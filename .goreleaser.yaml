@@ -1,0 +1,12 @@
+version: 1
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - skip: true
+
+release:
+  extra_files:
+    - glob: ./lib/*
