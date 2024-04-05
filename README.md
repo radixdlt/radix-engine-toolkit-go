@@ -1,7 +1,11 @@
 # Radix Engine Toolkit Go binding
-Repository contains Go package with Radix Engine Toolkit project Go language binding using Uniffi library.
+Repository contains Go package with [Radix Engine Toolkit](https://github.com/radixdlt/radix-engine-toolkit) project Go language binding using Uniffi library.
 
 ## How to use
+### Prerequisites
+Installed Go, minimum version 1.21.
+
+### Demo project
 Create new Go project:
 ```
 mkdir project
@@ -14,7 +18,7 @@ Add and install `radix_engine_toolkit_go` package dependency:
 go get github.com/radixdlt/radix-engine-toolkit-go@latest
 ```
 
-Create `main.go` file with content:
+Create `main.go` file with following code:
 ```
 package main
 
@@ -29,7 +33,7 @@ func main() {
 }
 ```
 
-From latest [release](https://github.com/radixdlt/radix-engine-toolkit-go/releases) download library for you OS. And put it your project directory or in system library directory (for linux use `/usr/lib`).
+From latest [release](https://github.com/radixdlt/radix-engine-toolkit-go/releases) download library for you OS, unpack it and put it in your project directory or in system library directory (for Linux use `/usr/lib`, for Mac OS use `/usr/local/lib`).
 
 Build project specyfing library to use and run it (`main` executable file will be created):
 ```
