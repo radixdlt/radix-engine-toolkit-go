@@ -33,7 +33,7 @@ func main() {
 }
 ```
 
-From latest [release](https://github.com/radixdlt/radix-engine-toolkit-go/releases) download library for you OS, unpack it and put it in your project directory or in system library directory (for Linux use `/usr/lib`, for Mac OS use `/usr/local/lib`).
+From latest [release](https://github.com/radixdlt/radix-engine-toolkit-go/releases) download library for your OS, unpack it and put it in your project directory or in system library directory (for Linux use `/usr/lib`, for Mac OS use `/usr/local/lib`).
 
 Build project specyfing library to use and run it (`main` executable file will be created):
 ```
