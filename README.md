@@ -40,9 +40,17 @@ Build project specyfing library to use and run it (`main` executable file will b
 CGO_LDFLAGS="-lradix_engine_toolkit_uniffi" go build
 ./main
 ```
-If you put radix_engine_toolkit_uniffi library in your project directory specify also library search path:
+ \
+If you put `radix_engine_toolkit_uniffi` library in your project directory specify also library search path:
 ```
 CGO_LDFLAGS="-L<path to directory with library> -lradix_engine_toolkit_uniffi" go build
+```
+Run on Linux:
+```
 LD_LIBRARY_PATH="<path to directory with library>" ./main
+```
+Run on MacOS:
+```
+DYLD_LIBRARY_PATH="<path to directory with library>" ./main
 ```
 After running our simple program you should see information about `radix-engine-toolkit` version: `RET version: x.y.z`
