@@ -24314,15 +24314,45 @@ func (_ FfiDestroyerMapTypePublicKeyFingerprintBytes) Destroy(mapValue map[Publi
 }
 
 
+
+
 /**
- * Typealias from the type name used in the UDL file to the builtin type.  This
+ * Typealias from the type name used in the UDL file to the custom type.  This
  * is needed because the UDL type name is used in function/method signatures.
  * It's also what we have an external type that references a custom type.
  */
 type PublicKeyFingerprint = string
-type FfiConverterTypePublicKeyFingerprint = FfiConverterString
-type FfiDestroyerTypePublicKeyFingerprint = FfiDestroyerString
-var FfiConverterTypePublicKeyFingerprintINSTANCE = FfiConverterString{}
+
+type FfiConverterTypePublicKeyFingerprint struct{}
+
+var FfiConverterTypePublicKeyFingerprintINSTANCE = FfiConverterTypePublicKeyFingerprint{}
+
+func (FfiConverterTypePublicKeyFingerprint) Lower(value PublicKeyFingerprint) RustBufferI {
+    builtinValue := []byte(value)
+    return FfiConverterBytesINSTANCE.Lower(builtinValue)
+}
+
+func (FfiConverterTypePublicKeyFingerprint) Write(writer io.Writer, value PublicKeyFingerprint) {
+    builtinValue := []byte(value)
+    FfiConverterBytesINSTANCE.Write(writer, builtinValue)
+}
+
+func (FfiConverterTypePublicKeyFingerprint) Lift(value RustBufferI) PublicKeyFingerprint {
+    builtinValue := FfiConverterBytesINSTANCE.Lift(value)
+    return string(builtinValue)
+}
+
+func (FfiConverterTypePublicKeyFingerprint) Read(reader io.Reader) PublicKeyFingerprint {
+    builtinValue := FfiConverterBytesINSTANCE.Read(reader)
+    return string(builtinValue)
+}
+
+type FfiDestroyerTypePublicKeyFingerprint struct {}
+
+func (FfiDestroyerTypePublicKeyFingerprint) Destroy(value PublicKeyFingerprint) {
+	builtinValue := []byte(value)
+	FfiDestroyerBytes{}.Destroy(builtinValue)
+}
 
 func DeriveOlympiaAccountAddressFromPublicKey(publicKey PublicKey, olympiaNetwork OlympiaNetwork) (*OlympiaAddress, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
