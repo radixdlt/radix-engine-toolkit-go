@@ -62,7 +62,11 @@ Build project specyfing library to use and path to it:
 ```
 CGO_LDFLAGS="-L<path to directory with library> -lradix_engine_toolkit_uniffi" go build
 ```
-Run application:
+Run application, if library is in the same directory as executable file:
+```
+./main
+```
+If library is in other directory:
 ```
 DYLD_LIBRARY_PATH="<path to directory with library>" ./main
 ```
