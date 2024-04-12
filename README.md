@@ -33,42 +33,30 @@ func main() {
 }
 ```
 
-From the latest [release](https://github.com/radixdlt/radix-engine-toolkit-go/releases) download library for your OS.
+From the latest [release](https://github.com/radixdlt/radix-engine-toolkit-go/releases) download library for your OS. Unpack the library and put it in project directory.
 
 ### Linux instructions
-Unpack the library and put it in `/usr/lib` or project directory.
 
 Build project specifying library to use:
 ```
-CGO_LDFLAGS="-lradix_engine_toolkit_uniffi" go build
-```
-if library is in project directory use command:
-```
-CGO_LDFLAGS="-L<path to directory with library> -lradix_engine_toolkit_uniffi" go build
+CGO_LDFLAGS="-L<path to directory with library file> -lradix_engine_toolkit_uniffi" go build
 ```
 Run program:
 ```
-./main
-```
-if library is in project directory use command:
-```
-LD_LIBRARY_PATH="<path to directory with library>" ./main
+LD_LIBRARY_PATH="<path to directory with library file>" ./main
 ```
 
 ### MacOS instructions
-Unpack the library and put it in the project directory.
+
+> **_NOTE:_**  MacOS support is experimental.
 
 Build project specifying library to use and path to it:
 ```
-CGO_LDFLAGS="-L<path to directory with library> -lradix_engine_toolkit_uniffi" go build
+CGO_LDFLAGS="-L<path to directory with library file> -lradix_engine_toolkit_uniffi" go build
 ```
-Run application, if library is in the same directory as executable file:
+Run program:
 ```
-./main
-```
-If library is in other directory:
-```
-DYLD_LIBRARY_PATH="<path to directory with library>" ./main
+DYLD_LIBRARY_PATH="<path to directory with library file>" ./main
 ```
  \
 After running our simple program you should see information about `radix-engine-toolkit` version: `RET version: x.y.z`
