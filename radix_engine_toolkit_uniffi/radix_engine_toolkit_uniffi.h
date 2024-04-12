@@ -2266,6 +2266,16 @@ RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_func_non_fungible_local_id_sbor
 	RustCallStatus* out_status
 );
 
+RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_func_public_key_fingerprint_from_vec(
+	RustBuffer bytes,
+	RustCallStatus* out_status
+);
+
+RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_func_public_key_fingerprint_to_vec(
+	RustBuffer value,
+	RustCallStatus* out_status
+);
+
 RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_func_sbor_decode_to_string_representation(
 	RustBuffer bytes,
 	RustBuffer representation,
@@ -2663,6 +2673,14 @@ uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_func_non_fungible_local_id_
 );
 
 uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_func_non_fungible_local_id_sbor_encode(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_func_public_key_fingerprint_from_vec(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_func_public_key_fingerprint_to_vec(
 	RustCallStatus* out_status
 );
 

@@ -510,6 +510,24 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_func_public_key_fingerprint_from_vec(uniffiStatus)
+	})
+	if checksum != 41521 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_func_public_key_fingerprint_from_vec: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_func_public_key_fingerprint_to_vec(uniffiStatus)
+	})
+	if checksum != 4950 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_func_public_key_fingerprint_to_vec: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_func_sbor_decode_to_string_representation(uniffiStatus)
 	})
 	if checksum != 11831 {
@@ -12019,6 +12037,43 @@ func (c FfiConverterTypeProtocolUpdateReadinessSignalEvent) Write(writer io.Writ
 type FfiDestroyerTypeProtocolUpdateReadinessSignalEvent struct {}
 
 func (_ FfiDestroyerTypeProtocolUpdateReadinessSignalEvent) Destroy(value ProtocolUpdateReadinessSignalEvent) {
+	value.Destroy()
+}
+
+
+type PublicKeyFingerprint struct {
+	Bytes HashableBytes
+}
+
+func (r *PublicKeyFingerprint) Destroy() {
+		FfiDestroyerTypeHashableBytes{}.Destroy(r.Bytes);
+}
+
+type FfiConverterTypePublicKeyFingerprint struct {}
+
+var FfiConverterTypePublicKeyFingerprintINSTANCE = FfiConverterTypePublicKeyFingerprint{}
+
+func (c FfiConverterTypePublicKeyFingerprint) Lift(rb RustBufferI) PublicKeyFingerprint {
+	return LiftFromRustBuffer[PublicKeyFingerprint](c, rb)
+}
+
+func (c FfiConverterTypePublicKeyFingerprint) Read(reader io.Reader) PublicKeyFingerprint {
+	return PublicKeyFingerprint {
+			FfiConverterTypeHashableBytesINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypePublicKeyFingerprint) Lower(value PublicKeyFingerprint) RustBuffer {
+	return LowerIntoRustBuffer[PublicKeyFingerprint](c, value)
+}
+
+func (c FfiConverterTypePublicKeyFingerprint) Write(writer io.Writer, value PublicKeyFingerprint) {
+		FfiConverterTypeHashableBytesINSTANCE.Write(writer, value.Bytes);
+}
+
+type FfiDestroyerTypePublicKeyFingerprint struct {}
+
+func (_ FfiDestroyerTypePublicKeyFingerprint) Destroy(value PublicKeyFingerprint) {
 	value.Destroy()
 }
 
@@ -24177,6 +24232,52 @@ func (_ FfiDestroyerMapStringMapStringOptionalTypeMetadataValue) Destroy(mapValu
 
 
 
+type FfiConverterMapTypePublicKeyFingerprintBytes struct {}
+
+var FfiConverterMapTypePublicKeyFingerprintBytesINSTANCE = FfiConverterMapTypePublicKeyFingerprintBytes{}
+
+func (c FfiConverterMapTypePublicKeyFingerprintBytes) Lift(rb RustBufferI) map[PublicKeyFingerprint][]byte {
+	return LiftFromRustBuffer[map[PublicKeyFingerprint][]byte](c, rb)
+}
+
+func (_ FfiConverterMapTypePublicKeyFingerprintBytes) Read(reader io.Reader) map[PublicKeyFingerprint][]byte {
+	result := make(map[PublicKeyFingerprint][]byte)
+	length := readInt32(reader)
+	for i := int32(0); i < length; i++ {
+		key := FfiConverterTypePublicKeyFingerprintINSTANCE.Read(reader)
+		value := FfiConverterBytesINSTANCE.Read(reader)
+		result[key] = value
+	}
+	return result
+}
+
+func (c FfiConverterMapTypePublicKeyFingerprintBytes) Lower(value map[PublicKeyFingerprint][]byte) RustBuffer {
+	return LowerIntoRustBuffer[map[PublicKeyFingerprint][]byte](c, value)
+}
+
+func (_ FfiConverterMapTypePublicKeyFingerprintBytes) Write(writer io.Writer, mapValue map[PublicKeyFingerprint][]byte) {
+	if len(mapValue) > math.MaxInt32 {
+		panic("map[PublicKeyFingerprint][]byte is too large to fit into Int32")
+	}
+
+	writeInt32(writer, int32(len(mapValue)))
+	for key, value := range mapValue {
+		FfiConverterTypePublicKeyFingerprintINSTANCE.Write(writer, key)
+		FfiConverterBytesINSTANCE.Write(writer, value)
+	}
+}
+
+type FfiDestroyerMapTypePublicKeyFingerprintBytes struct {}
+
+func (_ FfiDestroyerMapTypePublicKeyFingerprintBytes) Destroy(mapValue map[PublicKeyFingerprint][]byte) {
+	for key, value := range mapValue {
+		FfiDestroyerTypePublicKeyFingerprint{}.Destroy(key)
+		FfiDestroyerBytes{}.Destroy(value)	
+	}
+}
+
+
+
 type FfiConverterMapTypeCurveTypeTypeDecryptorsByCurve struct {}
 
 var FfiConverterMapTypeCurveTypeTypeDecryptorsByCurveINSTANCE = FfiConverterMapTypeCurveTypeTypeDecryptorsByCurve{}
@@ -24269,87 +24370,41 @@ func (_ FfiDestroyerMapTypeEntityTypeSequenceAddress) Destroy(mapValue map[Entit
 
 
 
-type FfiConverterMapTypePublicKeyFingerprintBytes struct {}
-
-var FfiConverterMapTypePublicKeyFingerprintBytesINSTANCE = FfiConverterMapTypePublicKeyFingerprintBytes{}
-
-func (c FfiConverterMapTypePublicKeyFingerprintBytes) Lift(rb RustBufferI) map[PublicKeyFingerprint][]byte {
-	return LiftFromRustBuffer[map[PublicKeyFingerprint][]byte](c, rb)
-}
-
-func (_ FfiConverterMapTypePublicKeyFingerprintBytes) Read(reader io.Reader) map[PublicKeyFingerprint][]byte {
-	result := make(map[PublicKeyFingerprint][]byte)
-	length := readInt32(reader)
-	for i := int32(0); i < length; i++ {
-		key := FfiConverterTypePublicKeyFingerprintINSTANCE.Read(reader)
-		value := FfiConverterBytesINSTANCE.Read(reader)
-		result[key] = value
-	}
-	return result
-}
-
-func (c FfiConverterMapTypePublicKeyFingerprintBytes) Lower(value map[PublicKeyFingerprint][]byte) RustBuffer {
-	return LowerIntoRustBuffer[map[PublicKeyFingerprint][]byte](c, value)
-}
-
-func (_ FfiConverterMapTypePublicKeyFingerprintBytes) Write(writer io.Writer, mapValue map[PublicKeyFingerprint][]byte) {
-	if len(mapValue) > math.MaxInt32 {
-		panic("map[PublicKeyFingerprint][]byte is too large to fit into Int32")
-	}
-
-	writeInt32(writer, int32(len(mapValue)))
-	for key, value := range mapValue {
-		FfiConverterTypePublicKeyFingerprintINSTANCE.Write(writer, key)
-		FfiConverterBytesINSTANCE.Write(writer, value)
-	}
-}
-
-type FfiDestroyerMapTypePublicKeyFingerprintBytes struct {}
-
-func (_ FfiDestroyerMapTypePublicKeyFingerprintBytes) Destroy(mapValue map[PublicKeyFingerprint][]byte) {
-	for key, value := range mapValue {
-		FfiDestroyerTypePublicKeyFingerprint{}.Destroy(key)
-		FfiDestroyerBytes{}.Destroy(value)	
-	}
-}
-
-
-
 
 /**
  * Typealias from the type name used in the UDL file to the custom type.  This
  * is needed because the UDL type name is used in function/method signatures.
  * It's also what we have an external type that references a custom type.
  */
-type PublicKeyFingerprint = string
+type HashableBytes = string
 
-type FfiConverterTypePublicKeyFingerprint struct{}
+type FfiConverterTypeHashableBytes struct{}
 
-var FfiConverterTypePublicKeyFingerprintINSTANCE = FfiConverterTypePublicKeyFingerprint{}
+var FfiConverterTypeHashableBytesINSTANCE = FfiConverterTypeHashableBytes{}
 
-func (FfiConverterTypePublicKeyFingerprint) Lower(value PublicKeyFingerprint) RustBufferI {
+func (FfiConverterTypeHashableBytes) Lower(value HashableBytes) RustBufferI {
     builtinValue := []byte(value)
     return FfiConverterBytesINSTANCE.Lower(builtinValue)
 }
 
-func (FfiConverterTypePublicKeyFingerprint) Write(writer io.Writer, value PublicKeyFingerprint) {
+func (FfiConverterTypeHashableBytes) Write(writer io.Writer, value HashableBytes) {
     builtinValue := []byte(value)
     FfiConverterBytesINSTANCE.Write(writer, builtinValue)
 }
 
-func (FfiConverterTypePublicKeyFingerprint) Lift(value RustBufferI) PublicKeyFingerprint {
+func (FfiConverterTypeHashableBytes) Lift(value RustBufferI) HashableBytes {
     builtinValue := FfiConverterBytesINSTANCE.Lift(value)
     return string(builtinValue)
 }
 
-func (FfiConverterTypePublicKeyFingerprint) Read(reader io.Reader) PublicKeyFingerprint {
+func (FfiConverterTypeHashableBytes) Read(reader io.Reader) HashableBytes {
     builtinValue := FfiConverterBytesINSTANCE.Read(reader)
     return string(builtinValue)
 }
 
-type FfiDestroyerTypePublicKeyFingerprint struct {}
+type FfiDestroyerTypeHashableBytes struct {}
 
-func (FfiDestroyerTypePublicKeyFingerprint) Destroy(value PublicKeyFingerprint) {
+func (FfiDestroyerTypeHashableBytes) Destroy(value HashableBytes) {
 	builtinValue := []byte(value)
 	FfiDestroyerBytes{}.Destroy(builtinValue)
 }
@@ -24538,6 +24593,18 @@ func NonFungibleLocalIdSborEncode(value NonFungibleLocalId) ([]byte, error) {
 		} else {
 			return FfiConverterBytesINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
+}
+
+func PublicKeyFingerprintFromVec(bytes []byte) PublicKeyFingerprint {
+	return FfiConverterTypePublicKeyFingerprintINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_public_key_fingerprint_from_vec(FfiConverterBytesINSTANCE.Lower(bytes), _uniffiStatus)
+	}))
+}
+
+func PublicKeyFingerprintToVec(value PublicKeyFingerprint) []byte {
+	return FfiConverterBytesINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_public_key_fingerprint_to_vec(FfiConverterTypePublicKeyFingerprintINSTANCE.Lower(value), _uniffiStatus)
+	}))
 }
 
 func SborDecodeToStringRepresentation(bytes []byte, representation SerializationMode, networkId uint8, schema *Schema) (string, error) {
