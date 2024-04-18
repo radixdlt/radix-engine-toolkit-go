@@ -18751,7 +18751,8 @@ const (
 	ReservedInstructionAccountLockFee ReservedInstruction = 1
 	ReservedInstructionAccountSecurify ReservedInstruction = 2
 	ReservedInstructionIdentitySecurify ReservedInstruction = 3
-	ReservedInstructionAccessControllerMethod ReservedInstruction = 4
+	ReservedInstructionAccountUpdateSettings ReservedInstruction = 4
+	ReservedInstructionAccessControllerMethod ReservedInstruction = 5
 )
 
 type FfiConverterTypeReservedInstruction struct {}
