@@ -960,6 +960,15 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_decimal_to_le_bytes(uniffiStatus)
+	})
+	if checksum != 17037 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_decimal_to_le_bytes: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_hash_as_str(uniffiStatus)
 	})
 	if checksum != 46597 {
@@ -1379,6 +1388,96 @@ func uniffiCheckChecksums() {
 	if checksum != 46012 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_lock_fee_and_withdraw_non_fungibles: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_airdrop(uniffiStatus)
+	})
+	if checksum != 40671 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_airdrop: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_claim(uniffiStatus)
+	})
+	if checksum != 20662 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_claim: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_claim_non_fungibles(uniffiStatus)
+	})
+	if checksum != 38683 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_claim_non_fungibles: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_get_amount(uniffiStatus)
+	})
+	if checksum != 29397 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_get_amount: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_get_non_fungible_local_ids(uniffiStatus)
+	})
+	if checksum != 23927 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_get_non_fungible_local_ids: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_instantiate(uniffiStatus)
+	})
+	if checksum != 7727 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_instantiate: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_instantiate_simple(uniffiStatus)
+	})
+	if checksum != 65307 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_instantiate_simple: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_recover(uniffiStatus)
+	})
+	if checksum != 2999 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_recover: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_recover_non_fungibles(uniffiStatus)
+	})
+	if checksum != 65115 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_recover_non_fungibles: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_store(uniffiStatus)
+	})
+	if checksum != 40050 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_store: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -2661,6 +2760,15 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_precisedecimal_to_le_bytes(uniffiStatus)
+	})
+	if checksum != 6841 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_precisedecimal_to_le_bytes: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_privatekey_curve(uniffiStatus)
 	})
 	if checksum != 56035 {
@@ -3165,6 +3273,15 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_decimal_from_le_bytes(uniffiStatus)
+	})
+	if checksum != 14760 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_decimal_from_le_bytes: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_decimal_max(uniffiStatus)
 	})
 	if checksum != 38313 {
@@ -3359,6 +3476,15 @@ func uniffiCheckChecksums() {
 	if checksum != 12724 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_olympiaaddress_new: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_precisedecimal_from_le_bytes(uniffiStatus)
+	})
+	if checksum != 24547 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_precisedecimal_from_le_bytes: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -4415,6 +4541,12 @@ func NewDecimal(value string) (*Decimal, error) {
 }
 
 
+func DecimalFromLeBytes(value []byte) *Decimal {
+	return FfiConverterDecimalINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_decimal_from_le_bytes(FfiConverterBytesINSTANCE.Lower(value), _uniffiStatus)
+	}))
+}
+
 func DecimalMax() *Decimal {
 	return FfiConverterDecimalINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_decimal_max( _uniffiStatus)
@@ -4728,6 +4860,16 @@ func (_self *Decimal)Sub(other *Decimal) (*Decimal, error) {
 		} else {
 			return FfiConverterDecimalINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
+}
+
+
+func (_self *Decimal)ToLeBytes() []byte {
+	_pointer := _self.ffiObject.incrementPointer("*Decimal")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterBytesINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_decimal_to_le_bytes(
+		_pointer, _uniffiStatus)
+	}))
 }
 
 
@@ -5726,6 +5868,166 @@ func (_self *ManifestBuilder)AccountLockFeeAndWithdrawNonFungibles(address *Addr
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_lock_fee_and_withdraw_non_fungibles(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterDecimalINSTANCE.Lower(amountToLock), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestBuilder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestBuilder)AccountLockerAirdrop(address *Address, claimants map[string]ResourceSpecifier, bucket ManifestBuilderBucket, tryDirectSend bool) (*ManifestBuilder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_locker_airdrop(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterMapStringTypeResourceSpecifierINSTANCE.Lower(claimants), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), FfiConverterBoolINSTANCE.Lower(tryDirectSend), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestBuilder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestBuilder)AccountLockerClaim(address *Address, claimant *Address, resourceAddress *Address, amount *Decimal) (*ManifestBuilder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_locker_claim(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestBuilder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestBuilder)AccountLockerClaimNonFungibles(address *Address, claimant *Address, resourceAddress *Address, ids []NonFungibleLocalId) (*ManifestBuilder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_locker_claim_non_fungibles(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestBuilder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestBuilder)AccountLockerGetAmount(address *Address, claimant *Address, resourceAddress *Address) (*ManifestBuilder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_locker_get_amount(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterAddressINSTANCE.Lower(resourceAddress), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestBuilder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestBuilder)AccountLockerGetNonFungibleLocalIds(address *Address, claimant *Address, resourceAddress *Address, limit uint32) (*ManifestBuilder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_locker_get_non_fungible_local_ids(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterUint32INSTANCE.Lower(limit), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestBuilder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestBuilder)AccountLockerInstantiate(ownerRole OwnerRole, storerRole *AccessRule, storerUpdaterRole *AccessRule, recovererRole *AccessRule, recovererUpdaterRole *AccessRule, addressReservation *ManifestBuilderAddressReservation) (*ManifestBuilder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_locker_instantiate(
+		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), FfiConverterAccessRuleINSTANCE.Lower(storerRole), FfiConverterAccessRuleINSTANCE.Lower(storerUpdaterRole), FfiConverterAccessRuleINSTANCE.Lower(recovererRole), FfiConverterAccessRuleINSTANCE.Lower(recovererUpdaterRole), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestBuilder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestBuilder)AccountLockerInstantiateSimple(allowRecover bool) (*ManifestBuilder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_locker_instantiate_simple(
+		_pointer,FfiConverterBoolINSTANCE.Lower(allowRecover), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestBuilder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestBuilder)AccountLockerRecover(address *Address, claimant *Address, resourceAddress *Address, amount *Decimal) (*ManifestBuilder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_locker_recover(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestBuilder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestBuilder)AccountLockerRecoverNonFungibles(address *Address, claimant *Address, resourceAddress *Address, ids []NonFungibleLocalId) (*ManifestBuilder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_locker_recover_non_fungibles(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestBuilder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestBuilder)AccountLockerStore(address *Address, claimant *Address, bucket ManifestBuilderBucket, tryDirectSend bool) (*ManifestBuilder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_locker_store(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), FfiConverterBoolINSTANCE.Lower(tryDirectSend), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestBuilder
@@ -7912,6 +8214,12 @@ func NewPreciseDecimal(value string) (*PreciseDecimal, error) {
 }
 
 
+func PreciseDecimalFromLeBytes(value []byte) *PreciseDecimal {
+	return FfiConverterPreciseDecimalINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_precisedecimal_from_le_bytes(FfiConverterBytesINSTANCE.Lower(value), _uniffiStatus)
+	}))
+}
+
 func PreciseDecimalMax() *PreciseDecimal {
 	return FfiConverterPreciseDecimalINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_precisedecimal_max( _uniffiStatus)
@@ -8225,6 +8533,16 @@ func (_self *PreciseDecimal)Sub(other *PreciseDecimal) (*PreciseDecimal, error) 
 		} else {
 			return FfiConverterPreciseDecimalINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
+}
+
+
+func (_self *PreciseDecimal)ToLeBytes() []byte {
+	_pointer := _self.ffiObject.incrementPointer("*PreciseDecimal")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterBytesINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_precisedecimal_to_le_bytes(
+		_pointer, _uniffiStatus)
+	}))
 }
 
 
@@ -9742,6 +10060,51 @@ func (c FfiConverterTypeCancelRecoveryProposalEvent) Write(writer io.Writer, val
 type FfiDestroyerTypeCancelRecoveryProposalEvent struct {}
 
 func (_ FfiDestroyerTypeCancelRecoveryProposalEvent) Destroy(value CancelRecoveryProposalEvent) {
+	value.Destroy()
+}
+
+
+type ClaimEvent struct {
+	Claimant *Address
+	ResourceAddress *Address
+	Resources ResourceSpecifier
+}
+
+func (r *ClaimEvent) Destroy() {
+		FfiDestroyerAddress{}.Destroy(r.Claimant);
+		FfiDestroyerAddress{}.Destroy(r.ResourceAddress);
+		FfiDestroyerTypeResourceSpecifier{}.Destroy(r.Resources);
+}
+
+type FfiConverterTypeClaimEvent struct {}
+
+var FfiConverterTypeClaimEventINSTANCE = FfiConverterTypeClaimEvent{}
+
+func (c FfiConverterTypeClaimEvent) Lift(rb RustBufferI) ClaimEvent {
+	return LiftFromRustBuffer[ClaimEvent](c, rb)
+}
+
+func (c FfiConverterTypeClaimEvent) Read(reader io.Reader) ClaimEvent {
+	return ClaimEvent {
+			FfiConverterAddressINSTANCE.Read(reader),
+			FfiConverterAddressINSTANCE.Read(reader),
+			FfiConverterTypeResourceSpecifierINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeClaimEvent) Lower(value ClaimEvent) RustBuffer {
+	return LowerIntoRustBuffer[ClaimEvent](c, value)
+}
+
+func (c FfiConverterTypeClaimEvent) Write(writer io.Writer, value ClaimEvent) {
+		FfiConverterAddressINSTANCE.Write(writer, value.Claimant);
+		FfiConverterAddressINSTANCE.Write(writer, value.ResourceAddress);
+		FfiConverterTypeResourceSpecifierINSTANCE.Write(writer, value.Resources);
+}
+
+type FfiDestroyerTypeClaimEvent struct {}
+
+func (_ FfiDestroyerTypeClaimEvent) Destroy(value ClaimEvent) {
 	value.Destroy()
 }
 
@@ -12078,6 +12441,51 @@ func (_ FfiDestroyerTypePublicKeyFingerprint) Destroy(value PublicKeyFingerprint
 }
 
 
+type RecoverEvent struct {
+	Claimant *Address
+	ResourceAddress *Address
+	Resources ResourceSpecifier
+}
+
+func (r *RecoverEvent) Destroy() {
+		FfiDestroyerAddress{}.Destroy(r.Claimant);
+		FfiDestroyerAddress{}.Destroy(r.ResourceAddress);
+		FfiDestroyerTypeResourceSpecifier{}.Destroy(r.Resources);
+}
+
+type FfiConverterTypeRecoverEvent struct {}
+
+var FfiConverterTypeRecoverEventINSTANCE = FfiConverterTypeRecoverEvent{}
+
+func (c FfiConverterTypeRecoverEvent) Lift(rb RustBufferI) RecoverEvent {
+	return LiftFromRustBuffer[RecoverEvent](c, rb)
+}
+
+func (c FfiConverterTypeRecoverEvent) Read(reader io.Reader) RecoverEvent {
+	return RecoverEvent {
+			FfiConverterAddressINSTANCE.Read(reader),
+			FfiConverterAddressINSTANCE.Read(reader),
+			FfiConverterTypeResourceSpecifierINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeRecoverEvent) Lower(value RecoverEvent) RustBuffer {
+	return LowerIntoRustBuffer[RecoverEvent](c, value)
+}
+
+func (c FfiConverterTypeRecoverEvent) Write(writer io.Writer, value RecoverEvent) {
+		FfiConverterAddressINSTANCE.Write(writer, value.Claimant);
+		FfiConverterAddressINSTANCE.Write(writer, value.ResourceAddress);
+		FfiConverterTypeResourceSpecifierINSTANCE.Write(writer, value.Resources);
+}
+
+type FfiDestroyerTypeRecoverEvent struct {}
+
+func (_ FfiDestroyerTypeRecoverEvent) Destroy(value RecoverEvent) {
+	value.Destroy()
+}
+
+
 type RecoveryProposal struct {
 	RuleSet RuleSet
 	TimedRecoveryDelayInMinutes *uint32
@@ -12783,6 +13191,51 @@ func (c FfiConverterTypeStopTimedRecoveryEvent) Write(writer io.Writer, value St
 type FfiDestroyerTypeStopTimedRecoveryEvent struct {}
 
 func (_ FfiDestroyerTypeStopTimedRecoveryEvent) Destroy(value StopTimedRecoveryEvent) {
+	value.Destroy()
+}
+
+
+type StoreEvent struct {
+	Claimant *Address
+	ResourceAddress *Address
+	Resources ResourceSpecifier
+}
+
+func (r *StoreEvent) Destroy() {
+		FfiDestroyerAddress{}.Destroy(r.Claimant);
+		FfiDestroyerAddress{}.Destroy(r.ResourceAddress);
+		FfiDestroyerTypeResourceSpecifier{}.Destroy(r.Resources);
+}
+
+type FfiConverterTypeStoreEvent struct {}
+
+var FfiConverterTypeStoreEventINSTANCE = FfiConverterTypeStoreEvent{}
+
+func (c FfiConverterTypeStoreEvent) Lift(rb RustBufferI) StoreEvent {
+	return LiftFromRustBuffer[StoreEvent](c, rb)
+}
+
+func (c FfiConverterTypeStoreEvent) Read(reader io.Reader) StoreEvent {
+	return StoreEvent {
+			FfiConverterAddressINSTANCE.Read(reader),
+			FfiConverterAddressINSTANCE.Read(reader),
+			FfiConverterTypeResourceSpecifierINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeStoreEvent) Lower(value StoreEvent) RustBuffer {
+	return LowerIntoRustBuffer[StoreEvent](c, value)
+}
+
+func (c FfiConverterTypeStoreEvent) Write(writer io.Writer, value StoreEvent) {
+		FfiConverterAddressINSTANCE.Write(writer, value.Claimant);
+		FfiConverterAddressINSTANCE.Write(writer, value.ResourceAddress);
+		FfiConverterTypeResourceSpecifierINSTANCE.Write(writer, value.Resources);
+}
+
+type FfiDestroyerTypeStoreEvent struct {}
+
+func (_ FfiDestroyerTypeStoreEvent) Destroy(value StoreEvent) {
 	value.Destroy()
 }
 
@@ -14650,11 +15103,12 @@ const (
 	EntityTypeGlobalOneResourcePool EntityType = 14
 	EntityTypeGlobalTwoResourcePool EntityType = 15
 	EntityTypeGlobalMultiResourcePool EntityType = 16
-	EntityTypeGlobalTransactionTracker EntityType = 17
-	EntityTypeInternalFungibleVault EntityType = 18
-	EntityTypeInternalNonFungibleVault EntityType = 19
-	EntityTypeInternalGenericComponent EntityType = 20
-	EntityTypeInternalKeyValueStore EntityType = 21
+	EntityTypeGlobalAccountLocker EntityType = 17
+	EntityTypeGlobalTransactionTracker EntityType = 18
+	EntityTypeInternalFungibleVault EntityType = 19
+	EntityTypeInternalNonFungibleVault EntityType = 20
+	EntityTypeInternalGenericComponent EntityType = 21
+	EntityTypeInternalKeyValueStore EntityType = 22
 )
 
 type FfiConverterTypeEntityType struct {}
@@ -18751,7 +19205,8 @@ const (
 	ReservedInstructionAccountLockFee ReservedInstruction = 1
 	ReservedInstructionAccountSecurify ReservedInstruction = 2
 	ReservedInstructionIdentitySecurify ReservedInstruction = 3
-	ReservedInstructionAccessControllerMethod ReservedInstruction = 4
+	ReservedInstructionAccountUpdateSettings ReservedInstruction = 4
+	ReservedInstructionAccessControllerMethod ReservedInstruction = 5
 )
 
 type FfiConverterTypeReservedInstruction struct {}
@@ -19856,6 +20311,88 @@ func (_ FfiDestroyerTypeTypedAccountBlueprintEvent) Destroy(value TypedAccountBl
 
 
 
+type TypedAccountLockerBlueprintEvent interface {
+	Destroy()
+}
+type TypedAccountLockerBlueprintEventStoreEventValue struct {
+	Value StoreEvent
+}
+
+func (e TypedAccountLockerBlueprintEventStoreEventValue) Destroy() {
+		FfiDestroyerTypeStoreEvent{}.Destroy(e.Value);
+}
+type TypedAccountLockerBlueprintEventRecoverEventValue struct {
+	Value RecoverEvent
+}
+
+func (e TypedAccountLockerBlueprintEventRecoverEventValue) Destroy() {
+		FfiDestroyerTypeRecoverEvent{}.Destroy(e.Value);
+}
+type TypedAccountLockerBlueprintEventClaimEventValue struct {
+	Value ClaimEvent
+}
+
+func (e TypedAccountLockerBlueprintEventClaimEventValue) Destroy() {
+		FfiDestroyerTypeClaimEvent{}.Destroy(e.Value);
+}
+
+type FfiConverterTypeTypedAccountLockerBlueprintEvent struct {}
+
+var FfiConverterTypeTypedAccountLockerBlueprintEventINSTANCE = FfiConverterTypeTypedAccountLockerBlueprintEvent{}
+
+func (c FfiConverterTypeTypedAccountLockerBlueprintEvent) Lift(rb RustBufferI) TypedAccountLockerBlueprintEvent {
+	return LiftFromRustBuffer[TypedAccountLockerBlueprintEvent](c, rb)
+}
+
+func (c FfiConverterTypeTypedAccountLockerBlueprintEvent) Lower(value TypedAccountLockerBlueprintEvent) RustBuffer {
+	return LowerIntoRustBuffer[TypedAccountLockerBlueprintEvent](c, value)
+}
+func (FfiConverterTypeTypedAccountLockerBlueprintEvent) Read(reader io.Reader) TypedAccountLockerBlueprintEvent {
+	id := readInt32(reader)
+	switch (id) {
+		case 1:
+			return TypedAccountLockerBlueprintEventStoreEventValue{
+				FfiConverterTypeStoreEventINSTANCE.Read(reader),
+			};
+		case 2:
+			return TypedAccountLockerBlueprintEventRecoverEventValue{
+				FfiConverterTypeRecoverEventINSTANCE.Read(reader),
+			};
+		case 3:
+			return TypedAccountLockerBlueprintEventClaimEventValue{
+				FfiConverterTypeClaimEventINSTANCE.Read(reader),
+			};
+		default:
+			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeTypedAccountLockerBlueprintEvent.Read()", id));
+	}
+}
+
+func (FfiConverterTypeTypedAccountLockerBlueprintEvent) Write(writer io.Writer, value TypedAccountLockerBlueprintEvent) {
+	switch variant_value := value.(type) {
+		case TypedAccountLockerBlueprintEventStoreEventValue:
+			writeInt32(writer, 1)
+			FfiConverterTypeStoreEventINSTANCE.Write(writer, variant_value.Value)
+		case TypedAccountLockerBlueprintEventRecoverEventValue:
+			writeInt32(writer, 2)
+			FfiConverterTypeRecoverEventINSTANCE.Write(writer, variant_value.Value)
+		case TypedAccountLockerBlueprintEventClaimEventValue:
+			writeInt32(writer, 3)
+			FfiConverterTypeClaimEventINSTANCE.Write(writer, variant_value.Value)
+		default:
+			_ = variant_value
+			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeTypedAccountLockerBlueprintEvent.Write", value))
+	}
+}
+
+type FfiDestroyerTypeTypedAccountLockerBlueprintEvent struct {}
+
+func (_ FfiDestroyerTypeTypedAccountLockerBlueprintEvent) Destroy(value TypedAccountLockerBlueprintEvent) {
+	value.Destroy()
+}
+
+
+
+
 type TypedAccountPackageEvent interface {
 	Destroy()
 }
@@ -20238,6 +20775,60 @@ func (_ FfiDestroyerTypeTypedFungibleVaultBlueprintEvent) Destroy(value TypedFun
 
 
 
+type TypedLockerPackageEvent interface {
+	Destroy()
+}
+type TypedLockerPackageEventAccountLocker struct {
+	Value TypedAccountLockerBlueprintEvent
+}
+
+func (e TypedLockerPackageEventAccountLocker) Destroy() {
+		FfiDestroyerTypeTypedAccountLockerBlueprintEvent{}.Destroy(e.Value);
+}
+
+type FfiConverterTypeTypedLockerPackageEvent struct {}
+
+var FfiConverterTypeTypedLockerPackageEventINSTANCE = FfiConverterTypeTypedLockerPackageEvent{}
+
+func (c FfiConverterTypeTypedLockerPackageEvent) Lift(rb RustBufferI) TypedLockerPackageEvent {
+	return LiftFromRustBuffer[TypedLockerPackageEvent](c, rb)
+}
+
+func (c FfiConverterTypeTypedLockerPackageEvent) Lower(value TypedLockerPackageEvent) RustBuffer {
+	return LowerIntoRustBuffer[TypedLockerPackageEvent](c, value)
+}
+func (FfiConverterTypeTypedLockerPackageEvent) Read(reader io.Reader) TypedLockerPackageEvent {
+	id := readInt32(reader)
+	switch (id) {
+		case 1:
+			return TypedLockerPackageEventAccountLocker{
+				FfiConverterTypeTypedAccountLockerBlueprintEventINSTANCE.Read(reader),
+			};
+		default:
+			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeTypedLockerPackageEvent.Read()", id));
+	}
+}
+
+func (FfiConverterTypeTypedLockerPackageEvent) Write(writer io.Writer, value TypedLockerPackageEvent) {
+	switch variant_value := value.(type) {
+		case TypedLockerPackageEventAccountLocker:
+			writeInt32(writer, 1)
+			FfiConverterTypeTypedAccountLockerBlueprintEventINSTANCE.Write(writer, variant_value.Value)
+		default:
+			_ = variant_value
+			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeTypedLockerPackageEvent.Write", value))
+	}
+}
+
+type FfiDestroyerTypeTypedLockerPackageEvent struct {}
+
+func (_ FfiDestroyerTypeTypedLockerPackageEvent) Destroy(value TypedLockerPackageEvent) {
+	value.Destroy()
+}
+
+
+
+
 type TypedMetadataBlueprintEvent interface {
 	Destroy()
 }
@@ -20508,6 +21099,13 @@ type TypedNativeEventMetadata struct {
 func (e TypedNativeEventMetadata) Destroy() {
 		FfiDestroyerTypeTypedMetadataPackageEvent{}.Destroy(e.Value);
 }
+type TypedNativeEventLocker struct {
+	Value TypedLockerPackageEvent
+}
+
+func (e TypedNativeEventLocker) Destroy() {
+		FfiDestroyerTypeTypedLockerPackageEvent{}.Destroy(e.Value);
+}
 
 type FfiConverterTypeTypedNativeEvent struct {}
 
@@ -20551,6 +21149,10 @@ func (FfiConverterTypeTypedNativeEvent) Read(reader io.Reader) TypedNativeEvent 
 			return TypedNativeEventMetadata{
 				FfiConverterTypeTypedMetadataPackageEventINSTANCE.Read(reader),
 			};
+		case 8:
+			return TypedNativeEventLocker{
+				FfiConverterTypeTypedLockerPackageEventINSTANCE.Read(reader),
+			};
 		default:
 			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeTypedNativeEvent.Read()", id));
 	}
@@ -20579,6 +21181,9 @@ func (FfiConverterTypeTypedNativeEvent) Write(writer io.Writer, value TypedNativ
 		case TypedNativeEventMetadata:
 			writeInt32(writer, 7)
 			FfiConverterTypeTypedMetadataPackageEventINSTANCE.Write(writer, variant_value.Value)
+		case TypedNativeEventLocker:
+			writeInt32(writer, 8)
+			FfiConverterTypeTypedLockerPackageEventINSTANCE.Write(writer, variant_value.Value)
 		default:
 			_ = variant_value
 			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeTypedNativeEvent.Write", value))
@@ -23904,6 +24509,52 @@ func (_ FfiDestroyerMapStringTypeResourcePreferenceUpdate) Destroy(mapValue map[
 	for key, value := range mapValue {
 		FfiDestroyerString{}.Destroy(key)
 		FfiDestroyerTypeResourcePreferenceUpdate{}.Destroy(value)	
+	}
+}
+
+
+
+type FfiConverterMapStringTypeResourceSpecifier struct {}
+
+var FfiConverterMapStringTypeResourceSpecifierINSTANCE = FfiConverterMapStringTypeResourceSpecifier{}
+
+func (c FfiConverterMapStringTypeResourceSpecifier) Lift(rb RustBufferI) map[string]ResourceSpecifier {
+	return LiftFromRustBuffer[map[string]ResourceSpecifier](c, rb)
+}
+
+func (_ FfiConverterMapStringTypeResourceSpecifier) Read(reader io.Reader) map[string]ResourceSpecifier {
+	result := make(map[string]ResourceSpecifier)
+	length := readInt32(reader)
+	for i := int32(0); i < length; i++ {
+		key := FfiConverterStringINSTANCE.Read(reader)
+		value := FfiConverterTypeResourceSpecifierINSTANCE.Read(reader)
+		result[key] = value
+	}
+	return result
+}
+
+func (c FfiConverterMapStringTypeResourceSpecifier) Lower(value map[string]ResourceSpecifier) RustBuffer {
+	return LowerIntoRustBuffer[map[string]ResourceSpecifier](c, value)
+}
+
+func (_ FfiConverterMapStringTypeResourceSpecifier) Write(writer io.Writer, mapValue map[string]ResourceSpecifier) {
+	if len(mapValue) > math.MaxInt32 {
+		panic("map[string]ResourceSpecifier is too large to fit into Int32")
+	}
+
+	writeInt32(writer, int32(len(mapValue)))
+	for key, value := range mapValue {
+		FfiConverterStringINSTANCE.Write(writer, key)
+		FfiConverterTypeResourceSpecifierINSTANCE.Write(writer, value)
+	}
+}
+
+type FfiDestroyerMapStringTypeResourceSpecifier struct {}
+
+func (_ FfiDestroyerMapStringTypeResourceSpecifier) Destroy(mapValue map[string]ResourceSpecifier) {
+	for key, value := range mapValue {
+		FfiDestroyerString{}.Destroy(key)
+		FfiDestroyerTypeResourceSpecifier{}.Destroy(value)	
 	}
 }
 

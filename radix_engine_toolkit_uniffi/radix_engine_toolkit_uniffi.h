@@ -260,6 +260,11 @@ void uniffi_radix_engine_toolkit_uniffi_fn_free_decimal(
 	RustCallStatus* out_status
 );
 
+void* uniffi_radix_engine_toolkit_uniffi_fn_constructor_decimal_from_le_bytes(
+	RustBuffer value,
+	RustCallStatus* out_status
+);
+
 void* uniffi_radix_engine_toolkit_uniffi_fn_constructor_decimal_max(
 	RustCallStatus* out_status
 );
@@ -407,6 +412,11 @@ RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_method_decimal_sqrt(
 void* uniffi_radix_engine_toolkit_uniffi_fn_method_decimal_sub(
 	void* ptr,
 	void* other,
+	RustCallStatus* out_status
+);
+
+RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_method_decimal_to_le_bytes(
+	void* ptr,
 	RustCallStatus* out_status
 );
 
@@ -791,6 +801,94 @@ void* uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_lock_
 	void* amount_to_lock,
 	void* resource_address,
 	RustBuffer ids,
+	RustCallStatus* out_status
+);
+
+void* uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_locker_airdrop(
+	void* ptr,
+	void* address,
+	RustBuffer claimants,
+	RustBuffer bucket,
+	int8_t try_direct_send,
+	RustCallStatus* out_status
+);
+
+void* uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_locker_claim(
+	void* ptr,
+	void* address,
+	void* claimant,
+	void* resource_address,
+	void* amount,
+	RustCallStatus* out_status
+);
+
+void* uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_locker_claim_non_fungibles(
+	void* ptr,
+	void* address,
+	void* claimant,
+	void* resource_address,
+	RustBuffer ids,
+	RustCallStatus* out_status
+);
+
+void* uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_locker_get_amount(
+	void* ptr,
+	void* address,
+	void* claimant,
+	void* resource_address,
+	RustCallStatus* out_status
+);
+
+void* uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_locker_get_non_fungible_local_ids(
+	void* ptr,
+	void* address,
+	void* claimant,
+	void* resource_address,
+	uint32_t limit,
+	RustCallStatus* out_status
+);
+
+void* uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_locker_instantiate(
+	void* ptr,
+	RustBuffer owner_role,
+	void* storer_role,
+	void* storer_updater_role,
+	void* recoverer_role,
+	void* recoverer_updater_role,
+	RustBuffer address_reservation,
+	RustCallStatus* out_status
+);
+
+void* uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_locker_instantiate_simple(
+	void* ptr,
+	int8_t allow_recover,
+	RustCallStatus* out_status
+);
+
+void* uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_locker_recover(
+	void* ptr,
+	void* address,
+	void* claimant,
+	void* resource_address,
+	void* amount,
+	RustCallStatus* out_status
+);
+
+void* uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_locker_recover_non_fungibles(
+	void* ptr,
+	void* address,
+	void* claimant,
+	void* resource_address,
+	RustBuffer ids,
+	RustCallStatus* out_status
+);
+
+void* uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_locker_store(
+	void* ptr,
+	void* address,
+	void* claimant,
+	RustBuffer bucket,
+	int8_t try_direct_send,
 	RustCallStatus* out_status
 );
 
@@ -1676,6 +1774,11 @@ void uniffi_radix_engine_toolkit_uniffi_fn_free_precisedecimal(
 	RustCallStatus* out_status
 );
 
+void* uniffi_radix_engine_toolkit_uniffi_fn_constructor_precisedecimal_from_le_bytes(
+	RustBuffer value,
+	RustCallStatus* out_status
+);
+
 void* uniffi_radix_engine_toolkit_uniffi_fn_constructor_precisedecimal_max(
 	RustCallStatus* out_status
 );
@@ -1823,6 +1926,11 @@ RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_method_precisedecimal_sqrt(
 void* uniffi_radix_engine_toolkit_uniffi_fn_method_precisedecimal_sub(
 	void* ptr,
 	void* other,
+	RustCallStatus* out_status
+);
+
+RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_method_precisedecimal_to_le_bytes(
+	void* ptr,
 	RustCallStatus* out_status
 );
 
@@ -2876,6 +2984,10 @@ uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_decimal_sub(
 	RustCallStatus* out_status
 );
 
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_decimal_to_le_bytes(
+	RustCallStatus* out_status
+);
+
 uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_hash_as_str(
 	RustCallStatus* out_status
 );
@@ -3061,6 +3173,46 @@ uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_acco
 );
 
 uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_lock_fee_and_withdraw_non_fungibles(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_airdrop(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_claim(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_claim_non_fungibles(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_get_amount(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_get_non_fungible_local_ids(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_instantiate(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_instantiate_simple(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_recover(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_recover_non_fungibles(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_store(
 	RustCallStatus* out_status
 );
 
@@ -3632,6 +3784,10 @@ uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_precisedecimal_sub(
 	RustCallStatus* out_status
 );
 
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_precisedecimal_to_le_bytes(
+	RustCallStatus* out_status
+);
+
 uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_privatekey_curve(
 	RustCallStatus* out_status
 );
@@ -3856,6 +4012,10 @@ uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_constructor_address_virtual
 	RustCallStatus* out_status
 );
 
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_constructor_decimal_from_le_bytes(
+	RustCallStatus* out_status
+);
+
 uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_constructor_decimal_max(
 	RustCallStatus* out_status
 );
@@ -3941,6 +4101,10 @@ uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_constructor_notarizedtransa
 );
 
 uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_constructor_olympiaaddress_new(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_constructor_precisedecimal_from_le_bytes(
 	RustCallStatus* out_status
 );
 
