@@ -10191,6 +10191,43 @@ func (_ FfiDestroyerTypeComponentAddresses) Destroy(value ComponentAddresses) {
 }
 
 
+type DepositRecoveryXrdEvent struct {
+	Amount *Decimal
+}
+
+func (r *DepositRecoveryXrdEvent) Destroy() {
+		FfiDestroyerDecimal{}.Destroy(r.Amount);
+}
+
+type FfiConverterTypeDepositRecoveryXrdEvent struct {}
+
+var FfiConverterTypeDepositRecoveryXrdEventINSTANCE = FfiConverterTypeDepositRecoveryXrdEvent{}
+
+func (c FfiConverterTypeDepositRecoveryXrdEvent) Lift(rb RustBufferI) DepositRecoveryXrdEvent {
+	return LiftFromRustBuffer[DepositRecoveryXrdEvent](c, rb)
+}
+
+func (c FfiConverterTypeDepositRecoveryXrdEvent) Read(reader io.Reader) DepositRecoveryXrdEvent {
+	return DepositRecoveryXrdEvent {
+			FfiConverterDecimalINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeDepositRecoveryXrdEvent) Lower(value DepositRecoveryXrdEvent) RustBuffer {
+	return LowerIntoRustBuffer[DepositRecoveryXrdEvent](c, value)
+}
+
+func (c FfiConverterTypeDepositRecoveryXrdEvent) Write(writer io.Writer, value DepositRecoveryXrdEvent) {
+		FfiConverterDecimalINSTANCE.Write(writer, value.Amount);
+}
+
+type FfiDestroyerTypeDepositRecoveryXrdEvent struct {}
+
+func (_ FfiDestroyerTypeDepositRecoveryXrdEvent) Destroy(value DepositRecoveryXrdEvent) {
+	value.Destroy()
+}
+
+
 type Ed25519PublicKey struct {
 	Value []byte
 }
@@ -14169,6 +14206,43 @@ func (c FfiConverterTypeVaultCreationEvent) Write(writer io.Writer, value VaultC
 type FfiDestroyerTypeVaultCreationEvent struct {}
 
 func (_ FfiDestroyerTypeVaultCreationEvent) Destroy(value VaultCreationEvent) {
+	value.Destroy()
+}
+
+
+type WithdrawRecoveryXrdEvent struct {
+	Amount *Decimal
+}
+
+func (r *WithdrawRecoveryXrdEvent) Destroy() {
+		FfiDestroyerDecimal{}.Destroy(r.Amount);
+}
+
+type FfiConverterTypeWithdrawRecoveryXrdEvent struct {}
+
+var FfiConverterTypeWithdrawRecoveryXrdEventINSTANCE = FfiConverterTypeWithdrawRecoveryXrdEvent{}
+
+func (c FfiConverterTypeWithdrawRecoveryXrdEvent) Lift(rb RustBufferI) WithdrawRecoveryXrdEvent {
+	return LiftFromRustBuffer[WithdrawRecoveryXrdEvent](c, rb)
+}
+
+func (c FfiConverterTypeWithdrawRecoveryXrdEvent) Read(reader io.Reader) WithdrawRecoveryXrdEvent {
+	return WithdrawRecoveryXrdEvent {
+			FfiConverterDecimalINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeWithdrawRecoveryXrdEvent) Lower(value WithdrawRecoveryXrdEvent) RustBuffer {
+	return LowerIntoRustBuffer[WithdrawRecoveryXrdEvent](c, value)
+}
+
+func (c FfiConverterTypeWithdrawRecoveryXrdEvent) Write(writer io.Writer, value WithdrawRecoveryXrdEvent) {
+		FfiConverterDecimalINSTANCE.Write(writer, value.Amount);
+}
+
+type FfiDestroyerTypeWithdrawRecoveryXrdEvent struct {}
+
+func (_ FfiDestroyerTypeWithdrawRecoveryXrdEvent) Destroy(value WithdrawRecoveryXrdEvent) {
 	value.Destroy()
 }
 
@@ -20005,6 +20079,20 @@ type TypedAccessControllerBlueprintEventStopTimedRecoveryEventValue struct {
 func (e TypedAccessControllerBlueprintEventStopTimedRecoveryEventValue) Destroy() {
 		FfiDestroyerTypeStopTimedRecoveryEvent{}.Destroy(e.Value);
 }
+type TypedAccessControllerBlueprintEventDepositRecoveryXrdEventValue struct {
+	Value DepositRecoveryXrdEvent
+}
+
+func (e TypedAccessControllerBlueprintEventDepositRecoveryXrdEventValue) Destroy() {
+		FfiDestroyerTypeDepositRecoveryXrdEvent{}.Destroy(e.Value);
+}
+type TypedAccessControllerBlueprintEventWithdrawRecoveryXrdEventValue struct {
+	Value WithdrawRecoveryXrdEvent
+}
+
+func (e TypedAccessControllerBlueprintEventWithdrawRecoveryXrdEventValue) Destroy() {
+		FfiDestroyerTypeWithdrawRecoveryXrdEvent{}.Destroy(e.Value);
+}
 
 type FfiConverterTypeTypedAccessControllerBlueprintEvent struct {}
 
@@ -20056,6 +20144,14 @@ func (FfiConverterTypeTypedAccessControllerBlueprintEvent) Read(reader io.Reader
 			return TypedAccessControllerBlueprintEventStopTimedRecoveryEventValue{
 				FfiConverterTypeStopTimedRecoveryEventINSTANCE.Read(reader),
 			};
+		case 10:
+			return TypedAccessControllerBlueprintEventDepositRecoveryXrdEventValue{
+				FfiConverterTypeDepositRecoveryXrdEventINSTANCE.Read(reader),
+			};
+		case 11:
+			return TypedAccessControllerBlueprintEventWithdrawRecoveryXrdEventValue{
+				FfiConverterTypeWithdrawRecoveryXrdEventINSTANCE.Read(reader),
+			};
 		default:
 			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeTypedAccessControllerBlueprintEvent.Read()", id));
 	}
@@ -20090,6 +20186,12 @@ func (FfiConverterTypeTypedAccessControllerBlueprintEvent) Write(writer io.Write
 		case TypedAccessControllerBlueprintEventStopTimedRecoveryEventValue:
 			writeInt32(writer, 9)
 			FfiConverterTypeStopTimedRecoveryEventINSTANCE.Write(writer, variant_value.Value)
+		case TypedAccessControllerBlueprintEventDepositRecoveryXrdEventValue:
+			writeInt32(writer, 10)
+			FfiConverterTypeDepositRecoveryXrdEventINSTANCE.Write(writer, variant_value.Value)
+		case TypedAccessControllerBlueprintEventWithdrawRecoveryXrdEventValue:
+			writeInt32(writer, 11)
+			FfiConverterTypeWithdrawRecoveryXrdEventINSTANCE.Write(writer, variant_value.Value)
 		default:
 			_ = variant_value
 			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeTypedAccessControllerBlueprintEvent.Write", value))
