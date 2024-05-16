@@ -15,7 +15,7 @@ go mod init main
 
 Add and install `radix_engine_toolkit_go` package dependency:
 ```
-go get github.com/radixdlt/radix-engine-toolkit-go@latest
+go get github.com/radixdlt/radix-engine-toolkit-go/v2@latest
 ```
 
 Create `main.go` file with following code:
@@ -23,7 +23,7 @@ Create `main.go` file with following code:
 package main
 
 import (
-    "github.com/radixdlt/radix-engine-toolkit-go/radix_engine_toolkit_uniffi"
+    "github.com/radixdlt/radix-engine-toolkit-go/v2/radix_engine_toolkit_uniffi"
     "fmt"
 )
 
