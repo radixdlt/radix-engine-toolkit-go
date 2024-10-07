@@ -366,6 +366,33 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_func_derive_preallocated_account_address_from_olympia_account_address(uniffiStatus)
+	})
+	if checksum != 54 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_func_derive_preallocated_account_address_from_olympia_account_address: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_func_derive_preallocated_account_address_from_public_key(uniffiStatus)
+	})
+	if checksum != 57908 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_func_derive_preallocated_account_address_from_public_key: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_func_derive_preallocated_identity_address_from_public_key(uniffiStatus)
+	})
+	if checksum != 26480 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_func_derive_preallocated_identity_address_from_public_key: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_func_derive_public_key_from_olympia_account_address(uniffiStatus)
 	})
 	if checksum != 45205 {
@@ -384,38 +411,11 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_func_derive_virtual_account_address_from_olympia_account_address(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_func_derive_signature_badge_non_fungible_global_id_from_public_key(uniffiStatus)
 	})
-	if checksum != 24509 {
+	if checksum != 47850 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_func_derive_virtual_account_address_from_olympia_account_address: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_func_derive_virtual_account_address_from_public_key(uniffiStatus)
-	})
-	if checksum != 36758 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_func_derive_virtual_account_address_from_public_key: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_func_derive_virtual_identity_address_from_public_key(uniffiStatus)
-	})
-	if checksum != 11003 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_func_derive_virtual_identity_address_from_public_key: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_func_derive_virtual_signature_non_fungible_global_id_from_public_key(uniffiStatus)
-	})
-	if checksum != 61146 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_func_derive_virtual_signature_non_fungible_global_id_from_public_key: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_func_derive_signature_badge_non_fungible_global_id_from_public_key: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -510,20 +510,38 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_func_public_key_fingerprint_from_vec(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_func_public_key_fingerprint_v1_from_vec(uniffiStatus)
 	})
-	if checksum != 41521 {
+	if checksum != 25402 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_func_public_key_fingerprint_from_vec: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_func_public_key_fingerprint_v1_from_vec: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_func_public_key_fingerprint_to_vec(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_func_public_key_fingerprint_v1_to_vec(uniffiStatus)
 	})
-	if checksum != 4950 {
+	if checksum != 206 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_func_public_key_fingerprint_to_vec: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_func_public_key_fingerprint_v1_to_vec: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_func_public_key_fingerprint_v2_from_vec(uniffiStatus)
+	})
+	if checksum != 21486 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_func_public_key_fingerprint_v2_from_vec: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_func_public_key_fingerprint_v2_to_vec(uniffiStatus)
+	})
+	if checksum != 14661 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_func_public_key_fingerprint_v2_to_vec: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -537,11 +555,11 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_func_sbor_decode_to_typed_native_event(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_func_scrypto_sbor_decode_to_native_event(uniffiStatus)
 	})
-	if checksum != 43789 {
+	if checksum != 58943 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_func_sbor_decode_to_typed_native_event: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_func_scrypto_sbor_decode_to_native_event: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -681,20 +699,20 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_address_is_global_preallocated(uniffiStatus)
+	})
+	if checksum != 59221 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_address_is_global_preallocated: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_address_is_global_resource_manager(uniffiStatus)
 	})
 	if checksum != 34705 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_address_is_global_resource_manager: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_address_is_global_virtual(uniffiStatus)
-	})
-	if checksum != 44552 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_address_is_global_virtual: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -987,1451 +1005,2882 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_instructions_as_str(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_instructionsv1_as_str(uniffiStatus)
 	})
-	if checksum != 2403 {
+	if checksum != 31128 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_instructions_as_str: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_instructionsv1_as_str: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_instructions_instructions_list(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_instructionsv1_instructions_list(uniffiStatus)
 	})
-	if checksum != 45845 {
+	if checksum != 39835 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_instructions_instructions_list: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_instructionsv1_instructions_list: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_instructions_network_id(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_instructionsv1_network_id(uniffiStatus)
 	})
-	if checksum != 55489 {
+	if checksum != 57001 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_instructions_network_id: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_instructionsv1_network_id: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_intent_compile(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_instructionsv2_as_str(uniffiStatus)
 	})
-	if checksum != 31325 {
+	if checksum != 15711 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_intent_compile: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_instructionsv2_as_str: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_intent_hash(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_instructionsv2_instructions_list(uniffiStatus)
 	})
-	if checksum != 993 {
+	if checksum != 30444 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_intent_hash: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_instructionsv2_instructions_list: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_intent_header(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_instructionsv2_network_id(uniffiStatus)
 	})
-	if checksum != 49719 {
+	if checksum != 23684 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_intent_header: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_instructionsv2_network_id: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_intent_intent_hash(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_blobs(uniffiStatus)
 	})
-	if checksum != 63530 {
+	if checksum != 35056 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_intent_intent_hash: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_blobs: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_intent_manifest(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_children(uniffiStatus)
 	})
-	if checksum != 60823 {
+	if checksum != 63939 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_intent_manifest: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_children: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_intent_message(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_hash(uniffiStatus)
 	})
-	if checksum != 49610 {
+	if checksum != 12837 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_intent_message: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_hash: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_intent_statically_validate(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_header(uniffiStatus)
 	})
-	if checksum != 18502 {
+	if checksum != 42313 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_intent_statically_validate: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_header: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_cancel_primary_role_badge_withdraw_attempt(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_instructions(uniffiStatus)
 	})
-	if checksum != 48569 {
+	if checksum != 30446 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_cancel_primary_role_badge_withdraw_attempt: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_instructions: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_cancel_primary_role_recovery_proposal(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_intent_hash(uniffiStatus)
 	})
-	if checksum != 15034 {
+	if checksum != 3317 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_cancel_primary_role_recovery_proposal: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_intent_hash: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_cancel_recovery_role_badge_withdraw_attempt(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_message(uniffiStatus)
 	})
-	if checksum != 302 {
+	if checksum != 9657 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_cancel_recovery_role_badge_withdraw_attempt: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_message: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_cancel_recovery_role_recovery_proposal(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_subintent_hash(uniffiStatus)
 	})
-	if checksum != 29975 {
+	if checksum != 47178 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_cancel_recovery_role_recovery_proposal: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_subintent_hash: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_create(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_to_payload_bytes(uniffiStatus)
 	})
-	if checksum != 58316 {
+	if checksum != 46112 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_create: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_to_payload_bytes: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_create_proof(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_intentv1_hash(uniffiStatus)
 	})
-	if checksum != 64981 {
+	if checksum != 25295 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_create_proof: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_intentv1_hash: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_create_with_security_structure(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_intentv1_header(uniffiStatus)
 	})
-	if checksum != 28637 {
+	if checksum != 46007 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_create_with_security_structure: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_intentv1_header: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_initiate_badge_withdraw_as_primary(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_intentv1_intent_hash(uniffiStatus)
 	})
-	if checksum != 61645 {
+	if checksum != 7772 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_initiate_badge_withdraw_as_primary: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_intentv1_intent_hash: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_initiate_badge_withdraw_as_recovery(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_intentv1_manifest(uniffiStatus)
 	})
-	if checksum != 57712 {
+	if checksum != 9393 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_initiate_badge_withdraw_as_recovery: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_intentv1_manifest: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_initiate_recovery_as_primary(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_intentv1_message(uniffiStatus)
 	})
-	if checksum != 20119 {
+	if checksum != 52669 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_initiate_recovery_as_primary: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_intentv1_message: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_initiate_recovery_as_recovery(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_intentv1_statically_validate(uniffiStatus)
 	})
-	if checksum != 33445 {
+	if checksum != 12456 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_initiate_recovery_as_recovery: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_intentv1_statically_validate: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_lock_primary_role(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_intentv1_to_payload_bytes(uniffiStatus)
 	})
-	if checksum != 31780 {
+	if checksum != 52266 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_lock_primary_role: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_intentv1_to_payload_bytes: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_mint_recovery_badges(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_cancel_primary_role_badge_withdraw_attempt(uniffiStatus)
 	})
-	if checksum != 4851 {
+	if checksum != 60531 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_mint_recovery_badges: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_cancel_primary_role_badge_withdraw_attempt: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_new_from_public_keys(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_cancel_primary_role_recovery_proposal(uniffiStatus)
 	})
-	if checksum != 6146 {
+	if checksum != 8817 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_new_from_public_keys: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_cancel_primary_role_recovery_proposal: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_quick_confirm_primary_role_badge_withdraw_attempt(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_cancel_recovery_role_badge_withdraw_attempt(uniffiStatus)
 	})
-	if checksum != 12412 {
+	if checksum != 16478 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_quick_confirm_primary_role_badge_withdraw_attempt: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_cancel_recovery_role_badge_withdraw_attempt: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_quick_confirm_primary_role_recovery_proposal(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_cancel_recovery_role_recovery_proposal(uniffiStatus)
 	})
-	if checksum != 45088 {
+	if checksum != 35272 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_quick_confirm_primary_role_recovery_proposal: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_cancel_recovery_role_recovery_proposal: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_quick_confirm_recovery_role_badge_withdraw_attempt(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_create(uniffiStatus)
 	})
-	if checksum != 17833 {
+	if checksum != 35312 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_quick_confirm_recovery_role_badge_withdraw_attempt: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_create: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_quick_confirm_recovery_role_recovery_proposal(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_create_proof(uniffiStatus)
 	})
-	if checksum != 62781 {
+	if checksum != 27962 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_quick_confirm_recovery_role_recovery_proposal: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_create_proof: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_stop_timed_recovery(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_create_with_security_structure(uniffiStatus)
 	})
-	if checksum != 34245 {
+	if checksum != 41437 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_stop_timed_recovery: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_create_with_security_structure: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_timed_confirm_recovery(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_initiate_badge_withdraw_as_primary(uniffiStatus)
 	})
-	if checksum != 45733 {
+	if checksum != 58093 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_timed_confirm_recovery: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_initiate_badge_withdraw_as_primary: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_unlock_primary_role(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_initiate_badge_withdraw_as_recovery(uniffiStatus)
 	})
-	if checksum != 30029 {
+	if checksum != 5978 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_access_controller_unlock_primary_role: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_initiate_badge_withdraw_as_recovery: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_add_authorized_depositor(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_initiate_recovery_as_primary(uniffiStatus)
 	})
-	if checksum != 59221 {
+	if checksum != 22846 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_add_authorized_depositor: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_initiate_recovery_as_primary: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_burn(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_initiate_recovery_as_recovery(uniffiStatus)
 	})
-	if checksum != 64728 {
+	if checksum != 4060 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_burn: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_initiate_recovery_as_recovery: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_burn_non_fungibles(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_lock_primary_role(uniffiStatus)
 	})
-	if checksum != 40710 {
+	if checksum != 58099 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_burn_non_fungibles: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_lock_primary_role: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_create(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_mint_recovery_badges(uniffiStatus)
 	})
-	if checksum != 6013 {
+	if checksum != 41443 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_create: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_mint_recovery_badges: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_create_advanced(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_new_from_public_keys(uniffiStatus)
 	})
-	if checksum != 54940 {
+	if checksum != 56637 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_create_advanced: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_new_from_public_keys: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_create_proof_of_amount(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_quick_confirm_primary_role_badge_withdraw_attempt(uniffiStatus)
 	})
-	if checksum != 17393 {
+	if checksum != 41101 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_create_proof_of_amount: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_quick_confirm_primary_role_badge_withdraw_attempt: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_create_proof_of_non_fungibles(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_quick_confirm_primary_role_recovery_proposal(uniffiStatus)
 	})
-	if checksum != 43091 {
+	if checksum != 26388 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_create_proof_of_non_fungibles: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_quick_confirm_primary_role_recovery_proposal: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_deposit(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_quick_confirm_recovery_role_badge_withdraw_attempt(uniffiStatus)
 	})
-	if checksum != 3687 {
+	if checksum != 26819 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_deposit: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_quick_confirm_recovery_role_badge_withdraw_attempt: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_deposit_batch(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_quick_confirm_recovery_role_recovery_proposal(uniffiStatus)
 	})
-	if checksum != 43520 {
+	if checksum != 22260 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_deposit_batch: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_quick_confirm_recovery_role_recovery_proposal: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_deposit_entire_worktop(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_stop_timed_recovery(uniffiStatus)
 	})
-	if checksum != 59635 {
+	if checksum != 6246 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_deposit_entire_worktop: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_stop_timed_recovery: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_lock_contingent_fee(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_timed_confirm_recovery(uniffiStatus)
 	})
-	if checksum != 54668 {
+	if checksum != 54754 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_lock_contingent_fee: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_timed_confirm_recovery: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_lock_fee(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_unlock_primary_role(uniffiStatus)
 	})
-	if checksum != 38082 {
+	if checksum != 48648 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_lock_fee: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_access_controller_unlock_primary_role: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_lock_fee_and_withdraw(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_add_authorized_depositor(uniffiStatus)
 	})
-	if checksum != 19367 {
+	if checksum != 12277 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_lock_fee_and_withdraw: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_add_authorized_depositor: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_lock_fee_and_withdraw_non_fungibles(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_burn(uniffiStatus)
 	})
-	if checksum != 46012 {
+	if checksum != 57724 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_lock_fee_and_withdraw_non_fungibles: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_burn: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_airdrop(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_burn_non_fungibles(uniffiStatus)
 	})
-	if checksum != 40671 {
+	if checksum != 41992 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_airdrop: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_burn_non_fungibles: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_claim(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_create(uniffiStatus)
 	})
-	if checksum != 20662 {
+	if checksum != 23699 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_claim: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_create: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_claim_non_fungibles(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_create_advanced(uniffiStatus)
 	})
-	if checksum != 38683 {
+	if checksum != 58004 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_claim_non_fungibles: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_create_advanced: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_get_amount(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_create_proof_of_amount(uniffiStatus)
 	})
-	if checksum != 29397 {
+	if checksum != 25465 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_get_amount: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_create_proof_of_amount: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_get_non_fungible_local_ids(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_create_proof_of_non_fungibles(uniffiStatus)
 	})
-	if checksum != 23927 {
+	if checksum != 11505 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_get_non_fungible_local_ids: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_create_proof_of_non_fungibles: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_instantiate(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_deposit(uniffiStatus)
 	})
-	if checksum != 7727 {
+	if checksum != 31148 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_instantiate: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_deposit: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_instantiate_simple(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_deposit_batch(uniffiStatus)
 	})
-	if checksum != 65307 {
+	if checksum != 1563 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_instantiate_simple: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_deposit_batch: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_recover(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_deposit_entire_worktop(uniffiStatus)
 	})
-	if checksum != 2999 {
+	if checksum != 39520 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_recover: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_deposit_entire_worktop: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_recover_non_fungibles(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_lock_contingent_fee(uniffiStatus)
 	})
-	if checksum != 65115 {
+	if checksum != 26646 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_recover_non_fungibles: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_lock_contingent_fee: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_store(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_lock_fee(uniffiStatus)
 	})
-	if checksum != 40050 {
+	if checksum != 58072 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_locker_store: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_lock_fee: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_remove_authorized_depositor(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_lock_fee_and_withdraw(uniffiStatus)
 	})
-	if checksum != 17654 {
+	if checksum != 502 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_remove_authorized_depositor: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_lock_fee_and_withdraw: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_remove_resource_preference(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_lock_fee_and_withdraw_non_fungibles(uniffiStatus)
 	})
-	if checksum != 57432 {
+	if checksum != 53305 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_remove_resource_preference: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_lock_fee_and_withdraw_non_fungibles: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_securify(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_locker_airdrop(uniffiStatus)
 	})
-	if checksum != 20811 {
+	if checksum != 49282 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_securify: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_locker_airdrop: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_set_default_deposit_rule(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_locker_claim(uniffiStatus)
 	})
-	if checksum != 28798 {
+	if checksum != 29828 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_set_default_deposit_rule: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_locker_claim: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_set_resource_preference(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_locker_claim_non_fungibles(uniffiStatus)
 	})
-	if checksum != 24940 {
+	if checksum != 41808 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_set_resource_preference: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_locker_claim_non_fungibles: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_try_deposit_batch_or_abort(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_locker_get_amount(uniffiStatus)
 	})
-	if checksum != 18649 {
+	if checksum != 41686 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_try_deposit_batch_or_abort: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_locker_get_amount: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_try_deposit_batch_or_refund(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_locker_get_non_fungible_local_ids(uniffiStatus)
 	})
-	if checksum != 34909 {
+	if checksum != 20198 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_try_deposit_batch_or_refund: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_locker_get_non_fungible_local_ids: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_try_deposit_entire_worktop_or_abort(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_locker_instantiate(uniffiStatus)
 	})
-	if checksum != 42658 {
+	if checksum != 36961 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_try_deposit_entire_worktop_or_abort: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_locker_instantiate: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_try_deposit_entire_worktop_or_refund(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_locker_instantiate_simple(uniffiStatus)
 	})
-	if checksum != 9020 {
+	if checksum != 20970 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_try_deposit_entire_worktop_or_refund: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_locker_instantiate_simple: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_try_deposit_or_abort(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_locker_recover(uniffiStatus)
 	})
-	if checksum != 21998 {
+	if checksum != 24835 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_try_deposit_or_abort: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_locker_recover: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_try_deposit_or_refund(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_locker_recover_non_fungibles(uniffiStatus)
 	})
-	if checksum != 39086 {
+	if checksum != 21986 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_try_deposit_or_refund: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_locker_recover_non_fungibles: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_withdraw(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_locker_store(uniffiStatus)
 	})
-	if checksum != 29156 {
+	if checksum != 33048 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_withdraw: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_locker_store: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_withdraw_non_fungibles(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_remove_authorized_depositor(uniffiStatus)
 	})
-	if checksum != 56678 {
+	if checksum != 2590 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_account_withdraw_non_fungibles: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_remove_authorized_depositor: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_allocate_global_address(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_remove_resource_preference(uniffiStatus)
 	})
-	if checksum != 18604 {
+	if checksum != 25208 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_allocate_global_address: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_remove_resource_preference: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_assert_worktop_contains(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_securify(uniffiStatus)
 	})
-	if checksum != 37738 {
+	if checksum != 19075 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_assert_worktop_contains: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_securify: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_assert_worktop_contains_any(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_set_default_deposit_rule(uniffiStatus)
 	})
-	if checksum != 20665 {
+	if checksum != 43162 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_assert_worktop_contains_any: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_set_default_deposit_rule: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_assert_worktop_contains_non_fungibles(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_set_resource_preference(uniffiStatus)
 	})
-	if checksum != 58282 {
+	if checksum != 25573 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_assert_worktop_contains_non_fungibles: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_set_resource_preference: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_build(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_try_deposit_batch_or_abort(uniffiStatus)
 	})
-	if checksum != 36705 {
+	if checksum != 7148 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_build: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_try_deposit_batch_or_abort: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_burn_resource(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_try_deposit_batch_or_refund(uniffiStatus)
 	})
-	if checksum != 52445 {
+	if checksum != 20454 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_burn_resource: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_try_deposit_batch_or_refund: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_call_access_rules_method(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_try_deposit_entire_worktop_or_abort(uniffiStatus)
 	})
-	if checksum != 19399 {
+	if checksum != 20038 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_call_access_rules_method: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_try_deposit_entire_worktop_or_abort: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_call_direct_vault_method(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_try_deposit_entire_worktop_or_refund(uniffiStatus)
 	})
-	if checksum != 53674 {
+	if checksum != 16818 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_call_direct_vault_method: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_try_deposit_entire_worktop_or_refund: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_call_function(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_try_deposit_or_abort(uniffiStatus)
 	})
-	if checksum != 38619 {
+	if checksum != 11985 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_call_function: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_try_deposit_or_abort: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_call_metadata_method(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_try_deposit_or_refund(uniffiStatus)
 	})
-	if checksum != 42239 {
+	if checksum != 10519 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_call_metadata_method: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_try_deposit_or_refund: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_call_method(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_withdraw(uniffiStatus)
 	})
-	if checksum != 39370 {
+	if checksum != 18692 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_call_method: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_withdraw: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_call_royalty_method(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_withdraw_non_fungibles(uniffiStatus)
 	})
-	if checksum != 25488 {
+	if checksum != 53016 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_call_royalty_method: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_account_withdraw_non_fungibles: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_clone_proof(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_allocate_global_address(uniffiStatus)
 	})
-	if checksum != 52407 {
+	if checksum != 46029 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_clone_proof: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_allocate_global_address: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_create_fungible_resource_manager(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_assert_worktop_contains(uniffiStatus)
 	})
-	if checksum != 45955 {
+	if checksum != 36403 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_create_fungible_resource_manager: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_assert_worktop_contains: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_create_proof_from_auth_zone_of_all(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_assert_worktop_contains_any(uniffiStatus)
 	})
-	if checksum != 51538 {
+	if checksum != 37888 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_create_proof_from_auth_zone_of_all: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_assert_worktop_contains_any: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_create_proof_from_auth_zone_of_amount(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_assert_worktop_contains_non_fungibles(uniffiStatus)
 	})
-	if checksum != 51265 {
+	if checksum != 35596 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_create_proof_from_auth_zone_of_amount: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_assert_worktop_contains_non_fungibles: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_create_proof_from_auth_zone_of_non_fungibles(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_build(uniffiStatus)
+	})
+	if checksum != 29340 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_build: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_burn_resource(uniffiStatus)
+	})
+	if checksum != 58332 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_burn_resource: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_call_access_rules_method(uniffiStatus)
+	})
+	if checksum != 24143 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_call_access_rules_method: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_call_direct_vault_method(uniffiStatus)
+	})
+	if checksum != 43046 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_call_direct_vault_method: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_call_function(uniffiStatus)
+	})
+	if checksum != 21038 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_call_function: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_call_metadata_method(uniffiStatus)
+	})
+	if checksum != 25760 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_call_metadata_method: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_call_method(uniffiStatus)
+	})
+	if checksum != 19609 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_call_method: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_call_royalty_method(uniffiStatus)
+	})
+	if checksum != 22006 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_call_royalty_method: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_clone_proof(uniffiStatus)
+	})
+	if checksum != 56236 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_clone_proof: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_create_fungible_resource_manager(uniffiStatus)
+	})
+	if checksum != 56966 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_create_fungible_resource_manager: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_create_proof_from_auth_zone_of_all(uniffiStatus)
+	})
+	if checksum != 50330 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_create_proof_from_auth_zone_of_all: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_create_proof_from_auth_zone_of_amount(uniffiStatus)
+	})
+	if checksum != 21961 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_create_proof_from_auth_zone_of_amount: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_create_proof_from_auth_zone_of_non_fungibles(uniffiStatus)
+	})
+	if checksum != 51504 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_create_proof_from_auth_zone_of_non_fungibles: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_create_proof_from_bucket_of_all(uniffiStatus)
+	})
+	if checksum != 1032 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_create_proof_from_bucket_of_all: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_create_proof_from_bucket_of_amount(uniffiStatus)
+	})
+	if checksum != 47905 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_create_proof_from_bucket_of_amount: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_create_proof_from_bucket_of_non_fungibles(uniffiStatus)
+	})
+	if checksum != 373 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_create_proof_from_bucket_of_non_fungibles: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_drop_all_proofs(uniffiStatus)
+	})
+	if checksum != 63018 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_drop_all_proofs: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_drop_auth_zone_proofs(uniffiStatus)
+	})
+	if checksum != 23844 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_drop_auth_zone_proofs: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_drop_auth_zone_signature_proofs(uniffiStatus)
+	})
+	if checksum != 43912 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_drop_auth_zone_signature_proofs: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_drop_proof(uniffiStatus)
+	})
+	if checksum != 15794 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_drop_proof: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_faucet_free_xrd(uniffiStatus)
+	})
+	if checksum != 47292 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_faucet_free_xrd: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_faucet_lock_fee(uniffiStatus)
+	})
+	if checksum != 8590 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_faucet_lock_fee: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_identity_create(uniffiStatus)
+	})
+	if checksum != 43498 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_identity_create: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_identity_create_advanced(uniffiStatus)
+	})
+	if checksum != 16521 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_identity_create_advanced: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_identity_securify(uniffiStatus)
+	})
+	if checksum != 19339 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_identity_securify: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_metadata_get(uniffiStatus)
+	})
+	if checksum != 53144 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_metadata_get: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_metadata_lock(uniffiStatus)
+	})
+	if checksum != 4573 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_metadata_lock: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_metadata_remove(uniffiStatus)
+	})
+	if checksum != 43632 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_metadata_remove: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_metadata_set(uniffiStatus)
+	})
+	if checksum != 65149 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_metadata_set: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_mint_fungible(uniffiStatus)
+	})
+	if checksum != 56621 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_mint_fungible: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_multi_resource_pool_contribute(uniffiStatus)
+	})
+	if checksum != 34378 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_multi_resource_pool_contribute: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_multi_resource_pool_get_redemption_value(uniffiStatus)
+	})
+	if checksum != 22642 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_multi_resource_pool_get_redemption_value: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_multi_resource_pool_get_vault_amount(uniffiStatus)
+	})
+	if checksum != 49212 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_multi_resource_pool_get_vault_amount: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_multi_resource_pool_instantiate(uniffiStatus)
+	})
+	if checksum != 37955 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_multi_resource_pool_instantiate: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_multi_resource_pool_protected_deposit(uniffiStatus)
+	})
+	if checksum != 49988 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_multi_resource_pool_protected_deposit: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_multi_resource_pool_protected_withdraw(uniffiStatus)
+	})
+	if checksum != 51169 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_multi_resource_pool_protected_withdraw: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_multi_resource_pool_redeem(uniffiStatus)
+	})
+	if checksum != 14336 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_multi_resource_pool_redeem: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_one_resource_pool_contribute(uniffiStatus)
+	})
+	if checksum != 7573 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_one_resource_pool_contribute: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_one_resource_pool_get_redemption_value(uniffiStatus)
+	})
+	if checksum != 12824 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_one_resource_pool_get_redemption_value: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_one_resource_pool_get_vault_amount(uniffiStatus)
+	})
+	if checksum != 40253 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_one_resource_pool_get_vault_amount: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_one_resource_pool_instantiate(uniffiStatus)
+	})
+	if checksum != 47027 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_one_resource_pool_instantiate: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_one_resource_pool_protected_deposit(uniffiStatus)
+	})
+	if checksum != 51072 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_one_resource_pool_protected_deposit: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_one_resource_pool_protected_withdraw(uniffiStatus)
+	})
+	if checksum != 28364 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_one_resource_pool_protected_withdraw: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_one_resource_pool_redeem(uniffiStatus)
+	})
+	if checksum != 30657 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_one_resource_pool_redeem: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_package_claim_royalty(uniffiStatus)
+	})
+	if checksum != 58285 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_package_claim_royalty: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_package_publish(uniffiStatus)
+	})
+	if checksum != 54702 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_package_publish: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_package_publish_advanced(uniffiStatus)
+	})
+	if checksum != 13809 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_package_publish_advanced: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_pop_from_auth_zone(uniffiStatus)
+	})
+	if checksum != 47232 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_pop_from_auth_zone: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_push_to_auth_zone(uniffiStatus)
+	})
+	if checksum != 7649 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_push_to_auth_zone: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_return_to_worktop(uniffiStatus)
+	})
+	if checksum != 7068 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_return_to_worktop: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_role_assignment_get(uniffiStatus)
+	})
+	if checksum != 8943 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_role_assignment_get: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_role_assignment_lock_owner(uniffiStatus)
+	})
+	if checksum != 8343 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_role_assignment_lock_owner: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_role_assignment_set(uniffiStatus)
+	})
+	if checksum != 54453 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_role_assignment_set: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_role_assignment_set_owner(uniffiStatus)
+	})
+	if checksum != 49233 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_role_assignment_set_owner: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_royalty_claim(uniffiStatus)
+	})
+	if checksum != 3260 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_royalty_claim: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_royalty_lock(uniffiStatus)
+	})
+	if checksum != 43069 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_royalty_lock: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_royalty_set(uniffiStatus)
+	})
+	if checksum != 15446 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_royalty_set: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_take_all_from_worktop(uniffiStatus)
+	})
+	if checksum != 40187 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_take_all_from_worktop: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_take_from_worktop(uniffiStatus)
+	})
+	if checksum != 41784 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_take_from_worktop: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_take_non_fungibles_from_worktop(uniffiStatus)
+	})
+	if checksum != 26835 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_take_non_fungibles_from_worktop: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_two_resource_pool_contribute(uniffiStatus)
+	})
+	if checksum != 63652 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_two_resource_pool_contribute: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_two_resource_pool_get_redemption_value(uniffiStatus)
+	})
+	if checksum != 19476 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_two_resource_pool_get_redemption_value: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_two_resource_pool_get_vault_amount(uniffiStatus)
+	})
+	if checksum != 37680 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_two_resource_pool_get_vault_amount: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_two_resource_pool_instantiate(uniffiStatus)
+	})
+	if checksum != 59493 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_two_resource_pool_instantiate: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_two_resource_pool_protected_deposit(uniffiStatus)
+	})
+	if checksum != 58737 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_two_resource_pool_protected_deposit: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_two_resource_pool_protected_withdraw(uniffiStatus)
+	})
+	if checksum != 1401 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_two_resource_pool_protected_withdraw: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_two_resource_pool_redeem(uniffiStatus)
+	})
+	if checksum != 49803 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_two_resource_pool_redeem: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_accepts_delegated_stake(uniffiStatus)
+	})
+	if checksum != 28360 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_accepts_delegated_stake: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_claim_xrd(uniffiStatus)
+	})
+	if checksum != 17473 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_claim_xrd: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_finish_unlock_owner_stake_units(uniffiStatus)
+	})
+	if checksum != 49096 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_finish_unlock_owner_stake_units: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_get_protocol_update_readiness(uniffiStatus)
+	})
+	if checksum != 25029 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_get_protocol_update_readiness: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_get_redemption_value(uniffiStatus)
+	})
+	if checksum != 693 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_get_redemption_value: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_lock_owner_stake_units(uniffiStatus)
+	})
+	if checksum != 42510 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_lock_owner_stake_units: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_register(uniffiStatus)
+	})
+	if checksum != 30436 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_register: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_signal_protocol_update_readiness(uniffiStatus)
+	})
+	if checksum != 30161 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_signal_protocol_update_readiness: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_stake(uniffiStatus)
+	})
+	if checksum != 49515 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_stake: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_stake_as_owner(uniffiStatus)
+	})
+	if checksum != 13257 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_stake_as_owner: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_start_unlock_owner_stake_units(uniffiStatus)
+	})
+	if checksum != 52933 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_start_unlock_owner_stake_units: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_total_stake_unit_supply(uniffiStatus)
+	})
+	if checksum != 3880 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_total_stake_unit_supply: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_total_stake_xrd_amount(uniffiStatus)
+	})
+	if checksum != 59231 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_total_stake_xrd_amount: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_unregister(uniffiStatus)
+	})
+	if checksum != 1649 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_unregister: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_unstake(uniffiStatus)
+	})
+	if checksum != 56891 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_unstake: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_update_accept_delegated_stake(uniffiStatus)
+	})
+	if checksum != 53701 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_update_accept_delegated_stake: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_update_fee(uniffiStatus)
+	})
+	if checksum != 43552 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_update_fee: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_update_key(uniffiStatus)
+	})
+	if checksum != 7439 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv1builder_validator_update_key: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_cancel_primary_role_badge_withdraw_attempt(uniffiStatus)
+	})
+	if checksum != 33510 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_cancel_primary_role_badge_withdraw_attempt: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_cancel_primary_role_recovery_proposal(uniffiStatus)
+	})
+	if checksum != 33702 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_cancel_primary_role_recovery_proposal: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_cancel_recovery_role_badge_withdraw_attempt(uniffiStatus)
+	})
+	if checksum != 20474 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_cancel_recovery_role_badge_withdraw_attempt: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_cancel_recovery_role_recovery_proposal(uniffiStatus)
+	})
+	if checksum != 62802 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_cancel_recovery_role_recovery_proposal: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_create(uniffiStatus)
+	})
+	if checksum != 34664 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_create: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_create_proof(uniffiStatus)
+	})
+	if checksum != 39379 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_create_proof: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_create_with_security_structure(uniffiStatus)
+	})
+	if checksum != 37918 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_create_with_security_structure: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_initiate_badge_withdraw_as_primary(uniffiStatus)
+	})
+	if checksum != 42109 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_initiate_badge_withdraw_as_primary: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_initiate_badge_withdraw_as_recovery(uniffiStatus)
+	})
+	if checksum != 43420 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_initiate_badge_withdraw_as_recovery: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_initiate_recovery_as_primary(uniffiStatus)
+	})
+	if checksum != 51352 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_initiate_recovery_as_primary: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_initiate_recovery_as_recovery(uniffiStatus)
+	})
+	if checksum != 37482 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_initiate_recovery_as_recovery: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_lock_primary_role(uniffiStatus)
+	})
+	if checksum != 53379 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_lock_primary_role: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_mint_recovery_badges(uniffiStatus)
+	})
+	if checksum != 61459 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_mint_recovery_badges: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_new_from_public_keys(uniffiStatus)
+	})
+	if checksum != 61918 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_new_from_public_keys: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_quick_confirm_primary_role_badge_withdraw_attempt(uniffiStatus)
+	})
+	if checksum != 14490 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_quick_confirm_primary_role_badge_withdraw_attempt: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_quick_confirm_primary_role_recovery_proposal(uniffiStatus)
+	})
+	if checksum != 31754 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_quick_confirm_primary_role_recovery_proposal: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_quick_confirm_recovery_role_badge_withdraw_attempt(uniffiStatus)
+	})
+	if checksum != 8429 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_quick_confirm_recovery_role_badge_withdraw_attempt: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_quick_confirm_recovery_role_recovery_proposal(uniffiStatus)
+	})
+	if checksum != 37273 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_quick_confirm_recovery_role_recovery_proposal: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_stop_timed_recovery(uniffiStatus)
+	})
+	if checksum != 32275 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_stop_timed_recovery: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_timed_confirm_recovery(uniffiStatus)
+	})
+	if checksum != 31265 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_timed_confirm_recovery: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_unlock_primary_role(uniffiStatus)
+	})
+	if checksum != 18385 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_access_controller_unlock_primary_role: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_add_authorized_depositor(uniffiStatus)
+	})
+	if checksum != 63090 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_add_authorized_depositor: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_burn(uniffiStatus)
+	})
+	if checksum != 4502 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_burn: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_burn_non_fungibles(uniffiStatus)
+	})
+	if checksum != 49170 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_burn_non_fungibles: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_create(uniffiStatus)
+	})
+	if checksum != 19500 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_create: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_create_advanced(uniffiStatus)
+	})
+	if checksum != 22780 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_create_advanced: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_create_proof_of_amount(uniffiStatus)
+	})
+	if checksum != 55207 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_create_proof_of_amount: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_create_proof_of_non_fungibles(uniffiStatus)
+	})
+	if checksum != 8925 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_create_proof_of_non_fungibles: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_deposit(uniffiStatus)
+	})
+	if checksum != 39893 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_deposit: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_deposit_batch(uniffiStatus)
+	})
+	if checksum != 54367 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_deposit_batch: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_deposit_entire_worktop(uniffiStatus)
+	})
+	if checksum != 59338 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_deposit_entire_worktop: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_lock_contingent_fee(uniffiStatus)
+	})
+	if checksum != 27507 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_lock_contingent_fee: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_lock_fee(uniffiStatus)
+	})
+	if checksum != 10837 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_lock_fee: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_lock_fee_and_withdraw(uniffiStatus)
+	})
+	if checksum != 4567 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_lock_fee_and_withdraw: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_lock_fee_and_withdraw_non_fungibles(uniffiStatus)
+	})
+	if checksum != 22712 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_lock_fee_and_withdraw_non_fungibles: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_locker_airdrop(uniffiStatus)
+	})
+	if checksum != 44690 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_locker_airdrop: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_locker_claim(uniffiStatus)
+	})
+	if checksum != 15012 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_locker_claim: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_locker_claim_non_fungibles(uniffiStatus)
+	})
+	if checksum != 48686 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_locker_claim_non_fungibles: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_locker_get_amount(uniffiStatus)
+	})
+	if checksum != 23353 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_locker_get_amount: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_locker_get_non_fungible_local_ids(uniffiStatus)
+	})
+	if checksum != 4528 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_locker_get_non_fungible_local_ids: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_locker_instantiate(uniffiStatus)
+	})
+	if checksum != 27300 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_locker_instantiate: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_locker_instantiate_simple(uniffiStatus)
+	})
+	if checksum != 44417 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_locker_instantiate_simple: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_locker_recover(uniffiStatus)
+	})
+	if checksum != 51581 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_locker_recover: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_locker_recover_non_fungibles(uniffiStatus)
+	})
+	if checksum != 11316 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_locker_recover_non_fungibles: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_locker_store(uniffiStatus)
+	})
+	if checksum != 15149 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_locker_store: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_remove_authorized_depositor(uniffiStatus)
+	})
+	if checksum != 26785 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_remove_authorized_depositor: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_remove_resource_preference(uniffiStatus)
+	})
+	if checksum != 8050 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_remove_resource_preference: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_securify(uniffiStatus)
+	})
+	if checksum != 22484 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_securify: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_set_default_deposit_rule(uniffiStatus)
+	})
+	if checksum != 38217 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_set_default_deposit_rule: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_set_resource_preference(uniffiStatus)
+	})
+	if checksum != 47757 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_set_resource_preference: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_try_deposit_batch_or_abort(uniffiStatus)
+	})
+	if checksum != 30140 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_try_deposit_batch_or_abort: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_try_deposit_batch_or_refund(uniffiStatus)
+	})
+	if checksum != 17973 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_try_deposit_batch_or_refund: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_try_deposit_entire_worktop_or_abort(uniffiStatus)
+	})
+	if checksum != 18189 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_try_deposit_entire_worktop_or_abort: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_try_deposit_entire_worktop_or_refund(uniffiStatus)
+	})
+	if checksum != 3430 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_try_deposit_entire_worktop_or_refund: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_try_deposit_or_abort(uniffiStatus)
+	})
+	if checksum != 27778 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_try_deposit_or_abort: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_try_deposit_or_refund(uniffiStatus)
+	})
+	if checksum != 43918 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_try_deposit_or_refund: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_withdraw(uniffiStatus)
+	})
+	if checksum != 16133 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_withdraw: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_withdraw_non_fungibles(uniffiStatus)
+	})
+	if checksum != 33553 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_account_withdraw_non_fungibles: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_allocate_global_address(uniffiStatus)
+	})
+	if checksum != 19420 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_allocate_global_address: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_assert_worktop_contains(uniffiStatus)
+	})
+	if checksum != 52948 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_assert_worktop_contains: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_assert_worktop_contains_any(uniffiStatus)
+	})
+	if checksum != 42814 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_assert_worktop_contains_any: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_assert_worktop_contains_non_fungibles(uniffiStatus)
+	})
+	if checksum != 16655 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_assert_worktop_contains_non_fungibles: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_build(uniffiStatus)
+	})
+	if checksum != 23646 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_build: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_burn_resource(uniffiStatus)
+	})
+	if checksum != 12566 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_burn_resource: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_call_access_rules_method(uniffiStatus)
+	})
+	if checksum != 23464 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_call_access_rules_method: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_call_direct_vault_method(uniffiStatus)
+	})
+	if checksum != 34996 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_call_direct_vault_method: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_call_function(uniffiStatus)
+	})
+	if checksum != 46798 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_call_function: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_call_metadata_method(uniffiStatus)
+	})
+	if checksum != 12082 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_call_metadata_method: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_call_method(uniffiStatus)
+	})
+	if checksum != 19732 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_call_method: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_call_royalty_method(uniffiStatus)
+	})
+	if checksum != 58845 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_call_royalty_method: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_clone_proof(uniffiStatus)
+	})
+	if checksum != 29910 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_clone_proof: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_create_fungible_resource_manager(uniffiStatus)
+	})
+	if checksum != 8008 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_create_fungible_resource_manager: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_create_proof_from_auth_zone_of_all(uniffiStatus)
+	})
+	if checksum != 43180 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_create_proof_from_auth_zone_of_all: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_create_proof_from_auth_zone_of_amount(uniffiStatus)
+	})
+	if checksum != 46492 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_create_proof_from_auth_zone_of_amount: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_create_proof_from_auth_zone_of_non_fungibles(uniffiStatus)
+	})
+	if checksum != 11198 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_create_proof_from_auth_zone_of_non_fungibles: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_create_proof_from_bucket_of_all(uniffiStatus)
+	})
+	if checksum != 6166 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_create_proof_from_bucket_of_all: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_create_proof_from_bucket_of_amount(uniffiStatus)
+	})
+	if checksum != 36692 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_create_proof_from_bucket_of_amount: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_create_proof_from_bucket_of_non_fungibles(uniffiStatus)
+	})
+	if checksum != 42676 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_create_proof_from_bucket_of_non_fungibles: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_drop_all_proofs(uniffiStatus)
+	})
+	if checksum != 6643 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_drop_all_proofs: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_drop_auth_zone_proofs(uniffiStatus)
+	})
+	if checksum != 45714 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_drop_auth_zone_proofs: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_drop_auth_zone_signature_proofs(uniffiStatus)
+	})
+	if checksum != 50588 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_drop_auth_zone_signature_proofs: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_drop_proof(uniffiStatus)
+	})
+	if checksum != 23537 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_drop_proof: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_faucet_free_xrd(uniffiStatus)
+	})
+	if checksum != 54032 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_faucet_free_xrd: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_faucet_lock_fee(uniffiStatus)
+	})
+	if checksum != 51943 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_faucet_lock_fee: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_identity_create(uniffiStatus)
+	})
+	if checksum != 51631 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_identity_create: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_identity_create_advanced(uniffiStatus)
+	})
+	if checksum != 25544 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_identity_create_advanced: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_identity_securify(uniffiStatus)
+	})
+	if checksum != 64346 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_identity_securify: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_metadata_get(uniffiStatus)
+	})
+	if checksum != 48123 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_metadata_get: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_metadata_lock(uniffiStatus)
+	})
+	if checksum != 41835 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_metadata_lock: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_metadata_remove(uniffiStatus)
+	})
+	if checksum != 26501 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_metadata_remove: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_metadata_set(uniffiStatus)
+	})
+	if checksum != 6610 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_metadata_set: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_mint_fungible(uniffiStatus)
+	})
+	if checksum != 47316 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_mint_fungible: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_multi_resource_pool_contribute(uniffiStatus)
+	})
+	if checksum != 34502 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_multi_resource_pool_contribute: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_multi_resource_pool_get_redemption_value(uniffiStatus)
+	})
+	if checksum != 44971 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_multi_resource_pool_get_redemption_value: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_multi_resource_pool_get_vault_amount(uniffiStatus)
+	})
+	if checksum != 15355 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_multi_resource_pool_get_vault_amount: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_multi_resource_pool_instantiate(uniffiStatus)
+	})
+	if checksum != 30062 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_multi_resource_pool_instantiate: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_multi_resource_pool_protected_deposit(uniffiStatus)
+	})
+	if checksum != 45754 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_multi_resource_pool_protected_deposit: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_multi_resource_pool_protected_withdraw(uniffiStatus)
 	})
 	if checksum != 49166 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_create_proof_from_auth_zone_of_non_fungibles: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_multi_resource_pool_protected_withdraw: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_create_proof_from_bucket_of_all(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_multi_resource_pool_redeem(uniffiStatus)
 	})
-	if checksum != 46129 {
+	if checksum != 49990 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_create_proof_from_bucket_of_all: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_multi_resource_pool_redeem: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_create_proof_from_bucket_of_amount(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_one_resource_pool_contribute(uniffiStatus)
 	})
-	if checksum != 20827 {
+	if checksum != 64298 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_create_proof_from_bucket_of_amount: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_one_resource_pool_contribute: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_create_proof_from_bucket_of_non_fungibles(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_one_resource_pool_get_redemption_value(uniffiStatus)
 	})
-	if checksum != 25333 {
+	if checksum != 16153 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_create_proof_from_bucket_of_non_fungibles: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_one_resource_pool_get_redemption_value: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_drop_all_proofs(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_one_resource_pool_get_vault_amount(uniffiStatus)
 	})
-	if checksum != 12341 {
+	if checksum != 47438 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_drop_all_proofs: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_one_resource_pool_get_vault_amount: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_drop_auth_zone_proofs(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_one_resource_pool_instantiate(uniffiStatus)
 	})
-	if checksum != 63484 {
+	if checksum != 4200 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_drop_auth_zone_proofs: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_one_resource_pool_instantiate: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_drop_auth_zone_signature_proofs(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_one_resource_pool_protected_deposit(uniffiStatus)
 	})
-	if checksum != 2952 {
+	if checksum != 7032 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_drop_auth_zone_signature_proofs: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_one_resource_pool_protected_deposit: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_drop_proof(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_one_resource_pool_protected_withdraw(uniffiStatus)
 	})
-	if checksum != 29894 {
+	if checksum != 40018 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_drop_proof: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_one_resource_pool_protected_withdraw: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_faucet_free_xrd(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_one_resource_pool_redeem(uniffiStatus)
 	})
-	if checksum != 59721 {
+	if checksum != 35146 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_faucet_free_xrd: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_one_resource_pool_redeem: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_faucet_lock_fee(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_package_claim_royalty(uniffiStatus)
 	})
-	if checksum != 5856 {
+	if checksum != 33050 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_faucet_lock_fee: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_package_claim_royalty: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_identity_create(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_package_publish(uniffiStatus)
 	})
-	if checksum != 22657 {
+	if checksum != 47159 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_identity_create: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_package_publish: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_identity_create_advanced(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_package_publish_advanced(uniffiStatus)
 	})
-	if checksum != 53046 {
+	if checksum != 37576 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_identity_create_advanced: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_package_publish_advanced: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_identity_securify(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_pop_from_auth_zone(uniffiStatus)
 	})
-	if checksum != 24322 {
+	if checksum != 41570 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_identity_securify: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_pop_from_auth_zone: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_metadata_get(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_push_to_auth_zone(uniffiStatus)
 	})
-	if checksum != 37782 {
+	if checksum != 38749 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_metadata_get: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_push_to_auth_zone: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_metadata_lock(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_register_subintent(uniffiStatus)
 	})
-	if checksum != 53375 {
+	if checksum != 44269 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_metadata_lock: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_register_subintent: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_metadata_remove(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_return_to_worktop(uniffiStatus)
 	})
-	if checksum != 30456 {
+	if checksum != 3045 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_metadata_remove: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_return_to_worktop: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_metadata_set(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_role_assignment_get(uniffiStatus)
 	})
-	if checksum != 11186 {
+	if checksum != 40328 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_metadata_set: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_role_assignment_get: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_mint_fungible(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_role_assignment_lock_owner(uniffiStatus)
 	})
-	if checksum != 41635 {
+	if checksum != 1482 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_mint_fungible: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_role_assignment_lock_owner: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_multi_resource_pool_contribute(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_role_assignment_set(uniffiStatus)
 	})
-	if checksum != 54648 {
+	if checksum != 4736 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_multi_resource_pool_contribute: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_role_assignment_set: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_multi_resource_pool_get_redemption_value(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_role_assignment_set_owner(uniffiStatus)
 	})
-	if checksum != 1278 {
+	if checksum != 50136 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_multi_resource_pool_get_redemption_value: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_role_assignment_set_owner: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_multi_resource_pool_get_vault_amount(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_royalty_claim(uniffiStatus)
 	})
-	if checksum != 53964 {
+	if checksum != 57093 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_multi_resource_pool_get_vault_amount: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_royalty_claim: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_multi_resource_pool_instantiate(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_royalty_lock(uniffiStatus)
 	})
-	if checksum != 17825 {
+	if checksum != 7902 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_multi_resource_pool_instantiate: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_royalty_lock: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_multi_resource_pool_protected_deposit(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_royalty_set(uniffiStatus)
 	})
-	if checksum != 10939 {
+	if checksum != 9665 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_multi_resource_pool_protected_deposit: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_royalty_set: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_multi_resource_pool_protected_withdraw(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_take_all_from_worktop(uniffiStatus)
 	})
-	if checksum != 3505 {
+	if checksum != 42429 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_multi_resource_pool_protected_withdraw: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_take_all_from_worktop: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_multi_resource_pool_redeem(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_take_from_worktop(uniffiStatus)
 	})
-	if checksum != 16912 {
+	if checksum != 31951 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_multi_resource_pool_redeem: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_take_from_worktop: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_one_resource_pool_contribute(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_take_non_fungibles_from_worktop(uniffiStatus)
 	})
-	if checksum != 25120 {
+	if checksum != 46778 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_one_resource_pool_contribute: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_take_non_fungibles_from_worktop: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_one_resource_pool_get_redemption_value(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_two_resource_pool_contribute(uniffiStatus)
 	})
-	if checksum != 27814 {
+	if checksum != 57341 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_one_resource_pool_get_redemption_value: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_two_resource_pool_contribute: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_one_resource_pool_get_vault_amount(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_two_resource_pool_get_redemption_value(uniffiStatus)
 	})
-	if checksum != 37942 {
+	if checksum != 25543 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_one_resource_pool_get_vault_amount: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_two_resource_pool_get_redemption_value: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_one_resource_pool_instantiate(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_two_resource_pool_get_vault_amount(uniffiStatus)
 	})
-	if checksum != 5474 {
+	if checksum != 23880 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_one_resource_pool_instantiate: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_two_resource_pool_get_vault_amount: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_one_resource_pool_protected_deposit(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_two_resource_pool_instantiate(uniffiStatus)
 	})
-	if checksum != 1325 {
+	if checksum != 8171 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_one_resource_pool_protected_deposit: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_two_resource_pool_instantiate: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_one_resource_pool_protected_withdraw(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_two_resource_pool_protected_deposit(uniffiStatus)
 	})
-	if checksum != 47007 {
+	if checksum != 19877 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_one_resource_pool_protected_withdraw: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_two_resource_pool_protected_deposit: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_one_resource_pool_redeem(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_two_resource_pool_protected_withdraw(uniffiStatus)
 	})
-	if checksum != 16139 {
+	if checksum != 15459 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_one_resource_pool_redeem: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_two_resource_pool_protected_withdraw: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_package_claim_royalty(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_two_resource_pool_redeem(uniffiStatus)
 	})
-	if checksum != 54897 {
+	if checksum != 8311 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_package_claim_royalty: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_two_resource_pool_redeem: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_package_publish(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_accepts_delegated_stake(uniffiStatus)
 	})
-	if checksum != 43039 {
+	if checksum != 63270 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_package_publish: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_accepts_delegated_stake: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_package_publish_advanced(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_claim_xrd(uniffiStatus)
 	})
-	if checksum != 7234 {
+	if checksum != 14720 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_package_publish_advanced: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_claim_xrd: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_pop_from_auth_zone(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_finish_unlock_owner_stake_units(uniffiStatus)
 	})
-	if checksum != 54385 {
+	if checksum != 10672 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_pop_from_auth_zone: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_finish_unlock_owner_stake_units: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_push_to_auth_zone(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_get_protocol_update_readiness(uniffiStatus)
 	})
-	if checksum != 59668 {
+	if checksum != 43346 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_push_to_auth_zone: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_get_protocol_update_readiness: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_return_to_worktop(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_get_redemption_value(uniffiStatus)
 	})
-	if checksum != 48542 {
+	if checksum != 32889 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_return_to_worktop: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_get_redemption_value: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_role_assignment_get(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_lock_owner_stake_units(uniffiStatus)
 	})
-	if checksum != 57962 {
+	if checksum != 60417 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_role_assignment_get: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_lock_owner_stake_units: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_role_assignment_lock_owner(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_register(uniffiStatus)
 	})
-	if checksum != 26186 {
+	if checksum != 6761 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_role_assignment_lock_owner: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_register: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_role_assignment_set(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_signal_protocol_update_readiness(uniffiStatus)
 	})
-	if checksum != 27207 {
+	if checksum != 37612 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_role_assignment_set: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_signal_protocol_update_readiness: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_role_assignment_set_owner(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_stake(uniffiStatus)
 	})
-	if checksum != 64161 {
+	if checksum != 21668 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_role_assignment_set_owner: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_stake: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_royalty_claim(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_stake_as_owner(uniffiStatus)
 	})
-	if checksum != 23601 {
+	if checksum != 11392 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_royalty_claim: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_stake_as_owner: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_royalty_lock(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_start_unlock_owner_stake_units(uniffiStatus)
 	})
-	if checksum != 50599 {
+	if checksum != 61315 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_royalty_lock: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_start_unlock_owner_stake_units: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_royalty_set(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_total_stake_unit_supply(uniffiStatus)
 	})
-	if checksum != 26584 {
+	if checksum != 21570 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_royalty_set: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_total_stake_unit_supply: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_take_all_from_worktop(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_total_stake_xrd_amount(uniffiStatus)
 	})
-	if checksum != 61948 {
+	if checksum != 36484 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_take_all_from_worktop: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_total_stake_xrd_amount: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_take_from_worktop(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_unregister(uniffiStatus)
 	})
-	if checksum != 7334 {
+	if checksum != 36109 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_take_from_worktop: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_unregister: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_take_non_fungibles_from_worktop(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_unstake(uniffiStatus)
 	})
-	if checksum != 49676 {
+	if checksum != 30979 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_take_non_fungibles_from_worktop: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_unstake: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_two_resource_pool_contribute(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_update_accept_delegated_stake(uniffiStatus)
 	})
-	if checksum != 3256 {
+	if checksum != 13955 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_two_resource_pool_contribute: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_update_accept_delegated_stake: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_two_resource_pool_get_redemption_value(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_update_fee(uniffiStatus)
 	})
-	if checksum != 41038 {
+	if checksum != 5561 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_two_resource_pool_get_redemption_value: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_update_fee: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_two_resource_pool_get_vault_amount(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_update_key(uniffiStatus)
 	})
-	if checksum != 44545 {
+	if checksum != 6401 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_two_resource_pool_get_vault_amount: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_validator_update_key: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_two_resource_pool_instantiate(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_verify_parent(uniffiStatus)
 	})
-	if checksum != 22784 {
+	if checksum != 52793 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_two_resource_pool_instantiate: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_verify_parent: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_two_resource_pool_protected_deposit(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_yield_to_child(uniffiStatus)
 	})
-	if checksum != 8937 {
+	if checksum != 29761 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_two_resource_pool_protected_deposit: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_yield_to_child: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_two_resource_pool_protected_withdraw(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_yield_to_parent(uniffiStatus)
 	})
-	if checksum != 35351 {
+	if checksum != 31210 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_two_resource_pool_protected_withdraw: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_two_resource_pool_redeem(uniffiStatus)
-	})
-	if checksum != 4503 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_two_resource_pool_redeem: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_accepts_delegated_stake(uniffiStatus)
-	})
-	if checksum != 63411 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_accepts_delegated_stake: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_claim_xrd(uniffiStatus)
-	})
-	if checksum != 13361 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_claim_xrd: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_finish_unlock_owner_stake_units(uniffiStatus)
-	})
-	if checksum != 24114 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_finish_unlock_owner_stake_units: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_get_protocol_update_readiness(uniffiStatus)
-	})
-	if checksum != 56572 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_get_protocol_update_readiness: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_get_redemption_value(uniffiStatus)
-	})
-	if checksum != 30890 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_get_redemption_value: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_lock_owner_stake_units(uniffiStatus)
-	})
-	if checksum != 26840 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_lock_owner_stake_units: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_register(uniffiStatus)
-	})
-	if checksum != 38592 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_register: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_signal_protocol_update_readiness(uniffiStatus)
-	})
-	if checksum != 41037 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_signal_protocol_update_readiness: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_stake(uniffiStatus)
-	})
-	if checksum != 46849 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_stake: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_stake_as_owner(uniffiStatus)
-	})
-	if checksum != 43974 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_stake_as_owner: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_start_unlock_owner_stake_units(uniffiStatus)
-	})
-	if checksum != 53351 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_start_unlock_owner_stake_units: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_total_stake_unit_supply(uniffiStatus)
-	})
-	if checksum != 14885 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_total_stake_unit_supply: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_total_stake_xrd_amount(uniffiStatus)
-	})
-	if checksum != 44141 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_total_stake_xrd_amount: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_unregister(uniffiStatus)
-	})
-	if checksum != 55641 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_unregister: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_unstake(uniffiStatus)
-	})
-	if checksum != 53557 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_unstake: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_update_accept_delegated_stake(uniffiStatus)
-	})
-	if checksum != 38363 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_update_accept_delegated_stake: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_update_fee(uniffiStatus)
-	})
-	if checksum != 10602 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_update_fee: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_update_key(uniffiStatus)
-	})
-	if checksum != 41122 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestbuilder_validator_update_key: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_messagevalidationconfig_max_decryptors(uniffiStatus)
-	})
-	if checksum != 45350 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_messagevalidationconfig_max_decryptors: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_messagevalidationconfig_max_encrypted_message_length(uniffiStatus)
-	})
-	if checksum != 10753 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_messagevalidationconfig_max_encrypted_message_length: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_messagevalidationconfig_max_mime_type_length(uniffiStatus)
-	})
-	if checksum != 15824 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_messagevalidationconfig_max_mime_type_length: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_messagevalidationconfig_max_plaintext_message_length(uniffiStatus)
-	})
-	if checksum != 53437 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_messagevalidationconfig_max_plaintext_message_length: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_yield_to_parent: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -2463,74 +3912,137 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransaction_compile(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv1_hash(uniffiStatus)
 	})
-	if checksum != 65183 {
+	if checksum != 22172 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransaction_compile: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv1_hash: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransaction_hash(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv1_intent_hash(uniffiStatus)
 	})
-	if checksum != 64270 {
+	if checksum != 9212 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransaction_hash: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv1_intent_hash: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransaction_intent_hash(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv1_notarized_transaction_hash(uniffiStatus)
 	})
-	if checksum != 51688 {
+	if checksum != 51860 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransaction_intent_hash: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv1_notarized_transaction_hash: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransaction_notarized_transaction_hash(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv1_notary_signature(uniffiStatus)
 	})
-	if checksum != 17757 {
+	if checksum != 51957 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransaction_notarized_transaction_hash: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv1_notary_signature: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransaction_notary_signature(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv1_signed_intent(uniffiStatus)
 	})
-	if checksum != 46873 {
+	if checksum != 36857 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransaction_notary_signature: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv1_signed_intent: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransaction_signed_intent(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv1_signed_intent_hash(uniffiStatus)
 	})
-	if checksum != 11409 {
+	if checksum != 29894 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransaction_signed_intent: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv1_signed_intent_hash: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransaction_signed_intent_hash(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv1_statically_validate(uniffiStatus)
 	})
-	if checksum != 60604 {
+	if checksum != 26435 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransaction_signed_intent_hash: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv1_statically_validate: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransaction_statically_validate(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv1_to_payload_bytes(uniffiStatus)
 	})
-	if checksum != 11188 {
+	if checksum != 59384 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransaction_statically_validate: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv1_to_payload_bytes: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv2_hash(uniffiStatus)
+	})
+	if checksum != 34375 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv2_hash: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv2_intent_hash(uniffiStatus)
+	})
+	if checksum != 49055 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv2_intent_hash: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv2_notarized_transaction_hash(uniffiStatus)
+	})
+	if checksum != 7664 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv2_notarized_transaction_hash: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv2_notary_signature(uniffiStatus)
+	})
+	if checksum != 41926 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv2_notary_signature: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv2_signed_transaction_intent(uniffiStatus)
+	})
+	if checksum != 14090 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv2_signed_transaction_intent: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv2_signed_transaction_intent_hash(uniffiStatus)
+	})
+	if checksum != 10799 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv2_signed_transaction_intent_hash: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv2_to_payload_bytes(uniffiStatus)
+	})
+	if checksum != 52602 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv2_to_payload_bytes: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -2549,6 +4061,51 @@ func uniffiCheckChecksums() {
 	if checksum != 33649 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_olympiaaddress_public_key: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2_hash(uniffiStatus)
+	})
+	if checksum != 7316 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2_hash: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2_intent_hash(uniffiStatus)
+	})
+	if checksum != 55700 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2_intent_hash: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2_non_root_subintents(uniffiStatus)
+	})
+	if checksum != 49721 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2_non_root_subintents: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2_root_subintent(uniffiStatus)
+	})
+	if checksum != 40364 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2_root_subintent: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2_to_payload_bytes(uniffiStatus)
+	})
+	if checksum != 40008 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2_to_payload_bytes: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -2825,7 +4382,7 @@ func uniffiCheckChecksums() {
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_privatekey_sign_to_signature(uniffiStatus)
 	})
-	if checksum != 4246 {
+	if checksum != 44322 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_privatekey_sign_to_signature: UniFFI API checksum mismatch")
 	}
@@ -2834,153 +4391,252 @@ func uniffiCheckChecksums() {
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_privatekey_sign_to_signature_with_public_key(uniffiStatus)
 	})
-	if checksum != 41168 {
+	if checksum != 3087 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_privatekey_sign_to_signature_with_public_key: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedintent_compile(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2_hash(uniffiStatus)
 	})
-	if checksum != 26394 {
+	if checksum != 44538 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedintent_compile: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2_hash: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedintent_hash(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2_intent_hash(uniffiStatus)
 	})
-	if checksum != 60260 {
+	if checksum != 53171 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedintent_hash: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2_intent_hash: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedintent_intent(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2_non_root_subintent_signatures(uniffiStatus)
 	})
-	if checksum != 19540 {
+	if checksum != 60250 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedintent_intent: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2_non_root_subintent_signatures: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedintent_intent_hash(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2_partial_transaction(uniffiStatus)
 	})
-	if checksum != 9462 {
+	if checksum != 33675 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedintent_intent_hash: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2_partial_transaction: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedintent_intent_signatures(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2_root_subintent_signatures(uniffiStatus)
 	})
-	if checksum != 46037 {
+	if checksum != 17028 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedintent_intent_signatures: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2_root_subintent_signatures: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedintent_signed_intent_hash(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2_to_payload_bytes(uniffiStatus)
 	})
-	if checksum != 20757 {
+	if checksum != 13380 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedintent_signed_intent_hash: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2_to_payload_bytes: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedintent_statically_validate(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2builder_add_child(uniffiStatus)
 	})
-	if checksum != 27682 {
+	if checksum != 55617 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedintent_statically_validate: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2builder_add_child: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionbuilder_header(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2builder_intent_header(uniffiStatus)
 	})
-	if checksum != 40383 {
+	if checksum != 21500 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionbuilder_header: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2builder_intent_header: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionbuilderheaderstep_manifest(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2builder_manifest(uniffiStatus)
 	})
-	if checksum != 8446 {
+	if checksum != 15877 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionbuilderheaderstep_manifest: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2builder_manifest: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionbuilderintentsignaturesstep_notarize_with_private_key(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2builder_message(uniffiStatus)
 	})
-	if checksum != 57025 {
+	if checksum != 18736 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionbuilderintentsignaturesstep_notarize_with_private_key: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2builder_message: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionbuilderintentsignaturesstep_notarize_with_signer(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2builder_prepare_for_signing(uniffiStatus)
 	})
-	if checksum != 32547 {
+	if checksum != 4884 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionbuilderintentsignaturesstep_notarize_with_signer: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2builder_prepare_for_signing: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionbuilderintentsignaturesstep_sign_with_private_key(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2buildersignaturestep_build(uniffiStatus)
 	})
-	if checksum != 29671 {
+	if checksum != 49980 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionbuilderintentsignaturesstep_sign_with_private_key: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2buildersignaturestep_build: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionbuilderintentsignaturesstep_sign_with_signer(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2buildersignaturestep_sign_with_private_key(uniffiStatus)
 	})
-	if checksum != 17372 {
+	if checksum != 17001 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionbuilderintentsignaturesstep_sign_with_signer: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2buildersignaturestep_sign_with_private_key: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionbuildermessagestep_message(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2buildersignaturestep_sign_with_signer(uniffiStatus)
 	})
-	if checksum != 55782 {
+	if checksum != 39194 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionbuildermessagestep_message: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2buildersignaturestep_sign_with_signer: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionbuildermessagestep_sign_with_private_key(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedtransactionintentv1_hash(uniffiStatus)
 	})
-	if checksum != 60073 {
+	if checksum != 46173 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionbuildermessagestep_sign_with_private_key: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedtransactionintentv1_hash: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionbuildermessagestep_sign_with_signer(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedtransactionintentv1_intent(uniffiStatus)
 	})
-	if checksum != 21713 {
+	if checksum != 32566 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionbuildermessagestep_sign_with_signer: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedtransactionintentv1_intent: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedtransactionintentv1_intent_hash(uniffiStatus)
+	})
+	if checksum != 8863 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedtransactionintentv1_intent_hash: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedtransactionintentv1_intent_signatures(uniffiStatus)
+	})
+	if checksum != 42237 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedtransactionintentv1_intent_signatures: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedtransactionintentv1_signed_intent_hash(uniffiStatus)
+	})
+	if checksum != 55712 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedtransactionintentv1_signed_intent_hash: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedtransactionintentv1_statically_validate(uniffiStatus)
+	})
+	if checksum != 13960 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedtransactionintentv1_statically_validate: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedtransactionintentv1_to_payload_bytes(uniffiStatus)
+	})
+	if checksum != 53590 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedtransactionintentv1_to_payload_bytes: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedtransactionintentv2_hash(uniffiStatus)
+	})
+	if checksum != 11474 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedtransactionintentv2_hash: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedtransactionintentv2_intent_hash(uniffiStatus)
+	})
+	if checksum != 4964 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedtransactionintentv2_intent_hash: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedtransactionintentv2_signed_intent_hash(uniffiStatus)
+	})
+	if checksum != 57716 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedtransactionintentv2_signed_intent_hash: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedtransactionintentv2_to_payload_bytes(uniffiStatus)
+	})
+	if checksum != 16847 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedtransactionintentv2_to_payload_bytes: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedtransactionintentv2_transaction_intent(uniffiStatus)
+	})
+	if checksum != 11642 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedtransactionintentv2_transaction_intent: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedtransactionintentv2_transaction_intent_signatures(uniffiStatus)
+	})
+	if checksum != 8514 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedtransactionintentv2_transaction_intent_signatures: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -3021,128 +4677,308 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifest_blobs(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionintentv2_hash(uniffiStatus)
 	})
-	if checksum != 55127 {
+	if checksum != 46670 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifest_blobs: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionintentv2_hash: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifest_compile(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionintentv2_intent_hash(uniffiStatus)
 	})
-	if checksum != 11452 {
+	if checksum != 59290 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifest_compile: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionintentv2_intent_hash: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifest_execution_summary(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionintentv2_non_root_subintents(uniffiStatus)
 	})
-	if checksum != 43934 {
+	if checksum != 20904 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifest_execution_summary: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionintentv2_non_root_subintents: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifest_extract_addresses(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionintentv2_root_intent_core(uniffiStatus)
 	})
-	if checksum != 5474 {
+	if checksum != 41107 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifest_extract_addresses: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionintentv2_root_intent_core: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifest_instructions(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionintentv2_to_payload_bytes(uniffiStatus)
 	})
-	if checksum != 3783 {
+	if checksum != 14821 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifest_instructions: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionintentv2_to_payload_bytes: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifest_modify(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionintentv2_transaction_header(uniffiStatus)
 	})
-	if checksum != 4850 {
+	if checksum != 26458 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifest_modify: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionintentv2_transaction_header: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifest_statically_validate(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_blobs(uniffiStatus)
 	})
-	if checksum != 42656 {
+	if checksum != 37273 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifest_statically_validate: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_blobs: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifest_summary(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_dynamic_analysis(uniffiStatus)
 	})
-	if checksum != 53923 {
+	if checksum != 27204 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifest_summary: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_dynamic_analysis: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_validationconfig_max_epoch_range(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_extract_addresses(uniffiStatus)
 	})
-	if checksum != 31430 {
+	if checksum != 24084 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_validationconfig_max_epoch_range: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_extract_addresses: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_validationconfig_max_notarized_payload_size(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_instructions(uniffiStatus)
 	})
-	if checksum != 39564 {
+	if checksum != 28436 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_validationconfig_max_notarized_payload_size: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_instructions: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_validationconfig_max_tip_percentage(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_static_analysis(uniffiStatus)
 	})
-	if checksum != 28981 {
+	if checksum != 27026 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_validationconfig_max_tip_percentage: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_static_analysis: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_validationconfig_message_validation(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_statically_validate(uniffiStatus)
 	})
-	if checksum != 52946 {
+	if checksum != 1391 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_validationconfig_message_validation: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_statically_validate: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_validationconfig_min_tip_percentage(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_to_payload_bytes(uniffiStatus)
 	})
-	if checksum != 2069 {
+	if checksum != 12465 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_validationconfig_min_tip_percentage: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_to_payload_bytes: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_validationconfig_network_id(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_blobs(uniffiStatus)
 	})
-	if checksum != 63098 {
+	if checksum != 59861 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_validationconfig_network_id: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_blobs: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_dynamic_analysis(uniffiStatus)
+	})
+	if checksum != 2627 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_dynamic_analysis: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_extract_addresses(uniffiStatus)
+	})
+	if checksum != 31977 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_extract_addresses: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_instructions(uniffiStatus)
+	})
+	if checksum != 30513 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_instructions: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_static_analysis(uniffiStatus)
+	})
+	if checksum != 25127 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_static_analysis: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_to_payload_bytes(uniffiStatus)
+	})
+	if checksum != 126 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_to_payload_bytes: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv1builder_header(uniffiStatus)
+	})
+	if checksum != 2206 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv1builder_header: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv1builderheaderstep_manifest(uniffiStatus)
+	})
+	if checksum != 30 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv1builderheaderstep_manifest: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv1builderintentsignaturesstep_notarize_with_private_key(uniffiStatus)
+	})
+	if checksum != 29658 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv1builderintentsignaturesstep_notarize_with_private_key: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv1builderintentsignaturesstep_notarize_with_signer(uniffiStatus)
+	})
+	if checksum != 16311 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv1builderintentsignaturesstep_notarize_with_signer: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv1builderintentsignaturesstep_sign_with_private_key(uniffiStatus)
+	})
+	if checksum != 35472 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv1builderintentsignaturesstep_sign_with_private_key: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv1builderintentsignaturesstep_sign_with_signer(uniffiStatus)
+	})
+	if checksum != 13661 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv1builderintentsignaturesstep_sign_with_signer: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv1buildermessagestep_message(uniffiStatus)
+	})
+	if checksum != 51476 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv1buildermessagestep_message: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv1buildermessagestep_sign_with_private_key(uniffiStatus)
+	})
+	if checksum != 44626 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv1buildermessagestep_sign_with_private_key: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv1buildermessagestep_sign_with_signer(uniffiStatus)
+	})
+	if checksum != 38774 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv1buildermessagestep_sign_with_signer: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv2builder_add_child(uniffiStatus)
+	})
+	if checksum != 19864 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv2builder_add_child: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv2builder_intent_header(uniffiStatus)
+	})
+	if checksum != 8155 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv2builder_intent_header: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv2builder_manifest(uniffiStatus)
+	})
+	if checksum != 24082 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv2builder_manifest: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv2builder_message(uniffiStatus)
+	})
+	if checksum != 7700 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv2builder_message: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv2builder_prepare_for_signing(uniffiStatus)
+	})
+	if checksum != 27222 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv2builder_prepare_for_signing: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv2builder_transaction_header(uniffiStatus)
+	})
+	if checksum != 42344 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv2builder_transaction_header: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -3237,38 +5073,38 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_address_preallocated_account_address_from_olympia_address(uniffiStatus)
+	})
+	if checksum != 47319 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_address_preallocated_account_address_from_olympia_address: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_address_preallocated_account_address_from_public_key(uniffiStatus)
+	})
+	if checksum != 41407 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_address_preallocated_account_address_from_public_key: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_address_preallocated_identity_address_from_public_key(uniffiStatus)
+	})
+	if checksum != 56260 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_address_preallocated_identity_address_from_public_key: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_address_resource_address_from_olympia_resource_address(uniffiStatus)
 	})
 	if checksum != 64771 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_address_resource_address_from_olympia_resource_address: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_address_virtual_account_address_from_olympia_address(uniffiStatus)
-	})
-	if checksum != 31070 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_address_virtual_account_address_from_olympia_address: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_address_virtual_account_address_from_public_key(uniffiStatus)
-	})
-	if checksum != 738 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_address_virtual_account_address_from_public_key: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_address_virtual_identity_address_from_public_key(uniffiStatus)
-	})
-	if checksum != 32432 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_address_virtual_identity_address_from_public_key: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -3363,65 +5199,92 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_instructions_from_instructions(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_instructionsv1_from_instructions(uniffiStatus)
 	})
-	if checksum != 51039 {
+	if checksum != 24570 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_instructions_from_instructions: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_instructionsv1_from_instructions: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_instructions_from_string(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_instructionsv1_from_string(uniffiStatus)
 	})
-	if checksum != 47420 {
+	if checksum != 17597 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_instructions_from_string: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_instructionsv1_from_string: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_intent_decompile(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_instructionsv2_from_instructions(uniffiStatus)
 	})
-	if checksum != 565 {
+	if checksum != 21346 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_intent_decompile: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_instructionsv2_from_instructions: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_intent_new(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_instructionsv2_from_string(uniffiStatus)
 	})
-	if checksum != 4284 {
+	if checksum != 18755 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_intent_new: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_instructionsv2_from_string: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_manifestbuilder_new(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_intentcorev2_from_payload_bytes(uniffiStatus)
 	})
-	if checksum != 30710 {
+	if checksum != 5622 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_manifestbuilder_new: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_intentcorev2_from_payload_bytes: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_messagevalidationconfig_default(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_intentcorev2_new(uniffiStatus)
 	})
-	if checksum != 54905 {
+	if checksum != 44152 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_messagevalidationconfig_default: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_intentcorev2_new: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_messagevalidationconfig_new(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_intentv1_from_payload_bytes(uniffiStatus)
 	})
-	if checksum != 60275 {
+	if checksum != 24593 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_messagevalidationconfig_new: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_intentv1_from_payload_bytes: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_intentv1_new(uniffiStatus)
+	})
+	if checksum != 29220 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_intentv1_new: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_manifestv1builder_new(uniffiStatus)
+	})
+	if checksum != 57381 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_manifestv1builder_new: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_manifestv2builder_new(uniffiStatus)
+	})
+	if checksum != 37050 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_manifestv2builder_new: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -3453,20 +5316,38 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_notarizedtransaction_decompile(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_notarizedtransactionv1_from_payload_bytes(uniffiStatus)
 	})
-	if checksum != 58667 {
+	if checksum != 57930 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_notarizedtransaction_decompile: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_notarizedtransactionv1_from_payload_bytes: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_notarizedtransaction_new(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_notarizedtransactionv1_new(uniffiStatus)
 	})
-	if checksum != 56154 {
+	if checksum != 39467 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_notarizedtransaction_new: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_notarizedtransactionv1_new: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_notarizedtransactionv2_from_payload_bytes(uniffiStatus)
+	})
+	if checksum != 53259 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_notarizedtransactionv2_from_payload_bytes: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_notarizedtransactionv2_new(uniffiStatus)
+	})
+	if checksum != 32248 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_notarizedtransactionv2_new: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -3476,6 +5357,24 @@ func uniffiCheckChecksums() {
 	if checksum != 12724 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_olympiaaddress_new: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_partialtransactionv2_from_payload_bytes(uniffiStatus)
+	})
+	if checksum != 49926 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_partialtransactionv2_from_payload_bytes: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_partialtransactionv2_new(uniffiStatus)
+	})
+	if checksum != 49244 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_partialtransactionv2_new: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -3561,38 +5460,65 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_signedintent_decompile(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_signedpartialtransactionv2_from_payload_bytes(uniffiStatus)
 	})
-	if checksum != 12765 {
+	if checksum != 60466 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_signedintent_decompile: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_signedpartialtransactionv2_from_payload_bytes: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_signedintent_new(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_signedpartialtransactionv2_new(uniffiStatus)
 	})
-	if checksum != 36392 {
+	if checksum != 3310 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_signedintent_new: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_signedpartialtransactionv2_new: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_transactionbuilder_new(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_signedpartialtransactionv2builder_new(uniffiStatus)
 	})
-	if checksum != 46196 {
+	if checksum != 18997 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_transactionbuilder_new: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_signedpartialtransactionv2builder_new: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_transactionbuilderintentsignaturesstep_new(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_signedtransactionintentv1_from_payload_bytes(uniffiStatus)
 	})
-	if checksum != 17229 {
+	if checksum != 1503 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_transactionbuilderintentsignaturesstep_new: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_signedtransactionintentv1_from_payload_bytes: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_signedtransactionintentv1_new(uniffiStatus)
+	})
+	if checksum != 46779 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_signedtransactionintentv1_new: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_signedtransactionintentv2_from_payload_bytes(uniffiStatus)
+	})
+	if checksum != 30111 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_signedtransactionintentv2_from_payload_bytes: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_signedtransactionintentv2_new(uniffiStatus)
+	})
+	if checksum != 13944 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_signedtransactionintentv2_new: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -3606,38 +5532,83 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_transactionmanifest_decompile(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_transactionintentv2_from_payload_bytes(uniffiStatus)
 	})
-	if checksum != 51209 {
+	if checksum != 57262 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_transactionmanifest_decompile: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_transactionintentv2_from_payload_bytes: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_transactionmanifest_new(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_transactionintentv2_new(uniffiStatus)
 	})
-	if checksum != 62865 {
+	if checksum != 50610 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_transactionmanifest_new: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_transactionintentv2_new: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_validationconfig_default(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_transactionmanifestv1_from_payload_bytes(uniffiStatus)
 	})
-	if checksum != 1435 {
+	if checksum != 48079 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_validationconfig_default: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_transactionmanifestv1_from_payload_bytes: UniFFI API checksum mismatch")
 	}
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_validationconfig_new(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_transactionmanifestv1_new(uniffiStatus)
 	})
-	if checksum != 36594 {
+	if checksum != 65285 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_validationconfig_new: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_transactionmanifestv1_new: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_transactionmanifestv2_from_payload_bytes(uniffiStatus)
+	})
+	if checksum != 25949 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_transactionmanifestv2_from_payload_bytes: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_transactionmanifestv2_new(uniffiStatus)
+	})
+	if checksum != 60603 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_transactionmanifestv2_new: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_transactionv1builder_new(uniffiStatus)
+	})
+	if checksum != 9969 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_transactionv1builder_new: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_transactionv1builderintentsignaturesstep_new(uniffiStatus)
+	})
+	if checksum != 17328 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_transactionv1builderintentsignaturesstep_new: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_transactionv2builder_new(uniffiStatus)
+	})
+	if checksum != 62671 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_transactionv2builder_new: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -3653,7 +5624,7 @@ func uniffiCheckChecksums() {
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signer_sign_to_signature(uniffiStatus)
 	})
-	if checksum != 15804 {
+	if checksum != 59869 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signer_sign_to_signature: UniFFI API checksum mismatch")
 	}
@@ -3662,7 +5633,7 @@ func uniffiCheckChecksums() {
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signer_sign_to_signature_with_public_key(uniffiStatus)
 	})
-	if checksum != 9393 {
+	if checksum != 46998 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signer_sign_to_signature_with_public_key: UniFFI API checksum mismatch")
 	}
@@ -4249,45 +6220,45 @@ func AddressFromRaw(nodeIdBytes []byte, networkId uint8) (*Address, error) {
 		}
 }
 
+func AddressPreallocatedAccountAddressFromOlympiaAddress(olympiaAccountAddress *OlympiaAddress, networkId uint8) (*Address, error) {
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_address_preallocated_account_address_from_olympia_address(FfiConverterOlympiaAddressINSTANCE.Lower(olympiaAccountAddress), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *Address
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterAddressINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+func AddressPreallocatedAccountAddressFromPublicKey(publicKey PublicKey, networkId uint8) (*Address, error) {
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_address_preallocated_account_address_from_public_key(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *Address
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterAddressINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+func AddressPreallocatedIdentityAddressFromPublicKey(publicKey PublicKey, networkId uint8) (*Address, error) {
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_address_preallocated_identity_address_from_public_key(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *Address
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterAddressINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
 func AddressResourceAddressFromOlympiaResourceAddress(olympiaResourceAddress *OlympiaAddress, networkId uint8) (*Address, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_address_resource_address_from_olympia_resource_address(FfiConverterOlympiaAddressINSTANCE.Lower(olympiaResourceAddress), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
-	})
-		if _uniffiErr != nil {
-			var _uniffiDefaultValue *Address
-			return _uniffiDefaultValue, _uniffiErr
-		} else {
-			return FfiConverterAddressINSTANCE.Lift(_uniffiRV), _uniffiErr
-		}
-}
-
-func AddressVirtualAccountAddressFromOlympiaAddress(olympiaAccountAddress *OlympiaAddress, networkId uint8) (*Address, error) {
-	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_address_virtual_account_address_from_olympia_address(FfiConverterOlympiaAddressINSTANCE.Lower(olympiaAccountAddress), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
-	})
-		if _uniffiErr != nil {
-			var _uniffiDefaultValue *Address
-			return _uniffiDefaultValue, _uniffiErr
-		} else {
-			return FfiConverterAddressINSTANCE.Lift(_uniffiRV), _uniffiErr
-		}
-}
-
-func AddressVirtualAccountAddressFromPublicKey(publicKey PublicKey, networkId uint8) (*Address, error) {
-	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_address_virtual_account_address_from_public_key(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
-	})
-		if _uniffiErr != nil {
-			var _uniffiDefaultValue *Address
-			return _uniffiDefaultValue, _uniffiErr
-		} else {
-			return FfiConverterAddressINSTANCE.Lift(_uniffiRV), _uniffiErr
-		}
-}
-
-func AddressVirtualIdentityAddressFromPublicKey(publicKey PublicKey, networkId uint8) (*Address, error) {
-	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_address_virtual_identity_address_from_public_key(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *Address
@@ -4399,21 +6370,21 @@ func (_self *Address)IsGlobalPackage() bool {
 }
 
 
-func (_self *Address)IsGlobalResourceManager() bool {
+func (_self *Address)IsGlobalPreallocated() bool {
 	_pointer := _self.ffiObject.incrementPointer("*Address")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_address_is_global_resource_manager(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_address_is_global_preallocated(
 		_pointer, _uniffiStatus)
 	}))
 }
 
 
-func (_self *Address)IsGlobalVirtual() bool {
+func (_self *Address)IsGlobalResourceManager() bool {
 	_pointer := _self.ffiObject.incrementPointer("*Address")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_address_is_global_virtual(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_address_is_global_resource_manager(
 		_pointer, _uniffiStatus)
 	}))
 }
@@ -5033,42 +7004,42 @@ func (_ FfiDestroyerHash) Destroy(value *Hash) {
 }
 
 
-type Instructions struct {
+type InstructionsV1 struct {
 	ffiObject FfiObject
 }
 
 
-func InstructionsFromInstructions(instructions []Instruction, networkId uint8) (*Instructions, error) {
+func InstructionsV1FromInstructions(instructions []InstructionV1, networkId uint8) (*InstructionsV1, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_instructions_from_instructions(FfiConverterSequenceTypeInstructionINSTANCE.Lower(instructions), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_instructionsv1_from_instructions(FfiConverterSequenceTypeInstructionV1INSTANCE.Lower(instructions), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *Instructions
+			var _uniffiDefaultValue *InstructionsV1
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterInstructionsINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterInstructionsV1INSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
-func InstructionsFromString(string string, networkId uint8) (*Instructions, error) {
+func InstructionsV1FromString(string string, networkId uint8) (*InstructionsV1, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_instructions_from_string(FfiConverterStringINSTANCE.Lower(string), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_instructionsv1_from_string(FfiConverterStringINSTANCE.Lower(string), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *Instructions
+			var _uniffiDefaultValue *InstructionsV1
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterInstructionsINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterInstructionsV1INSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
 
-func (_self *Instructions)AsStr() (string, error) {
-	_pointer := _self.ffiObject.incrementPointer("*Instructions")
+func (_self *InstructionsV1)AsStr() (string, error) {
+	_pointer := _self.ffiObject.incrementPointer("*InstructionsV1")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_instructions_as_str(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_instructionsv1_as_str(
 		_pointer, _uniffiStatus)
 	})
 		if _uniffiErr != nil {
@@ -5080,101 +7051,312 @@ func (_self *Instructions)AsStr() (string, error) {
 }
 
 
-func (_self *Instructions)InstructionsList() []Instruction {
-	_pointer := _self.ffiObject.incrementPointer("*Instructions")
+func (_self *InstructionsV1)InstructionsList() []InstructionV1 {
+	_pointer := _self.ffiObject.incrementPointer("*InstructionsV1")
 	defer _self.ffiObject.decrementPointer()
-	return FfiConverterSequenceTypeInstructionINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_instructions_instructions_list(
+	return FfiConverterSequenceTypeInstructionV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_instructionsv1_instructions_list(
 		_pointer, _uniffiStatus)
 	}))
 }
 
 
-func (_self *Instructions)NetworkId() uint8 {
-	_pointer := _self.ffiObject.incrementPointer("*Instructions")
+func (_self *InstructionsV1)NetworkId() uint8 {
+	_pointer := _self.ffiObject.incrementPointer("*InstructionsV1")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterUint8INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint8_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_instructions_network_id(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_instructionsv1_network_id(
 		_pointer, _uniffiStatus)
 	}))
 }
 
 
 
-func (object *Instructions)Destroy() {
+func (object *InstructionsV1)Destroy() {
 	runtime.SetFinalizer(object, nil)
 	object.ffiObject.destroy()
 }
 
-type FfiConverterInstructions struct {}
+type FfiConverterInstructionsV1 struct {}
 
-var FfiConverterInstructionsINSTANCE = FfiConverterInstructions{}
+var FfiConverterInstructionsV1INSTANCE = FfiConverterInstructionsV1{}
 
-func (c FfiConverterInstructions) Lift(pointer unsafe.Pointer) *Instructions {
-	result := &Instructions {
+func (c FfiConverterInstructionsV1) Lift(pointer unsafe.Pointer) *InstructionsV1 {
+	result := &InstructionsV1 {
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_radix_engine_toolkit_uniffi_fn_free_instructions(pointer, status)
+				C.uniffi_radix_engine_toolkit_uniffi_fn_free_instructionsv1(pointer, status)
 		}),
 	}
-	runtime.SetFinalizer(result, (*Instructions).Destroy)
+	runtime.SetFinalizer(result, (*InstructionsV1).Destroy)
 	return result
 }
 
-func (c FfiConverterInstructions) Read(reader io.Reader) *Instructions {
+func (c FfiConverterInstructionsV1) Read(reader io.Reader) *InstructionsV1 {
 	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
 }
 
-func (c FfiConverterInstructions) Lower(value *Instructions) unsafe.Pointer {
+func (c FfiConverterInstructionsV1) Lower(value *InstructionsV1) unsafe.Pointer {
 	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
 	// because the pointer will be decremented immediately after this function returns,
 	// and someone will be left holding onto a non-locked pointer.
-	pointer := value.ffiObject.incrementPointer("*Instructions")
+	pointer := value.ffiObject.incrementPointer("*InstructionsV1")
 	defer value.ffiObject.decrementPointer()
 	return pointer
 }
 
-func (c FfiConverterInstructions) Write(writer io.Writer, value *Instructions) {
+func (c FfiConverterInstructionsV1) Write(writer io.Writer, value *InstructionsV1) {
 	writeUint64(writer, uint64(uintptr(c.Lower(value))))
 }
 
-type FfiDestroyerInstructions struct {}
+type FfiDestroyerInstructionsV1 struct {}
 
-func (_ FfiDestroyerInstructions) Destroy(value *Instructions) {
+func (_ FfiDestroyerInstructionsV1) Destroy(value *InstructionsV1) {
 	value.Destroy()
 }
 
 
-type Intent struct {
+type InstructionsV2 struct {
 	ffiObject FfiObject
 }
-func NewIntent(header TransactionHeader, manifest *TransactionManifest, message Message) *Intent {
-	return FfiConverterIntentINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_intent_new(FfiConverterTypeTransactionHeaderINSTANCE.Lower(header), FfiConverterTransactionManifestINSTANCE.Lower(manifest), FfiConverterTypeMessageINSTANCE.Lower(message), _uniffiStatus)
-	}))
-}
 
 
-func IntentDecompile(compiledIntent []byte) (*Intent, error) {
+func InstructionsV2FromInstructions(instructions []InstructionV2, networkId uint8) (*InstructionsV2, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_intent_decompile(FfiConverterBytesINSTANCE.Lower(compiledIntent), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_instructionsv2_from_instructions(FfiConverterSequenceTypeInstructionV2INSTANCE.Lower(instructions), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *Intent
+			var _uniffiDefaultValue *InstructionsV2
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterIntentINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterInstructionsV2INSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+func InstructionsV2FromString(string string, networkId uint8) (*InstructionsV2, error) {
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_instructionsv2_from_string(FfiConverterStringINSTANCE.Lower(string), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *InstructionsV2
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterInstructionsV2INSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
 
-func (_self *Intent)Compile() ([]byte, error) {
-	_pointer := _self.ffiObject.incrementPointer("*Intent")
+func (_self *InstructionsV2)AsStr() (string, error) {
+	_pointer := _self.ffiObject.incrementPointer("*InstructionsV2")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intent_compile(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_instructionsv2_as_str(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue string
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterStringINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *InstructionsV2)InstructionsList() []InstructionV2 {
+	_pointer := _self.ffiObject.incrementPointer("*InstructionsV2")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterSequenceTypeInstructionV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_instructionsv2_instructions_list(
+		_pointer, _uniffiStatus)
+	}))
+}
+
+
+func (_self *InstructionsV2)NetworkId() uint8 {
+	_pointer := _self.ffiObject.incrementPointer("*InstructionsV2")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterUint8INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint8_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_instructionsv2_network_id(
+		_pointer, _uniffiStatus)
+	}))
+}
+
+
+
+func (object *InstructionsV2)Destroy() {
+	runtime.SetFinalizer(object, nil)
+	object.ffiObject.destroy()
+}
+
+type FfiConverterInstructionsV2 struct {}
+
+var FfiConverterInstructionsV2INSTANCE = FfiConverterInstructionsV2{}
+
+func (c FfiConverterInstructionsV2) Lift(pointer unsafe.Pointer) *InstructionsV2 {
+	result := &InstructionsV2 {
+		newFfiObject(
+			pointer,
+			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
+				C.uniffi_radix_engine_toolkit_uniffi_fn_free_instructionsv2(pointer, status)
+		}),
+	}
+	runtime.SetFinalizer(result, (*InstructionsV2).Destroy)
+	return result
+}
+
+func (c FfiConverterInstructionsV2) Read(reader io.Reader) *InstructionsV2 {
+	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
+}
+
+func (c FfiConverterInstructionsV2) Lower(value *InstructionsV2) unsafe.Pointer {
+	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
+	// because the pointer will be decremented immediately after this function returns,
+	// and someone will be left holding onto a non-locked pointer.
+	pointer := value.ffiObject.incrementPointer("*InstructionsV2")
+	defer value.ffiObject.decrementPointer()
+	return pointer
+}
+
+func (c FfiConverterInstructionsV2) Write(writer io.Writer, value *InstructionsV2) {
+	writeUint64(writer, uint64(uintptr(c.Lower(value))))
+}
+
+type FfiDestroyerInstructionsV2 struct {}
+
+func (_ FfiDestroyerInstructionsV2) Destroy(value *InstructionsV2) {
+	value.Destroy()
+}
+
+
+type IntentCoreV2 struct {
+	ffiObject FfiObject
+}
+func NewIntentCoreV2(header IntentHeaderV2, blobs [][]byte, message MessageV2, children []*Hash, instructions *InstructionsV2) *IntentCoreV2 {
+	return FfiConverterIntentCoreV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_intentcorev2_new(FfiConverterTypeIntentHeaderV2INSTANCE.Lower(header), FfiConverterSequenceBytesINSTANCE.Lower(blobs), FfiConverterTypeMessageV2INSTANCE.Lower(message), FfiConverterSequenceHashINSTANCE.Lower(children), FfiConverterInstructionsV2INSTANCE.Lower(instructions), _uniffiStatus)
+	}))
+}
+
+
+func IntentCoreV2FromPayloadBytes(compiledIntent []byte) (*IntentCoreV2, error) {
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_intentcorev2_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiledIntent), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *IntentCoreV2
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterIntentCoreV2INSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+
+func (_self *IntentCoreV2)Blobs() [][]byte {
+	_pointer := _self.ffiObject.incrementPointer("*IntentCoreV2")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterSequenceBytesINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_blobs(
+		_pointer, _uniffiStatus)
+	}))
+}
+
+
+func (_self *IntentCoreV2)Children() []*Hash {
+	_pointer := _self.ffiObject.incrementPointer("*IntentCoreV2")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterSequenceHashINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_children(
+		_pointer, _uniffiStatus)
+	}))
+}
+
+
+func (_self *IntentCoreV2)Hash() (*TransactionHash, error) {
+	_pointer := _self.ffiObject.incrementPointer("*IntentCoreV2")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_hash(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *TransactionHash
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *IntentCoreV2)Header() IntentHeaderV2 {
+	_pointer := _self.ffiObject.incrementPointer("*IntentCoreV2")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterTypeIntentHeaderV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_header(
+		_pointer, _uniffiStatus)
+	}))
+}
+
+
+func (_self *IntentCoreV2)Instructions() *InstructionsV2 {
+	_pointer := _self.ffiObject.incrementPointer("*IntentCoreV2")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterInstructionsV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_instructions(
+		_pointer, _uniffiStatus)
+	}))
+}
+
+
+func (_self *IntentCoreV2)IntentHash() (*TransactionHash, error) {
+	_pointer := _self.ffiObject.incrementPointer("*IntentCoreV2")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_intent_hash(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *TransactionHash
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *IntentCoreV2)Message() MessageV2 {
+	_pointer := _self.ffiObject.incrementPointer("*IntentCoreV2")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterTypeMessageV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_message(
+		_pointer, _uniffiStatus)
+	}))
+}
+
+
+func (_self *IntentCoreV2)SubintentHash() (*TransactionHash, error) {
+	_pointer := _self.ffiObject.incrementPointer("*IntentCoreV2")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_subintent_hash(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *TransactionHash
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *IntentCoreV2)ToPayloadBytes() ([]byte, error) {
+	_pointer := _self.ffiObject.incrementPointer("*IntentCoreV2")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_to_payload_bytes(
 		_pointer, _uniffiStatus)
 	})
 		if _uniffiErr != nil {
@@ -5186,11 +7368,81 @@ func (_self *Intent)Compile() ([]byte, error) {
 }
 
 
-func (_self *Intent)Hash() (*TransactionHash, error) {
-	_pointer := _self.ffiObject.incrementPointer("*Intent")
+
+func (object *IntentCoreV2)Destroy() {
+	runtime.SetFinalizer(object, nil)
+	object.ffiObject.destroy()
+}
+
+type FfiConverterIntentCoreV2 struct {}
+
+var FfiConverterIntentCoreV2INSTANCE = FfiConverterIntentCoreV2{}
+
+func (c FfiConverterIntentCoreV2) Lift(pointer unsafe.Pointer) *IntentCoreV2 {
+	result := &IntentCoreV2 {
+		newFfiObject(
+			pointer,
+			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
+				C.uniffi_radix_engine_toolkit_uniffi_fn_free_intentcorev2(pointer, status)
+		}),
+	}
+	runtime.SetFinalizer(result, (*IntentCoreV2).Destroy)
+	return result
+}
+
+func (c FfiConverterIntentCoreV2) Read(reader io.Reader) *IntentCoreV2 {
+	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
+}
+
+func (c FfiConverterIntentCoreV2) Lower(value *IntentCoreV2) unsafe.Pointer {
+	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
+	// because the pointer will be decremented immediately after this function returns,
+	// and someone will be left holding onto a non-locked pointer.
+	pointer := value.ffiObject.incrementPointer("*IntentCoreV2")
+	defer value.ffiObject.decrementPointer()
+	return pointer
+}
+
+func (c FfiConverterIntentCoreV2) Write(writer io.Writer, value *IntentCoreV2) {
+	writeUint64(writer, uint64(uintptr(c.Lower(value))))
+}
+
+type FfiDestroyerIntentCoreV2 struct {}
+
+func (_ FfiDestroyerIntentCoreV2) Destroy(value *IntentCoreV2) {
+	value.Destroy()
+}
+
+
+type IntentV1 struct {
+	ffiObject FfiObject
+}
+func NewIntentV1(header TransactionHeaderV1, manifest *TransactionManifestV1, message MessageV1) *IntentV1 {
+	return FfiConverterIntentV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_intentv1_new(FfiConverterTypeTransactionHeaderV1INSTANCE.Lower(header), FfiConverterTransactionManifestV1INSTANCE.Lower(manifest), FfiConverterTypeMessageV1INSTANCE.Lower(message), _uniffiStatus)
+	}))
+}
+
+
+func IntentV1FromPayloadBytes(compiledIntent []byte) (*IntentV1, error) {
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_intentv1_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiledIntent), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *IntentV1
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterIntentV1INSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+
+func (_self *IntentV1)Hash() (*TransactionHash, error) {
+	_pointer := _self.ffiObject.incrementPointer("*IntentV1")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intent_hash(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentv1_hash(
 		_pointer, _uniffiStatus)
 	})
 		if _uniffiErr != nil {
@@ -5202,21 +7454,21 @@ func (_self *Intent)Hash() (*TransactionHash, error) {
 }
 
 
-func (_self *Intent)Header() TransactionHeader {
-	_pointer := _self.ffiObject.incrementPointer("*Intent")
+func (_self *IntentV1)Header() TransactionHeaderV1 {
+	_pointer := _self.ffiObject.incrementPointer("*IntentV1")
 	defer _self.ffiObject.decrementPointer()
-	return FfiConverterTypeTransactionHeaderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intent_header(
+	return FfiConverterTypeTransactionHeaderV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentv1_header(
 		_pointer, _uniffiStatus)
 	}))
 }
 
 
-func (_self *Intent)IntentHash() (*TransactionHash, error) {
-	_pointer := _self.ffiObject.incrementPointer("*Intent")
+func (_self *IntentV1)IntentHash() (*TransactionHash, error) {
+	_pointer := _self.ffiObject.incrementPointer("*IntentV1")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intent_intent_hash(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentv1_intent_hash(
 		_pointer, _uniffiStatus)
 	})
 		if _uniffiErr != nil {
@@ -5228,2588 +7480,4968 @@ func (_self *Intent)IntentHash() (*TransactionHash, error) {
 }
 
 
-func (_self *Intent)Manifest() *TransactionManifest {
-	_pointer := _self.ffiObject.incrementPointer("*Intent")
+func (_self *IntentV1)Manifest() *TransactionManifestV1 {
+	_pointer := _self.ffiObject.incrementPointer("*IntentV1")
 	defer _self.ffiObject.decrementPointer()
-	return FfiConverterTransactionManifestINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intent_manifest(
+	return FfiConverterTransactionManifestV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentv1_manifest(
 		_pointer, _uniffiStatus)
 	}))
 }
 
 
-func (_self *Intent)Message() Message {
-	_pointer := _self.ffiObject.incrementPointer("*Intent")
+func (_self *IntentV1)Message() MessageV1 {
+	_pointer := _self.ffiObject.incrementPointer("*IntentV1")
 	defer _self.ffiObject.decrementPointer()
-	return FfiConverterTypeMessageINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intent_message(
+	return FfiConverterTypeMessageV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentv1_message(
 		_pointer, _uniffiStatus)
 	}))
 }
 
 
-func (_self *Intent)StaticallyValidate(validationConfig *ValidationConfig) error {
-	_pointer := _self.ffiObject.incrementPointer("*Intent")
+func (_self *IntentV1)StaticallyValidate(networkId uint8) error {
+	_pointer := _self.ffiObject.incrementPointer("*IntentV1")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_radix_engine_toolkit_uniffi_fn_method_intent_statically_validate(
-		_pointer,FfiConverterValidationConfigINSTANCE.Lower(validationConfig), _uniffiStatus)
+		C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentv1_statically_validate(
+		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 		return false
 	})
 		return _uniffiErr
 }
 
 
+func (_self *IntentV1)ToPayloadBytes() ([]byte, error) {
+	_pointer := _self.ffiObject.incrementPointer("*IntentV1")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentv1_to_payload_bytes(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue []byte
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterBytesINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
 
-func (object *Intent)Destroy() {
+
+
+func (object *IntentV1)Destroy() {
 	runtime.SetFinalizer(object, nil)
 	object.ffiObject.destroy()
 }
 
-type FfiConverterIntent struct {}
+type FfiConverterIntentV1 struct {}
 
-var FfiConverterIntentINSTANCE = FfiConverterIntent{}
+var FfiConverterIntentV1INSTANCE = FfiConverterIntentV1{}
 
-func (c FfiConverterIntent) Lift(pointer unsafe.Pointer) *Intent {
-	result := &Intent {
+func (c FfiConverterIntentV1) Lift(pointer unsafe.Pointer) *IntentV1 {
+	result := &IntentV1 {
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_radix_engine_toolkit_uniffi_fn_free_intent(pointer, status)
+				C.uniffi_radix_engine_toolkit_uniffi_fn_free_intentv1(pointer, status)
 		}),
 	}
-	runtime.SetFinalizer(result, (*Intent).Destroy)
+	runtime.SetFinalizer(result, (*IntentV1).Destroy)
 	return result
 }
 
-func (c FfiConverterIntent) Read(reader io.Reader) *Intent {
+func (c FfiConverterIntentV1) Read(reader io.Reader) *IntentV1 {
 	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
 }
 
-func (c FfiConverterIntent) Lower(value *Intent) unsafe.Pointer {
+func (c FfiConverterIntentV1) Lower(value *IntentV1) unsafe.Pointer {
 	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
 	// because the pointer will be decremented immediately after this function returns,
 	// and someone will be left holding onto a non-locked pointer.
-	pointer := value.ffiObject.incrementPointer("*Intent")
+	pointer := value.ffiObject.incrementPointer("*IntentV1")
 	defer value.ffiObject.decrementPointer()
 	return pointer
 }
 
-func (c FfiConverterIntent) Write(writer io.Writer, value *Intent) {
+func (c FfiConverterIntentV1) Write(writer io.Writer, value *IntentV1) {
 	writeUint64(writer, uint64(uintptr(c.Lower(value))))
 }
 
-type FfiDestroyerIntent struct {}
+type FfiDestroyerIntentV1 struct {}
 
-func (_ FfiDestroyerIntent) Destroy(value *Intent) {
+func (_ FfiDestroyerIntentV1) Destroy(value *IntentV1) {
 	value.Destroy()
 }
 
 
-type ManifestBuilder struct {
+type ManifestV1Builder struct {
 	ffiObject FfiObject
 }
-func NewManifestBuilder() *ManifestBuilder {
-	return FfiConverterManifestBuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_manifestbuilder_new( _uniffiStatus)
+func NewManifestV1Builder() *ManifestV1Builder {
+	return FfiConverterManifestV1BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_manifestv1builder_new( _uniffiStatus)
 	}))
 }
 
 
 
 
-func (_self *ManifestBuilder)AccessControllerCancelPrimaryRoleBadgeWithdrawAttempt(address *Address) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccessControllerCancelPrimaryRoleBadgeWithdrawAttempt(address *Address) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_access_controller_cancel_primary_role_badge_withdraw_attempt(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_access_controller_cancel_primary_role_badge_withdraw_attempt(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccessControllerCancelPrimaryRoleRecoveryProposal(address *Address) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccessControllerCancelPrimaryRoleRecoveryProposal(address *Address) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_access_controller_cancel_primary_role_recovery_proposal(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_access_controller_cancel_primary_role_recovery_proposal(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccessControllerCancelRecoveryRoleBadgeWithdrawAttempt(address *Address) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccessControllerCancelRecoveryRoleBadgeWithdrawAttempt(address *Address) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_access_controller_cancel_recovery_role_badge_withdraw_attempt(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_access_controller_cancel_recovery_role_badge_withdraw_attempt(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccessControllerCancelRecoveryRoleRecoveryProposal(address *Address) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccessControllerCancelRecoveryRoleRecoveryProposal(address *Address) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_access_controller_cancel_recovery_role_recovery_proposal(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_access_controller_cancel_recovery_role_recovery_proposal(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccessControllerCreate(controlledAsset ManifestBuilderBucket, ruleSet RuleSet, timedRecoveryDelayInMinutes *uint32, addressReservation *ManifestBuilderAddressReservation) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccessControllerCreate(controlledAsset ManifestBuilderBucket, ruleSet RuleSet, timedRecoveryDelayInMinutes *uint32, addressReservation *ManifestBuilderAddressReservation) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_access_controller_create(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_access_controller_create(
 		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(controlledAsset), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccessControllerCreateProof(address *Address) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccessControllerCreateProof(address *Address) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_access_controller_create_proof(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_access_controller_create_proof(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccessControllerCreateWithSecurityStructure(controlledAsset ManifestBuilderBucket, primaryRole SecurityStructureRole, recoveryRole SecurityStructureRole, confirmationRole SecurityStructureRole, timedRecoveryDelayInMinutes *uint32, addressReservation *ManifestBuilderAddressReservation) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccessControllerCreateWithSecurityStructure(controlledAsset ManifestBuilderBucket, primaryRole SecurityStructureRole, recoveryRole SecurityStructureRole, confirmationRole SecurityStructureRole, timedRecoveryDelayInMinutes *uint32, addressReservation *ManifestBuilderAddressReservation) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_access_controller_create_with_security_structure(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_access_controller_create_with_security_structure(
 		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(controlledAsset), FfiConverterTypeSecurityStructureRoleINSTANCE.Lower(primaryRole), FfiConverterTypeSecurityStructureRoleINSTANCE.Lower(recoveryRole), FfiConverterTypeSecurityStructureRoleINSTANCE.Lower(confirmationRole), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccessControllerInitiateBadgeWithdrawAsPrimary(address *Address) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccessControllerInitiateBadgeWithdrawAsPrimary(address *Address) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_access_controller_initiate_badge_withdraw_as_primary(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_access_controller_initiate_badge_withdraw_as_primary(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccessControllerInitiateBadgeWithdrawAsRecovery(address *Address) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccessControllerInitiateBadgeWithdrawAsRecovery(address *Address) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_access_controller_initiate_badge_withdraw_as_recovery(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_access_controller_initiate_badge_withdraw_as_recovery(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccessControllerInitiateRecoveryAsPrimary(address *Address, ruleSet RuleSet, timedRecoveryDelayInMinutes *uint32) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccessControllerInitiateRecoveryAsPrimary(address *Address, ruleSet RuleSet, timedRecoveryDelayInMinutes *uint32) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_access_controller_initiate_recovery_as_primary(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_access_controller_initiate_recovery_as_primary(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccessControllerInitiateRecoveryAsRecovery(address *Address, ruleSet RuleSet, timedRecoveryDelayInMinutes *uint32) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccessControllerInitiateRecoveryAsRecovery(address *Address, ruleSet RuleSet, timedRecoveryDelayInMinutes *uint32) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_access_controller_initiate_recovery_as_recovery(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_access_controller_initiate_recovery_as_recovery(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccessControllerLockPrimaryRole(address *Address) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccessControllerLockPrimaryRole(address *Address) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_access_controller_lock_primary_role(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_access_controller_lock_primary_role(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccessControllerMintRecoveryBadges(address *Address, nonFungibleLocalIds []NonFungibleLocalId) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccessControllerMintRecoveryBadges(address *Address, nonFungibleLocalIds []NonFungibleLocalId) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_access_controller_mint_recovery_badges(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_access_controller_mint_recovery_badges(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(nonFungibleLocalIds), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccessControllerNewFromPublicKeys(controlledAsset ManifestBuilderBucket, primaryRole PublicKey, recoveryRole PublicKey, confirmationRole PublicKey, timedRecoveryDelayInMinutes *uint32, addressReservation *ManifestBuilderAddressReservation) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccessControllerNewFromPublicKeys(controlledAsset ManifestBuilderBucket, primaryRole PublicKey, recoveryRole PublicKey, confirmationRole PublicKey, timedRecoveryDelayInMinutes *uint32, addressReservation *ManifestBuilderAddressReservation) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_access_controller_new_from_public_keys(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_access_controller_new_from_public_keys(
 		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(controlledAsset), FfiConverterTypePublicKeyINSTANCE.Lower(primaryRole), FfiConverterTypePublicKeyINSTANCE.Lower(recoveryRole), FfiConverterTypePublicKeyINSTANCE.Lower(confirmationRole), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccessControllerQuickConfirmPrimaryRoleBadgeWithdrawAttempt(address *Address) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccessControllerQuickConfirmPrimaryRoleBadgeWithdrawAttempt(address *Address) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_access_controller_quick_confirm_primary_role_badge_withdraw_attempt(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_access_controller_quick_confirm_primary_role_badge_withdraw_attempt(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccessControllerQuickConfirmPrimaryRoleRecoveryProposal(address *Address, ruleSet RuleSet, timedRecoveryDelayInMinutes *uint32) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccessControllerQuickConfirmPrimaryRoleRecoveryProposal(address *Address, ruleSet RuleSet, timedRecoveryDelayInMinutes *uint32) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_access_controller_quick_confirm_primary_role_recovery_proposal(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_access_controller_quick_confirm_primary_role_recovery_proposal(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccessControllerQuickConfirmRecoveryRoleBadgeWithdrawAttempt(address *Address) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccessControllerQuickConfirmRecoveryRoleBadgeWithdrawAttempt(address *Address) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_access_controller_quick_confirm_recovery_role_badge_withdraw_attempt(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_access_controller_quick_confirm_recovery_role_badge_withdraw_attempt(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccessControllerQuickConfirmRecoveryRoleRecoveryProposal(address *Address, ruleSet RuleSet, timedRecoveryDelayInMinutes *uint32) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccessControllerQuickConfirmRecoveryRoleRecoveryProposal(address *Address, ruleSet RuleSet, timedRecoveryDelayInMinutes *uint32) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_access_controller_quick_confirm_recovery_role_recovery_proposal(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_access_controller_quick_confirm_recovery_role_recovery_proposal(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccessControllerStopTimedRecovery(address *Address, ruleSet RuleSet, timedRecoveryDelayInMinutes *uint32) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccessControllerStopTimedRecovery(address *Address, ruleSet RuleSet, timedRecoveryDelayInMinutes *uint32) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_access_controller_stop_timed_recovery(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_access_controller_stop_timed_recovery(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccessControllerTimedConfirmRecovery(address *Address, ruleSet RuleSet, timedRecoveryDelayInMinutes *uint32) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccessControllerTimedConfirmRecovery(address *Address, ruleSet RuleSet, timedRecoveryDelayInMinutes *uint32) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_access_controller_timed_confirm_recovery(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_access_controller_timed_confirm_recovery(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccessControllerUnlockPrimaryRole(address *Address) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccessControllerUnlockPrimaryRole(address *Address) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_access_controller_unlock_primary_role(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_access_controller_unlock_primary_role(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountAddAuthorizedDepositor(address *Address, badge ResourceOrNonFungible) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountAddAuthorizedDepositor(address *Address, badge ResourceOrNonFungible) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_add_authorized_depositor(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_add_authorized_depositor(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeResourceOrNonFungibleINSTANCE.Lower(badge), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountBurn(address *Address, resourceAddress *Address, amount *Decimal) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountBurn(address *Address, resourceAddress *Address, amount *Decimal) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_burn(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_burn(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountBurnNonFungibles(address *Address, resourceAddress *Address, ids []NonFungibleLocalId) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountBurnNonFungibles(address *Address, resourceAddress *Address, ids []NonFungibleLocalId) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_burn_non_fungibles(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_burn_non_fungibles(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountCreate() (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountCreate() (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_create(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_create(
 		_pointer, _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountCreateAdvanced(ownerRole OwnerRole, addressReservation *ManifestBuilderAddressReservation) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountCreateAdvanced(ownerRole OwnerRole, addressReservation *ManifestBuilderAddressReservation) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_create_advanced(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_create_advanced(
 		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountCreateProofOfAmount(address *Address, resourceAddress *Address, amount *Decimal) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountCreateProofOfAmount(address *Address, resourceAddress *Address, amount *Decimal) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_create_proof_of_amount(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_create_proof_of_amount(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountCreateProofOfNonFungibles(address *Address, resourceAddress *Address, ids []NonFungibleLocalId) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountCreateProofOfNonFungibles(address *Address, resourceAddress *Address, ids []NonFungibleLocalId) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_create_proof_of_non_fungibles(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_create_proof_of_non_fungibles(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountDeposit(address *Address, bucket ManifestBuilderBucket) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountDeposit(address *Address, bucket ManifestBuilderBucket) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_deposit(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_deposit(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountDepositBatch(address *Address, buckets []ManifestBuilderBucket) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountDepositBatch(address *Address, buckets []ManifestBuilderBucket) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_deposit_batch(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_deposit_batch(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeManifestBuilderBucketINSTANCE.Lower(buckets), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountDepositEntireWorktop(accountAddress *Address) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountDepositEntireWorktop(accountAddress *Address) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_deposit_entire_worktop(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_deposit_entire_worktop(
 		_pointer,FfiConverterAddressINSTANCE.Lower(accountAddress), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountLockContingentFee(address *Address, amount *Decimal) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountLockContingentFee(address *Address, amount *Decimal) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_lock_contingent_fee(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_lock_contingent_fee(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterDecimalINSTANCE.Lower(amount), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountLockFee(address *Address, amount *Decimal) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountLockFee(address *Address, amount *Decimal) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_lock_fee(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_lock_fee(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterDecimalINSTANCE.Lower(amount), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountLockFeeAndWithdraw(address *Address, amountToLock *Decimal, resourceAddress *Address, amount *Decimal) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountLockFeeAndWithdraw(address *Address, amountToLock *Decimal, resourceAddress *Address, amount *Decimal) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_lock_fee_and_withdraw(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_lock_fee_and_withdraw(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterDecimalINSTANCE.Lower(amountToLock), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountLockFeeAndWithdrawNonFungibles(address *Address, amountToLock *Decimal, resourceAddress *Address, ids []NonFungibleLocalId) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountLockFeeAndWithdrawNonFungibles(address *Address, amountToLock *Decimal, resourceAddress *Address, ids []NonFungibleLocalId) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_lock_fee_and_withdraw_non_fungibles(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_lock_fee_and_withdraw_non_fungibles(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterDecimalINSTANCE.Lower(amountToLock), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountLockerAirdrop(address *Address, claimants map[string]ResourceSpecifier, bucket ManifestBuilderBucket, tryDirectSend bool) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountLockerAirdrop(address *Address, claimants map[string]ResourceSpecifier, bucket ManifestBuilderBucket, tryDirectSend bool) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_locker_airdrop(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_locker_airdrop(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterMapStringTypeResourceSpecifierINSTANCE.Lower(claimants), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), FfiConverterBoolINSTANCE.Lower(tryDirectSend), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountLockerClaim(address *Address, claimant *Address, resourceAddress *Address, amount *Decimal) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountLockerClaim(address *Address, claimant *Address, resourceAddress *Address, amount *Decimal) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_locker_claim(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_locker_claim(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountLockerClaimNonFungibles(address *Address, claimant *Address, resourceAddress *Address, ids []NonFungibleLocalId) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountLockerClaimNonFungibles(address *Address, claimant *Address, resourceAddress *Address, ids []NonFungibleLocalId) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_locker_claim_non_fungibles(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_locker_claim_non_fungibles(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountLockerGetAmount(address *Address, claimant *Address, resourceAddress *Address) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountLockerGetAmount(address *Address, claimant *Address, resourceAddress *Address) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_locker_get_amount(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_locker_get_amount(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterAddressINSTANCE.Lower(resourceAddress), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountLockerGetNonFungibleLocalIds(address *Address, claimant *Address, resourceAddress *Address, limit uint32) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountLockerGetNonFungibleLocalIds(address *Address, claimant *Address, resourceAddress *Address, limit uint32) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_locker_get_non_fungible_local_ids(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_locker_get_non_fungible_local_ids(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterUint32INSTANCE.Lower(limit), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountLockerInstantiate(ownerRole OwnerRole, storerRole *AccessRule, storerUpdaterRole *AccessRule, recovererRole *AccessRule, recovererUpdaterRole *AccessRule, addressReservation *ManifestBuilderAddressReservation) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountLockerInstantiate(ownerRole OwnerRole, storerRole *AccessRule, storerUpdaterRole *AccessRule, recovererRole *AccessRule, recovererUpdaterRole *AccessRule, addressReservation *ManifestBuilderAddressReservation) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_locker_instantiate(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_locker_instantiate(
 		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), FfiConverterAccessRuleINSTANCE.Lower(storerRole), FfiConverterAccessRuleINSTANCE.Lower(storerUpdaterRole), FfiConverterAccessRuleINSTANCE.Lower(recovererRole), FfiConverterAccessRuleINSTANCE.Lower(recovererUpdaterRole), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountLockerInstantiateSimple(allowRecover bool) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountLockerInstantiateSimple(allowRecover bool) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_locker_instantiate_simple(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_locker_instantiate_simple(
 		_pointer,FfiConverterBoolINSTANCE.Lower(allowRecover), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountLockerRecover(address *Address, claimant *Address, resourceAddress *Address, amount *Decimal) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountLockerRecover(address *Address, claimant *Address, resourceAddress *Address, amount *Decimal) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_locker_recover(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_locker_recover(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountLockerRecoverNonFungibles(address *Address, claimant *Address, resourceAddress *Address, ids []NonFungibleLocalId) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountLockerRecoverNonFungibles(address *Address, claimant *Address, resourceAddress *Address, ids []NonFungibleLocalId) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_locker_recover_non_fungibles(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_locker_recover_non_fungibles(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountLockerStore(address *Address, claimant *Address, bucket ManifestBuilderBucket, tryDirectSend bool) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountLockerStore(address *Address, claimant *Address, bucket ManifestBuilderBucket, tryDirectSend bool) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_locker_store(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_locker_store(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), FfiConverterBoolINSTANCE.Lower(tryDirectSend), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountRemoveAuthorizedDepositor(address *Address, badge ResourceOrNonFungible) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountRemoveAuthorizedDepositor(address *Address, badge ResourceOrNonFungible) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_remove_authorized_depositor(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_remove_authorized_depositor(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeResourceOrNonFungibleINSTANCE.Lower(badge), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountRemoveResourcePreference(address *Address, resourceAddress *Address) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountRemoveResourcePreference(address *Address, resourceAddress *Address) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_remove_resource_preference(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_remove_resource_preference(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountSecurify(address *Address) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountSecurify(address *Address) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_securify(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_securify(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountSetDefaultDepositRule(address *Address, defaultDepositRule AccountDefaultDepositRule) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountSetDefaultDepositRule(address *Address, defaultDepositRule AccountDefaultDepositRule) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_set_default_deposit_rule(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_set_default_deposit_rule(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeAccountDefaultDepositRuleINSTANCE.Lower(defaultDepositRule), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountSetResourcePreference(address *Address, resourceAddress *Address, resourcePreference ResourcePreference) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountSetResourcePreference(address *Address, resourceAddress *Address, resourcePreference ResourcePreference) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_set_resource_preference(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_set_resource_preference(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterTypeResourcePreferenceINSTANCE.Lower(resourcePreference), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountTryDepositBatchOrAbort(address *Address, buckets []ManifestBuilderBucket, authorizedDepositorBadge *ResourceOrNonFungible) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountTryDepositBatchOrAbort(address *Address, buckets []ManifestBuilderBucket, authorizedDepositorBadge *ResourceOrNonFungible) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_try_deposit_batch_or_abort(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_try_deposit_batch_or_abort(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeManifestBuilderBucketINSTANCE.Lower(buckets), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountTryDepositBatchOrRefund(address *Address, buckets []ManifestBuilderBucket, authorizedDepositorBadge *ResourceOrNonFungible) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountTryDepositBatchOrRefund(address *Address, buckets []ManifestBuilderBucket, authorizedDepositorBadge *ResourceOrNonFungible) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_try_deposit_batch_or_refund(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_try_deposit_batch_or_refund(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeManifestBuilderBucketINSTANCE.Lower(buckets), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountTryDepositEntireWorktopOrAbort(accountAddress *Address, authorizedDepositorBadge *ResourceOrNonFungible) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountTryDepositEntireWorktopOrAbort(accountAddress *Address, authorizedDepositorBadge *ResourceOrNonFungible) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_try_deposit_entire_worktop_or_abort(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_try_deposit_entire_worktop_or_abort(
 		_pointer,FfiConverterAddressINSTANCE.Lower(accountAddress), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountTryDepositEntireWorktopOrRefund(accountAddress *Address, authorizedDepositorBadge *ResourceOrNonFungible) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountTryDepositEntireWorktopOrRefund(accountAddress *Address, authorizedDepositorBadge *ResourceOrNonFungible) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_try_deposit_entire_worktop_or_refund(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_try_deposit_entire_worktop_or_refund(
 		_pointer,FfiConverterAddressINSTANCE.Lower(accountAddress), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountTryDepositOrAbort(address *Address, bucket ManifestBuilderBucket, authorizedDepositorBadge *ResourceOrNonFungible) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountTryDepositOrAbort(address *Address, bucket ManifestBuilderBucket, authorizedDepositorBadge *ResourceOrNonFungible) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_try_deposit_or_abort(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_try_deposit_or_abort(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountTryDepositOrRefund(address *Address, bucket ManifestBuilderBucket, authorizedDepositorBadge *ResourceOrNonFungible) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountTryDepositOrRefund(address *Address, bucket ManifestBuilderBucket, authorizedDepositorBadge *ResourceOrNonFungible) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_try_deposit_or_refund(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_try_deposit_or_refund(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountWithdraw(address *Address, resourceAddress *Address, amount *Decimal) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountWithdraw(address *Address, resourceAddress *Address, amount *Decimal) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_withdraw(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_withdraw(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AccountWithdrawNonFungibles(address *Address, resourceAddress *Address, ids []NonFungibleLocalId) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AccountWithdrawNonFungibles(address *Address, resourceAddress *Address, ids []NonFungibleLocalId) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_account_withdraw_non_fungibles(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_withdraw_non_fungibles(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AllocateGlobalAddress(packageAddress *Address, blueprintName string, intoAddressReservation ManifestBuilderAddressReservation, intoNamedAddress ManifestBuilderNamedAddress) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AllocateGlobalAddress(packageAddress *Address, blueprintName string, intoAddressReservation ManifestBuilderAddressReservation, intoNamedAddress ManifestBuilderNamedAddress) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_allocate_global_address(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_allocate_global_address(
 		_pointer,FfiConverterAddressINSTANCE.Lower(packageAddress), FfiConverterStringINSTANCE.Lower(blueprintName), FfiConverterTypeManifestBuilderAddressReservationINSTANCE.Lower(intoAddressReservation), FfiConverterTypeManifestBuilderNamedAddressINSTANCE.Lower(intoNamedAddress), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AssertWorktopContains(resourceAddress *Address, amount *Decimal) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AssertWorktopContains(resourceAddress *Address, amount *Decimal) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_assert_worktop_contains(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_assert_worktop_contains(
 		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AssertWorktopContainsAny(resourceAddress *Address) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AssertWorktopContainsAny(resourceAddress *Address) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_assert_worktop_contains_any(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_assert_worktop_contains_any(
 		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)AssertWorktopContainsNonFungibles(resourceAddress *Address, ids []NonFungibleLocalId) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)AssertWorktopContainsNonFungibles(resourceAddress *Address, ids []NonFungibleLocalId) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_assert_worktop_contains_non_fungibles(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_assert_worktop_contains_non_fungibles(
 		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)Build(networkId uint8) *TransactionManifest {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)Build(networkId uint8) *TransactionManifestV1 {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
-	return FfiConverterTransactionManifestINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_build(
+	return FfiConverterTransactionManifestV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_build(
 		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	}))
 }
 
 
-func (_self *ManifestBuilder)BurnResource(bucket ManifestBuilderBucket) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)BurnResource(bucket ManifestBuilderBucket) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_burn_resource(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_burn_resource(
 		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)CallAccessRulesMethod(address ManifestBuilderAddress, methodName string, args []ManifestBuilderValue) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)CallAccessRulesMethod(address ManifestBuilderAddress, methodName string, args []ManifestBuilderValue) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_call_access_rules_method(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_call_access_rules_method(
 		_pointer,FfiConverterTypeManifestBuilderAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(methodName), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)CallDirectVaultMethod(address *Address, methodName string, args []ManifestBuilderValue) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)CallDirectVaultMethod(address *Address, methodName string, args []ManifestBuilderValue) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_call_direct_vault_method(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_call_direct_vault_method(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(methodName), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)CallFunction(address ManifestBuilderAddress, blueprintName string, functionName string, args []ManifestBuilderValue) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)CallFunction(address ManifestBuilderAddress, blueprintName string, functionName string, args []ManifestBuilderValue) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_call_function(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_call_function(
 		_pointer,FfiConverterTypeManifestBuilderAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(blueprintName), FfiConverterStringINSTANCE.Lower(functionName), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)CallMetadataMethod(address ManifestBuilderAddress, methodName string, args []ManifestBuilderValue) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)CallMetadataMethod(address ManifestBuilderAddress, methodName string, args []ManifestBuilderValue) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_call_metadata_method(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_call_metadata_method(
 		_pointer,FfiConverterTypeManifestBuilderAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(methodName), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)CallMethod(address ManifestBuilderAddress, methodName string, args []ManifestBuilderValue) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)CallMethod(address ManifestBuilderAddress, methodName string, args []ManifestBuilderValue) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_call_method(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_call_method(
 		_pointer,FfiConverterTypeManifestBuilderAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(methodName), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)CallRoyaltyMethod(address ManifestBuilderAddress, methodName string, args []ManifestBuilderValue) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)CallRoyaltyMethod(address ManifestBuilderAddress, methodName string, args []ManifestBuilderValue) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_call_royalty_method(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_call_royalty_method(
 		_pointer,FfiConverterTypeManifestBuilderAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(methodName), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)CloneProof(proof ManifestBuilderProof, intoProof ManifestBuilderProof) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)CloneProof(proof ManifestBuilderProof, intoProof ManifestBuilderProof) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_clone_proof(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_clone_proof(
 		_pointer,FfiConverterTypeManifestBuilderProofINSTANCE.Lower(proof), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)CreateFungibleResourceManager(ownerRole OwnerRole, trackTotalSupply bool, divisibility uint8, initialSupply **Decimal, resourceRoles FungibleResourceRoles, metadata MetadataModuleConfig, addressReservation *ManifestBuilderAddressReservation) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)CreateFungibleResourceManager(ownerRole OwnerRole, trackTotalSupply bool, divisibility uint8, initialSupply **Decimal, resourceRoles FungibleResourceRoles, metadata MetadataModuleConfig, addressReservation *ManifestBuilderAddressReservation) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_create_fungible_resource_manager(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_create_fungible_resource_manager(
 		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), FfiConverterBoolINSTANCE.Lower(trackTotalSupply), FfiConverterUint8INSTANCE.Lower(divisibility), FfiConverterOptionalDecimalINSTANCE.Lower(initialSupply), FfiConverterTypeFungibleResourceRolesINSTANCE.Lower(resourceRoles), FfiConverterTypeMetadataModuleConfigINSTANCE.Lower(metadata), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)CreateProofFromAuthZoneOfAll(resourceAddress *Address, intoProof ManifestBuilderProof) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)CreateProofFromAuthZoneOfAll(resourceAddress *Address, intoProof ManifestBuilderProof) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_create_proof_from_auth_zone_of_all(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_create_proof_from_auth_zone_of_all(
 		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)CreateProofFromAuthZoneOfAmount(resourceAddress *Address, amount *Decimal, intoProof ManifestBuilderProof) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)CreateProofFromAuthZoneOfAmount(resourceAddress *Address, amount *Decimal, intoProof ManifestBuilderProof) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_create_proof_from_auth_zone_of_amount(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_create_proof_from_auth_zone_of_amount(
 		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)CreateProofFromAuthZoneOfNonFungibles(resourceAddress *Address, ids []NonFungibleLocalId, intoProof ManifestBuilderProof) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)CreateProofFromAuthZoneOfNonFungibles(resourceAddress *Address, ids []NonFungibleLocalId, intoProof ManifestBuilderProof) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_create_proof_from_auth_zone_of_non_fungibles(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_create_proof_from_auth_zone_of_non_fungibles(
 		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)CreateProofFromBucketOfAll(bucket ManifestBuilderBucket, intoProof ManifestBuilderProof) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)CreateProofFromBucketOfAll(bucket ManifestBuilderBucket, intoProof ManifestBuilderProof) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_create_proof_from_bucket_of_all(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_create_proof_from_bucket_of_all(
 		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)CreateProofFromBucketOfAmount(amount *Decimal, bucket ManifestBuilderBucket, intoProof ManifestBuilderProof) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)CreateProofFromBucketOfAmount(amount *Decimal, bucket ManifestBuilderBucket, intoProof ManifestBuilderProof) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_create_proof_from_bucket_of_amount(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_create_proof_from_bucket_of_amount(
 		_pointer,FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)CreateProofFromBucketOfNonFungibles(ids []NonFungibleLocalId, bucket ManifestBuilderBucket, intoProof ManifestBuilderProof) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)CreateProofFromBucketOfNonFungibles(ids []NonFungibleLocalId, bucket ManifestBuilderBucket, intoProof ManifestBuilderProof) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_create_proof_from_bucket_of_non_fungibles(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_create_proof_from_bucket_of_non_fungibles(
 		_pointer,FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)DropAllProofs() (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)DropAllProofs() (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_drop_all_proofs(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_drop_all_proofs(
 		_pointer, _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)DropAuthZoneProofs() (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)DropAuthZoneProofs() (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_drop_auth_zone_proofs(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_drop_auth_zone_proofs(
 		_pointer, _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)DropAuthZoneSignatureProofs() (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)DropAuthZoneSignatureProofs() (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_drop_auth_zone_signature_proofs(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_drop_auth_zone_signature_proofs(
 		_pointer, _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)DropProof(proof ManifestBuilderProof) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)DropProof(proof ManifestBuilderProof) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_drop_proof(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_drop_proof(
 		_pointer,FfiConverterTypeManifestBuilderProofINSTANCE.Lower(proof), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)FaucetFreeXrd() (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)FaucetFreeXrd() (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_faucet_free_xrd(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_faucet_free_xrd(
 		_pointer, _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)FaucetLockFee() (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)FaucetLockFee() (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_faucet_lock_fee(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_faucet_lock_fee(
 		_pointer, _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)IdentityCreate() (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)IdentityCreate() (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_identity_create(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_identity_create(
 		_pointer, _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)IdentityCreateAdvanced(ownerRole OwnerRole) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)IdentityCreateAdvanced(ownerRole OwnerRole) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_identity_create_advanced(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_identity_create_advanced(
 		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)IdentitySecurify(address *Address) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)IdentitySecurify(address *Address) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_identity_securify(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_identity_securify(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)MetadataGet(address *Address, key string) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)MetadataGet(address *Address, key string) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_metadata_get(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_metadata_get(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(key), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)MetadataLock(address *Address, key string) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)MetadataLock(address *Address, key string) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_metadata_lock(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_metadata_lock(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(key), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)MetadataRemove(address *Address, key string) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)MetadataRemove(address *Address, key string) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_metadata_remove(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_metadata_remove(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(key), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)MetadataSet(address *Address, key string, value MetadataValue) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)MetadataSet(address *Address, key string, value MetadataValue) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_metadata_set(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_metadata_set(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(key), FfiConverterTypeMetadataValueINSTANCE.Lower(value), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)MintFungible(resourceAddress *Address, amount *Decimal) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)MintFungible(resourceAddress *Address, amount *Decimal) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_mint_fungible(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_mint_fungible(
 		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)MultiResourcePoolContribute(address *Address, buckets []ManifestBuilderBucket) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)MultiResourcePoolContribute(address *Address, buckets []ManifestBuilderBucket) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_multi_resource_pool_contribute(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_multi_resource_pool_contribute(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeManifestBuilderBucketINSTANCE.Lower(buckets), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)MultiResourcePoolGetRedemptionValue(address *Address, amountOfPoolUnits *Decimal) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)MultiResourcePoolGetRedemptionValue(address *Address, amountOfPoolUnits *Decimal) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_multi_resource_pool_get_redemption_value(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_multi_resource_pool_get_redemption_value(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterDecimalINSTANCE.Lower(amountOfPoolUnits), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)MultiResourcePoolGetVaultAmount(address *Address) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)MultiResourcePoolGetVaultAmount(address *Address) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_multi_resource_pool_get_vault_amount(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_multi_resource_pool_get_vault_amount(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)MultiResourcePoolInstantiate(ownerRole OwnerRole, poolManagerRule *AccessRule, resourceAddresses []*Address, addressReservation *ManifestBuilderAddressReservation) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)MultiResourcePoolInstantiate(ownerRole OwnerRole, poolManagerRule *AccessRule, resourceAddresses []*Address, addressReservation *ManifestBuilderAddressReservation) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_multi_resource_pool_instantiate(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_multi_resource_pool_instantiate(
 		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), FfiConverterAccessRuleINSTANCE.Lower(poolManagerRule), FfiConverterSequenceAddressINSTANCE.Lower(resourceAddresses), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)MultiResourcePoolProtectedDeposit(address *Address, bucket ManifestBuilderBucket) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)MultiResourcePoolProtectedDeposit(address *Address, bucket ManifestBuilderBucket) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_multi_resource_pool_protected_deposit(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_multi_resource_pool_protected_deposit(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)MultiResourcePoolProtectedWithdraw(address *Address, resourceAddress *Address, amount *Decimal, withdrawStrategy WithdrawStrategy) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)MultiResourcePoolProtectedWithdraw(address *Address, resourceAddress *Address, amount *Decimal, withdrawStrategy WithdrawStrategy) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_multi_resource_pool_protected_withdraw(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_multi_resource_pool_protected_withdraw(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeWithdrawStrategyINSTANCE.Lower(withdrawStrategy), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)MultiResourcePoolRedeem(address *Address, bucket ManifestBuilderBucket) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)MultiResourcePoolRedeem(address *Address, bucket ManifestBuilderBucket) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_multi_resource_pool_redeem(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_multi_resource_pool_redeem(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)OneResourcePoolContribute(address *Address, bucket ManifestBuilderBucket) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)OneResourcePoolContribute(address *Address, bucket ManifestBuilderBucket) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_one_resource_pool_contribute(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_one_resource_pool_contribute(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)OneResourcePoolGetRedemptionValue(address *Address, amountOfPoolUnits *Decimal) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)OneResourcePoolGetRedemptionValue(address *Address, amountOfPoolUnits *Decimal) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_one_resource_pool_get_redemption_value(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_one_resource_pool_get_redemption_value(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterDecimalINSTANCE.Lower(amountOfPoolUnits), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)OneResourcePoolGetVaultAmount(address *Address) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)OneResourcePoolGetVaultAmount(address *Address) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_one_resource_pool_get_vault_amount(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_one_resource_pool_get_vault_amount(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)OneResourcePoolInstantiate(ownerRole OwnerRole, poolManagerRule *AccessRule, resourceAddress *Address, addressReservation *ManifestBuilderAddressReservation) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)OneResourcePoolInstantiate(ownerRole OwnerRole, poolManagerRule *AccessRule, resourceAddress *Address, addressReservation *ManifestBuilderAddressReservation) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_one_resource_pool_instantiate(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_one_resource_pool_instantiate(
 		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), FfiConverterAccessRuleINSTANCE.Lower(poolManagerRule), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)OneResourcePoolProtectedDeposit(address *Address, bucket ManifestBuilderBucket) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)OneResourcePoolProtectedDeposit(address *Address, bucket ManifestBuilderBucket) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_one_resource_pool_protected_deposit(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_one_resource_pool_protected_deposit(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)OneResourcePoolProtectedWithdraw(address *Address, amount *Decimal, withdrawStrategy WithdrawStrategy) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)OneResourcePoolProtectedWithdraw(address *Address, amount *Decimal, withdrawStrategy WithdrawStrategy) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_one_resource_pool_protected_withdraw(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_one_resource_pool_protected_withdraw(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeWithdrawStrategyINSTANCE.Lower(withdrawStrategy), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)OneResourcePoolRedeem(address *Address, bucket ManifestBuilderBucket) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)OneResourcePoolRedeem(address *Address, bucket ManifestBuilderBucket) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_one_resource_pool_redeem(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_one_resource_pool_redeem(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)PackageClaimRoyalty(address *Address) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)PackageClaimRoyalty(address *Address) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_package_claim_royalty(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_package_claim_royalty(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)PackagePublish(code []byte, definition []byte, metadata map[string]MetadataInitEntry) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)PackagePublish(code []byte, definition []byte, metadata map[string]MetadataInitEntry) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_package_publish(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_package_publish(
 		_pointer,FfiConverterBytesINSTANCE.Lower(code), FfiConverterBytesINSTANCE.Lower(definition), FfiConverterMapStringTypeMetadataInitEntryINSTANCE.Lower(metadata), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)PackagePublishAdvanced(ownerRole OwnerRole, code []byte, definition []byte, metadata map[string]MetadataInitEntry, packageAddress *ManifestBuilderAddressReservation) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)PackagePublishAdvanced(ownerRole OwnerRole, code []byte, definition []byte, metadata map[string]MetadataInitEntry, packageAddress *ManifestBuilderAddressReservation) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_package_publish_advanced(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_package_publish_advanced(
 		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), FfiConverterBytesINSTANCE.Lower(code), FfiConverterBytesINSTANCE.Lower(definition), FfiConverterMapStringTypeMetadataInitEntryINSTANCE.Lower(metadata), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(packageAddress), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)PopFromAuthZone(intoProof ManifestBuilderProof) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)PopFromAuthZone(intoProof ManifestBuilderProof) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_pop_from_auth_zone(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_pop_from_auth_zone(
 		_pointer,FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)PushToAuthZone(proof ManifestBuilderProof) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)PushToAuthZone(proof ManifestBuilderProof) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_push_to_auth_zone(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_push_to_auth_zone(
 		_pointer,FfiConverterTypeManifestBuilderProofINSTANCE.Lower(proof), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)ReturnToWorktop(bucket ManifestBuilderBucket) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)ReturnToWorktop(bucket ManifestBuilderBucket) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_return_to_worktop(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_return_to_worktop(
 		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)RoleAssignmentGet(address *Address, module ModuleId, roleKey string) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)RoleAssignmentGet(address *Address, module ModuleId, roleKey string) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_role_assignment_get(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_role_assignment_get(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeModuleIdINSTANCE.Lower(module), FfiConverterStringINSTANCE.Lower(roleKey), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)RoleAssignmentLockOwner(address *Address) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)RoleAssignmentLockOwner(address *Address) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_role_assignment_lock_owner(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_role_assignment_lock_owner(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)RoleAssignmentSet(address *Address, module ModuleId, roleKey string, rule *AccessRule) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)RoleAssignmentSet(address *Address, module ModuleId, roleKey string, rule *AccessRule) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_role_assignment_set(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_role_assignment_set(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeModuleIdINSTANCE.Lower(module), FfiConverterStringINSTANCE.Lower(roleKey), FfiConverterAccessRuleINSTANCE.Lower(rule), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)RoleAssignmentSetOwner(address *Address, rule *AccessRule) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)RoleAssignmentSetOwner(address *Address, rule *AccessRule) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_role_assignment_set_owner(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_role_assignment_set_owner(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAccessRuleINSTANCE.Lower(rule), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)RoyaltyClaim(address *Address) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)RoyaltyClaim(address *Address) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_royalty_claim(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_royalty_claim(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)RoyaltyLock(address *Address, method string) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)RoyaltyLock(address *Address, method string) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_royalty_lock(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_royalty_lock(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(method), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)RoyaltySet(address *Address, method string, amount RoyaltyAmount) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)RoyaltySet(address *Address, method string, amount RoyaltyAmount) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_royalty_set(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_royalty_set(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(method), FfiConverterTypeRoyaltyAmountINSTANCE.Lower(amount), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)TakeAllFromWorktop(resourceAddress *Address, intoBucket ManifestBuilderBucket) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)TakeAllFromWorktop(resourceAddress *Address, intoBucket ManifestBuilderBucket) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_take_all_from_worktop(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_take_all_from_worktop(
 		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(intoBucket), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)TakeFromWorktop(resourceAddress *Address, amount *Decimal, intoBucket ManifestBuilderBucket) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)TakeFromWorktop(resourceAddress *Address, amount *Decimal, intoBucket ManifestBuilderBucket) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_take_from_worktop(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_take_from_worktop(
 		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(intoBucket), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)TakeNonFungiblesFromWorktop(resourceAddress *Address, ids []NonFungibleLocalId, intoBucket ManifestBuilderBucket) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)TakeNonFungiblesFromWorktop(resourceAddress *Address, ids []NonFungibleLocalId, intoBucket ManifestBuilderBucket) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_take_non_fungibles_from_worktop(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_take_non_fungibles_from_worktop(
 		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(intoBucket), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)TwoResourcePoolContribute(address *Address, buckets []ManifestBuilderBucket) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)TwoResourcePoolContribute(address *Address, buckets []ManifestBuilderBucket) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_two_resource_pool_contribute(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_two_resource_pool_contribute(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeManifestBuilderBucketINSTANCE.Lower(buckets), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)TwoResourcePoolGetRedemptionValue(address *Address, amountOfPoolUnits *Decimal) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)TwoResourcePoolGetRedemptionValue(address *Address, amountOfPoolUnits *Decimal) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_two_resource_pool_get_redemption_value(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_two_resource_pool_get_redemption_value(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterDecimalINSTANCE.Lower(amountOfPoolUnits), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)TwoResourcePoolGetVaultAmount(address *Address) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)TwoResourcePoolGetVaultAmount(address *Address) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_two_resource_pool_get_vault_amount(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_two_resource_pool_get_vault_amount(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)TwoResourcePoolInstantiate(ownerRole OwnerRole, poolManagerRule *AccessRule, resourceAddresses []*Address, addressReservation *ManifestBuilderAddressReservation) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)TwoResourcePoolInstantiate(ownerRole OwnerRole, poolManagerRule *AccessRule, resourceAddresses []*Address, addressReservation *ManifestBuilderAddressReservation) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_two_resource_pool_instantiate(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_two_resource_pool_instantiate(
 		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), FfiConverterAccessRuleINSTANCE.Lower(poolManagerRule), FfiConverterSequenceAddressINSTANCE.Lower(resourceAddresses), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)TwoResourcePoolProtectedDeposit(address *Address, bucket ManifestBuilderBucket) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)TwoResourcePoolProtectedDeposit(address *Address, bucket ManifestBuilderBucket) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_two_resource_pool_protected_deposit(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_two_resource_pool_protected_deposit(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)TwoResourcePoolProtectedWithdraw(address *Address, resourceAddress *Address, amount *Decimal, withdrawStrategy WithdrawStrategy) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)TwoResourcePoolProtectedWithdraw(address *Address, resourceAddress *Address, amount *Decimal, withdrawStrategy WithdrawStrategy) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_two_resource_pool_protected_withdraw(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_two_resource_pool_protected_withdraw(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeWithdrawStrategyINSTANCE.Lower(withdrawStrategy), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)TwoResourcePoolRedeem(address *Address, bucket ManifestBuilderBucket) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)TwoResourcePoolRedeem(address *Address, bucket ManifestBuilderBucket) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_two_resource_pool_redeem(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_two_resource_pool_redeem(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)ValidatorAcceptsDelegatedStake(address *Address) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)ValidatorAcceptsDelegatedStake(address *Address) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_validator_accepts_delegated_stake(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_validator_accepts_delegated_stake(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)ValidatorClaimXrd(address *Address, bucket ManifestBuilderBucket) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)ValidatorClaimXrd(address *Address, bucket ManifestBuilderBucket) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_validator_claim_xrd(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_validator_claim_xrd(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)ValidatorFinishUnlockOwnerStakeUnits(address *Address) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)ValidatorFinishUnlockOwnerStakeUnits(address *Address) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_validator_finish_unlock_owner_stake_units(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_validator_finish_unlock_owner_stake_units(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)ValidatorGetProtocolUpdateReadiness(address *Address) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)ValidatorGetProtocolUpdateReadiness(address *Address) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_validator_get_protocol_update_readiness(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_validator_get_protocol_update_readiness(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)ValidatorGetRedemptionValue(address *Address, amountOfStakeUnits *Decimal) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)ValidatorGetRedemptionValue(address *Address, amountOfStakeUnits *Decimal) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_validator_get_redemption_value(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_validator_get_redemption_value(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterDecimalINSTANCE.Lower(amountOfStakeUnits), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)ValidatorLockOwnerStakeUnits(address *Address, stakeUnitBucket ManifestBuilderBucket) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)ValidatorLockOwnerStakeUnits(address *Address, stakeUnitBucket ManifestBuilderBucket) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_validator_lock_owner_stake_units(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_validator_lock_owner_stake_units(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(stakeUnitBucket), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)ValidatorRegister(address *Address) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)ValidatorRegister(address *Address) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_validator_register(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_validator_register(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)ValidatorSignalProtocolUpdateReadiness(address *Address, vote string) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)ValidatorSignalProtocolUpdateReadiness(address *Address, vote string) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_validator_signal_protocol_update_readiness(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_validator_signal_protocol_update_readiness(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(vote), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)ValidatorStake(address *Address, stake ManifestBuilderBucket) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)ValidatorStake(address *Address, stake ManifestBuilderBucket) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_validator_stake(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_validator_stake(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(stake), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)ValidatorStakeAsOwner(address *Address, stake ManifestBuilderBucket) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)ValidatorStakeAsOwner(address *Address, stake ManifestBuilderBucket) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_validator_stake_as_owner(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_validator_stake_as_owner(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(stake), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)ValidatorStartUnlockOwnerStakeUnits(address *Address, requestedStakeUnitAmount *Decimal) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)ValidatorStartUnlockOwnerStakeUnits(address *Address, requestedStakeUnitAmount *Decimal) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_validator_start_unlock_owner_stake_units(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_validator_start_unlock_owner_stake_units(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterDecimalINSTANCE.Lower(requestedStakeUnitAmount), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)ValidatorTotalStakeUnitSupply(address *Address) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)ValidatorTotalStakeUnitSupply(address *Address) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_validator_total_stake_unit_supply(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_validator_total_stake_unit_supply(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)ValidatorTotalStakeXrdAmount(address *Address) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)ValidatorTotalStakeXrdAmount(address *Address) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_validator_total_stake_xrd_amount(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_validator_total_stake_xrd_amount(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)ValidatorUnregister(address *Address) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)ValidatorUnregister(address *Address) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_validator_unregister(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_validator_unregister(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)ValidatorUnstake(address *Address, stakeUnitBucket ManifestBuilderBucket) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)ValidatorUnstake(address *Address, stakeUnitBucket ManifestBuilderBucket) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_validator_unstake(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_validator_unstake(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(stakeUnitBucket), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)ValidatorUpdateAcceptDelegatedStake(address *Address, acceptDelegatedStake bool) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)ValidatorUpdateAcceptDelegatedStake(address *Address, acceptDelegatedStake bool) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_validator_update_accept_delegated_stake(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_validator_update_accept_delegated_stake(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterBoolINSTANCE.Lower(acceptDelegatedStake), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)ValidatorUpdateFee(address *Address, newFeeFactor *Decimal) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)ValidatorUpdateFee(address *Address, newFeeFactor *Decimal) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_validator_update_fee(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_validator_update_fee(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterDecimalINSTANCE.Lower(newFeeFactor), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *ManifestBuilder)ValidatorUpdateKey(address *Address, key PublicKey) (*ManifestBuilder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestBuilder")
+func (_self *ManifestV1Builder)ValidatorUpdateKey(address *Address, key PublicKey) (*ManifestV1Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestbuilder_validator_update_key(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_validator_update_key(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypePublicKeyINSTANCE.Lower(key), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestBuilder
+			var _uniffiDefaultValue *ManifestV1Builder
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterManifestBuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterManifestV1BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
 
-func (object *ManifestBuilder)Destroy() {
+func (object *ManifestV1Builder)Destroy() {
 	runtime.SetFinalizer(object, nil)
 	object.ffiObject.destroy()
 }
 
-type FfiConverterManifestBuilder struct {}
+type FfiConverterManifestV1Builder struct {}
 
-var FfiConverterManifestBuilderINSTANCE = FfiConverterManifestBuilder{}
+var FfiConverterManifestV1BuilderINSTANCE = FfiConverterManifestV1Builder{}
 
-func (c FfiConverterManifestBuilder) Lift(pointer unsafe.Pointer) *ManifestBuilder {
-	result := &ManifestBuilder {
+func (c FfiConverterManifestV1Builder) Lift(pointer unsafe.Pointer) *ManifestV1Builder {
+	result := &ManifestV1Builder {
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_radix_engine_toolkit_uniffi_fn_free_manifestbuilder(pointer, status)
+				C.uniffi_radix_engine_toolkit_uniffi_fn_free_manifestv1builder(pointer, status)
 		}),
 	}
-	runtime.SetFinalizer(result, (*ManifestBuilder).Destroy)
+	runtime.SetFinalizer(result, (*ManifestV1Builder).Destroy)
 	return result
 }
 
-func (c FfiConverterManifestBuilder) Read(reader io.Reader) *ManifestBuilder {
+func (c FfiConverterManifestV1Builder) Read(reader io.Reader) *ManifestV1Builder {
 	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
 }
 
-func (c FfiConverterManifestBuilder) Lower(value *ManifestBuilder) unsafe.Pointer {
+func (c FfiConverterManifestV1Builder) Lower(value *ManifestV1Builder) unsafe.Pointer {
 	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
 	// because the pointer will be decremented immediately after this function returns,
 	// and someone will be left holding onto a non-locked pointer.
-	pointer := value.ffiObject.incrementPointer("*ManifestBuilder")
+	pointer := value.ffiObject.incrementPointer("*ManifestV1Builder")
 	defer value.ffiObject.decrementPointer()
 	return pointer
 }
 
-func (c FfiConverterManifestBuilder) Write(writer io.Writer, value *ManifestBuilder) {
+func (c FfiConverterManifestV1Builder) Write(writer io.Writer, value *ManifestV1Builder) {
 	writeUint64(writer, uint64(uintptr(c.Lower(value))))
 }
 
-type FfiDestroyerManifestBuilder struct {}
+type FfiDestroyerManifestV1Builder struct {}
 
-func (_ FfiDestroyerManifestBuilder) Destroy(value *ManifestBuilder) {
+func (_ FfiDestroyerManifestV1Builder) Destroy(value *ManifestV1Builder) {
 	value.Destroy()
 }
 
 
-type MessageValidationConfig struct {
+type ManifestV2Builder struct {
 	ffiObject FfiObject
 }
-func NewMessageValidationConfig(maxPlaintextMessageLength uint64, maxEncryptedMessageLength uint64, maxMimeTypeLength uint64, maxDecryptors uint64) *MessageValidationConfig {
-	return FfiConverterMessageValidationConfigINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_messagevalidationconfig_new(FfiConverterUint64INSTANCE.Lower(maxPlaintextMessageLength), FfiConverterUint64INSTANCE.Lower(maxEncryptedMessageLength), FfiConverterUint64INSTANCE.Lower(maxMimeTypeLength), FfiConverterUint64INSTANCE.Lower(maxDecryptors), _uniffiStatus)
-	}))
-}
-
-
-func MessageValidationConfigDefault() *MessageValidationConfig {
-	return FfiConverterMessageValidationConfigINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_messagevalidationconfig_default( _uniffiStatus)
+func NewManifestV2Builder() *ManifestV2Builder {
+	return FfiConverterManifestV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_manifestv2builder_new( _uniffiStatus)
 	}))
 }
 
 
 
-func (_self *MessageValidationConfig)MaxDecryptors() uint64 {
-	_pointer := _self.ffiObject.incrementPointer("*MessageValidationConfig")
+
+func (_self *ManifestV2Builder)AccessControllerCancelPrimaryRoleBadgeWithdrawAttempt(address *Address) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
 	defer _self.ffiObject.decrementPointer()
-	return FfiConverterUint64INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint64_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_messagevalidationconfig_max_decryptors(
-		_pointer, _uniffiStatus)
-	}))
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_access_controller_cancel_primary_role_badge_withdraw_attempt(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
 }
 
 
-func (_self *MessageValidationConfig)MaxEncryptedMessageLength() uint64 {
-	_pointer := _self.ffiObject.incrementPointer("*MessageValidationConfig")
+func (_self *ManifestV2Builder)AccessControllerCancelPrimaryRoleRecoveryProposal(address *Address) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
 	defer _self.ffiObject.decrementPointer()
-	return FfiConverterUint64INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint64_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_messagevalidationconfig_max_encrypted_message_length(
-		_pointer, _uniffiStatus)
-	}))
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_access_controller_cancel_primary_role_recovery_proposal(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
 }
 
 
-func (_self *MessageValidationConfig)MaxMimeTypeLength() uint64 {
-	_pointer := _self.ffiObject.incrementPointer("*MessageValidationConfig")
+func (_self *ManifestV2Builder)AccessControllerCancelRecoveryRoleBadgeWithdrawAttempt(address *Address) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
 	defer _self.ffiObject.decrementPointer()
-	return FfiConverterUint64INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint64_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_messagevalidationconfig_max_mime_type_length(
-		_pointer, _uniffiStatus)
-	}))
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_access_controller_cancel_recovery_role_badge_withdraw_attempt(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
 }
 
 
-func (_self *MessageValidationConfig)MaxPlaintextMessageLength() uint64 {
-	_pointer := _self.ffiObject.incrementPointer("*MessageValidationConfig")
+func (_self *ManifestV2Builder)AccessControllerCancelRecoveryRoleRecoveryProposal(address *Address) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
 	defer _self.ffiObject.decrementPointer()
-	return FfiConverterUint64INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint64_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_messagevalidationconfig_max_plaintext_message_length(
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_access_controller_cancel_recovery_role_recovery_proposal(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccessControllerCreate(controlledAsset ManifestBuilderBucket, ruleSet RuleSet, timedRecoveryDelayInMinutes *uint32, addressReservation *ManifestBuilderAddressReservation) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_access_controller_create(
+		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(controlledAsset), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccessControllerCreateProof(address *Address) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_access_controller_create_proof(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccessControllerCreateWithSecurityStructure(controlledAsset ManifestBuilderBucket, primaryRole SecurityStructureRole, recoveryRole SecurityStructureRole, confirmationRole SecurityStructureRole, timedRecoveryDelayInMinutes *uint32, addressReservation *ManifestBuilderAddressReservation) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_access_controller_create_with_security_structure(
+		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(controlledAsset), FfiConverterTypeSecurityStructureRoleINSTANCE.Lower(primaryRole), FfiConverterTypeSecurityStructureRoleINSTANCE.Lower(recoveryRole), FfiConverterTypeSecurityStructureRoleINSTANCE.Lower(confirmationRole), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccessControllerInitiateBadgeWithdrawAsPrimary(address *Address) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_access_controller_initiate_badge_withdraw_as_primary(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccessControllerInitiateBadgeWithdrawAsRecovery(address *Address) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_access_controller_initiate_badge_withdraw_as_recovery(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccessControllerInitiateRecoveryAsPrimary(address *Address, ruleSet RuleSet, timedRecoveryDelayInMinutes *uint32) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_access_controller_initiate_recovery_as_primary(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccessControllerInitiateRecoveryAsRecovery(address *Address, ruleSet RuleSet, timedRecoveryDelayInMinutes *uint32) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_access_controller_initiate_recovery_as_recovery(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccessControllerLockPrimaryRole(address *Address) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_access_controller_lock_primary_role(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccessControllerMintRecoveryBadges(address *Address, nonFungibleLocalIds []NonFungibleLocalId) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_access_controller_mint_recovery_badges(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(nonFungibleLocalIds), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccessControllerNewFromPublicKeys(controlledAsset ManifestBuilderBucket, primaryRole PublicKey, recoveryRole PublicKey, confirmationRole PublicKey, timedRecoveryDelayInMinutes *uint32, addressReservation *ManifestBuilderAddressReservation) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_access_controller_new_from_public_keys(
+		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(controlledAsset), FfiConverterTypePublicKeyINSTANCE.Lower(primaryRole), FfiConverterTypePublicKeyINSTANCE.Lower(recoveryRole), FfiConverterTypePublicKeyINSTANCE.Lower(confirmationRole), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccessControllerQuickConfirmPrimaryRoleBadgeWithdrawAttempt(address *Address) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_access_controller_quick_confirm_primary_role_badge_withdraw_attempt(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccessControllerQuickConfirmPrimaryRoleRecoveryProposal(address *Address, ruleSet RuleSet, timedRecoveryDelayInMinutes *uint32) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_access_controller_quick_confirm_primary_role_recovery_proposal(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccessControllerQuickConfirmRecoveryRoleBadgeWithdrawAttempt(address *Address) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_access_controller_quick_confirm_recovery_role_badge_withdraw_attempt(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccessControllerQuickConfirmRecoveryRoleRecoveryProposal(address *Address, ruleSet RuleSet, timedRecoveryDelayInMinutes *uint32) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_access_controller_quick_confirm_recovery_role_recovery_proposal(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccessControllerStopTimedRecovery(address *Address, ruleSet RuleSet, timedRecoveryDelayInMinutes *uint32) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_access_controller_stop_timed_recovery(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccessControllerTimedConfirmRecovery(address *Address, ruleSet RuleSet, timedRecoveryDelayInMinutes *uint32) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_access_controller_timed_confirm_recovery(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccessControllerUnlockPrimaryRole(address *Address) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_access_controller_unlock_primary_role(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountAddAuthorizedDepositor(address *Address, badge ResourceOrNonFungible) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_add_authorized_depositor(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeResourceOrNonFungibleINSTANCE.Lower(badge), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountBurn(address *Address, resourceAddress *Address, amount *Decimal) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_burn(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountBurnNonFungibles(address *Address, resourceAddress *Address, ids []NonFungibleLocalId) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_burn_non_fungibles(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountCreate() (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_create(
 		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountCreateAdvanced(ownerRole OwnerRole, addressReservation *ManifestBuilderAddressReservation) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_create_advanced(
+		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountCreateProofOfAmount(address *Address, resourceAddress *Address, amount *Decimal) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_create_proof_of_amount(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountCreateProofOfNonFungibles(address *Address, resourceAddress *Address, ids []NonFungibleLocalId) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_create_proof_of_non_fungibles(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountDeposit(address *Address, bucket ManifestBuilderBucket) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_deposit(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountDepositBatch(address *Address, buckets []ManifestBuilderBucket) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_deposit_batch(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeManifestBuilderBucketINSTANCE.Lower(buckets), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountDepositEntireWorktop(accountAddress *Address) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_deposit_entire_worktop(
+		_pointer,FfiConverterAddressINSTANCE.Lower(accountAddress), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountLockContingentFee(address *Address, amount *Decimal) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_lock_contingent_fee(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterDecimalINSTANCE.Lower(amount), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountLockFee(address *Address, amount *Decimal) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_lock_fee(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterDecimalINSTANCE.Lower(amount), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountLockFeeAndWithdraw(address *Address, amountToLock *Decimal, resourceAddress *Address, amount *Decimal) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_lock_fee_and_withdraw(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterDecimalINSTANCE.Lower(amountToLock), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountLockFeeAndWithdrawNonFungibles(address *Address, amountToLock *Decimal, resourceAddress *Address, ids []NonFungibleLocalId) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_lock_fee_and_withdraw_non_fungibles(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterDecimalINSTANCE.Lower(amountToLock), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountLockerAirdrop(address *Address, claimants map[string]ResourceSpecifier, bucket ManifestBuilderBucket, tryDirectSend bool) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_locker_airdrop(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterMapStringTypeResourceSpecifierINSTANCE.Lower(claimants), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), FfiConverterBoolINSTANCE.Lower(tryDirectSend), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountLockerClaim(address *Address, claimant *Address, resourceAddress *Address, amount *Decimal) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_locker_claim(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountLockerClaimNonFungibles(address *Address, claimant *Address, resourceAddress *Address, ids []NonFungibleLocalId) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_locker_claim_non_fungibles(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountLockerGetAmount(address *Address, claimant *Address, resourceAddress *Address) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_locker_get_amount(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterAddressINSTANCE.Lower(resourceAddress), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountLockerGetNonFungibleLocalIds(address *Address, claimant *Address, resourceAddress *Address, limit uint32) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_locker_get_non_fungible_local_ids(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterUint32INSTANCE.Lower(limit), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountLockerInstantiate(ownerRole OwnerRole, storerRole *AccessRule, storerUpdaterRole *AccessRule, recovererRole *AccessRule, recovererUpdaterRole *AccessRule, addressReservation *ManifestBuilderAddressReservation) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_locker_instantiate(
+		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), FfiConverterAccessRuleINSTANCE.Lower(storerRole), FfiConverterAccessRuleINSTANCE.Lower(storerUpdaterRole), FfiConverterAccessRuleINSTANCE.Lower(recovererRole), FfiConverterAccessRuleINSTANCE.Lower(recovererUpdaterRole), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountLockerInstantiateSimple(allowRecover bool) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_locker_instantiate_simple(
+		_pointer,FfiConverterBoolINSTANCE.Lower(allowRecover), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountLockerRecover(address *Address, claimant *Address, resourceAddress *Address, amount *Decimal) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_locker_recover(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountLockerRecoverNonFungibles(address *Address, claimant *Address, resourceAddress *Address, ids []NonFungibleLocalId) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_locker_recover_non_fungibles(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountLockerStore(address *Address, claimant *Address, bucket ManifestBuilderBucket, tryDirectSend bool) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_locker_store(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), FfiConverterBoolINSTANCE.Lower(tryDirectSend), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountRemoveAuthorizedDepositor(address *Address, badge ResourceOrNonFungible) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_remove_authorized_depositor(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeResourceOrNonFungibleINSTANCE.Lower(badge), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountRemoveResourcePreference(address *Address, resourceAddress *Address) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_remove_resource_preference(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountSecurify(address *Address) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_securify(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountSetDefaultDepositRule(address *Address, defaultDepositRule AccountDefaultDepositRule) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_set_default_deposit_rule(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeAccountDefaultDepositRuleINSTANCE.Lower(defaultDepositRule), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountSetResourcePreference(address *Address, resourceAddress *Address, resourcePreference ResourcePreference) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_set_resource_preference(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterTypeResourcePreferenceINSTANCE.Lower(resourcePreference), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountTryDepositBatchOrAbort(address *Address, buckets []ManifestBuilderBucket, authorizedDepositorBadge *ResourceOrNonFungible) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_try_deposit_batch_or_abort(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeManifestBuilderBucketINSTANCE.Lower(buckets), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountTryDepositBatchOrRefund(address *Address, buckets []ManifestBuilderBucket, authorizedDepositorBadge *ResourceOrNonFungible) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_try_deposit_batch_or_refund(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeManifestBuilderBucketINSTANCE.Lower(buckets), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountTryDepositEntireWorktopOrAbort(accountAddress *Address, authorizedDepositorBadge *ResourceOrNonFungible) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_try_deposit_entire_worktop_or_abort(
+		_pointer,FfiConverterAddressINSTANCE.Lower(accountAddress), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountTryDepositEntireWorktopOrRefund(accountAddress *Address, authorizedDepositorBadge *ResourceOrNonFungible) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_try_deposit_entire_worktop_or_refund(
+		_pointer,FfiConverterAddressINSTANCE.Lower(accountAddress), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountTryDepositOrAbort(address *Address, bucket ManifestBuilderBucket, authorizedDepositorBadge *ResourceOrNonFungible) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_try_deposit_or_abort(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountTryDepositOrRefund(address *Address, bucket ManifestBuilderBucket, authorizedDepositorBadge *ResourceOrNonFungible) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_try_deposit_or_refund(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountWithdraw(address *Address, resourceAddress *Address, amount *Decimal) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_withdraw(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AccountWithdrawNonFungibles(address *Address, resourceAddress *Address, ids []NonFungibleLocalId) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_withdraw_non_fungibles(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AllocateGlobalAddress(packageAddress *Address, blueprintName string, intoAddressReservation ManifestBuilderAddressReservation, intoNamedAddress ManifestBuilderNamedAddress) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_allocate_global_address(
+		_pointer,FfiConverterAddressINSTANCE.Lower(packageAddress), FfiConverterStringINSTANCE.Lower(blueprintName), FfiConverterTypeManifestBuilderAddressReservationINSTANCE.Lower(intoAddressReservation), FfiConverterTypeManifestBuilderNamedAddressINSTANCE.Lower(intoNamedAddress), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AssertWorktopContains(resourceAddress *Address, amount *Decimal) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_assert_worktop_contains(
+		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AssertWorktopContainsAny(resourceAddress *Address) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_assert_worktop_contains_any(
+		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)AssertWorktopContainsNonFungibles(resourceAddress *Address, ids []NonFungibleLocalId) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_assert_worktop_contains_non_fungibles(
+		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)Build(networkId uint8) *TransactionManifestV2 {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterTransactionManifestV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_build(
+		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	}))
 }
 
 
+func (_self *ManifestV2Builder)BurnResource(bucket ManifestBuilderBucket) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_burn_resource(
+		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
 
-func (object *MessageValidationConfig)Destroy() {
+
+func (_self *ManifestV2Builder)CallAccessRulesMethod(address ManifestBuilderAddress, methodName string, args []ManifestBuilderValue) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_call_access_rules_method(
+		_pointer,FfiConverterTypeManifestBuilderAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(methodName), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)CallDirectVaultMethod(address *Address, methodName string, args []ManifestBuilderValue) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_call_direct_vault_method(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(methodName), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)CallFunction(address ManifestBuilderAddress, blueprintName string, functionName string, args []ManifestBuilderValue) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_call_function(
+		_pointer,FfiConverterTypeManifestBuilderAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(blueprintName), FfiConverterStringINSTANCE.Lower(functionName), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)CallMetadataMethod(address ManifestBuilderAddress, methodName string, args []ManifestBuilderValue) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_call_metadata_method(
+		_pointer,FfiConverterTypeManifestBuilderAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(methodName), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)CallMethod(address ManifestBuilderAddress, methodName string, args []ManifestBuilderValue) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_call_method(
+		_pointer,FfiConverterTypeManifestBuilderAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(methodName), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)CallRoyaltyMethod(address ManifestBuilderAddress, methodName string, args []ManifestBuilderValue) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_call_royalty_method(
+		_pointer,FfiConverterTypeManifestBuilderAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(methodName), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)CloneProof(proof ManifestBuilderProof, intoProof ManifestBuilderProof) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_clone_proof(
+		_pointer,FfiConverterTypeManifestBuilderProofINSTANCE.Lower(proof), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)CreateFungibleResourceManager(ownerRole OwnerRole, trackTotalSupply bool, divisibility uint8, initialSupply **Decimal, resourceRoles FungibleResourceRoles, metadata MetadataModuleConfig, addressReservation *ManifestBuilderAddressReservation) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_create_fungible_resource_manager(
+		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), FfiConverterBoolINSTANCE.Lower(trackTotalSupply), FfiConverterUint8INSTANCE.Lower(divisibility), FfiConverterOptionalDecimalINSTANCE.Lower(initialSupply), FfiConverterTypeFungibleResourceRolesINSTANCE.Lower(resourceRoles), FfiConverterTypeMetadataModuleConfigINSTANCE.Lower(metadata), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)CreateProofFromAuthZoneOfAll(resourceAddress *Address, intoProof ManifestBuilderProof) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_create_proof_from_auth_zone_of_all(
+		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)CreateProofFromAuthZoneOfAmount(resourceAddress *Address, amount *Decimal, intoProof ManifestBuilderProof) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_create_proof_from_auth_zone_of_amount(
+		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)CreateProofFromAuthZoneOfNonFungibles(resourceAddress *Address, ids []NonFungibleLocalId, intoProof ManifestBuilderProof) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_create_proof_from_auth_zone_of_non_fungibles(
+		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)CreateProofFromBucketOfAll(bucket ManifestBuilderBucket, intoProof ManifestBuilderProof) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_create_proof_from_bucket_of_all(
+		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)CreateProofFromBucketOfAmount(amount *Decimal, bucket ManifestBuilderBucket, intoProof ManifestBuilderProof) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_create_proof_from_bucket_of_amount(
+		_pointer,FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)CreateProofFromBucketOfNonFungibles(ids []NonFungibleLocalId, bucket ManifestBuilderBucket, intoProof ManifestBuilderProof) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_create_proof_from_bucket_of_non_fungibles(
+		_pointer,FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)DropAllProofs() (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_drop_all_proofs(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)DropAuthZoneProofs() (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_drop_auth_zone_proofs(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)DropAuthZoneSignatureProofs() (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_drop_auth_zone_signature_proofs(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)DropProof(proof ManifestBuilderProof) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_drop_proof(
+		_pointer,FfiConverterTypeManifestBuilderProofINSTANCE.Lower(proof), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)FaucetFreeXrd() (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_faucet_free_xrd(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)FaucetLockFee() (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_faucet_lock_fee(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)IdentityCreate() (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_identity_create(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)IdentityCreateAdvanced(ownerRole OwnerRole) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_identity_create_advanced(
+		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)IdentitySecurify(address *Address) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_identity_securify(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)MetadataGet(address *Address, key string) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_metadata_get(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(key), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)MetadataLock(address *Address, key string) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_metadata_lock(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(key), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)MetadataRemove(address *Address, key string) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_metadata_remove(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(key), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)MetadataSet(address *Address, key string, value MetadataValue) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_metadata_set(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(key), FfiConverterTypeMetadataValueINSTANCE.Lower(value), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)MintFungible(resourceAddress *Address, amount *Decimal) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_mint_fungible(
+		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)MultiResourcePoolContribute(address *Address, buckets []ManifestBuilderBucket) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_multi_resource_pool_contribute(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeManifestBuilderBucketINSTANCE.Lower(buckets), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)MultiResourcePoolGetRedemptionValue(address *Address, amountOfPoolUnits *Decimal) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_multi_resource_pool_get_redemption_value(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterDecimalINSTANCE.Lower(amountOfPoolUnits), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)MultiResourcePoolGetVaultAmount(address *Address) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_multi_resource_pool_get_vault_amount(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)MultiResourcePoolInstantiate(ownerRole OwnerRole, poolManagerRule *AccessRule, resourceAddresses []*Address, addressReservation *ManifestBuilderAddressReservation) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_multi_resource_pool_instantiate(
+		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), FfiConverterAccessRuleINSTANCE.Lower(poolManagerRule), FfiConverterSequenceAddressINSTANCE.Lower(resourceAddresses), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)MultiResourcePoolProtectedDeposit(address *Address, bucket ManifestBuilderBucket) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_multi_resource_pool_protected_deposit(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)MultiResourcePoolProtectedWithdraw(address *Address, resourceAddress *Address, amount *Decimal, withdrawStrategy WithdrawStrategy) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_multi_resource_pool_protected_withdraw(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeWithdrawStrategyINSTANCE.Lower(withdrawStrategy), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)MultiResourcePoolRedeem(address *Address, bucket ManifestBuilderBucket) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_multi_resource_pool_redeem(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)OneResourcePoolContribute(address *Address, bucket ManifestBuilderBucket) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_one_resource_pool_contribute(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)OneResourcePoolGetRedemptionValue(address *Address, amountOfPoolUnits *Decimal) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_one_resource_pool_get_redemption_value(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterDecimalINSTANCE.Lower(amountOfPoolUnits), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)OneResourcePoolGetVaultAmount(address *Address) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_one_resource_pool_get_vault_amount(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)OneResourcePoolInstantiate(ownerRole OwnerRole, poolManagerRule *AccessRule, resourceAddress *Address, addressReservation *ManifestBuilderAddressReservation) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_one_resource_pool_instantiate(
+		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), FfiConverterAccessRuleINSTANCE.Lower(poolManagerRule), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)OneResourcePoolProtectedDeposit(address *Address, bucket ManifestBuilderBucket) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_one_resource_pool_protected_deposit(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)OneResourcePoolProtectedWithdraw(address *Address, amount *Decimal, withdrawStrategy WithdrawStrategy) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_one_resource_pool_protected_withdraw(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeWithdrawStrategyINSTANCE.Lower(withdrawStrategy), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)OneResourcePoolRedeem(address *Address, bucket ManifestBuilderBucket) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_one_resource_pool_redeem(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)PackageClaimRoyalty(address *Address) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_package_claim_royalty(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)PackagePublish(code []byte, definition []byte, metadata map[string]MetadataInitEntry) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_package_publish(
+		_pointer,FfiConverterBytesINSTANCE.Lower(code), FfiConverterBytesINSTANCE.Lower(definition), FfiConverterMapStringTypeMetadataInitEntryINSTANCE.Lower(metadata), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)PackagePublishAdvanced(ownerRole OwnerRole, code []byte, definition []byte, metadata map[string]MetadataInitEntry, packageAddress *ManifestBuilderAddressReservation) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_package_publish_advanced(
+		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), FfiConverterBytesINSTANCE.Lower(code), FfiConverterBytesINSTANCE.Lower(definition), FfiConverterMapStringTypeMetadataInitEntryINSTANCE.Lower(metadata), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(packageAddress), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)PopFromAuthZone(intoProof ManifestBuilderProof) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_pop_from_auth_zone(
+		_pointer,FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)PushToAuthZone(proof ManifestBuilderProof) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_push_to_auth_zone(
+		_pointer,FfiConverterTypeManifestBuilderProofINSTANCE.Lower(proof), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)RegisterSubintent(subintent *IntentCoreV2, name ManifestBuilderIntent) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_register_subintent(
+		_pointer,FfiConverterIntentCoreV2INSTANCE.Lower(subintent), FfiConverterTypeManifestBuilderIntentINSTANCE.Lower(name), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)ReturnToWorktop(bucket ManifestBuilderBucket) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_return_to_worktop(
+		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)RoleAssignmentGet(address *Address, module ModuleId, roleKey string) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_role_assignment_get(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeModuleIdINSTANCE.Lower(module), FfiConverterStringINSTANCE.Lower(roleKey), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)RoleAssignmentLockOwner(address *Address) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_role_assignment_lock_owner(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)RoleAssignmentSet(address *Address, module ModuleId, roleKey string, rule *AccessRule) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_role_assignment_set(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeModuleIdINSTANCE.Lower(module), FfiConverterStringINSTANCE.Lower(roleKey), FfiConverterAccessRuleINSTANCE.Lower(rule), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)RoleAssignmentSetOwner(address *Address, rule *AccessRule) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_role_assignment_set_owner(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAccessRuleINSTANCE.Lower(rule), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)RoyaltyClaim(address *Address) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_royalty_claim(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)RoyaltyLock(address *Address, method string) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_royalty_lock(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(method), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)RoyaltySet(address *Address, method string, amount RoyaltyAmount) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_royalty_set(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(method), FfiConverterTypeRoyaltyAmountINSTANCE.Lower(amount), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)TakeAllFromWorktop(resourceAddress *Address, intoBucket ManifestBuilderBucket) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_take_all_from_worktop(
+		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(intoBucket), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)TakeFromWorktop(resourceAddress *Address, amount *Decimal, intoBucket ManifestBuilderBucket) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_take_from_worktop(
+		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(intoBucket), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)TakeNonFungiblesFromWorktop(resourceAddress *Address, ids []NonFungibleLocalId, intoBucket ManifestBuilderBucket) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_take_non_fungibles_from_worktop(
+		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(intoBucket), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)TwoResourcePoolContribute(address *Address, buckets []ManifestBuilderBucket) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_two_resource_pool_contribute(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeManifestBuilderBucketINSTANCE.Lower(buckets), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)TwoResourcePoolGetRedemptionValue(address *Address, amountOfPoolUnits *Decimal) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_two_resource_pool_get_redemption_value(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterDecimalINSTANCE.Lower(amountOfPoolUnits), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)TwoResourcePoolGetVaultAmount(address *Address) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_two_resource_pool_get_vault_amount(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)TwoResourcePoolInstantiate(ownerRole OwnerRole, poolManagerRule *AccessRule, resourceAddresses []*Address, addressReservation *ManifestBuilderAddressReservation) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_two_resource_pool_instantiate(
+		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), FfiConverterAccessRuleINSTANCE.Lower(poolManagerRule), FfiConverterSequenceAddressINSTANCE.Lower(resourceAddresses), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)TwoResourcePoolProtectedDeposit(address *Address, bucket ManifestBuilderBucket) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_two_resource_pool_protected_deposit(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)TwoResourcePoolProtectedWithdraw(address *Address, resourceAddress *Address, amount *Decimal, withdrawStrategy WithdrawStrategy) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_two_resource_pool_protected_withdraw(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeWithdrawStrategyINSTANCE.Lower(withdrawStrategy), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)TwoResourcePoolRedeem(address *Address, bucket ManifestBuilderBucket) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_two_resource_pool_redeem(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)ValidatorAcceptsDelegatedStake(address *Address) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_validator_accepts_delegated_stake(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)ValidatorClaimXrd(address *Address, bucket ManifestBuilderBucket) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_validator_claim_xrd(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)ValidatorFinishUnlockOwnerStakeUnits(address *Address) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_validator_finish_unlock_owner_stake_units(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)ValidatorGetProtocolUpdateReadiness(address *Address) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_validator_get_protocol_update_readiness(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)ValidatorGetRedemptionValue(address *Address, amountOfStakeUnits *Decimal) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_validator_get_redemption_value(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterDecimalINSTANCE.Lower(amountOfStakeUnits), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)ValidatorLockOwnerStakeUnits(address *Address, stakeUnitBucket ManifestBuilderBucket) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_validator_lock_owner_stake_units(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(stakeUnitBucket), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)ValidatorRegister(address *Address) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_validator_register(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)ValidatorSignalProtocolUpdateReadiness(address *Address, vote string) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_validator_signal_protocol_update_readiness(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(vote), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)ValidatorStake(address *Address, stake ManifestBuilderBucket) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_validator_stake(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(stake), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)ValidatorStakeAsOwner(address *Address, stake ManifestBuilderBucket) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_validator_stake_as_owner(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(stake), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)ValidatorStartUnlockOwnerStakeUnits(address *Address, requestedStakeUnitAmount *Decimal) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_validator_start_unlock_owner_stake_units(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterDecimalINSTANCE.Lower(requestedStakeUnitAmount), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)ValidatorTotalStakeUnitSupply(address *Address) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_validator_total_stake_unit_supply(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)ValidatorTotalStakeXrdAmount(address *Address) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_validator_total_stake_xrd_amount(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)ValidatorUnregister(address *Address) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_validator_unregister(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)ValidatorUnstake(address *Address, stakeUnitBucket ManifestBuilderBucket) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_validator_unstake(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(stakeUnitBucket), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)ValidatorUpdateAcceptDelegatedStake(address *Address, acceptDelegatedStake bool) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_validator_update_accept_delegated_stake(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterBoolINSTANCE.Lower(acceptDelegatedStake), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)ValidatorUpdateFee(address *Address, newFeeFactor *Decimal) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_validator_update_fee(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterDecimalINSTANCE.Lower(newFeeFactor), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)ValidatorUpdateKey(address *Address, key PublicKey) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_validator_update_key(
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypePublicKeyINSTANCE.Lower(key), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)VerifyParent(accessRule *AccessRule) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_verify_parent(
+		_pointer,FfiConverterAccessRuleINSTANCE.Lower(accessRule), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)YieldToChild(name ManifestBuilderIntent, args []ManifestBuilderValue) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_yield_to_child(
+		_pointer,FfiConverterTypeManifestBuilderIntentINSTANCE.Lower(name), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)YieldToParent(args []ManifestBuilderValue) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_yield_to_parent(
+		_pointer,FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+
+func (object *ManifestV2Builder)Destroy() {
 	runtime.SetFinalizer(object, nil)
 	object.ffiObject.destroy()
 }
 
-type FfiConverterMessageValidationConfig struct {}
+type FfiConverterManifestV2Builder struct {}
 
-var FfiConverterMessageValidationConfigINSTANCE = FfiConverterMessageValidationConfig{}
+var FfiConverterManifestV2BuilderINSTANCE = FfiConverterManifestV2Builder{}
 
-func (c FfiConverterMessageValidationConfig) Lift(pointer unsafe.Pointer) *MessageValidationConfig {
-	result := &MessageValidationConfig {
+func (c FfiConverterManifestV2Builder) Lift(pointer unsafe.Pointer) *ManifestV2Builder {
+	result := &ManifestV2Builder {
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_radix_engine_toolkit_uniffi_fn_free_messagevalidationconfig(pointer, status)
+				C.uniffi_radix_engine_toolkit_uniffi_fn_free_manifestv2builder(pointer, status)
 		}),
 	}
-	runtime.SetFinalizer(result, (*MessageValidationConfig).Destroy)
+	runtime.SetFinalizer(result, (*ManifestV2Builder).Destroy)
 	return result
 }
 
-func (c FfiConverterMessageValidationConfig) Read(reader io.Reader) *MessageValidationConfig {
+func (c FfiConverterManifestV2Builder) Read(reader io.Reader) *ManifestV2Builder {
 	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
 }
 
-func (c FfiConverterMessageValidationConfig) Lower(value *MessageValidationConfig) unsafe.Pointer {
+func (c FfiConverterManifestV2Builder) Lower(value *ManifestV2Builder) unsafe.Pointer {
 	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
 	// because the pointer will be decremented immediately after this function returns,
 	// and someone will be left holding onto a non-locked pointer.
-	pointer := value.ffiObject.incrementPointer("*MessageValidationConfig")
+	pointer := value.ffiObject.incrementPointer("*ManifestV2Builder")
 	defer value.ffiObject.decrementPointer()
 	return pointer
 }
 
-func (c FfiConverterMessageValidationConfig) Write(writer io.Writer, value *MessageValidationConfig) {
+func (c FfiConverterManifestV2Builder) Write(writer io.Writer, value *ManifestV2Builder) {
 	writeUint64(writer, uint64(uintptr(c.Lower(value))))
 }
 
-type FfiDestroyerMessageValidationConfig struct {}
+type FfiDestroyerManifestV2Builder struct {}
 
-func (_ FfiDestroyerMessageValidationConfig) Destroy(value *MessageValidationConfig) {
+func (_ FfiDestroyerManifestV2Builder) Destroy(value *ManifestV2Builder) {
 	value.Destroy()
 }
 
@@ -7932,35 +12564,131 @@ func (_ FfiDestroyerNonFungibleGlobalId) Destroy(value *NonFungibleGlobalId) {
 }
 
 
-type NotarizedTransaction struct {
+type NotarizedTransactionV1 struct {
 	ffiObject FfiObject
 }
-func NewNotarizedTransaction(signedIntent *SignedIntent, notarySignature Signature) *NotarizedTransaction {
-	return FfiConverterNotarizedTransactionINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_notarizedtransaction_new(FfiConverterSignedIntentINSTANCE.Lower(signedIntent), FfiConverterTypeSignatureINSTANCE.Lower(notarySignature), _uniffiStatus)
+func NewNotarizedTransactionV1(signedIntent *SignedTransactionIntentV1, notarySignature SignatureV1) *NotarizedTransactionV1 {
+	return FfiConverterNotarizedTransactionV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_notarizedtransactionv1_new(FfiConverterSignedTransactionIntentV1INSTANCE.Lower(signedIntent), FfiConverterTypeSignatureV1INSTANCE.Lower(notarySignature), _uniffiStatus)
 	}))
 }
 
 
-func NotarizedTransactionDecompile(compiledNotarizedTransaction []byte) (*NotarizedTransaction, error) {
+func NotarizedTransactionV1FromPayloadBytes(compiledNotarizedTransaction []byte) (*NotarizedTransactionV1, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_notarizedtransaction_decompile(FfiConverterBytesINSTANCE.Lower(compiledNotarizedTransaction), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_notarizedtransactionv1_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiledNotarizedTransaction), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *NotarizedTransaction
+			var _uniffiDefaultValue *NotarizedTransactionV1
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterNotarizedTransactionINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterNotarizedTransactionV1INSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
 
-func (_self *NotarizedTransaction)Compile() ([]byte, error) {
-	_pointer := _self.ffiObject.incrementPointer("*NotarizedTransaction")
+func (_self *NotarizedTransactionV1)Hash() (*TransactionHash, error) {
+	_pointer := _self.ffiObject.incrementPointer("*NotarizedTransactionV1")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv1_hash(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *TransactionHash
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *NotarizedTransactionV1)IntentHash() (*TransactionHash, error) {
+	_pointer := _self.ffiObject.incrementPointer("*NotarizedTransactionV1")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv1_intent_hash(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *TransactionHash
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *NotarizedTransactionV1)NotarizedTransactionHash() (*TransactionHash, error) {
+	_pointer := _self.ffiObject.incrementPointer("*NotarizedTransactionV1")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv1_notarized_transaction_hash(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *TransactionHash
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *NotarizedTransactionV1)NotarySignature() SignatureV1 {
+	_pointer := _self.ffiObject.incrementPointer("*NotarizedTransactionV1")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterTypeSignatureV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv1_notary_signature(
+		_pointer, _uniffiStatus)
+	}))
+}
+
+
+func (_self *NotarizedTransactionV1)SignedIntent() *SignedTransactionIntentV1 {
+	_pointer := _self.ffiObject.incrementPointer("*NotarizedTransactionV1")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterSignedTransactionIntentV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv1_signed_intent(
+		_pointer, _uniffiStatus)
+	}))
+}
+
+
+func (_self *NotarizedTransactionV1)SignedIntentHash() (*TransactionHash, error) {
+	_pointer := _self.ffiObject.incrementPointer("*NotarizedTransactionV1")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv1_signed_intent_hash(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *TransactionHash
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *NotarizedTransactionV1)StaticallyValidate(networkId uint8) error {
+	_pointer := _self.ffiObject.incrementPointer("*NotarizedTransactionV1")
+	defer _self.ffiObject.decrementPointer()
+	_, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) bool {
+		C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv1_statically_validate(
+		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return false
+	})
+		return _uniffiErr
+}
+
+
+func (_self *NotarizedTransactionV1)ToPayloadBytes() ([]byte, error) {
+	_pointer := _self.ffiObject.incrementPointer("*NotarizedTransactionV1")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransaction_compile(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv1_to_payload_bytes(
 		_pointer, _uniffiStatus)
 	})
 		if _uniffiErr != nil {
@@ -7972,144 +12700,218 @@ func (_self *NotarizedTransaction)Compile() ([]byte, error) {
 }
 
 
-func (_self *NotarizedTransaction)Hash() (*TransactionHash, error) {
-	_pointer := _self.ffiObject.incrementPointer("*NotarizedTransaction")
-	defer _self.ffiObject.decrementPointer()
-	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransaction_hash(
-		_pointer, _uniffiStatus)
-	})
-		if _uniffiErr != nil {
-			var _uniffiDefaultValue *TransactionHash
-			return _uniffiDefaultValue, _uniffiErr
-		} else {
-			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
-		}
-}
 
-
-func (_self *NotarizedTransaction)IntentHash() (*TransactionHash, error) {
-	_pointer := _self.ffiObject.incrementPointer("*NotarizedTransaction")
-	defer _self.ffiObject.decrementPointer()
-	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransaction_intent_hash(
-		_pointer, _uniffiStatus)
-	})
-		if _uniffiErr != nil {
-			var _uniffiDefaultValue *TransactionHash
-			return _uniffiDefaultValue, _uniffiErr
-		} else {
-			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
-		}
-}
-
-
-func (_self *NotarizedTransaction)NotarizedTransactionHash() (*TransactionHash, error) {
-	_pointer := _self.ffiObject.incrementPointer("*NotarizedTransaction")
-	defer _self.ffiObject.decrementPointer()
-	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransaction_notarized_transaction_hash(
-		_pointer, _uniffiStatus)
-	})
-		if _uniffiErr != nil {
-			var _uniffiDefaultValue *TransactionHash
-			return _uniffiDefaultValue, _uniffiErr
-		} else {
-			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
-		}
-}
-
-
-func (_self *NotarizedTransaction)NotarySignature() Signature {
-	_pointer := _self.ffiObject.incrementPointer("*NotarizedTransaction")
-	defer _self.ffiObject.decrementPointer()
-	return FfiConverterTypeSignatureINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransaction_notary_signature(
-		_pointer, _uniffiStatus)
-	}))
-}
-
-
-func (_self *NotarizedTransaction)SignedIntent() *SignedIntent {
-	_pointer := _self.ffiObject.incrementPointer("*NotarizedTransaction")
-	defer _self.ffiObject.decrementPointer()
-	return FfiConverterSignedIntentINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransaction_signed_intent(
-		_pointer, _uniffiStatus)
-	}))
-}
-
-
-func (_self *NotarizedTransaction)SignedIntentHash() (*TransactionHash, error) {
-	_pointer := _self.ffiObject.incrementPointer("*NotarizedTransaction")
-	defer _self.ffiObject.decrementPointer()
-	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransaction_signed_intent_hash(
-		_pointer, _uniffiStatus)
-	})
-		if _uniffiErr != nil {
-			var _uniffiDefaultValue *TransactionHash
-			return _uniffiDefaultValue, _uniffiErr
-		} else {
-			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
-		}
-}
-
-
-func (_self *NotarizedTransaction)StaticallyValidate(validationConfig *ValidationConfig) error {
-	_pointer := _self.ffiObject.incrementPointer("*NotarizedTransaction")
-	defer _self.ffiObject.decrementPointer()
-	_, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransaction_statically_validate(
-		_pointer,FfiConverterValidationConfigINSTANCE.Lower(validationConfig), _uniffiStatus)
-		return false
-	})
-		return _uniffiErr
-}
-
-
-
-func (object *NotarizedTransaction)Destroy() {
+func (object *NotarizedTransactionV1)Destroy() {
 	runtime.SetFinalizer(object, nil)
 	object.ffiObject.destroy()
 }
 
-type FfiConverterNotarizedTransaction struct {}
+type FfiConverterNotarizedTransactionV1 struct {}
 
-var FfiConverterNotarizedTransactionINSTANCE = FfiConverterNotarizedTransaction{}
+var FfiConverterNotarizedTransactionV1INSTANCE = FfiConverterNotarizedTransactionV1{}
 
-func (c FfiConverterNotarizedTransaction) Lift(pointer unsafe.Pointer) *NotarizedTransaction {
-	result := &NotarizedTransaction {
+func (c FfiConverterNotarizedTransactionV1) Lift(pointer unsafe.Pointer) *NotarizedTransactionV1 {
+	result := &NotarizedTransactionV1 {
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_radix_engine_toolkit_uniffi_fn_free_notarizedtransaction(pointer, status)
+				C.uniffi_radix_engine_toolkit_uniffi_fn_free_notarizedtransactionv1(pointer, status)
 		}),
 	}
-	runtime.SetFinalizer(result, (*NotarizedTransaction).Destroy)
+	runtime.SetFinalizer(result, (*NotarizedTransactionV1).Destroy)
 	return result
 }
 
-func (c FfiConverterNotarizedTransaction) Read(reader io.Reader) *NotarizedTransaction {
+func (c FfiConverterNotarizedTransactionV1) Read(reader io.Reader) *NotarizedTransactionV1 {
 	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
 }
 
-func (c FfiConverterNotarizedTransaction) Lower(value *NotarizedTransaction) unsafe.Pointer {
+func (c FfiConverterNotarizedTransactionV1) Lower(value *NotarizedTransactionV1) unsafe.Pointer {
 	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
 	// because the pointer will be decremented immediately after this function returns,
 	// and someone will be left holding onto a non-locked pointer.
-	pointer := value.ffiObject.incrementPointer("*NotarizedTransaction")
+	pointer := value.ffiObject.incrementPointer("*NotarizedTransactionV1")
 	defer value.ffiObject.decrementPointer()
 	return pointer
 }
 
-func (c FfiConverterNotarizedTransaction) Write(writer io.Writer, value *NotarizedTransaction) {
+func (c FfiConverterNotarizedTransactionV1) Write(writer io.Writer, value *NotarizedTransactionV1) {
 	writeUint64(writer, uint64(uintptr(c.Lower(value))))
 }
 
-type FfiDestroyerNotarizedTransaction struct {}
+type FfiDestroyerNotarizedTransactionV1 struct {}
 
-func (_ FfiDestroyerNotarizedTransaction) Destroy(value *NotarizedTransaction) {
+func (_ FfiDestroyerNotarizedTransactionV1) Destroy(value *NotarizedTransactionV1) {
+	value.Destroy()
+}
+
+
+type NotarizedTransactionV2 struct {
+	ffiObject FfiObject
+}
+func NewNotarizedTransactionV2(signedTransactionIntent *SignedTransactionIntentV2, notarySignature SignatureV1) *NotarizedTransactionV2 {
+	return FfiConverterNotarizedTransactionV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_notarizedtransactionv2_new(FfiConverterSignedTransactionIntentV2INSTANCE.Lower(signedTransactionIntent), FfiConverterTypeSignatureV1INSTANCE.Lower(notarySignature), _uniffiStatus)
+	}))
+}
+
+
+func NotarizedTransactionV2FromPayloadBytes(compiledNotarizedTransaction []byte) (*NotarizedTransactionV2, error) {
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_notarizedtransactionv2_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiledNotarizedTransaction), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *NotarizedTransactionV2
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterNotarizedTransactionV2INSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+
+func (_self *NotarizedTransactionV2)Hash() (*TransactionHash, error) {
+	_pointer := _self.ffiObject.incrementPointer("*NotarizedTransactionV2")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv2_hash(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *TransactionHash
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *NotarizedTransactionV2)IntentHash() (*TransactionHash, error) {
+	_pointer := _self.ffiObject.incrementPointer("*NotarizedTransactionV2")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv2_intent_hash(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *TransactionHash
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *NotarizedTransactionV2)NotarizedTransactionHash() (*TransactionHash, error) {
+	_pointer := _self.ffiObject.incrementPointer("*NotarizedTransactionV2")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv2_notarized_transaction_hash(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *TransactionHash
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *NotarizedTransactionV2)NotarySignature() SignatureV1 {
+	_pointer := _self.ffiObject.incrementPointer("*NotarizedTransactionV2")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterTypeSignatureV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv2_notary_signature(
+		_pointer, _uniffiStatus)
+	}))
+}
+
+
+func (_self *NotarizedTransactionV2)SignedTransactionIntent() *SignedTransactionIntentV2 {
+	_pointer := _self.ffiObject.incrementPointer("*NotarizedTransactionV2")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterSignedTransactionIntentV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv2_signed_transaction_intent(
+		_pointer, _uniffiStatus)
+	}))
+}
+
+
+func (_self *NotarizedTransactionV2)SignedTransactionIntentHash() (*TransactionHash, error) {
+	_pointer := _self.ffiObject.incrementPointer("*NotarizedTransactionV2")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv2_signed_transaction_intent_hash(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *TransactionHash
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *NotarizedTransactionV2)ToPayloadBytes() ([]byte, error) {
+	_pointer := _self.ffiObject.incrementPointer("*NotarizedTransactionV2")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv2_to_payload_bytes(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue []byte
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterBytesINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+
+func (object *NotarizedTransactionV2)Destroy() {
+	runtime.SetFinalizer(object, nil)
+	object.ffiObject.destroy()
+}
+
+type FfiConverterNotarizedTransactionV2 struct {}
+
+var FfiConverterNotarizedTransactionV2INSTANCE = FfiConverterNotarizedTransactionV2{}
+
+func (c FfiConverterNotarizedTransactionV2) Lift(pointer unsafe.Pointer) *NotarizedTransactionV2 {
+	result := &NotarizedTransactionV2 {
+		newFfiObject(
+			pointer,
+			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
+				C.uniffi_radix_engine_toolkit_uniffi_fn_free_notarizedtransactionv2(pointer, status)
+		}),
+	}
+	runtime.SetFinalizer(result, (*NotarizedTransactionV2).Destroy)
+	return result
+}
+
+func (c FfiConverterNotarizedTransactionV2) Read(reader io.Reader) *NotarizedTransactionV2 {
+	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
+}
+
+func (c FfiConverterNotarizedTransactionV2) Lower(value *NotarizedTransactionV2) unsafe.Pointer {
+	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
+	// because the pointer will be decremented immediately after this function returns,
+	// and someone will be left holding onto a non-locked pointer.
+	pointer := value.ffiObject.incrementPointer("*NotarizedTransactionV2")
+	defer value.ffiObject.decrementPointer()
+	return pointer
+}
+
+func (c FfiConverterNotarizedTransactionV2) Write(writer io.Writer, value *NotarizedTransactionV2) {
+	writeUint64(writer, uint64(uintptr(c.Lower(value))))
+}
+
+type FfiDestroyerNotarizedTransactionV2 struct {}
+
+func (_ FfiDestroyerNotarizedTransactionV2) Destroy(value *NotarizedTransactionV2) {
 	value.Destroy()
 }
 
@@ -8194,6 +12996,144 @@ func (c FfiConverterOlympiaAddress) Write(writer io.Writer, value *OlympiaAddres
 type FfiDestroyerOlympiaAddress struct {}
 
 func (_ FfiDestroyerOlympiaAddress) Destroy(value *OlympiaAddress) {
+	value.Destroy()
+}
+
+
+type PartialTransactionV2 struct {
+	ffiObject FfiObject
+}
+func NewPartialTransactionV2(rootSubintent *IntentCoreV2, nonRootSubintents []*IntentCoreV2) *PartialTransactionV2 {
+	return FfiConverterPartialTransactionV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_partialtransactionv2_new(FfiConverterIntentCoreV2INSTANCE.Lower(rootSubintent), FfiConverterSequenceIntentCoreV2INSTANCE.Lower(nonRootSubintents), _uniffiStatus)
+	}))
+}
+
+
+func PartialTransactionV2FromPayloadBytes(compiledIntent []byte) (*PartialTransactionV2, error) {
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_partialtransactionv2_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiledIntent), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *PartialTransactionV2
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterPartialTransactionV2INSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+
+func (_self *PartialTransactionV2)Hash() (*TransactionHash, error) {
+	_pointer := _self.ffiObject.incrementPointer("*PartialTransactionV2")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_partialtransactionv2_hash(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *TransactionHash
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *PartialTransactionV2)IntentHash() (*TransactionHash, error) {
+	_pointer := _self.ffiObject.incrementPointer("*PartialTransactionV2")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_partialtransactionv2_intent_hash(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *TransactionHash
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *PartialTransactionV2)NonRootSubintents() []*IntentCoreV2 {
+	_pointer := _self.ffiObject.incrementPointer("*PartialTransactionV2")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterSequenceIntentCoreV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_partialtransactionv2_non_root_subintents(
+		_pointer, _uniffiStatus)
+	}))
+}
+
+
+func (_self *PartialTransactionV2)RootSubintent() *IntentCoreV2 {
+	_pointer := _self.ffiObject.incrementPointer("*PartialTransactionV2")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterIntentCoreV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_partialtransactionv2_root_subintent(
+		_pointer, _uniffiStatus)
+	}))
+}
+
+
+func (_self *PartialTransactionV2)ToPayloadBytes() ([]byte, error) {
+	_pointer := _self.ffiObject.incrementPointer("*PartialTransactionV2")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_partialtransactionv2_to_payload_bytes(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue []byte
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterBytesINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+
+func (object *PartialTransactionV2)Destroy() {
+	runtime.SetFinalizer(object, nil)
+	object.ffiObject.destroy()
+}
+
+type FfiConverterPartialTransactionV2 struct {}
+
+var FfiConverterPartialTransactionV2INSTANCE = FfiConverterPartialTransactionV2{}
+
+func (c FfiConverterPartialTransactionV2) Lift(pointer unsafe.Pointer) *PartialTransactionV2 {
+	result := &PartialTransactionV2 {
+		newFfiObject(
+			pointer,
+			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
+				C.uniffi_radix_engine_toolkit_uniffi_fn_free_partialtransactionv2(pointer, status)
+		}),
+	}
+	runtime.SetFinalizer(result, (*PartialTransactionV2).Destroy)
+	return result
+}
+
+func (c FfiConverterPartialTransactionV2) Read(reader io.Reader) *PartialTransactionV2 {
+	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
+}
+
+func (c FfiConverterPartialTransactionV2) Lower(value *PartialTransactionV2) unsafe.Pointer {
+	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
+	// because the pointer will be decremented immediately after this function returns,
+	// and someone will be left holding onto a non-locked pointer.
+	pointer := value.ffiObject.incrementPointer("*PartialTransactionV2")
+	defer value.ffiObject.decrementPointer()
+	return pointer
+}
+
+func (c FfiConverterPartialTransactionV2) Write(writer io.Writer, value *PartialTransactionV2) {
+	writeUint64(writer, uint64(uintptr(c.Lower(value))))
+}
+
+type FfiDestroyerPartialTransactionV2 struct {}
+
+func (_ FfiDestroyerPartialTransactionV2) Destroy(value *PartialTransactionV2) {
 	value.Destroy()
 }
 
@@ -8694,20 +13634,20 @@ func (_self *PrivateKey)Sign(hash *Hash) []byte {
 }
 
 
-func (_self *PrivateKey)SignToSignature(hash *Hash) Signature {
+func (_self *PrivateKey)SignToSignature(hash *Hash) SignatureV1 {
 	_pointer := _self.ffiObject.incrementPointer("*PrivateKey")
 	defer _self.ffiObject.decrementPointer()
-	return FfiConverterTypeSignatureINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+	return FfiConverterTypeSignatureV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_privatekey_sign_to_signature(
 		_pointer,FfiConverterHashINSTANCE.Lower(hash), _uniffiStatus)
 	}))
 }
 
 
-func (_self *PrivateKey)SignToSignatureWithPublicKey(hash *Hash) SignatureWithPublicKey {
+func (_self *PrivateKey)SignToSignatureWithPublicKey(hash *Hash) SignatureWithPublicKeyV1 {
 	_pointer := _self.ffiObject.incrementPointer("*PrivateKey")
 	defer _self.ffiObject.decrementPointer()
-	return FfiConverterTypeSignatureWithPublicKeyINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+	return FfiConverterTypeSignatureWithPublicKeyV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_privatekey_sign_to_signature_with_public_key(
 		_pointer,FfiConverterHashINSTANCE.Lower(hash), _uniffiStatus)
 	}))
@@ -8760,35 +13700,97 @@ func (_ FfiDestroyerPrivateKey) Destroy(value *PrivateKey) {
 }
 
 
-type SignedIntent struct {
+type SignedPartialTransactionV2 struct {
 	ffiObject FfiObject
 }
-func NewSignedIntent(intent *Intent, intentSignatures []SignatureWithPublicKey) *SignedIntent {
-	return FfiConverterSignedIntentINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_signedintent_new(FfiConverterIntentINSTANCE.Lower(intent), FfiConverterSequenceTypeSignatureWithPublicKeyINSTANCE.Lower(intentSignatures), _uniffiStatus)
+func NewSignedPartialTransactionV2(partialTransaction *PartialTransactionV2, rootSubintentSignatures []SignatureWithPublicKeyV1, nonRootSubintentSignatures [][]SignatureWithPublicKeyV1) *SignedPartialTransactionV2 {
+	return FfiConverterSignedPartialTransactionV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_signedpartialtransactionv2_new(FfiConverterPartialTransactionV2INSTANCE.Lower(partialTransaction), FfiConverterSequenceTypeSignatureWithPublicKeyV1INSTANCE.Lower(rootSubintentSignatures), FfiConverterSequenceSequenceTypeSignatureWithPublicKeyV1INSTANCE.Lower(nonRootSubintentSignatures), _uniffiStatus)
 	}))
 }
 
 
-func SignedIntentDecompile(compiledSignedIntent []byte) (*SignedIntent, error) {
+func SignedPartialTransactionV2FromPayloadBytes(compiledIntent []byte) (*SignedPartialTransactionV2, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_signedintent_decompile(FfiConverterBytesINSTANCE.Lower(compiledSignedIntent), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_signedpartialtransactionv2_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiledIntent), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *SignedIntent
+			var _uniffiDefaultValue *SignedPartialTransactionV2
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterSignedIntentINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterSignedPartialTransactionV2INSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
 
-func (_self *SignedIntent)Compile() ([]byte, error) {
-	_pointer := _self.ffiObject.incrementPointer("*SignedIntent")
+func (_self *SignedPartialTransactionV2)Hash() (*TransactionHash, error) {
+	_pointer := _self.ffiObject.incrementPointer("*SignedPartialTransactionV2")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedpartialtransactionv2_hash(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *TransactionHash
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *SignedPartialTransactionV2)IntentHash() (*TransactionHash, error) {
+	_pointer := _self.ffiObject.incrementPointer("*SignedPartialTransactionV2")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedpartialtransactionv2_intent_hash(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *TransactionHash
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *SignedPartialTransactionV2)NonRootSubintentSignatures() [][]SignatureWithPublicKeyV1 {
+	_pointer := _self.ffiObject.incrementPointer("*SignedPartialTransactionV2")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterSequenceSequenceTypeSignatureWithPublicKeyV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedpartialtransactionv2_non_root_subintent_signatures(
+		_pointer, _uniffiStatus)
+	}))
+}
+
+
+func (_self *SignedPartialTransactionV2)PartialTransaction() *PartialTransactionV2 {
+	_pointer := _self.ffiObject.incrementPointer("*SignedPartialTransactionV2")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterPartialTransactionV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedpartialtransactionv2_partial_transaction(
+		_pointer, _uniffiStatus)
+	}))
+}
+
+
+func (_self *SignedPartialTransactionV2)RootSubintentSignatures() []SignatureWithPublicKeyV1 {
+	_pointer := _self.ffiObject.incrementPointer("*SignedPartialTransactionV2")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterSequenceTypeSignatureWithPublicKeyV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedpartialtransactionv2_root_subintent_signatures(
+		_pointer, _uniffiStatus)
+	}))
+}
+
+
+func (_self *SignedPartialTransactionV2)ToPayloadBytes() ([]byte, error) {
+	_pointer := _self.ffiObject.incrementPointer("*SignedPartialTransactionV2")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedintent_compile(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedpartialtransactionv2_to_payload_bytes(
 		_pointer, _uniffiStatus)
 	})
 		if _uniffiErr != nil {
@@ -8800,37 +13802,278 @@ func (_self *SignedIntent)Compile() ([]byte, error) {
 }
 
 
-func (_self *SignedIntent)Hash() (*TransactionHash, error) {
-	_pointer := _self.ffiObject.incrementPointer("*SignedIntent")
+
+func (object *SignedPartialTransactionV2)Destroy() {
+	runtime.SetFinalizer(object, nil)
+	object.ffiObject.destroy()
+}
+
+type FfiConverterSignedPartialTransactionV2 struct {}
+
+var FfiConverterSignedPartialTransactionV2INSTANCE = FfiConverterSignedPartialTransactionV2{}
+
+func (c FfiConverterSignedPartialTransactionV2) Lift(pointer unsafe.Pointer) *SignedPartialTransactionV2 {
+	result := &SignedPartialTransactionV2 {
+		newFfiObject(
+			pointer,
+			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
+				C.uniffi_radix_engine_toolkit_uniffi_fn_free_signedpartialtransactionv2(pointer, status)
+		}),
+	}
+	runtime.SetFinalizer(result, (*SignedPartialTransactionV2).Destroy)
+	return result
+}
+
+func (c FfiConverterSignedPartialTransactionV2) Read(reader io.Reader) *SignedPartialTransactionV2 {
+	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
+}
+
+func (c FfiConverterSignedPartialTransactionV2) Lower(value *SignedPartialTransactionV2) unsafe.Pointer {
+	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
+	// because the pointer will be decremented immediately after this function returns,
+	// and someone will be left holding onto a non-locked pointer.
+	pointer := value.ffiObject.incrementPointer("*SignedPartialTransactionV2")
+	defer value.ffiObject.decrementPointer()
+	return pointer
+}
+
+func (c FfiConverterSignedPartialTransactionV2) Write(writer io.Writer, value *SignedPartialTransactionV2) {
+	writeUint64(writer, uint64(uintptr(c.Lower(value))))
+}
+
+type FfiDestroyerSignedPartialTransactionV2 struct {}
+
+func (_ FfiDestroyerSignedPartialTransactionV2) Destroy(value *SignedPartialTransactionV2) {
+	value.Destroy()
+}
+
+
+type SignedPartialTransactionV2Builder struct {
+	ffiObject FfiObject
+}
+func NewSignedPartialTransactionV2Builder() *SignedPartialTransactionV2Builder {
+	return FfiConverterSignedPartialTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_signedpartialtransactionv2builder_new( _uniffiStatus)
+	}))
+}
+
+
+
+
+func (_self *SignedPartialTransactionV2Builder)AddChild(child *SignedPartialTransactionV2) *SignedPartialTransactionV2Builder {
+	_pointer := _self.ffiObject.incrementPointer("*SignedPartialTransactionV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterSignedPartialTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedpartialtransactionv2builder_add_child(
+		_pointer,FfiConverterSignedPartialTransactionV2INSTANCE.Lower(child), _uniffiStatus)
+	}))
+}
+
+
+func (_self *SignedPartialTransactionV2Builder)IntentHeader(intentHeader IntentHeaderV2) *SignedPartialTransactionV2Builder {
+	_pointer := _self.ffiObject.incrementPointer("*SignedPartialTransactionV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterSignedPartialTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedpartialtransactionv2builder_intent_header(
+		_pointer,FfiConverterTypeIntentHeaderV2INSTANCE.Lower(intentHeader), _uniffiStatus)
+	}))
+}
+
+
+func (_self *SignedPartialTransactionV2Builder)Manifest(manifest *TransactionManifestV2) *SignedPartialTransactionV2Builder {
+	_pointer := _self.ffiObject.incrementPointer("*SignedPartialTransactionV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterSignedPartialTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedpartialtransactionv2builder_manifest(
+		_pointer,FfiConverterTransactionManifestV2INSTANCE.Lower(manifest), _uniffiStatus)
+	}))
+}
+
+
+func (_self *SignedPartialTransactionV2Builder)Message(message MessageV2) *SignedPartialTransactionV2Builder {
+	_pointer := _self.ffiObject.incrementPointer("*SignedPartialTransactionV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterSignedPartialTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedpartialtransactionv2builder_message(
+		_pointer,FfiConverterTypeMessageV2INSTANCE.Lower(message), _uniffiStatus)
+	}))
+}
+
+
+func (_self *SignedPartialTransactionV2Builder)PrepareForSigning() (*SignedPartialTransactionV2BuilderSignatureStep, error) {
+	_pointer := _self.ffiObject.incrementPointer("*SignedPartialTransactionV2Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedintent_hash(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedpartialtransactionv2builder_prepare_for_signing(
 		_pointer, _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *TransactionHash
+			var _uniffiDefaultValue *SignedPartialTransactionV2BuilderSignatureStep
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterSignedPartialTransactionV2BuilderSignatureStepINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *SignedIntent)Intent() *Intent {
-	_pointer := _self.ffiObject.incrementPointer("*SignedIntent")
+
+func (object *SignedPartialTransactionV2Builder)Destroy() {
+	runtime.SetFinalizer(object, nil)
+	object.ffiObject.destroy()
+}
+
+type FfiConverterSignedPartialTransactionV2Builder struct {}
+
+var FfiConverterSignedPartialTransactionV2BuilderINSTANCE = FfiConverterSignedPartialTransactionV2Builder{}
+
+func (c FfiConverterSignedPartialTransactionV2Builder) Lift(pointer unsafe.Pointer) *SignedPartialTransactionV2Builder {
+	result := &SignedPartialTransactionV2Builder {
+		newFfiObject(
+			pointer,
+			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
+				C.uniffi_radix_engine_toolkit_uniffi_fn_free_signedpartialtransactionv2builder(pointer, status)
+		}),
+	}
+	runtime.SetFinalizer(result, (*SignedPartialTransactionV2Builder).Destroy)
+	return result
+}
+
+func (c FfiConverterSignedPartialTransactionV2Builder) Read(reader io.Reader) *SignedPartialTransactionV2Builder {
+	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
+}
+
+func (c FfiConverterSignedPartialTransactionV2Builder) Lower(value *SignedPartialTransactionV2Builder) unsafe.Pointer {
+	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
+	// because the pointer will be decremented immediately after this function returns,
+	// and someone will be left holding onto a non-locked pointer.
+	pointer := value.ffiObject.incrementPointer("*SignedPartialTransactionV2Builder")
+	defer value.ffiObject.decrementPointer()
+	return pointer
+}
+
+func (c FfiConverterSignedPartialTransactionV2Builder) Write(writer io.Writer, value *SignedPartialTransactionV2Builder) {
+	writeUint64(writer, uint64(uintptr(c.Lower(value))))
+}
+
+type FfiDestroyerSignedPartialTransactionV2Builder struct {}
+
+func (_ FfiDestroyerSignedPartialTransactionV2Builder) Destroy(value *SignedPartialTransactionV2Builder) {
+	value.Destroy()
+}
+
+
+type SignedPartialTransactionV2BuilderSignatureStep struct {
+	ffiObject FfiObject
+}
+
+
+
+
+func (_self *SignedPartialTransactionV2BuilderSignatureStep)Build() *SignedPartialTransactionV2 {
+	_pointer := _self.ffiObject.incrementPointer("*SignedPartialTransactionV2BuilderSignatureStep")
 	defer _self.ffiObject.decrementPointer()
-	return FfiConverterIntentINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedintent_intent(
+	return FfiConverterSignedPartialTransactionV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedpartialtransactionv2buildersignaturestep_build(
 		_pointer, _uniffiStatus)
 	}))
 }
 
 
-func (_self *SignedIntent)IntentHash() (*TransactionHash, error) {
-	_pointer := _self.ffiObject.incrementPointer("*SignedIntent")
+func (_self *SignedPartialTransactionV2BuilderSignatureStep)SignWithPrivateKey(privateKey *PrivateKey) *SignedPartialTransactionV2BuilderSignatureStep {
+	_pointer := _self.ffiObject.incrementPointer("*SignedPartialTransactionV2BuilderSignatureStep")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterSignedPartialTransactionV2BuilderSignatureStepINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedpartialtransactionv2buildersignaturestep_sign_with_private_key(
+		_pointer,FfiConverterPrivateKeyINSTANCE.Lower(privateKey), _uniffiStatus)
+	}))
+}
+
+
+func (_self *SignedPartialTransactionV2BuilderSignatureStep)SignWithSigner(signer Signer) *SignedPartialTransactionV2BuilderSignatureStep {
+	_pointer := _self.ffiObject.incrementPointer("*SignedPartialTransactionV2BuilderSignatureStep")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterSignedPartialTransactionV2BuilderSignatureStepINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedpartialtransactionv2buildersignaturestep_sign_with_signer(
+		_pointer,FfiConverterCallbackInterfaceSignerINSTANCE.Lower(signer), _uniffiStatus)
+	}))
+}
+
+
+
+func (object *SignedPartialTransactionV2BuilderSignatureStep)Destroy() {
+	runtime.SetFinalizer(object, nil)
+	object.ffiObject.destroy()
+}
+
+type FfiConverterSignedPartialTransactionV2BuilderSignatureStep struct {}
+
+var FfiConverterSignedPartialTransactionV2BuilderSignatureStepINSTANCE = FfiConverterSignedPartialTransactionV2BuilderSignatureStep{}
+
+func (c FfiConverterSignedPartialTransactionV2BuilderSignatureStep) Lift(pointer unsafe.Pointer) *SignedPartialTransactionV2BuilderSignatureStep {
+	result := &SignedPartialTransactionV2BuilderSignatureStep {
+		newFfiObject(
+			pointer,
+			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
+				C.uniffi_radix_engine_toolkit_uniffi_fn_free_signedpartialtransactionv2buildersignaturestep(pointer, status)
+		}),
+	}
+	runtime.SetFinalizer(result, (*SignedPartialTransactionV2BuilderSignatureStep).Destroy)
+	return result
+}
+
+func (c FfiConverterSignedPartialTransactionV2BuilderSignatureStep) Read(reader io.Reader) *SignedPartialTransactionV2BuilderSignatureStep {
+	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
+}
+
+func (c FfiConverterSignedPartialTransactionV2BuilderSignatureStep) Lower(value *SignedPartialTransactionV2BuilderSignatureStep) unsafe.Pointer {
+	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
+	// because the pointer will be decremented immediately after this function returns,
+	// and someone will be left holding onto a non-locked pointer.
+	pointer := value.ffiObject.incrementPointer("*SignedPartialTransactionV2BuilderSignatureStep")
+	defer value.ffiObject.decrementPointer()
+	return pointer
+}
+
+func (c FfiConverterSignedPartialTransactionV2BuilderSignatureStep) Write(writer io.Writer, value *SignedPartialTransactionV2BuilderSignatureStep) {
+	writeUint64(writer, uint64(uintptr(c.Lower(value))))
+}
+
+type FfiDestroyerSignedPartialTransactionV2BuilderSignatureStep struct {}
+
+func (_ FfiDestroyerSignedPartialTransactionV2BuilderSignatureStep) Destroy(value *SignedPartialTransactionV2BuilderSignatureStep) {
+	value.Destroy()
+}
+
+
+type SignedTransactionIntentV1 struct {
+	ffiObject FfiObject
+}
+func NewSignedTransactionIntentV1(intent *IntentV1, intentSignatures []SignatureWithPublicKeyV1) *SignedTransactionIntentV1 {
+	return FfiConverterSignedTransactionIntentV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_signedtransactionintentv1_new(FfiConverterIntentV1INSTANCE.Lower(intent), FfiConverterSequenceTypeSignatureWithPublicKeyV1INSTANCE.Lower(intentSignatures), _uniffiStatus)
+	}))
+}
+
+
+func SignedTransactionIntentV1FromPayloadBytes(compiledSignedIntent []byte) (*SignedTransactionIntentV1, error) {
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_signedtransactionintentv1_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiledSignedIntent), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *SignedTransactionIntentV1
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterSignedTransactionIntentV1INSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+
+func (_self *SignedTransactionIntentV1)Hash() (*TransactionHash, error) {
+	_pointer := _self.ffiObject.incrementPointer("*SignedTransactionIntentV1")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedintent_intent_hash(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedtransactionintentv1_hash(
 		_pointer, _uniffiStatus)
 	})
 		if _uniffiErr != nil {
@@ -8842,21 +14085,21 @@ func (_self *SignedIntent)IntentHash() (*TransactionHash, error) {
 }
 
 
-func (_self *SignedIntent)IntentSignatures() []SignatureWithPublicKey {
-	_pointer := _self.ffiObject.incrementPointer("*SignedIntent")
+func (_self *SignedTransactionIntentV1)Intent() *IntentV1 {
+	_pointer := _self.ffiObject.incrementPointer("*SignedTransactionIntentV1")
 	defer _self.ffiObject.decrementPointer()
-	return FfiConverterSequenceTypeSignatureWithPublicKeyINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedintent_intent_signatures(
+	return FfiConverterIntentV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedtransactionintentv1_intent(
 		_pointer, _uniffiStatus)
 	}))
 }
 
 
-func (_self *SignedIntent)SignedIntentHash() (*TransactionHash, error) {
-	_pointer := _self.ffiObject.incrementPointer("*SignedIntent")
+func (_self *SignedTransactionIntentV1)IntentHash() (*TransactionHash, error) {
+	_pointer := _self.ffiObject.incrementPointer("*SignedTransactionIntentV1")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedintent_signed_intent_hash(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedtransactionintentv1_intent_hash(
 		_pointer, _uniffiStatus)
 	})
 		if _uniffiErr != nil {
@@ -8868,384 +14111,256 @@ func (_self *SignedIntent)SignedIntentHash() (*TransactionHash, error) {
 }
 
 
-func (_self *SignedIntent)StaticallyValidate(validationConfig *ValidationConfig) error {
-	_pointer := _self.ffiObject.incrementPointer("*SignedIntent")
+func (_self *SignedTransactionIntentV1)IntentSignatures() []SignatureWithPublicKeyV1 {
+	_pointer := _self.ffiObject.incrementPointer("*SignedTransactionIntentV1")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterSequenceTypeSignatureWithPublicKeyV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedtransactionintentv1_intent_signatures(
+		_pointer, _uniffiStatus)
+	}))
+}
+
+
+func (_self *SignedTransactionIntentV1)SignedIntentHash() (*TransactionHash, error) {
+	_pointer := _self.ffiObject.incrementPointer("*SignedTransactionIntentV1")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedtransactionintentv1_signed_intent_hash(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *TransactionHash
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *SignedTransactionIntentV1)StaticallyValidate(networkId uint8) error {
+	_pointer := _self.ffiObject.incrementPointer("*SignedTransactionIntentV1")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedintent_statically_validate(
-		_pointer,FfiConverterValidationConfigINSTANCE.Lower(validationConfig), _uniffiStatus)
+		C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedtransactionintentv1_statically_validate(
+		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 		return false
 	})
 		return _uniffiErr
 }
 
 
-
-func (object *SignedIntent)Destroy() {
-	runtime.SetFinalizer(object, nil)
-	object.ffiObject.destroy()
-}
-
-type FfiConverterSignedIntent struct {}
-
-var FfiConverterSignedIntentINSTANCE = FfiConverterSignedIntent{}
-
-func (c FfiConverterSignedIntent) Lift(pointer unsafe.Pointer) *SignedIntent {
-	result := &SignedIntent {
-		newFfiObject(
-			pointer,
-			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_radix_engine_toolkit_uniffi_fn_free_signedintent(pointer, status)
-		}),
-	}
-	runtime.SetFinalizer(result, (*SignedIntent).Destroy)
-	return result
-}
-
-func (c FfiConverterSignedIntent) Read(reader io.Reader) *SignedIntent {
-	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
-}
-
-func (c FfiConverterSignedIntent) Lower(value *SignedIntent) unsafe.Pointer {
-	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
-	// because the pointer will be decremented immediately after this function returns,
-	// and someone will be left holding onto a non-locked pointer.
-	pointer := value.ffiObject.incrementPointer("*SignedIntent")
-	defer value.ffiObject.decrementPointer()
-	return pointer
-}
-
-func (c FfiConverterSignedIntent) Write(writer io.Writer, value *SignedIntent) {
-	writeUint64(writer, uint64(uintptr(c.Lower(value))))
-}
-
-type FfiDestroyerSignedIntent struct {}
-
-func (_ FfiDestroyerSignedIntent) Destroy(value *SignedIntent) {
-	value.Destroy()
-}
-
-
-type TransactionBuilder struct {
-	ffiObject FfiObject
-}
-func NewTransactionBuilder() *TransactionBuilder {
-	return FfiConverterTransactionBuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_transactionbuilder_new( _uniffiStatus)
-	}))
-}
-
-
-
-
-func (_self *TransactionBuilder)Header(header TransactionHeader) *TransactionBuilderHeaderStep {
-	_pointer := _self.ffiObject.incrementPointer("*TransactionBuilder")
+func (_self *SignedTransactionIntentV1)ToPayloadBytes() ([]byte, error) {
+	_pointer := _self.ffiObject.incrementPointer("*SignedTransactionIntentV1")
 	defer _self.ffiObject.decrementPointer()
-	return FfiConverterTransactionBuilderHeaderStepINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionbuilder_header(
-		_pointer,FfiConverterTypeTransactionHeaderINSTANCE.Lower(header), _uniffiStatus)
-	}))
-}
-
-
-
-func (object *TransactionBuilder)Destroy() {
-	runtime.SetFinalizer(object, nil)
-	object.ffiObject.destroy()
-}
-
-type FfiConverterTransactionBuilder struct {}
-
-var FfiConverterTransactionBuilderINSTANCE = FfiConverterTransactionBuilder{}
-
-func (c FfiConverterTransactionBuilder) Lift(pointer unsafe.Pointer) *TransactionBuilder {
-	result := &TransactionBuilder {
-		newFfiObject(
-			pointer,
-			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_radix_engine_toolkit_uniffi_fn_free_transactionbuilder(pointer, status)
-		}),
-	}
-	runtime.SetFinalizer(result, (*TransactionBuilder).Destroy)
-	return result
-}
-
-func (c FfiConverterTransactionBuilder) Read(reader io.Reader) *TransactionBuilder {
-	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
-}
-
-func (c FfiConverterTransactionBuilder) Lower(value *TransactionBuilder) unsafe.Pointer {
-	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
-	// because the pointer will be decremented immediately after this function returns,
-	// and someone will be left holding onto a non-locked pointer.
-	pointer := value.ffiObject.incrementPointer("*TransactionBuilder")
-	defer value.ffiObject.decrementPointer()
-	return pointer
-}
-
-func (c FfiConverterTransactionBuilder) Write(writer io.Writer, value *TransactionBuilder) {
-	writeUint64(writer, uint64(uintptr(c.Lower(value))))
-}
-
-type FfiDestroyerTransactionBuilder struct {}
-
-func (_ FfiDestroyerTransactionBuilder) Destroy(value *TransactionBuilder) {
-	value.Destroy()
-}
-
-
-type TransactionBuilderHeaderStep struct {
-	ffiObject FfiObject
-}
-
-
-
-
-func (_self *TransactionBuilderHeaderStep)Manifest(manifest *TransactionManifest) *TransactionBuilderMessageStep {
-	_pointer := _self.ffiObject.incrementPointer("*TransactionBuilderHeaderStep")
-	defer _self.ffiObject.decrementPointer()
-	return FfiConverterTransactionBuilderMessageStepINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionbuilderheaderstep_manifest(
-		_pointer,FfiConverterTransactionManifestINSTANCE.Lower(manifest), _uniffiStatus)
-	}))
-}
-
-
-
-func (object *TransactionBuilderHeaderStep)Destroy() {
-	runtime.SetFinalizer(object, nil)
-	object.ffiObject.destroy()
-}
-
-type FfiConverterTransactionBuilderHeaderStep struct {}
-
-var FfiConverterTransactionBuilderHeaderStepINSTANCE = FfiConverterTransactionBuilderHeaderStep{}
-
-func (c FfiConverterTransactionBuilderHeaderStep) Lift(pointer unsafe.Pointer) *TransactionBuilderHeaderStep {
-	result := &TransactionBuilderHeaderStep {
-		newFfiObject(
-			pointer,
-			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_radix_engine_toolkit_uniffi_fn_free_transactionbuilderheaderstep(pointer, status)
-		}),
-	}
-	runtime.SetFinalizer(result, (*TransactionBuilderHeaderStep).Destroy)
-	return result
-}
-
-func (c FfiConverterTransactionBuilderHeaderStep) Read(reader io.Reader) *TransactionBuilderHeaderStep {
-	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
-}
-
-func (c FfiConverterTransactionBuilderHeaderStep) Lower(value *TransactionBuilderHeaderStep) unsafe.Pointer {
-	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
-	// because the pointer will be decremented immediately after this function returns,
-	// and someone will be left holding onto a non-locked pointer.
-	pointer := value.ffiObject.incrementPointer("*TransactionBuilderHeaderStep")
-	defer value.ffiObject.decrementPointer()
-	return pointer
-}
-
-func (c FfiConverterTransactionBuilderHeaderStep) Write(writer io.Writer, value *TransactionBuilderHeaderStep) {
-	writeUint64(writer, uint64(uintptr(c.Lower(value))))
-}
-
-type FfiDestroyerTransactionBuilderHeaderStep struct {}
-
-func (_ FfiDestroyerTransactionBuilderHeaderStep) Destroy(value *TransactionBuilderHeaderStep) {
-	value.Destroy()
-}
-
-
-type TransactionBuilderIntentSignaturesStep struct {
-	ffiObject FfiObject
-}
-func NewTransactionBuilderIntentSignaturesStep(messageStep *TransactionBuilderMessageStep) *TransactionBuilderIntentSignaturesStep {
-	return FfiConverterTransactionBuilderIntentSignaturesStepINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_transactionbuilderintentsignaturesstep_new(FfiConverterTransactionBuilderMessageStepINSTANCE.Lower(messageStep), _uniffiStatus)
-	}))
-}
-
-
-
-
-func (_self *TransactionBuilderIntentSignaturesStep)NotarizeWithPrivateKey(privateKey *PrivateKey) (*NotarizedTransaction, error) {
-	_pointer := _self.ffiObject.incrementPointer("*TransactionBuilderIntentSignaturesStep")
-	defer _self.ffiObject.decrementPointer()
-	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionbuilderintentsignaturesstep_notarize_with_private_key(
-		_pointer,FfiConverterPrivateKeyINSTANCE.Lower(privateKey), _uniffiStatus)
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedtransactionintentv1_to_payload_bytes(
+		_pointer, _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *NotarizedTransaction
+			var _uniffiDefaultValue []byte
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterNotarizedTransactionINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterBytesINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *TransactionBuilderIntentSignaturesStep)NotarizeWithSigner(signer Signer) (*NotarizedTransaction, error) {
-	_pointer := _self.ffiObject.incrementPointer("*TransactionBuilderIntentSignaturesStep")
-	defer _self.ffiObject.decrementPointer()
-	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionbuilderintentsignaturesstep_notarize_with_signer(
-		_pointer,FfiConverterCallbackInterfaceSignerINSTANCE.Lower(signer), _uniffiStatus)
-	})
-		if _uniffiErr != nil {
-			var _uniffiDefaultValue *NotarizedTransaction
-			return _uniffiDefaultValue, _uniffiErr
-		} else {
-			return FfiConverterNotarizedTransactionINSTANCE.Lift(_uniffiRV), _uniffiErr
-		}
-}
 
-
-func (_self *TransactionBuilderIntentSignaturesStep)SignWithPrivateKey(privateKey *PrivateKey) *TransactionBuilderIntentSignaturesStep {
-	_pointer := _self.ffiObject.incrementPointer("*TransactionBuilderIntentSignaturesStep")
-	defer _self.ffiObject.decrementPointer()
-	return FfiConverterTransactionBuilderIntentSignaturesStepINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionbuilderintentsignaturesstep_sign_with_private_key(
-		_pointer,FfiConverterPrivateKeyINSTANCE.Lower(privateKey), _uniffiStatus)
-	}))
-}
-
-
-func (_self *TransactionBuilderIntentSignaturesStep)SignWithSigner(signer Signer) *TransactionBuilderIntentSignaturesStep {
-	_pointer := _self.ffiObject.incrementPointer("*TransactionBuilderIntentSignaturesStep")
-	defer _self.ffiObject.decrementPointer()
-	return FfiConverterTransactionBuilderIntentSignaturesStepINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionbuilderintentsignaturesstep_sign_with_signer(
-		_pointer,FfiConverterCallbackInterfaceSignerINSTANCE.Lower(signer), _uniffiStatus)
-	}))
-}
-
-
-
-func (object *TransactionBuilderIntentSignaturesStep)Destroy() {
+func (object *SignedTransactionIntentV1)Destroy() {
 	runtime.SetFinalizer(object, nil)
 	object.ffiObject.destroy()
 }
 
-type FfiConverterTransactionBuilderIntentSignaturesStep struct {}
+type FfiConverterSignedTransactionIntentV1 struct {}
 
-var FfiConverterTransactionBuilderIntentSignaturesStepINSTANCE = FfiConverterTransactionBuilderIntentSignaturesStep{}
+var FfiConverterSignedTransactionIntentV1INSTANCE = FfiConverterSignedTransactionIntentV1{}
 
-func (c FfiConverterTransactionBuilderIntentSignaturesStep) Lift(pointer unsafe.Pointer) *TransactionBuilderIntentSignaturesStep {
-	result := &TransactionBuilderIntentSignaturesStep {
+func (c FfiConverterSignedTransactionIntentV1) Lift(pointer unsafe.Pointer) *SignedTransactionIntentV1 {
+	result := &SignedTransactionIntentV1 {
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_radix_engine_toolkit_uniffi_fn_free_transactionbuilderintentsignaturesstep(pointer, status)
+				C.uniffi_radix_engine_toolkit_uniffi_fn_free_signedtransactionintentv1(pointer, status)
 		}),
 	}
-	runtime.SetFinalizer(result, (*TransactionBuilderIntentSignaturesStep).Destroy)
+	runtime.SetFinalizer(result, (*SignedTransactionIntentV1).Destroy)
 	return result
 }
 
-func (c FfiConverterTransactionBuilderIntentSignaturesStep) Read(reader io.Reader) *TransactionBuilderIntentSignaturesStep {
+func (c FfiConverterSignedTransactionIntentV1) Read(reader io.Reader) *SignedTransactionIntentV1 {
 	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
 }
 
-func (c FfiConverterTransactionBuilderIntentSignaturesStep) Lower(value *TransactionBuilderIntentSignaturesStep) unsafe.Pointer {
+func (c FfiConverterSignedTransactionIntentV1) Lower(value *SignedTransactionIntentV1) unsafe.Pointer {
 	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
 	// because the pointer will be decremented immediately after this function returns,
 	// and someone will be left holding onto a non-locked pointer.
-	pointer := value.ffiObject.incrementPointer("*TransactionBuilderIntentSignaturesStep")
+	pointer := value.ffiObject.incrementPointer("*SignedTransactionIntentV1")
 	defer value.ffiObject.decrementPointer()
 	return pointer
 }
 
-func (c FfiConverterTransactionBuilderIntentSignaturesStep) Write(writer io.Writer, value *TransactionBuilderIntentSignaturesStep) {
+func (c FfiConverterSignedTransactionIntentV1) Write(writer io.Writer, value *SignedTransactionIntentV1) {
 	writeUint64(writer, uint64(uintptr(c.Lower(value))))
 }
 
-type FfiDestroyerTransactionBuilderIntentSignaturesStep struct {}
+type FfiDestroyerSignedTransactionIntentV1 struct {}
 
-func (_ FfiDestroyerTransactionBuilderIntentSignaturesStep) Destroy(value *TransactionBuilderIntentSignaturesStep) {
+func (_ FfiDestroyerSignedTransactionIntentV1) Destroy(value *SignedTransactionIntentV1) {
 	value.Destroy()
 }
 
 
-type TransactionBuilderMessageStep struct {
+type SignedTransactionIntentV2 struct {
 	ffiObject FfiObject
 }
-
-
-
-
-func (_self *TransactionBuilderMessageStep)Message(message Message) *TransactionBuilderIntentSignaturesStep {
-	_pointer := _self.ffiObject.incrementPointer("*TransactionBuilderMessageStep")
-	defer _self.ffiObject.decrementPointer()
-	return FfiConverterTransactionBuilderIntentSignaturesStepINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionbuildermessagestep_message(
-		_pointer,FfiConverterTypeMessageINSTANCE.Lower(message), _uniffiStatus)
+func NewSignedTransactionIntentV2(transactionIntent *TransactionIntentV2, transactionIntentSignatures []SignatureWithPublicKeyV1, nonRootSubintentSignatures [][]SignatureWithPublicKeyV1) *SignedTransactionIntentV2 {
+	return FfiConverterSignedTransactionIntentV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_signedtransactionintentv2_new(FfiConverterTransactionIntentV2INSTANCE.Lower(transactionIntent), FfiConverterSequenceTypeSignatureWithPublicKeyV1INSTANCE.Lower(transactionIntentSignatures), FfiConverterSequenceSequenceTypeSignatureWithPublicKeyV1INSTANCE.Lower(nonRootSubintentSignatures), _uniffiStatus)
 	}))
 }
 
 
-func (_self *TransactionBuilderMessageStep)SignWithPrivateKey(privateKey *PrivateKey) *TransactionBuilderIntentSignaturesStep {
-	_pointer := _self.ffiObject.incrementPointer("*TransactionBuilderMessageStep")
-	defer _self.ffiObject.decrementPointer()
-	return FfiConverterTransactionBuilderIntentSignaturesStepINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionbuildermessagestep_sign_with_private_key(
-		_pointer,FfiConverterPrivateKeyINSTANCE.Lower(privateKey), _uniffiStatus)
-	}))
-}
-
-
-func (_self *TransactionBuilderMessageStep)SignWithSigner(signer Signer) *TransactionBuilderIntentSignaturesStep {
-	_pointer := _self.ffiObject.incrementPointer("*TransactionBuilderMessageStep")
-	defer _self.ffiObject.decrementPointer()
-	return FfiConverterTransactionBuilderIntentSignaturesStepINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionbuildermessagestep_sign_with_signer(
-		_pointer,FfiConverterCallbackInterfaceSignerINSTANCE.Lower(signer), _uniffiStatus)
-	}))
+func SignedTransactionIntentV2FromPayloadBytes(compiledSignedIntent []byte) (*SignedTransactionIntentV2, error) {
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_signedtransactionintentv2_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiledSignedIntent), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *SignedTransactionIntentV2
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterSignedTransactionIntentV2INSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
 }
 
 
 
-func (object *TransactionBuilderMessageStep)Destroy() {
+func (_self *SignedTransactionIntentV2)Hash() (*TransactionHash, error) {
+	_pointer := _self.ffiObject.incrementPointer("*SignedTransactionIntentV2")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedtransactionintentv2_hash(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *TransactionHash
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *SignedTransactionIntentV2)IntentHash() (*TransactionHash, error) {
+	_pointer := _self.ffiObject.incrementPointer("*SignedTransactionIntentV2")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedtransactionintentv2_intent_hash(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *TransactionHash
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *SignedTransactionIntentV2)SignedIntentHash() (*TransactionHash, error) {
+	_pointer := _self.ffiObject.incrementPointer("*SignedTransactionIntentV2")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedtransactionintentv2_signed_intent_hash(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *TransactionHash
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *SignedTransactionIntentV2)ToPayloadBytes() ([]byte, error) {
+	_pointer := _self.ffiObject.incrementPointer("*SignedTransactionIntentV2")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedtransactionintentv2_to_payload_bytes(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue []byte
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterBytesINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *SignedTransactionIntentV2)TransactionIntent() *TransactionIntentV2 {
+	_pointer := _self.ffiObject.incrementPointer("*SignedTransactionIntentV2")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterTransactionIntentV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedtransactionintentv2_transaction_intent(
+		_pointer, _uniffiStatus)
+	}))
+}
+
+
+func (_self *SignedTransactionIntentV2)TransactionIntentSignatures() []SignatureWithPublicKeyV1 {
+	_pointer := _self.ffiObject.incrementPointer("*SignedTransactionIntentV2")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterSequenceTypeSignatureWithPublicKeyV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedtransactionintentv2_transaction_intent_signatures(
+		_pointer, _uniffiStatus)
+	}))
+}
+
+
+
+func (object *SignedTransactionIntentV2)Destroy() {
 	runtime.SetFinalizer(object, nil)
 	object.ffiObject.destroy()
 }
 
-type FfiConverterTransactionBuilderMessageStep struct {}
+type FfiConverterSignedTransactionIntentV2 struct {}
 
-var FfiConverterTransactionBuilderMessageStepINSTANCE = FfiConverterTransactionBuilderMessageStep{}
+var FfiConverterSignedTransactionIntentV2INSTANCE = FfiConverterSignedTransactionIntentV2{}
 
-func (c FfiConverterTransactionBuilderMessageStep) Lift(pointer unsafe.Pointer) *TransactionBuilderMessageStep {
-	result := &TransactionBuilderMessageStep {
+func (c FfiConverterSignedTransactionIntentV2) Lift(pointer unsafe.Pointer) *SignedTransactionIntentV2 {
+	result := &SignedTransactionIntentV2 {
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_radix_engine_toolkit_uniffi_fn_free_transactionbuildermessagestep(pointer, status)
+				C.uniffi_radix_engine_toolkit_uniffi_fn_free_signedtransactionintentv2(pointer, status)
 		}),
 	}
-	runtime.SetFinalizer(result, (*TransactionBuilderMessageStep).Destroy)
+	runtime.SetFinalizer(result, (*SignedTransactionIntentV2).Destroy)
 	return result
 }
 
-func (c FfiConverterTransactionBuilderMessageStep) Read(reader io.Reader) *TransactionBuilderMessageStep {
+func (c FfiConverterSignedTransactionIntentV2) Read(reader io.Reader) *SignedTransactionIntentV2 {
 	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
 }
 
-func (c FfiConverterTransactionBuilderMessageStep) Lower(value *TransactionBuilderMessageStep) unsafe.Pointer {
+func (c FfiConverterSignedTransactionIntentV2) Lower(value *SignedTransactionIntentV2) unsafe.Pointer {
 	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
 	// because the pointer will be decremented immediately after this function returns,
 	// and someone will be left holding onto a non-locked pointer.
-	pointer := value.ffiObject.incrementPointer("*TransactionBuilderMessageStep")
+	pointer := value.ffiObject.incrementPointer("*SignedTransactionIntentV2")
 	defer value.ffiObject.decrementPointer()
 	return pointer
 }
 
-func (c FfiConverterTransactionBuilderMessageStep) Write(writer io.Writer, value *TransactionBuilderMessageStep) {
+func (c FfiConverterSignedTransactionIntentV2) Write(writer io.Writer, value *SignedTransactionIntentV2) {
 	writeUint64(writer, uint64(uintptr(c.Lower(value))))
 }
 
-type FfiDestroyerTransactionBuilderMessageStep struct {}
+type FfiDestroyerSignedTransactionIntentV2 struct {}
 
-func (_ FfiDestroyerTransactionBuilderMessageStep) Destroy(value *TransactionBuilderMessageStep) {
+func (_ FfiDestroyerSignedTransactionIntentV2) Destroy(value *SignedTransactionIntentV2) {
 	value.Destroy()
 }
 
@@ -9355,45 +14470,87 @@ func (_ FfiDestroyerTransactionHash) Destroy(value *TransactionHash) {
 }
 
 
-type TransactionManifest struct {
+type TransactionIntentV2 struct {
 	ffiObject FfiObject
 }
-func NewTransactionManifest(instructions *Instructions, blobs [][]byte) *TransactionManifest {
-	return FfiConverterTransactionManifestINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_transactionmanifest_new(FfiConverterInstructionsINSTANCE.Lower(instructions), FfiConverterSequenceBytesINSTANCE.Lower(blobs), _uniffiStatus)
+func NewTransactionIntentV2(transactionHeader TransactionHeaderV2, rootIntentCore *IntentCoreV2, nonRootSubintents []*IntentCoreV2) *TransactionIntentV2 {
+	return FfiConverterTransactionIntentV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_transactionintentv2_new(FfiConverterTypeTransactionHeaderV2INSTANCE.Lower(transactionHeader), FfiConverterIntentCoreV2INSTANCE.Lower(rootIntentCore), FfiConverterSequenceIntentCoreV2INSTANCE.Lower(nonRootSubintents), _uniffiStatus)
 	}))
 }
 
 
-func TransactionManifestDecompile(compiled []byte, networkId uint8) (*TransactionManifest, error) {
+func TransactionIntentV2FromPayloadBytes(compiledIntent []byte) (*TransactionIntentV2, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_transactionmanifest_decompile(FfiConverterBytesINSTANCE.Lower(compiled), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_transactionintentv2_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiledIntent), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *TransactionManifest
+			var _uniffiDefaultValue *TransactionIntentV2
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterTransactionManifestINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterTransactionIntentV2INSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
 
-func (_self *TransactionManifest)Blobs() [][]byte {
-	_pointer := _self.ffiObject.incrementPointer("*TransactionManifest")
+func (_self *TransactionIntentV2)Hash() (*TransactionHash, error) {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionIntentV2")
 	defer _self.ffiObject.decrementPointer()
-	return FfiConverterSequenceBytesINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifest_blobs(
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionintentv2_hash(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *TransactionHash
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *TransactionIntentV2)IntentHash() (*TransactionHash, error) {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionIntentV2")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionintentv2_intent_hash(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *TransactionHash
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *TransactionIntentV2)NonRootSubintents() []*IntentCoreV2 {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionIntentV2")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterSequenceIntentCoreV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionintentv2_non_root_subintents(
 		_pointer, _uniffiStatus)
 	}))
 }
 
 
-func (_self *TransactionManifest)Compile() ([]byte, error) {
-	_pointer := _self.ffiObject.incrementPointer("*TransactionManifest")
+func (_self *TransactionIntentV2)RootIntentCore() *IntentCoreV2 {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionIntentV2")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterIntentCoreV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionintentv2_root_intent_core(
+		_pointer, _uniffiStatus)
+	}))
+}
+
+
+func (_self *TransactionIntentV2)ToPayloadBytes() ([]byte, error) {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionIntentV2")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifest_compile(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionintentv2_to_payload_bytes(
 		_pointer, _uniffiStatus)
 	})
 		if _uniffiErr != nil {
@@ -9405,246 +14562,867 @@ func (_self *TransactionManifest)Compile() ([]byte, error) {
 }
 
 
-func (_self *TransactionManifest)ExecutionSummary(networkId uint8, encodedReceipt []byte) (ExecutionSummary, error) {
-	_pointer := _self.ffiObject.incrementPointer("*TransactionManifest")
+func (_self *TransactionIntentV2)TransactionHeader() TransactionHeaderV2 {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionIntentV2")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterTypeTransactionHeaderV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionintentv2_transaction_header(
+		_pointer, _uniffiStatus)
+	}))
+}
+
+
+
+func (object *TransactionIntentV2)Destroy() {
+	runtime.SetFinalizer(object, nil)
+	object.ffiObject.destroy()
+}
+
+type FfiConverterTransactionIntentV2 struct {}
+
+var FfiConverterTransactionIntentV2INSTANCE = FfiConverterTransactionIntentV2{}
+
+func (c FfiConverterTransactionIntentV2) Lift(pointer unsafe.Pointer) *TransactionIntentV2 {
+	result := &TransactionIntentV2 {
+		newFfiObject(
+			pointer,
+			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
+				C.uniffi_radix_engine_toolkit_uniffi_fn_free_transactionintentv2(pointer, status)
+		}),
+	}
+	runtime.SetFinalizer(result, (*TransactionIntentV2).Destroy)
+	return result
+}
+
+func (c FfiConverterTransactionIntentV2) Read(reader io.Reader) *TransactionIntentV2 {
+	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
+}
+
+func (c FfiConverterTransactionIntentV2) Lower(value *TransactionIntentV2) unsafe.Pointer {
+	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
+	// because the pointer will be decremented immediately after this function returns,
+	// and someone will be left holding onto a non-locked pointer.
+	pointer := value.ffiObject.incrementPointer("*TransactionIntentV2")
+	defer value.ffiObject.decrementPointer()
+	return pointer
+}
+
+func (c FfiConverterTransactionIntentV2) Write(writer io.Writer, value *TransactionIntentV2) {
+	writeUint64(writer, uint64(uintptr(c.Lower(value))))
+}
+
+type FfiDestroyerTransactionIntentV2 struct {}
+
+func (_ FfiDestroyerTransactionIntentV2) Destroy(value *TransactionIntentV2) {
+	value.Destroy()
+}
+
+
+type TransactionManifestV1 struct {
+	ffiObject FfiObject
+}
+func NewTransactionManifestV1(instructions *InstructionsV1, blobs [][]byte) *TransactionManifestV1 {
+	return FfiConverterTransactionManifestV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_transactionmanifestv1_new(FfiConverterInstructionsV1INSTANCE.Lower(instructions), FfiConverterSequenceBytesINSTANCE.Lower(blobs), _uniffiStatus)
+	}))
+}
+
+
+func TransactionManifestV1FromPayloadBytes(compiled []byte, networkId uint8) (*TransactionManifestV1, error) {
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_transactionmanifestv1_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiled), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *TransactionManifestV1
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterTransactionManifestV1INSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+
+func (_self *TransactionManifestV1)Blobs() [][]byte {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV1")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterSequenceBytesINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_blobs(
+		_pointer, _uniffiStatus)
+	}))
+}
+
+
+func (_self *TransactionManifestV1)DynamicAnalysis(networkId uint8, toolkitReceipt string) (DynamicAnalysis, error) {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV1")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifest_execution_summary(
-		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), FfiConverterBytesINSTANCE.Lower(encodedReceipt), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_dynamic_analysis(
+		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), FfiConverterStringINSTANCE.Lower(toolkitReceipt), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue ExecutionSummary
+			var _uniffiDefaultValue DynamicAnalysis
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterTypeExecutionSummaryINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterTypeDynamicAnalysisINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *TransactionManifest)ExtractAddresses() map[EntityType][]*Address {
-	_pointer := _self.ffiObject.incrementPointer("*TransactionManifest")
+func (_self *TransactionManifestV1)ExtractAddresses() map[EntityType][]*Address {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV1")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterMapTypeEntityTypeSequenceAddressINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifest_extract_addresses(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_extract_addresses(
 		_pointer, _uniffiStatus)
 	}))
 }
 
 
-func (_self *TransactionManifest)Instructions() *Instructions {
-	_pointer := _self.ffiObject.incrementPointer("*TransactionManifest")
+func (_self *TransactionManifestV1)Instructions() *InstructionsV1 {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV1")
 	defer _self.ffiObject.decrementPointer()
-	return FfiConverterInstructionsINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifest_instructions(
+	return FfiConverterInstructionsV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_instructions(
 		_pointer, _uniffiStatus)
 	}))
 }
 
 
-func (_self *TransactionManifest)Modify(modifications TransactionManifestModifications) (*TransactionManifest, error) {
-	_pointer := _self.ffiObject.incrementPointer("*TransactionManifest")
+func (_self *TransactionManifestV1)StaticAnalysis(networkId uint8) (StaticAnalysis, error) {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV1")
 	defer _self.ffiObject.decrementPointer()
-	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifest_modify(
-		_pointer,FfiConverterTypeTransactionManifestModificationsINSTANCE.Lower(modifications), _uniffiStatus)
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_static_analysis(
+		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue *TransactionManifest
+			var _uniffiDefaultValue StaticAnalysis
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterTransactionManifestINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterTypeStaticAnalysisINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
 
-func (_self *TransactionManifest)StaticallyValidate() error {
-	_pointer := _self.ffiObject.incrementPointer("*TransactionManifest")
+func (_self *TransactionManifestV1)StaticallyValidate(networkId uint8) error {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV1")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifest_statically_validate(
-		_pointer, _uniffiStatus)
+		C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_statically_validate(
+		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 		return false
 	})
 		return _uniffiErr
 }
 
 
-func (_self *TransactionManifest)Summary(networkId uint8) ManifestSummary {
-	_pointer := _self.ffiObject.incrementPointer("*TransactionManifest")
+func (_self *TransactionManifestV1)ToPayloadBytes() ([]byte, error) {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV1")
 	defer _self.ffiObject.decrementPointer()
-	return FfiConverterTypeManifestSummaryINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifest_summary(
-		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
-	}))
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_to_payload_bytes(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue []byte
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterBytesINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
 }
 
 
 
-func (object *TransactionManifest)Destroy() {
+func (object *TransactionManifestV1)Destroy() {
 	runtime.SetFinalizer(object, nil)
 	object.ffiObject.destroy()
 }
 
-type FfiConverterTransactionManifest struct {}
+type FfiConverterTransactionManifestV1 struct {}
 
-var FfiConverterTransactionManifestINSTANCE = FfiConverterTransactionManifest{}
+var FfiConverterTransactionManifestV1INSTANCE = FfiConverterTransactionManifestV1{}
 
-func (c FfiConverterTransactionManifest) Lift(pointer unsafe.Pointer) *TransactionManifest {
-	result := &TransactionManifest {
+func (c FfiConverterTransactionManifestV1) Lift(pointer unsafe.Pointer) *TransactionManifestV1 {
+	result := &TransactionManifestV1 {
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_radix_engine_toolkit_uniffi_fn_free_transactionmanifest(pointer, status)
+				C.uniffi_radix_engine_toolkit_uniffi_fn_free_transactionmanifestv1(pointer, status)
 		}),
 	}
-	runtime.SetFinalizer(result, (*TransactionManifest).Destroy)
+	runtime.SetFinalizer(result, (*TransactionManifestV1).Destroy)
 	return result
 }
 
-func (c FfiConverterTransactionManifest) Read(reader io.Reader) *TransactionManifest {
+func (c FfiConverterTransactionManifestV1) Read(reader io.Reader) *TransactionManifestV1 {
 	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
 }
 
-func (c FfiConverterTransactionManifest) Lower(value *TransactionManifest) unsafe.Pointer {
+func (c FfiConverterTransactionManifestV1) Lower(value *TransactionManifestV1) unsafe.Pointer {
 	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
 	// because the pointer will be decremented immediately after this function returns,
 	// and someone will be left holding onto a non-locked pointer.
-	pointer := value.ffiObject.incrementPointer("*TransactionManifest")
+	pointer := value.ffiObject.incrementPointer("*TransactionManifestV1")
 	defer value.ffiObject.decrementPointer()
 	return pointer
 }
 
-func (c FfiConverterTransactionManifest) Write(writer io.Writer, value *TransactionManifest) {
+func (c FfiConverterTransactionManifestV1) Write(writer io.Writer, value *TransactionManifestV1) {
 	writeUint64(writer, uint64(uintptr(c.Lower(value))))
 }
 
-type FfiDestroyerTransactionManifest struct {}
+type FfiDestroyerTransactionManifestV1 struct {}
 
-func (_ FfiDestroyerTransactionManifest) Destroy(value *TransactionManifest) {
+func (_ FfiDestroyerTransactionManifestV1) Destroy(value *TransactionManifestV1) {
 	value.Destroy()
 }
 
 
-type ValidationConfig struct {
+type TransactionManifestV2 struct {
 	ffiObject FfiObject
 }
-func NewValidationConfig(networkId uint8, maxNotarizedPayloadSize uint64, minTipPercentage uint16, maxTipPercentage uint16, maxEpochRange uint64, messageValidation *MessageValidationConfig) *ValidationConfig {
-	return FfiConverterValidationConfigINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_validationconfig_new(FfiConverterUint8INSTANCE.Lower(networkId), FfiConverterUint64INSTANCE.Lower(maxNotarizedPayloadSize), FfiConverterUint16INSTANCE.Lower(minTipPercentage), FfiConverterUint16INSTANCE.Lower(maxTipPercentage), FfiConverterUint64INSTANCE.Lower(maxEpochRange), FfiConverterMessageValidationConfigINSTANCE.Lower(messageValidation), _uniffiStatus)
+func NewTransactionManifestV2(instructions *InstructionsV2, blobs [][]byte, children []*Hash) *TransactionManifestV2 {
+	return FfiConverterTransactionManifestV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_transactionmanifestv2_new(FfiConverterInstructionsV2INSTANCE.Lower(instructions), FfiConverterSequenceBytesINSTANCE.Lower(blobs), FfiConverterSequenceHashINSTANCE.Lower(children), _uniffiStatus)
 	}))
 }
 
 
-func ValidationConfigDefault(networkId uint8) *ValidationConfig {
-	return FfiConverterValidationConfigINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_validationconfig_default(FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
-	}))
+func TransactionManifestV2FromPayloadBytes(compiled []byte, networkId uint8) (*TransactionManifestV2, error) {
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_transactionmanifestv2_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiled), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *TransactionManifestV2
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterTransactionManifestV2INSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
 }
 
 
 
-func (_self *ValidationConfig)MaxEpochRange() uint64 {
-	_pointer := _self.ffiObject.incrementPointer("*ValidationConfig")
+func (_self *TransactionManifestV2)Blobs() [][]byte {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV2")
 	defer _self.ffiObject.decrementPointer()
-	return FfiConverterUint64INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint64_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_validationconfig_max_epoch_range(
+	return FfiConverterSequenceBytesINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_blobs(
 		_pointer, _uniffiStatus)
 	}))
 }
 
 
-func (_self *ValidationConfig)MaxNotarizedPayloadSize() uint64 {
-	_pointer := _self.ffiObject.incrementPointer("*ValidationConfig")
+func (_self *TransactionManifestV2)DynamicAnalysis(networkId uint8, toolkitReceipt string) (DynamicAnalysis, error) {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV2")
 	defer _self.ffiObject.decrementPointer()
-	return FfiConverterUint64INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint64_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_validationconfig_max_notarized_payload_size(
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_dynamic_analysis(
+		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), FfiConverterStringINSTANCE.Lower(toolkitReceipt), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue DynamicAnalysis
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterTypeDynamicAnalysisINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *TransactionManifestV2)ExtractAddresses() map[EntityType][]*Address {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV2")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterMapTypeEntityTypeSequenceAddressINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_extract_addresses(
 		_pointer, _uniffiStatus)
 	}))
 }
 
 
-func (_self *ValidationConfig)MaxTipPercentage() uint16 {
-	_pointer := _self.ffiObject.incrementPointer("*ValidationConfig")
+func (_self *TransactionManifestV2)Instructions() *InstructionsV2 {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV2")
 	defer _self.ffiObject.decrementPointer()
-	return FfiConverterUint16INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_validationconfig_max_tip_percentage(
+	return FfiConverterInstructionsV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_instructions(
 		_pointer, _uniffiStatus)
 	}))
 }
 
 
-func (_self *ValidationConfig)MessageValidation() *MessageValidationConfig {
-	_pointer := _self.ffiObject.incrementPointer("*ValidationConfig")
+func (_self *TransactionManifestV2)StaticAnalysis(networkId uint8) (StaticAnalysis, error) {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV2")
 	defer _self.ffiObject.decrementPointer()
-	return FfiConverterMessageValidationConfigINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_validationconfig_message_validation(
-		_pointer, _uniffiStatus)
-	}))
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_static_analysis(
+		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue StaticAnalysis
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterTypeStaticAnalysisINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
 }
 
 
-func (_self *ValidationConfig)MinTipPercentage() uint16 {
-	_pointer := _self.ffiObject.incrementPointer("*ValidationConfig")
+func (_self *TransactionManifestV2)ToPayloadBytes() ([]byte, error) {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV2")
 	defer _self.ffiObject.decrementPointer()
-	return FfiConverterUint16INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_validationconfig_min_tip_percentage(
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_to_payload_bytes(
 		_pointer, _uniffiStatus)
-	}))
-}
-
-
-func (_self *ValidationConfig)NetworkId() uint8 {
-	_pointer := _self.ffiObject.incrementPointer("*ValidationConfig")
-	defer _self.ffiObject.decrementPointer()
-	return FfiConverterUint8INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint8_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_validationconfig_network_id(
-		_pointer, _uniffiStatus)
-	}))
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue []byte
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterBytesINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
 }
 
 
 
-func (object *ValidationConfig)Destroy() {
+func (object *TransactionManifestV2)Destroy() {
 	runtime.SetFinalizer(object, nil)
 	object.ffiObject.destroy()
 }
 
-type FfiConverterValidationConfig struct {}
+type FfiConverterTransactionManifestV2 struct {}
 
-var FfiConverterValidationConfigINSTANCE = FfiConverterValidationConfig{}
+var FfiConverterTransactionManifestV2INSTANCE = FfiConverterTransactionManifestV2{}
 
-func (c FfiConverterValidationConfig) Lift(pointer unsafe.Pointer) *ValidationConfig {
-	result := &ValidationConfig {
+func (c FfiConverterTransactionManifestV2) Lift(pointer unsafe.Pointer) *TransactionManifestV2 {
+	result := &TransactionManifestV2 {
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_radix_engine_toolkit_uniffi_fn_free_validationconfig(pointer, status)
+				C.uniffi_radix_engine_toolkit_uniffi_fn_free_transactionmanifestv2(pointer, status)
 		}),
 	}
-	runtime.SetFinalizer(result, (*ValidationConfig).Destroy)
+	runtime.SetFinalizer(result, (*TransactionManifestV2).Destroy)
 	return result
 }
 
-func (c FfiConverterValidationConfig) Read(reader io.Reader) *ValidationConfig {
+func (c FfiConverterTransactionManifestV2) Read(reader io.Reader) *TransactionManifestV2 {
 	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
 }
 
-func (c FfiConverterValidationConfig) Lower(value *ValidationConfig) unsafe.Pointer {
+func (c FfiConverterTransactionManifestV2) Lower(value *TransactionManifestV2) unsafe.Pointer {
 	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
 	// because the pointer will be decremented immediately after this function returns,
 	// and someone will be left holding onto a non-locked pointer.
-	pointer := value.ffiObject.incrementPointer("*ValidationConfig")
+	pointer := value.ffiObject.incrementPointer("*TransactionManifestV2")
 	defer value.ffiObject.decrementPointer()
 	return pointer
 }
 
-func (c FfiConverterValidationConfig) Write(writer io.Writer, value *ValidationConfig) {
+func (c FfiConverterTransactionManifestV2) Write(writer io.Writer, value *TransactionManifestV2) {
 	writeUint64(writer, uint64(uintptr(c.Lower(value))))
 }
 
-type FfiDestroyerValidationConfig struct {}
+type FfiDestroyerTransactionManifestV2 struct {}
 
-func (_ FfiDestroyerValidationConfig) Destroy(value *ValidationConfig) {
+func (_ FfiDestroyerTransactionManifestV2) Destroy(value *TransactionManifestV2) {
+	value.Destroy()
+}
+
+
+type TransactionV1Builder struct {
+	ffiObject FfiObject
+}
+func NewTransactionV1Builder() *TransactionV1Builder {
+	return FfiConverterTransactionV1BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_transactionv1builder_new( _uniffiStatus)
+	}))
+}
+
+
+
+
+func (_self *TransactionV1Builder)Header(header TransactionHeaderV1) *TransactionV1BuilderHeaderStep {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionV1Builder")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterTransactionV1BuilderHeaderStepINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionv1builder_header(
+		_pointer,FfiConverterTypeTransactionHeaderV1INSTANCE.Lower(header), _uniffiStatus)
+	}))
+}
+
+
+
+func (object *TransactionV1Builder)Destroy() {
+	runtime.SetFinalizer(object, nil)
+	object.ffiObject.destroy()
+}
+
+type FfiConverterTransactionV1Builder struct {}
+
+var FfiConverterTransactionV1BuilderINSTANCE = FfiConverterTransactionV1Builder{}
+
+func (c FfiConverterTransactionV1Builder) Lift(pointer unsafe.Pointer) *TransactionV1Builder {
+	result := &TransactionV1Builder {
+		newFfiObject(
+			pointer,
+			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
+				C.uniffi_radix_engine_toolkit_uniffi_fn_free_transactionv1builder(pointer, status)
+		}),
+	}
+	runtime.SetFinalizer(result, (*TransactionV1Builder).Destroy)
+	return result
+}
+
+func (c FfiConverterTransactionV1Builder) Read(reader io.Reader) *TransactionV1Builder {
+	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
+}
+
+func (c FfiConverterTransactionV1Builder) Lower(value *TransactionV1Builder) unsafe.Pointer {
+	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
+	// because the pointer will be decremented immediately after this function returns,
+	// and someone will be left holding onto a non-locked pointer.
+	pointer := value.ffiObject.incrementPointer("*TransactionV1Builder")
+	defer value.ffiObject.decrementPointer()
+	return pointer
+}
+
+func (c FfiConverterTransactionV1Builder) Write(writer io.Writer, value *TransactionV1Builder) {
+	writeUint64(writer, uint64(uintptr(c.Lower(value))))
+}
+
+type FfiDestroyerTransactionV1Builder struct {}
+
+func (_ FfiDestroyerTransactionV1Builder) Destroy(value *TransactionV1Builder) {
+	value.Destroy()
+}
+
+
+type TransactionV1BuilderHeaderStep struct {
+	ffiObject FfiObject
+}
+
+
+
+
+func (_self *TransactionV1BuilderHeaderStep)Manifest(manifest *TransactionManifestV1) *TransactionV1BuilderMessageStep {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionV1BuilderHeaderStep")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterTransactionV1BuilderMessageStepINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionv1builderheaderstep_manifest(
+		_pointer,FfiConverterTransactionManifestV1INSTANCE.Lower(manifest), _uniffiStatus)
+	}))
+}
+
+
+
+func (object *TransactionV1BuilderHeaderStep)Destroy() {
+	runtime.SetFinalizer(object, nil)
+	object.ffiObject.destroy()
+}
+
+type FfiConverterTransactionV1BuilderHeaderStep struct {}
+
+var FfiConverterTransactionV1BuilderHeaderStepINSTANCE = FfiConverterTransactionV1BuilderHeaderStep{}
+
+func (c FfiConverterTransactionV1BuilderHeaderStep) Lift(pointer unsafe.Pointer) *TransactionV1BuilderHeaderStep {
+	result := &TransactionV1BuilderHeaderStep {
+		newFfiObject(
+			pointer,
+			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
+				C.uniffi_radix_engine_toolkit_uniffi_fn_free_transactionv1builderheaderstep(pointer, status)
+		}),
+	}
+	runtime.SetFinalizer(result, (*TransactionV1BuilderHeaderStep).Destroy)
+	return result
+}
+
+func (c FfiConverterTransactionV1BuilderHeaderStep) Read(reader io.Reader) *TransactionV1BuilderHeaderStep {
+	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
+}
+
+func (c FfiConverterTransactionV1BuilderHeaderStep) Lower(value *TransactionV1BuilderHeaderStep) unsafe.Pointer {
+	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
+	// because the pointer will be decremented immediately after this function returns,
+	// and someone will be left holding onto a non-locked pointer.
+	pointer := value.ffiObject.incrementPointer("*TransactionV1BuilderHeaderStep")
+	defer value.ffiObject.decrementPointer()
+	return pointer
+}
+
+func (c FfiConverterTransactionV1BuilderHeaderStep) Write(writer io.Writer, value *TransactionV1BuilderHeaderStep) {
+	writeUint64(writer, uint64(uintptr(c.Lower(value))))
+}
+
+type FfiDestroyerTransactionV1BuilderHeaderStep struct {}
+
+func (_ FfiDestroyerTransactionV1BuilderHeaderStep) Destroy(value *TransactionV1BuilderHeaderStep) {
+	value.Destroy()
+}
+
+
+type TransactionV1BuilderIntentSignaturesStep struct {
+	ffiObject FfiObject
+}
+func NewTransactionV1BuilderIntentSignaturesStep(messageStep *TransactionV1BuilderMessageStep) *TransactionV1BuilderIntentSignaturesStep {
+	return FfiConverterTransactionV1BuilderIntentSignaturesStepINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_transactionv1builderintentsignaturesstep_new(FfiConverterTransactionV1BuilderMessageStepINSTANCE.Lower(messageStep), _uniffiStatus)
+	}))
+}
+
+
+
+
+func (_self *TransactionV1BuilderIntentSignaturesStep)NotarizeWithPrivateKey(privateKey *PrivateKey) (*NotarizedTransactionV1, error) {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionV1BuilderIntentSignaturesStep")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionv1builderintentsignaturesstep_notarize_with_private_key(
+		_pointer,FfiConverterPrivateKeyINSTANCE.Lower(privateKey), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *NotarizedTransactionV1
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterNotarizedTransactionV1INSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *TransactionV1BuilderIntentSignaturesStep)NotarizeWithSigner(signer Signer) (*NotarizedTransactionV1, error) {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionV1BuilderIntentSignaturesStep")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionv1builderintentsignaturesstep_notarize_with_signer(
+		_pointer,FfiConverterCallbackInterfaceSignerINSTANCE.Lower(signer), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *NotarizedTransactionV1
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterNotarizedTransactionV1INSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *TransactionV1BuilderIntentSignaturesStep)SignWithPrivateKey(privateKey *PrivateKey) *TransactionV1BuilderIntentSignaturesStep {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionV1BuilderIntentSignaturesStep")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterTransactionV1BuilderIntentSignaturesStepINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionv1builderintentsignaturesstep_sign_with_private_key(
+		_pointer,FfiConverterPrivateKeyINSTANCE.Lower(privateKey), _uniffiStatus)
+	}))
+}
+
+
+func (_self *TransactionV1BuilderIntentSignaturesStep)SignWithSigner(signer Signer) *TransactionV1BuilderIntentSignaturesStep {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionV1BuilderIntentSignaturesStep")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterTransactionV1BuilderIntentSignaturesStepINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionv1builderintentsignaturesstep_sign_with_signer(
+		_pointer,FfiConverterCallbackInterfaceSignerINSTANCE.Lower(signer), _uniffiStatus)
+	}))
+}
+
+
+
+func (object *TransactionV1BuilderIntentSignaturesStep)Destroy() {
+	runtime.SetFinalizer(object, nil)
+	object.ffiObject.destroy()
+}
+
+type FfiConverterTransactionV1BuilderIntentSignaturesStep struct {}
+
+var FfiConverterTransactionV1BuilderIntentSignaturesStepINSTANCE = FfiConverterTransactionV1BuilderIntentSignaturesStep{}
+
+func (c FfiConverterTransactionV1BuilderIntentSignaturesStep) Lift(pointer unsafe.Pointer) *TransactionV1BuilderIntentSignaturesStep {
+	result := &TransactionV1BuilderIntentSignaturesStep {
+		newFfiObject(
+			pointer,
+			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
+				C.uniffi_radix_engine_toolkit_uniffi_fn_free_transactionv1builderintentsignaturesstep(pointer, status)
+		}),
+	}
+	runtime.SetFinalizer(result, (*TransactionV1BuilderIntentSignaturesStep).Destroy)
+	return result
+}
+
+func (c FfiConverterTransactionV1BuilderIntentSignaturesStep) Read(reader io.Reader) *TransactionV1BuilderIntentSignaturesStep {
+	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
+}
+
+func (c FfiConverterTransactionV1BuilderIntentSignaturesStep) Lower(value *TransactionV1BuilderIntentSignaturesStep) unsafe.Pointer {
+	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
+	// because the pointer will be decremented immediately after this function returns,
+	// and someone will be left holding onto a non-locked pointer.
+	pointer := value.ffiObject.incrementPointer("*TransactionV1BuilderIntentSignaturesStep")
+	defer value.ffiObject.decrementPointer()
+	return pointer
+}
+
+func (c FfiConverterTransactionV1BuilderIntentSignaturesStep) Write(writer io.Writer, value *TransactionV1BuilderIntentSignaturesStep) {
+	writeUint64(writer, uint64(uintptr(c.Lower(value))))
+}
+
+type FfiDestroyerTransactionV1BuilderIntentSignaturesStep struct {}
+
+func (_ FfiDestroyerTransactionV1BuilderIntentSignaturesStep) Destroy(value *TransactionV1BuilderIntentSignaturesStep) {
+	value.Destroy()
+}
+
+
+type TransactionV1BuilderMessageStep struct {
+	ffiObject FfiObject
+}
+
+
+
+
+func (_self *TransactionV1BuilderMessageStep)Message(message MessageV1) *TransactionV1BuilderIntentSignaturesStep {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionV1BuilderMessageStep")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterTransactionV1BuilderIntentSignaturesStepINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionv1buildermessagestep_message(
+		_pointer,FfiConverterTypeMessageV1INSTANCE.Lower(message), _uniffiStatus)
+	}))
+}
+
+
+func (_self *TransactionV1BuilderMessageStep)SignWithPrivateKey(privateKey *PrivateKey) *TransactionV1BuilderIntentSignaturesStep {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionV1BuilderMessageStep")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterTransactionV1BuilderIntentSignaturesStepINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionv1buildermessagestep_sign_with_private_key(
+		_pointer,FfiConverterPrivateKeyINSTANCE.Lower(privateKey), _uniffiStatus)
+	}))
+}
+
+
+func (_self *TransactionV1BuilderMessageStep)SignWithSigner(signer Signer) *TransactionV1BuilderIntentSignaturesStep {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionV1BuilderMessageStep")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterTransactionV1BuilderIntentSignaturesStepINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionv1buildermessagestep_sign_with_signer(
+		_pointer,FfiConverterCallbackInterfaceSignerINSTANCE.Lower(signer), _uniffiStatus)
+	}))
+}
+
+
+
+func (object *TransactionV1BuilderMessageStep)Destroy() {
+	runtime.SetFinalizer(object, nil)
+	object.ffiObject.destroy()
+}
+
+type FfiConverterTransactionV1BuilderMessageStep struct {}
+
+var FfiConverterTransactionV1BuilderMessageStepINSTANCE = FfiConverterTransactionV1BuilderMessageStep{}
+
+func (c FfiConverterTransactionV1BuilderMessageStep) Lift(pointer unsafe.Pointer) *TransactionV1BuilderMessageStep {
+	result := &TransactionV1BuilderMessageStep {
+		newFfiObject(
+			pointer,
+			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
+				C.uniffi_radix_engine_toolkit_uniffi_fn_free_transactionv1buildermessagestep(pointer, status)
+		}),
+	}
+	runtime.SetFinalizer(result, (*TransactionV1BuilderMessageStep).Destroy)
+	return result
+}
+
+func (c FfiConverterTransactionV1BuilderMessageStep) Read(reader io.Reader) *TransactionV1BuilderMessageStep {
+	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
+}
+
+func (c FfiConverterTransactionV1BuilderMessageStep) Lower(value *TransactionV1BuilderMessageStep) unsafe.Pointer {
+	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
+	// because the pointer will be decremented immediately after this function returns,
+	// and someone will be left holding onto a non-locked pointer.
+	pointer := value.ffiObject.incrementPointer("*TransactionV1BuilderMessageStep")
+	defer value.ffiObject.decrementPointer()
+	return pointer
+}
+
+func (c FfiConverterTransactionV1BuilderMessageStep) Write(writer io.Writer, value *TransactionV1BuilderMessageStep) {
+	writeUint64(writer, uint64(uintptr(c.Lower(value))))
+}
+
+type FfiDestroyerTransactionV1BuilderMessageStep struct {}
+
+func (_ FfiDestroyerTransactionV1BuilderMessageStep) Destroy(value *TransactionV1BuilderMessageStep) {
+	value.Destroy()
+}
+
+
+type TransactionV2Builder struct {
+	ffiObject FfiObject
+}
+func NewTransactionV2Builder() *TransactionV2Builder {
+	return FfiConverterTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_transactionv2builder_new( _uniffiStatus)
+	}))
+}
+
+
+
+
+func (_self *TransactionV2Builder)AddChild(child *SignedPartialTransactionV2) *TransactionV2Builder {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionv2builder_add_child(
+		_pointer,FfiConverterSignedPartialTransactionV2INSTANCE.Lower(child), _uniffiStatus)
+	}))
+}
+
+
+func (_self *TransactionV2Builder)IntentHeader(intentHeader IntentHeaderV2) *TransactionV2Builder {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionv2builder_intent_header(
+		_pointer,FfiConverterTypeIntentHeaderV2INSTANCE.Lower(intentHeader), _uniffiStatus)
+	}))
+}
+
+
+func (_self *TransactionV2Builder)Manifest(manifest *TransactionManifestV2) *TransactionV2Builder {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionv2builder_manifest(
+		_pointer,FfiConverterTransactionManifestV2INSTANCE.Lower(manifest), _uniffiStatus)
+	}))
+}
+
+
+func (_self *TransactionV2Builder)Message(message MessageV2) *TransactionV2Builder {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionv2builder_message(
+		_pointer,FfiConverterTypeMessageV2INSTANCE.Lower(message), _uniffiStatus)
+	}))
+}
+
+
+func (_self *TransactionV2Builder)PrepareForSigning() (*TransactionV2BuilderSignatureStep, error) {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionv2builder_prepare_for_signing(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *TransactionV2BuilderSignatureStep
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterTransactionV2BuilderSignatureStepINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *TransactionV2Builder)TransactionHeader(transactionHeader TransactionHeaderV2) *TransactionV2Builder {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionv2builder_transaction_header(
+		_pointer,FfiConverterTypeTransactionHeaderV2INSTANCE.Lower(transactionHeader), _uniffiStatus)
+	}))
+}
+
+
+
+func (object *TransactionV2Builder)Destroy() {
+	runtime.SetFinalizer(object, nil)
+	object.ffiObject.destroy()
+}
+
+type FfiConverterTransactionV2Builder struct {}
+
+var FfiConverterTransactionV2BuilderINSTANCE = FfiConverterTransactionV2Builder{}
+
+func (c FfiConverterTransactionV2Builder) Lift(pointer unsafe.Pointer) *TransactionV2Builder {
+	result := &TransactionV2Builder {
+		newFfiObject(
+			pointer,
+			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
+				C.uniffi_radix_engine_toolkit_uniffi_fn_free_transactionv2builder(pointer, status)
+		}),
+	}
+	runtime.SetFinalizer(result, (*TransactionV2Builder).Destroy)
+	return result
+}
+
+func (c FfiConverterTransactionV2Builder) Read(reader io.Reader) *TransactionV2Builder {
+	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
+}
+
+func (c FfiConverterTransactionV2Builder) Lower(value *TransactionV2Builder) unsafe.Pointer {
+	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
+	// because the pointer will be decremented immediately after this function returns,
+	// and someone will be left holding onto a non-locked pointer.
+	pointer := value.ffiObject.incrementPointer("*TransactionV2Builder")
+	defer value.ffiObject.decrementPointer()
+	return pointer
+}
+
+func (c FfiConverterTransactionV2Builder) Write(writer io.Writer, value *TransactionV2Builder) {
+	writeUint64(writer, uint64(uintptr(c.Lower(value))))
+}
+
+type FfiDestroyerTransactionV2Builder struct {}
+
+func (_ FfiDestroyerTransactionV2Builder) Destroy(value *TransactionV2Builder) {
+	value.Destroy()
+}
+
+
+type TransactionV2BuilderSignatureStep struct {
+	ffiObject FfiObject
+}
+
+
+
+
+
+func (object *TransactionV2BuilderSignatureStep)Destroy() {
+	runtime.SetFinalizer(object, nil)
+	object.ffiObject.destroy()
+}
+
+type FfiConverterTransactionV2BuilderSignatureStep struct {}
+
+var FfiConverterTransactionV2BuilderSignatureStepINSTANCE = FfiConverterTransactionV2BuilderSignatureStep{}
+
+func (c FfiConverterTransactionV2BuilderSignatureStep) Lift(pointer unsafe.Pointer) *TransactionV2BuilderSignatureStep {
+	result := &TransactionV2BuilderSignatureStep {
+		newFfiObject(
+			pointer,
+			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
+				C.uniffi_radix_engine_toolkit_uniffi_fn_free_transactionv2buildersignaturestep(pointer, status)
+		}),
+	}
+	runtime.SetFinalizer(result, (*TransactionV2BuilderSignatureStep).Destroy)
+	return result
+}
+
+func (c FfiConverterTransactionV2BuilderSignatureStep) Read(reader io.Reader) *TransactionV2BuilderSignatureStep {
+	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
+}
+
+func (c FfiConverterTransactionV2BuilderSignatureStep) Lower(value *TransactionV2BuilderSignatureStep) unsafe.Pointer {
+	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
+	// because the pointer will be decremented immediately after this function returns,
+	// and someone will be left holding onto a non-locked pointer.
+	pointer := value.ffiObject.incrementPointer("*TransactionV2BuilderSignatureStep")
+	defer value.ffiObject.decrementPointer()
+	return pointer
+}
+
+func (c FfiConverterTransactionV2BuilderSignatureStep) Write(writer io.Writer, value *TransactionV2BuilderSignatureStep) {
+	writeUint64(writer, uint64(uintptr(c.Lower(value))))
+}
+
+type FfiDestroyerTransactionV2BuilderSignatureStep struct {}
+
+func (_ FfiDestroyerTransactionV2BuilderSignatureStep) Destroy(value *TransactionV2BuilderSignatureStep) {
 	value.Destroy()
 }
 
@@ -10228,6 +16006,87 @@ func (_ FfiDestroyerTypeDepositRecoveryXrdEvent) Destroy(value DepositRecoveryXr
 }
 
 
+type DynamicAnalysis struct {
+	AccountWithdraws map[string][]ResourceIndicator
+	AccountDeposits map[string][]ResourceIndicator
+	PresentedProofs map[string][]ResourceSpecifier
+	NewEntities NewEntities
+	EncounteredEntities []*Address
+	AccountsRequiringAuth []*Address
+	IdentitiesRequiringAuth []*Address
+	ReservedInstructions []ReservedInstruction
+	FeeLocks FeeLocks
+	FeeSummary FeeSummary
+	DetailedClassification []DetailedManifestClass
+	NewlyCreatedNonFungibles []*NonFungibleGlobalId
+}
+
+func (r *DynamicAnalysis) Destroy() {
+		FfiDestroyerMapStringSequenceTypeResourceIndicator{}.Destroy(r.AccountWithdraws);
+		FfiDestroyerMapStringSequenceTypeResourceIndicator{}.Destroy(r.AccountDeposits);
+		FfiDestroyerMapStringSequenceTypeResourceSpecifier{}.Destroy(r.PresentedProofs);
+		FfiDestroyerTypeNewEntities{}.Destroy(r.NewEntities);
+		FfiDestroyerSequenceAddress{}.Destroy(r.EncounteredEntities);
+		FfiDestroyerSequenceAddress{}.Destroy(r.AccountsRequiringAuth);
+		FfiDestroyerSequenceAddress{}.Destroy(r.IdentitiesRequiringAuth);
+		FfiDestroyerSequenceTypeReservedInstruction{}.Destroy(r.ReservedInstructions);
+		FfiDestroyerTypeFeeLocks{}.Destroy(r.FeeLocks);
+		FfiDestroyerTypeFeeSummary{}.Destroy(r.FeeSummary);
+		FfiDestroyerSequenceTypeDetailedManifestClass{}.Destroy(r.DetailedClassification);
+		FfiDestroyerSequenceNonFungibleGlobalId{}.Destroy(r.NewlyCreatedNonFungibles);
+}
+
+type FfiConverterTypeDynamicAnalysis struct {}
+
+var FfiConverterTypeDynamicAnalysisINSTANCE = FfiConverterTypeDynamicAnalysis{}
+
+func (c FfiConverterTypeDynamicAnalysis) Lift(rb RustBufferI) DynamicAnalysis {
+	return LiftFromRustBuffer[DynamicAnalysis](c, rb)
+}
+
+func (c FfiConverterTypeDynamicAnalysis) Read(reader io.Reader) DynamicAnalysis {
+	return DynamicAnalysis {
+			FfiConverterMapStringSequenceTypeResourceIndicatorINSTANCE.Read(reader),
+			FfiConverterMapStringSequenceTypeResourceIndicatorINSTANCE.Read(reader),
+			FfiConverterMapStringSequenceTypeResourceSpecifierINSTANCE.Read(reader),
+			FfiConverterTypeNewEntitiesINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceTypeReservedInstructionINSTANCE.Read(reader),
+			FfiConverterTypeFeeLocksINSTANCE.Read(reader),
+			FfiConverterTypeFeeSummaryINSTANCE.Read(reader),
+			FfiConverterSequenceTypeDetailedManifestClassINSTANCE.Read(reader),
+			FfiConverterSequenceNonFungibleGlobalIdINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeDynamicAnalysis) Lower(value DynamicAnalysis) RustBuffer {
+	return LowerIntoRustBuffer[DynamicAnalysis](c, value)
+}
+
+func (c FfiConverterTypeDynamicAnalysis) Write(writer io.Writer, value DynamicAnalysis) {
+		FfiConverterMapStringSequenceTypeResourceIndicatorINSTANCE.Write(writer, value.AccountWithdraws);
+		FfiConverterMapStringSequenceTypeResourceIndicatorINSTANCE.Write(writer, value.AccountDeposits);
+		FfiConverterMapStringSequenceTypeResourceSpecifierINSTANCE.Write(writer, value.PresentedProofs);
+		FfiConverterTypeNewEntitiesINSTANCE.Write(writer, value.NewEntities);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.EncounteredEntities);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountsRequiringAuth);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.IdentitiesRequiringAuth);
+		FfiConverterSequenceTypeReservedInstructionINSTANCE.Write(writer, value.ReservedInstructions);
+		FfiConverterTypeFeeLocksINSTANCE.Write(writer, value.FeeLocks);
+		FfiConverterTypeFeeSummaryINSTANCE.Write(writer, value.FeeSummary);
+		FfiConverterSequenceTypeDetailedManifestClassINSTANCE.Write(writer, value.DetailedClassification);
+		FfiConverterSequenceNonFungibleGlobalIdINSTANCE.Write(writer, value.NewlyCreatedNonFungibles);
+}
+
+type FfiDestroyerTypeDynamicAnalysis struct {}
+
+func (_ FfiDestroyerTypeDynamicAnalysis) Destroy(value DynamicAnalysis) {
+	value.Destroy()
+}
+
+
 type Ed25519PublicKey struct {
 	Value []byte
 }
@@ -10265,43 +16124,84 @@ func (_ FfiDestroyerTypeEd25519PublicKey) Destroy(value Ed25519PublicKey) {
 }
 
 
-type EncryptedMessage struct {
+type EncryptedMessageV1 struct {
 	Encrypted []byte
-	DecryptorsByCurve map[CurveType]DecryptorsByCurve
+	DecryptorsByCurve map[CurveTypeV1]DecryptorsByCurveV1
 }
 
-func (r *EncryptedMessage) Destroy() {
+func (r *EncryptedMessageV1) Destroy() {
 		FfiDestroyerBytes{}.Destroy(r.Encrypted);
-		FfiDestroyerMapTypeCurveTypeTypeDecryptorsByCurve{}.Destroy(r.DecryptorsByCurve);
+		FfiDestroyerMapTypeCurveTypeV1TypeDecryptorsByCurveV1{}.Destroy(r.DecryptorsByCurve);
 }
 
-type FfiConverterTypeEncryptedMessage struct {}
+type FfiConverterTypeEncryptedMessageV1 struct {}
 
-var FfiConverterTypeEncryptedMessageINSTANCE = FfiConverterTypeEncryptedMessage{}
+var FfiConverterTypeEncryptedMessageV1INSTANCE = FfiConverterTypeEncryptedMessageV1{}
 
-func (c FfiConverterTypeEncryptedMessage) Lift(rb RustBufferI) EncryptedMessage {
-	return LiftFromRustBuffer[EncryptedMessage](c, rb)
+func (c FfiConverterTypeEncryptedMessageV1) Lift(rb RustBufferI) EncryptedMessageV1 {
+	return LiftFromRustBuffer[EncryptedMessageV1](c, rb)
 }
 
-func (c FfiConverterTypeEncryptedMessage) Read(reader io.Reader) EncryptedMessage {
-	return EncryptedMessage {
+func (c FfiConverterTypeEncryptedMessageV1) Read(reader io.Reader) EncryptedMessageV1 {
+	return EncryptedMessageV1 {
 			FfiConverterBytesINSTANCE.Read(reader),
-			FfiConverterMapTypeCurveTypeTypeDecryptorsByCurveINSTANCE.Read(reader),
+			FfiConverterMapTypeCurveTypeV1TypeDecryptorsByCurveV1INSTANCE.Read(reader),
 	}
 }
 
-func (c FfiConverterTypeEncryptedMessage) Lower(value EncryptedMessage) RustBuffer {
-	return LowerIntoRustBuffer[EncryptedMessage](c, value)
+func (c FfiConverterTypeEncryptedMessageV1) Lower(value EncryptedMessageV1) RustBuffer {
+	return LowerIntoRustBuffer[EncryptedMessageV1](c, value)
 }
 
-func (c FfiConverterTypeEncryptedMessage) Write(writer io.Writer, value EncryptedMessage) {
+func (c FfiConverterTypeEncryptedMessageV1) Write(writer io.Writer, value EncryptedMessageV1) {
 		FfiConverterBytesINSTANCE.Write(writer, value.Encrypted);
-		FfiConverterMapTypeCurveTypeTypeDecryptorsByCurveINSTANCE.Write(writer, value.DecryptorsByCurve);
+		FfiConverterMapTypeCurveTypeV1TypeDecryptorsByCurveV1INSTANCE.Write(writer, value.DecryptorsByCurve);
 }
 
-type FfiDestroyerTypeEncryptedMessage struct {}
+type FfiDestroyerTypeEncryptedMessageV1 struct {}
 
-func (_ FfiDestroyerTypeEncryptedMessage) Destroy(value EncryptedMessage) {
+func (_ FfiDestroyerTypeEncryptedMessageV1) Destroy(value EncryptedMessageV1) {
+	value.Destroy()
+}
+
+
+type EncryptedMessageV2 struct {
+	Encrypted []byte
+	DecryptorsByCurve map[CurveTypeV2]DecryptorsByCurveV2
+}
+
+func (r *EncryptedMessageV2) Destroy() {
+		FfiDestroyerBytes{}.Destroy(r.Encrypted);
+		FfiDestroyerMapTypeCurveTypeV2TypeDecryptorsByCurveV2{}.Destroy(r.DecryptorsByCurve);
+}
+
+type FfiConverterTypeEncryptedMessageV2 struct {}
+
+var FfiConverterTypeEncryptedMessageV2INSTANCE = FfiConverterTypeEncryptedMessageV2{}
+
+func (c FfiConverterTypeEncryptedMessageV2) Lift(rb RustBufferI) EncryptedMessageV2 {
+	return LiftFromRustBuffer[EncryptedMessageV2](c, rb)
+}
+
+func (c FfiConverterTypeEncryptedMessageV2) Read(reader io.Reader) EncryptedMessageV2 {
+	return EncryptedMessageV2 {
+			FfiConverterBytesINSTANCE.Read(reader),
+			FfiConverterMapTypeCurveTypeV2TypeDecryptorsByCurveV2INSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeEncryptedMessageV2) Lower(value EncryptedMessageV2) RustBuffer {
+	return LowerIntoRustBuffer[EncryptedMessageV2](c, value)
+}
+
+func (c FfiConverterTypeEncryptedMessageV2) Write(writer io.Writer, value EncryptedMessageV2) {
+		FfiConverterBytesINSTANCE.Write(writer, value.Encrypted);
+		FfiConverterMapTypeCurveTypeV2TypeDecryptorsByCurveV2INSTANCE.Write(writer, value.DecryptorsByCurve);
+}
+
+type FfiDestroyerTypeEncryptedMessageV2 struct {}
+
+func (_ FfiDestroyerTypeEncryptedMessageV2) Destroy(value EncryptedMessageV2) {
 	value.Destroy()
 }
 
@@ -10384,87 +16284,6 @@ func (c FfiConverterTypeEventTypeIdentifier) Write(writer io.Writer, value Event
 type FfiDestroyerTypeEventTypeIdentifier struct {}
 
 func (_ FfiDestroyerTypeEventTypeIdentifier) Destroy(value EventTypeIdentifier) {
-	value.Destroy()
-}
-
-
-type ExecutionSummary struct {
-	AccountWithdraws map[string][]ResourceIndicator
-	AccountDeposits map[string][]ResourceIndicator
-	PresentedProofs map[string][]ResourceSpecifier
-	NewEntities NewEntities
-	EncounteredEntities []*Address
-	AccountsRequiringAuth []*Address
-	IdentitiesRequiringAuth []*Address
-	ReservedInstructions []ReservedInstruction
-	FeeLocks FeeLocks
-	FeeSummary FeeSummary
-	DetailedClassification []DetailedManifestClass
-	NewlyCreatedNonFungibles []*NonFungibleGlobalId
-}
-
-func (r *ExecutionSummary) Destroy() {
-		FfiDestroyerMapStringSequenceTypeResourceIndicator{}.Destroy(r.AccountWithdraws);
-		FfiDestroyerMapStringSequenceTypeResourceIndicator{}.Destroy(r.AccountDeposits);
-		FfiDestroyerMapStringSequenceTypeResourceSpecifier{}.Destroy(r.PresentedProofs);
-		FfiDestroyerTypeNewEntities{}.Destroy(r.NewEntities);
-		FfiDestroyerSequenceAddress{}.Destroy(r.EncounteredEntities);
-		FfiDestroyerSequenceAddress{}.Destroy(r.AccountsRequiringAuth);
-		FfiDestroyerSequenceAddress{}.Destroy(r.IdentitiesRequiringAuth);
-		FfiDestroyerSequenceTypeReservedInstruction{}.Destroy(r.ReservedInstructions);
-		FfiDestroyerTypeFeeLocks{}.Destroy(r.FeeLocks);
-		FfiDestroyerTypeFeeSummary{}.Destroy(r.FeeSummary);
-		FfiDestroyerSequenceTypeDetailedManifestClass{}.Destroy(r.DetailedClassification);
-		FfiDestroyerSequenceNonFungibleGlobalId{}.Destroy(r.NewlyCreatedNonFungibles);
-}
-
-type FfiConverterTypeExecutionSummary struct {}
-
-var FfiConverterTypeExecutionSummaryINSTANCE = FfiConverterTypeExecutionSummary{}
-
-func (c FfiConverterTypeExecutionSummary) Lift(rb RustBufferI) ExecutionSummary {
-	return LiftFromRustBuffer[ExecutionSummary](c, rb)
-}
-
-func (c FfiConverterTypeExecutionSummary) Read(reader io.Reader) ExecutionSummary {
-	return ExecutionSummary {
-			FfiConverterMapStringSequenceTypeResourceIndicatorINSTANCE.Read(reader),
-			FfiConverterMapStringSequenceTypeResourceIndicatorINSTANCE.Read(reader),
-			FfiConverterMapStringSequenceTypeResourceSpecifierINSTANCE.Read(reader),
-			FfiConverterTypeNewEntitiesINSTANCE.Read(reader),
-			FfiConverterSequenceAddressINSTANCE.Read(reader),
-			FfiConverterSequenceAddressINSTANCE.Read(reader),
-			FfiConverterSequenceAddressINSTANCE.Read(reader),
-			FfiConverterSequenceTypeReservedInstructionINSTANCE.Read(reader),
-			FfiConverterTypeFeeLocksINSTANCE.Read(reader),
-			FfiConverterTypeFeeSummaryINSTANCE.Read(reader),
-			FfiConverterSequenceTypeDetailedManifestClassINSTANCE.Read(reader),
-			FfiConverterSequenceNonFungibleGlobalIdINSTANCE.Read(reader),
-	}
-}
-
-func (c FfiConverterTypeExecutionSummary) Lower(value ExecutionSummary) RustBuffer {
-	return LowerIntoRustBuffer[ExecutionSummary](c, value)
-}
-
-func (c FfiConverterTypeExecutionSummary) Write(writer io.Writer, value ExecutionSummary) {
-		FfiConverterMapStringSequenceTypeResourceIndicatorINSTANCE.Write(writer, value.AccountWithdraws);
-		FfiConverterMapStringSequenceTypeResourceIndicatorINSTANCE.Write(writer, value.AccountDeposits);
-		FfiConverterMapStringSequenceTypeResourceSpecifierINSTANCE.Write(writer, value.PresentedProofs);
-		FfiConverterTypeNewEntitiesINSTANCE.Write(writer, value.NewEntities);
-		FfiConverterSequenceAddressINSTANCE.Write(writer, value.EncounteredEntities);
-		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountsRequiringAuth);
-		FfiConverterSequenceAddressINSTANCE.Write(writer, value.IdentitiesRequiringAuth);
-		FfiConverterSequenceTypeReservedInstructionINSTANCE.Write(writer, value.ReservedInstructions);
-		FfiConverterTypeFeeLocksINSTANCE.Write(writer, value.FeeLocks);
-		FfiConverterTypeFeeSummaryINSTANCE.Write(writer, value.FeeSummary);
-		FfiConverterSequenceTypeDetailedManifestClassINSTANCE.Write(writer, value.DetailedClassification);
-		FfiConverterSequenceNonFungibleGlobalIdINSTANCE.Write(writer, value.NewlyCreatedNonFungibles);
-}
-
-type FfiDestroyerTypeExecutionSummary struct {}
-
-func (_ FfiDestroyerTypeExecutionSummary) Destroy(value ExecutionSummary) {
 	value.Destroy()
 }
 
@@ -10801,43 +16620,51 @@ func (_ FfiDestroyerTypeFungibleVaultWithdrawEvent) Destroy(value FungibleVaultW
 }
 
 
-type IndexedAssertion struct {
-	Index uint64
-	Assertion Assertion
+type GeneralResourceConstraint struct {
+	RequiredIds []NonFungibleLocalId
+	LowerBound LowerBound
+	UpperBound UpperBound
+	AllowedIds AllowedIds
 }
 
-func (r *IndexedAssertion) Destroy() {
-		FfiDestroyerUint64{}.Destroy(r.Index);
-		FfiDestroyerTypeAssertion{}.Destroy(r.Assertion);
+func (r *GeneralResourceConstraint) Destroy() {
+		FfiDestroyerSequenceTypeNonFungibleLocalId{}.Destroy(r.RequiredIds);
+		FfiDestroyerTypeLowerBound{}.Destroy(r.LowerBound);
+		FfiDestroyerTypeUpperBound{}.Destroy(r.UpperBound);
+		FfiDestroyerTypeAllowedIds{}.Destroy(r.AllowedIds);
 }
 
-type FfiConverterTypeIndexedAssertion struct {}
+type FfiConverterTypeGeneralResourceConstraint struct {}
 
-var FfiConverterTypeIndexedAssertionINSTANCE = FfiConverterTypeIndexedAssertion{}
+var FfiConverterTypeGeneralResourceConstraintINSTANCE = FfiConverterTypeGeneralResourceConstraint{}
 
-func (c FfiConverterTypeIndexedAssertion) Lift(rb RustBufferI) IndexedAssertion {
-	return LiftFromRustBuffer[IndexedAssertion](c, rb)
+func (c FfiConverterTypeGeneralResourceConstraint) Lift(rb RustBufferI) GeneralResourceConstraint {
+	return LiftFromRustBuffer[GeneralResourceConstraint](c, rb)
 }
 
-func (c FfiConverterTypeIndexedAssertion) Read(reader io.Reader) IndexedAssertion {
-	return IndexedAssertion {
-			FfiConverterUint64INSTANCE.Read(reader),
-			FfiConverterTypeAssertionINSTANCE.Read(reader),
+func (c FfiConverterTypeGeneralResourceConstraint) Read(reader io.Reader) GeneralResourceConstraint {
+	return GeneralResourceConstraint {
+			FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Read(reader),
+			FfiConverterTypeLowerBoundINSTANCE.Read(reader),
+			FfiConverterTypeUpperBoundINSTANCE.Read(reader),
+			FfiConverterTypeAllowedIdsINSTANCE.Read(reader),
 	}
 }
 
-func (c FfiConverterTypeIndexedAssertion) Lower(value IndexedAssertion) RustBuffer {
-	return LowerIntoRustBuffer[IndexedAssertion](c, value)
+func (c FfiConverterTypeGeneralResourceConstraint) Lower(value GeneralResourceConstraint) RustBuffer {
+	return LowerIntoRustBuffer[GeneralResourceConstraint](c, value)
 }
 
-func (c FfiConverterTypeIndexedAssertion) Write(writer io.Writer, value IndexedAssertion) {
-		FfiConverterUint64INSTANCE.Write(writer, value.Index);
-		FfiConverterTypeAssertionINSTANCE.Write(writer, value.Assertion);
+func (c FfiConverterTypeGeneralResourceConstraint) Write(writer io.Writer, value GeneralResourceConstraint) {
+		FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Write(writer, value.RequiredIds);
+		FfiConverterTypeLowerBoundINSTANCE.Write(writer, value.LowerBound);
+		FfiConverterTypeUpperBoundINSTANCE.Write(writer, value.UpperBound);
+		FfiConverterTypeAllowedIdsINSTANCE.Write(writer, value.AllowedIds);
 }
 
-type FfiDestroyerTypeIndexedAssertion struct {}
+type FfiDestroyerTypeGeneralResourceConstraint struct {}
 
-func (_ FfiDestroyerTypeIndexedAssertion) Destroy(value IndexedAssertion) {
+func (_ FfiDestroyerTypeGeneralResourceConstraint) Destroy(value GeneralResourceConstraint) {
 	value.Destroy()
 }
 
@@ -10920,6 +16747,63 @@ func (_ FfiDestroyerTypeInitiateRecoveryEvent) Destroy(value InitiateRecoveryEve
 }
 
 
+type IntentHeaderV2 struct {
+	NetworkId uint8
+	StartEpochInclusive uint64
+	EndEpochExclusive uint64
+	MinProposerTimestampInclusive *int64
+	MaxProposerTimestampExclusive *int64
+	IntentDiscriminator uint64
+}
+
+func (r *IntentHeaderV2) Destroy() {
+		FfiDestroyerUint8{}.Destroy(r.NetworkId);
+		FfiDestroyerUint64{}.Destroy(r.StartEpochInclusive);
+		FfiDestroyerUint64{}.Destroy(r.EndEpochExclusive);
+		FfiDestroyerOptionalInt64{}.Destroy(r.MinProposerTimestampInclusive);
+		FfiDestroyerOptionalInt64{}.Destroy(r.MaxProposerTimestampExclusive);
+		FfiDestroyerUint64{}.Destroy(r.IntentDiscriminator);
+}
+
+type FfiConverterTypeIntentHeaderV2 struct {}
+
+var FfiConverterTypeIntentHeaderV2INSTANCE = FfiConverterTypeIntentHeaderV2{}
+
+func (c FfiConverterTypeIntentHeaderV2) Lift(rb RustBufferI) IntentHeaderV2 {
+	return LiftFromRustBuffer[IntentHeaderV2](c, rb)
+}
+
+func (c FfiConverterTypeIntentHeaderV2) Read(reader io.Reader) IntentHeaderV2 {
+	return IntentHeaderV2 {
+			FfiConverterUint8INSTANCE.Read(reader),
+			FfiConverterUint64INSTANCE.Read(reader),
+			FfiConverterUint64INSTANCE.Read(reader),
+			FfiConverterOptionalInt64INSTANCE.Read(reader),
+			FfiConverterOptionalInt64INSTANCE.Read(reader),
+			FfiConverterUint64INSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeIntentHeaderV2) Lower(value IntentHeaderV2) RustBuffer {
+	return LowerIntoRustBuffer[IntentHeaderV2](c, value)
+}
+
+func (c FfiConverterTypeIntentHeaderV2) Write(writer io.Writer, value IntentHeaderV2) {
+		FfiConverterUint8INSTANCE.Write(writer, value.NetworkId);
+		FfiConverterUint64INSTANCE.Write(writer, value.StartEpochInclusive);
+		FfiConverterUint64INSTANCE.Write(writer, value.EndEpochExclusive);
+		FfiConverterOptionalInt64INSTANCE.Write(writer, value.MinProposerTimestampInclusive);
+		FfiConverterOptionalInt64INSTANCE.Write(writer, value.MaxProposerTimestampExclusive);
+		FfiConverterUint64INSTANCE.Write(writer, value.IntentDiscriminator);
+}
+
+type FfiDestroyerTypeIntentHeaderV2 struct {}
+
+func (_ FfiDestroyerTypeIntentHeaderV2) Destroy(value IntentHeaderV2) {
+	value.Destroy()
+}
+
+
 type KnownAddresses struct {
 	ResourceAddresses ResourceAddresses
 	PackageAddresses PackageAddresses
@@ -10961,47 +16845,6 @@ func (c FfiConverterTypeKnownAddresses) Write(writer io.Writer, value KnownAddre
 type FfiDestroyerTypeKnownAddresses struct {}
 
 func (_ FfiDestroyerTypeKnownAddresses) Destroy(value KnownAddresses) {
-	value.Destroy()
-}
-
-
-type LockFeeModification struct {
-	AccountAddress *Address
-	Amount *Decimal
-}
-
-func (r *LockFeeModification) Destroy() {
-		FfiDestroyerAddress{}.Destroy(r.AccountAddress);
-		FfiDestroyerDecimal{}.Destroy(r.Amount);
-}
-
-type FfiConverterTypeLockFeeModification struct {}
-
-var FfiConverterTypeLockFeeModificationINSTANCE = FfiConverterTypeLockFeeModification{}
-
-func (c FfiConverterTypeLockFeeModification) Lift(rb RustBufferI) LockFeeModification {
-	return LiftFromRustBuffer[LockFeeModification](c, rb)
-}
-
-func (c FfiConverterTypeLockFeeModification) Read(reader io.Reader) LockFeeModification {
-	return LockFeeModification {
-			FfiConverterAddressINSTANCE.Read(reader),
-			FfiConverterDecimalINSTANCE.Read(reader),
-	}
-}
-
-func (c FfiConverterTypeLockFeeModification) Lower(value LockFeeModification) RustBuffer {
-	return LowerIntoRustBuffer[LockFeeModification](c, value)
-}
-
-func (c FfiConverterTypeLockFeeModification) Write(writer io.Writer, value LockFeeModification) {
-		FfiConverterAddressINSTANCE.Write(writer, value.AccountAddress);
-		FfiConverterDecimalINSTANCE.Write(writer, value.Amount);
-}
-
-type FfiDestroyerTypeLockFeeModification struct {}
-
-func (_ FfiDestroyerTypeLockFeeModification) Destroy(value LockFeeModification) {
 	value.Destroy()
 }
 
@@ -11302,6 +17145,43 @@ func (_ FfiDestroyerTypeManifestBuilderBucket) Destroy(value ManifestBuilderBuck
 }
 
 
+type ManifestBuilderIntent struct {
+	Name string
+}
+
+func (r *ManifestBuilderIntent) Destroy() {
+		FfiDestroyerString{}.Destroy(r.Name);
+}
+
+type FfiConverterTypeManifestBuilderIntent struct {}
+
+var FfiConverterTypeManifestBuilderIntentINSTANCE = FfiConverterTypeManifestBuilderIntent{}
+
+func (c FfiConverterTypeManifestBuilderIntent) Lift(rb RustBufferI) ManifestBuilderIntent {
+	return LiftFromRustBuffer[ManifestBuilderIntent](c, rb)
+}
+
+func (c FfiConverterTypeManifestBuilderIntent) Read(reader io.Reader) ManifestBuilderIntent {
+	return ManifestBuilderIntent {
+			FfiConverterStringINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeManifestBuilderIntent) Lower(value ManifestBuilderIntent) RustBuffer {
+	return LowerIntoRustBuffer[ManifestBuilderIntent](c, value)
+}
+
+func (c FfiConverterTypeManifestBuilderIntent) Write(writer io.Writer, value ManifestBuilderIntent) {
+		FfiConverterStringINSTANCE.Write(writer, value.Name);
+}
+
+type FfiDestroyerTypeManifestBuilderIntent struct {}
+
+func (_ FfiDestroyerTypeManifestBuilderIntent) Destroy(value ManifestBuilderIntent) {
+	value.Destroy()
+}
+
+
 type ManifestBuilderMapEntry struct {
 	Key ManifestBuilderValue
 	Value ManifestBuilderValue
@@ -11450,71 +17330,6 @@ func (c FfiConverterTypeManifestProof) Write(writer io.Writer, value ManifestPro
 type FfiDestroyerTypeManifestProof struct {}
 
 func (_ FfiDestroyerTypeManifestProof) Destroy(value ManifestProof) {
-	value.Destroy()
-}
-
-
-type ManifestSummary struct {
-	PresentedProofs map[string][]ResourceSpecifier
-	AccountsWithdrawnFrom []*Address
-	AccountsDepositedInto []*Address
-	EncounteredEntities []*Address
-	AccountsRequiringAuth []*Address
-	IdentitiesRequiringAuth []*Address
-	ReservedInstructions []ReservedInstruction
-	Classification []ManifestClass
-}
-
-func (r *ManifestSummary) Destroy() {
-		FfiDestroyerMapStringSequenceTypeResourceSpecifier{}.Destroy(r.PresentedProofs);
-		FfiDestroyerSequenceAddress{}.Destroy(r.AccountsWithdrawnFrom);
-		FfiDestroyerSequenceAddress{}.Destroy(r.AccountsDepositedInto);
-		FfiDestroyerSequenceAddress{}.Destroy(r.EncounteredEntities);
-		FfiDestroyerSequenceAddress{}.Destroy(r.AccountsRequiringAuth);
-		FfiDestroyerSequenceAddress{}.Destroy(r.IdentitiesRequiringAuth);
-		FfiDestroyerSequenceTypeReservedInstruction{}.Destroy(r.ReservedInstructions);
-		FfiDestroyerSequenceTypeManifestClass{}.Destroy(r.Classification);
-}
-
-type FfiConverterTypeManifestSummary struct {}
-
-var FfiConverterTypeManifestSummaryINSTANCE = FfiConverterTypeManifestSummary{}
-
-func (c FfiConverterTypeManifestSummary) Lift(rb RustBufferI) ManifestSummary {
-	return LiftFromRustBuffer[ManifestSummary](c, rb)
-}
-
-func (c FfiConverterTypeManifestSummary) Read(reader io.Reader) ManifestSummary {
-	return ManifestSummary {
-			FfiConverterMapStringSequenceTypeResourceSpecifierINSTANCE.Read(reader),
-			FfiConverterSequenceAddressINSTANCE.Read(reader),
-			FfiConverterSequenceAddressINSTANCE.Read(reader),
-			FfiConverterSequenceAddressINSTANCE.Read(reader),
-			FfiConverterSequenceAddressINSTANCE.Read(reader),
-			FfiConverterSequenceAddressINSTANCE.Read(reader),
-			FfiConverterSequenceTypeReservedInstructionINSTANCE.Read(reader),
-			FfiConverterSequenceTypeManifestClassINSTANCE.Read(reader),
-	}
-}
-
-func (c FfiConverterTypeManifestSummary) Lower(value ManifestSummary) RustBuffer {
-	return LowerIntoRustBuffer[ManifestSummary](c, value)
-}
-
-func (c FfiConverterTypeManifestSummary) Write(writer io.Writer, value ManifestSummary) {
-		FfiConverterMapStringSequenceTypeResourceSpecifierINSTANCE.Write(writer, value.PresentedProofs);
-		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountsWithdrawnFrom);
-		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountsDepositedInto);
-		FfiConverterSequenceAddressINSTANCE.Write(writer, value.EncounteredEntities);
-		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountsRequiringAuth);
-		FfiConverterSequenceAddressINSTANCE.Write(writer, value.IdentitiesRequiringAuth);
-		FfiConverterSequenceTypeReservedInstructionINSTANCE.Write(writer, value.ReservedInstructions);
-		FfiConverterSequenceTypeManifestClassINSTANCE.Write(writer, value.Classification);
-}
-
-type FfiDestroyerTypeManifestSummary struct {}
-
-func (_ FfiDestroyerTypeManifestSummary) Destroy(value ManifestSummary) {
 	value.Destroy()
 }
 
@@ -12281,43 +18096,84 @@ func (_ FfiDestroyerTypePackageAddresses) Destroy(value PackageAddresses) {
 }
 
 
-type PlainTextMessage struct {
+type PlainTextMessageV1 struct {
 	MimeType string
-	Message MessageContent
+	Message MessageContentV1
 }
 
-func (r *PlainTextMessage) Destroy() {
+func (r *PlainTextMessageV1) Destroy() {
 		FfiDestroyerString{}.Destroy(r.MimeType);
-		FfiDestroyerTypeMessageContent{}.Destroy(r.Message);
+		FfiDestroyerTypeMessageContentV1{}.Destroy(r.Message);
 }
 
-type FfiConverterTypePlainTextMessage struct {}
+type FfiConverterTypePlainTextMessageV1 struct {}
 
-var FfiConverterTypePlainTextMessageINSTANCE = FfiConverterTypePlainTextMessage{}
+var FfiConverterTypePlainTextMessageV1INSTANCE = FfiConverterTypePlainTextMessageV1{}
 
-func (c FfiConverterTypePlainTextMessage) Lift(rb RustBufferI) PlainTextMessage {
-	return LiftFromRustBuffer[PlainTextMessage](c, rb)
+func (c FfiConverterTypePlainTextMessageV1) Lift(rb RustBufferI) PlainTextMessageV1 {
+	return LiftFromRustBuffer[PlainTextMessageV1](c, rb)
 }
 
-func (c FfiConverterTypePlainTextMessage) Read(reader io.Reader) PlainTextMessage {
-	return PlainTextMessage {
+func (c FfiConverterTypePlainTextMessageV1) Read(reader io.Reader) PlainTextMessageV1 {
+	return PlainTextMessageV1 {
 			FfiConverterStringINSTANCE.Read(reader),
-			FfiConverterTypeMessageContentINSTANCE.Read(reader),
+			FfiConverterTypeMessageContentV1INSTANCE.Read(reader),
 	}
 }
 
-func (c FfiConverterTypePlainTextMessage) Lower(value PlainTextMessage) RustBuffer {
-	return LowerIntoRustBuffer[PlainTextMessage](c, value)
+func (c FfiConverterTypePlainTextMessageV1) Lower(value PlainTextMessageV1) RustBuffer {
+	return LowerIntoRustBuffer[PlainTextMessageV1](c, value)
 }
 
-func (c FfiConverterTypePlainTextMessage) Write(writer io.Writer, value PlainTextMessage) {
+func (c FfiConverterTypePlainTextMessageV1) Write(writer io.Writer, value PlainTextMessageV1) {
 		FfiConverterStringINSTANCE.Write(writer, value.MimeType);
-		FfiConverterTypeMessageContentINSTANCE.Write(writer, value.Message);
+		FfiConverterTypeMessageContentV1INSTANCE.Write(writer, value.Message);
 }
 
-type FfiDestroyerTypePlainTextMessage struct {}
+type FfiDestroyerTypePlainTextMessageV1 struct {}
 
-func (_ FfiDestroyerTypePlainTextMessage) Destroy(value PlainTextMessage) {
+func (_ FfiDestroyerTypePlainTextMessageV1) Destroy(value PlainTextMessageV1) {
+	value.Destroy()
+}
+
+
+type PlainTextMessageV2 struct {
+	MimeType string
+	Message MessageContentsV2
+}
+
+func (r *PlainTextMessageV2) Destroy() {
+		FfiDestroyerString{}.Destroy(r.MimeType);
+		FfiDestroyerTypeMessageContentsV2{}.Destroy(r.Message);
+}
+
+type FfiConverterTypePlainTextMessageV2 struct {}
+
+var FfiConverterTypePlainTextMessageV2INSTANCE = FfiConverterTypePlainTextMessageV2{}
+
+func (c FfiConverterTypePlainTextMessageV2) Lift(rb RustBufferI) PlainTextMessageV2 {
+	return LiftFromRustBuffer[PlainTextMessageV2](c, rb)
+}
+
+func (c FfiConverterTypePlainTextMessageV2) Read(reader io.Reader) PlainTextMessageV2 {
+	return PlainTextMessageV2 {
+			FfiConverterStringINSTANCE.Read(reader),
+			FfiConverterTypeMessageContentsV2INSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypePlainTextMessageV2) Lower(value PlainTextMessageV2) RustBuffer {
+	return LowerIntoRustBuffer[PlainTextMessageV2](c, value)
+}
+
+func (c FfiConverterTypePlainTextMessageV2) Write(writer io.Writer, value PlainTextMessageV2) {
+		FfiConverterStringINSTANCE.Write(writer, value.MimeType);
+		FfiConverterTypeMessageContentsV2INSTANCE.Write(writer, value.Message);
+}
+
+type FfiDestroyerTypePlainTextMessageV2 struct {}
+
+func (_ FfiDestroyerTypePlainTextMessageV2) Destroy(value PlainTextMessageV2) {
 	value.Destroy()
 }
 
@@ -12474,6 +18330,43 @@ func (c FfiConverterTypePublicKeyFingerprint) Write(writer io.Writer, value Publ
 type FfiDestroyerTypePublicKeyFingerprint struct {}
 
 func (_ FfiDestroyerTypePublicKeyFingerprint) Destroy(value PublicKeyFingerprint) {
+	value.Destroy()
+}
+
+
+type PublicKeyFingerprintV1 struct {
+	Bytes HashableBytes
+}
+
+func (r *PublicKeyFingerprintV1) Destroy() {
+		FfiDestroyerTypeHashableBytes{}.Destroy(r.Bytes);
+}
+
+type FfiConverterTypePublicKeyFingerprintV1 struct {}
+
+var FfiConverterTypePublicKeyFingerprintV1INSTANCE = FfiConverterTypePublicKeyFingerprintV1{}
+
+func (c FfiConverterTypePublicKeyFingerprintV1) Lift(rb RustBufferI) PublicKeyFingerprintV1 {
+	return LiftFromRustBuffer[PublicKeyFingerprintV1](c, rb)
+}
+
+func (c FfiConverterTypePublicKeyFingerprintV1) Read(reader io.Reader) PublicKeyFingerprintV1 {
+	return PublicKeyFingerprintV1 {
+			FfiConverterTypeHashableBytesINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypePublicKeyFingerprintV1) Lower(value PublicKeyFingerprintV1) RustBuffer {
+	return LowerIntoRustBuffer[PublicKeyFingerprintV1](c, value)
+}
+
+func (c FfiConverterTypePublicKeyFingerprintV1) Write(writer io.Writer, value PublicKeyFingerprintV1) {
+		FfiConverterTypeHashableBytesINSTANCE.Write(writer, value.Bytes);
+}
+
+type FfiDestroyerTypePublicKeyFingerprintV1 struct {}
+
+func (_ FfiDestroyerTypePublicKeyFingerprintV1) Destroy(value PublicKeyFingerprintV1) {
 	value.Destroy()
 }
 
@@ -12640,11 +18533,11 @@ func (_ FfiDestroyerTypeRemoveMetadataEvent) Destroy(value RemoveMetadataEvent) 
 
 type ResourceAddresses struct {
 	Xrd *Address
-	Secp256k1SignatureVirtualBadge *Address
-	Ed25519SignatureVirtualBadge *Address
-	PackageOfDirectCallerVirtualBadge *Address
-	GlobalCallerVirtualBadge *Address
-	SystemTransactionBadge *Address
+	Secp256k1SignatureResource *Address
+	Ed25519SignatureResource *Address
+	PackageOfDirectCallerResource *Address
+	GlobalCallerResource *Address
+	SystemExecutionResource *Address
 	PackageOwnerBadge *Address
 	ValidatorOwnerBadge *Address
 	AccountOwnerBadge *Address
@@ -12653,11 +18546,11 @@ type ResourceAddresses struct {
 
 func (r *ResourceAddresses) Destroy() {
 		FfiDestroyerAddress{}.Destroy(r.Xrd);
-		FfiDestroyerAddress{}.Destroy(r.Secp256k1SignatureVirtualBadge);
-		FfiDestroyerAddress{}.Destroy(r.Ed25519SignatureVirtualBadge);
-		FfiDestroyerAddress{}.Destroy(r.PackageOfDirectCallerVirtualBadge);
-		FfiDestroyerAddress{}.Destroy(r.GlobalCallerVirtualBadge);
-		FfiDestroyerAddress{}.Destroy(r.SystemTransactionBadge);
+		FfiDestroyerAddress{}.Destroy(r.Secp256k1SignatureResource);
+		FfiDestroyerAddress{}.Destroy(r.Ed25519SignatureResource);
+		FfiDestroyerAddress{}.Destroy(r.PackageOfDirectCallerResource);
+		FfiDestroyerAddress{}.Destroy(r.GlobalCallerResource);
+		FfiDestroyerAddress{}.Destroy(r.SystemExecutionResource);
 		FfiDestroyerAddress{}.Destroy(r.PackageOwnerBadge);
 		FfiDestroyerAddress{}.Destroy(r.ValidatorOwnerBadge);
 		FfiDestroyerAddress{}.Destroy(r.AccountOwnerBadge);
@@ -12693,11 +18586,11 @@ func (c FfiConverterTypeResourceAddresses) Lower(value ResourceAddresses) RustBu
 
 func (c FfiConverterTypeResourceAddresses) Write(writer io.Writer, value ResourceAddresses) {
 		FfiConverterAddressINSTANCE.Write(writer, value.Xrd);
-		FfiConverterAddressINSTANCE.Write(writer, value.Secp256k1SignatureVirtualBadge);
-		FfiConverterAddressINSTANCE.Write(writer, value.Ed25519SignatureVirtualBadge);
-		FfiConverterAddressINSTANCE.Write(writer, value.PackageOfDirectCallerVirtualBadge);
-		FfiConverterAddressINSTANCE.Write(writer, value.GlobalCallerVirtualBadge);
-		FfiConverterAddressINSTANCE.Write(writer, value.SystemTransactionBadge);
+		FfiConverterAddressINSTANCE.Write(writer, value.Secp256k1SignatureResource);
+		FfiConverterAddressINSTANCE.Write(writer, value.Ed25519SignatureResource);
+		FfiConverterAddressINSTANCE.Write(writer, value.PackageOfDirectCallerResource);
+		FfiConverterAddressINSTANCE.Write(writer, value.GlobalCallerResource);
+		FfiConverterAddressINSTANCE.Write(writer, value.SystemExecutionResource);
 		FfiConverterAddressINSTANCE.Write(writer, value.PackageOwnerBadge);
 		FfiConverterAddressINSTANCE.Write(writer, value.ValidatorOwnerBadge);
 		FfiConverterAddressINSTANCE.Write(writer, value.AccountOwnerBadge);
@@ -13195,6 +19088,79 @@ func (_ FfiDestroyerTypeStakeEvent) Destroy(value StakeEvent) {
 }
 
 
+type StaticAnalysis struct {
+	AccountWithdraws map[string][]AccountWithdraw
+	AccountDeposits map[string][]AccountDeposit
+	PresentedProofs map[string][]ResourceSpecifier
+	AccountsWithdrawnFrom []*Address
+	AccountsDepositedInto []*Address
+	EncounteredEntities []*Address
+	AccountsRequiringAuth []*Address
+	IdentitiesRequiringAuth []*Address
+	ReservedInstructions []ReservedInstruction
+	Classification []ManifestClass
+}
+
+func (r *StaticAnalysis) Destroy() {
+		FfiDestroyerMapStringSequenceTypeAccountWithdraw{}.Destroy(r.AccountWithdraws);
+		FfiDestroyerMapStringSequenceTypeAccountDeposit{}.Destroy(r.AccountDeposits);
+		FfiDestroyerMapStringSequenceTypeResourceSpecifier{}.Destroy(r.PresentedProofs);
+		FfiDestroyerSequenceAddress{}.Destroy(r.AccountsWithdrawnFrom);
+		FfiDestroyerSequenceAddress{}.Destroy(r.AccountsDepositedInto);
+		FfiDestroyerSequenceAddress{}.Destroy(r.EncounteredEntities);
+		FfiDestroyerSequenceAddress{}.Destroy(r.AccountsRequiringAuth);
+		FfiDestroyerSequenceAddress{}.Destroy(r.IdentitiesRequiringAuth);
+		FfiDestroyerSequenceTypeReservedInstruction{}.Destroy(r.ReservedInstructions);
+		FfiDestroyerSequenceTypeManifestClass{}.Destroy(r.Classification);
+}
+
+type FfiConverterTypeStaticAnalysis struct {}
+
+var FfiConverterTypeStaticAnalysisINSTANCE = FfiConverterTypeStaticAnalysis{}
+
+func (c FfiConverterTypeStaticAnalysis) Lift(rb RustBufferI) StaticAnalysis {
+	return LiftFromRustBuffer[StaticAnalysis](c, rb)
+}
+
+func (c FfiConverterTypeStaticAnalysis) Read(reader io.Reader) StaticAnalysis {
+	return StaticAnalysis {
+			FfiConverterMapStringSequenceTypeAccountWithdrawINSTANCE.Read(reader),
+			FfiConverterMapStringSequenceTypeAccountDepositINSTANCE.Read(reader),
+			FfiConverterMapStringSequenceTypeResourceSpecifierINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceTypeReservedInstructionINSTANCE.Read(reader),
+			FfiConverterSequenceTypeManifestClassINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeStaticAnalysis) Lower(value StaticAnalysis) RustBuffer {
+	return LowerIntoRustBuffer[StaticAnalysis](c, value)
+}
+
+func (c FfiConverterTypeStaticAnalysis) Write(writer io.Writer, value StaticAnalysis) {
+		FfiConverterMapStringSequenceTypeAccountWithdrawINSTANCE.Write(writer, value.AccountWithdraws);
+		FfiConverterMapStringSequenceTypeAccountDepositINSTANCE.Write(writer, value.AccountDeposits);
+		FfiConverterMapStringSequenceTypeResourceSpecifierINSTANCE.Write(writer, value.PresentedProofs);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountsWithdrawnFrom);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountsDepositedInto);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.EncounteredEntities);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountsRequiringAuth);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.IdentitiesRequiringAuth);
+		FfiConverterSequenceTypeReservedInstructionINSTANCE.Write(writer, value.ReservedInstructions);
+		FfiConverterSequenceTypeManifestClassINSTANCE.Write(writer, value.Classification);
+}
+
+type FfiDestroyerTypeStaticAnalysis struct {}
+
+func (_ FfiDestroyerTypeStaticAnalysis) Destroy(value StaticAnalysis) {
+	value.Destroy()
+}
+
+
 type StopTimedRecoveryEvent struct {
 	PlaceholderField bool
 }
@@ -13526,7 +19492,7 @@ func (_ FfiDestroyerTypeTrackedValidatorUnstake) Destroy(value TrackedValidatorU
 }
 
 
-type TransactionHeader struct {
+type TransactionHeaderV1 struct {
 	NetworkId uint8
 	StartEpochInclusive uint64
 	EndEpochExclusive uint64
@@ -13536,7 +19502,7 @@ type TransactionHeader struct {
 	TipPercentage uint16
 }
 
-func (r *TransactionHeader) Destroy() {
+func (r *TransactionHeaderV1) Destroy() {
 		FfiDestroyerUint8{}.Destroy(r.NetworkId);
 		FfiDestroyerUint64{}.Destroy(r.StartEpochInclusive);
 		FfiDestroyerUint64{}.Destroy(r.EndEpochExclusive);
@@ -13546,16 +19512,16 @@ func (r *TransactionHeader) Destroy() {
 		FfiDestroyerUint16{}.Destroy(r.TipPercentage);
 }
 
-type FfiConverterTypeTransactionHeader struct {}
+type FfiConverterTypeTransactionHeaderV1 struct {}
 
-var FfiConverterTypeTransactionHeaderINSTANCE = FfiConverterTypeTransactionHeader{}
+var FfiConverterTypeTransactionHeaderV1INSTANCE = FfiConverterTypeTransactionHeaderV1{}
 
-func (c FfiConverterTypeTransactionHeader) Lift(rb RustBufferI) TransactionHeader {
-	return LiftFromRustBuffer[TransactionHeader](c, rb)
+func (c FfiConverterTypeTransactionHeaderV1) Lift(rb RustBufferI) TransactionHeaderV1 {
+	return LiftFromRustBuffer[TransactionHeaderV1](c, rb)
 }
 
-func (c FfiConverterTypeTransactionHeader) Read(reader io.Reader) TransactionHeader {
-	return TransactionHeader {
+func (c FfiConverterTypeTransactionHeaderV1) Read(reader io.Reader) TransactionHeaderV1 {
+	return TransactionHeaderV1 {
 			FfiConverterUint8INSTANCE.Read(reader),
 			FfiConverterUint64INSTANCE.Read(reader),
 			FfiConverterUint64INSTANCE.Read(reader),
@@ -13566,11 +19532,11 @@ func (c FfiConverterTypeTransactionHeader) Read(reader io.Reader) TransactionHea
 	}
 }
 
-func (c FfiConverterTypeTransactionHeader) Lower(value TransactionHeader) RustBuffer {
-	return LowerIntoRustBuffer[TransactionHeader](c, value)
+func (c FfiConverterTypeTransactionHeaderV1) Lower(value TransactionHeaderV1) RustBuffer {
+	return LowerIntoRustBuffer[TransactionHeaderV1](c, value)
 }
 
-func (c FfiConverterTypeTransactionHeader) Write(writer io.Writer, value TransactionHeader) {
+func (c FfiConverterTypeTransactionHeaderV1) Write(writer io.Writer, value TransactionHeaderV1) {
 		FfiConverterUint8INSTANCE.Write(writer, value.NetworkId);
 		FfiConverterUint64INSTANCE.Write(writer, value.StartEpochInclusive);
 		FfiConverterUint64INSTANCE.Write(writer, value.EndEpochExclusive);
@@ -13580,54 +19546,54 @@ func (c FfiConverterTypeTransactionHeader) Write(writer io.Writer, value Transac
 		FfiConverterUint16INSTANCE.Write(writer, value.TipPercentage);
 }
 
-type FfiDestroyerTypeTransactionHeader struct {}
+type FfiDestroyerTypeTransactionHeaderV1 struct {}
 
-func (_ FfiDestroyerTypeTransactionHeader) Destroy(value TransactionHeader) {
+func (_ FfiDestroyerTypeTransactionHeaderV1) Destroy(value TransactionHeaderV1) {
 	value.Destroy()
 }
 
 
-type TransactionManifestModifications struct {
-	AddAccessControllerProofs []*Address
-	AddLockFee *LockFeeModification
-	AddAssertions []IndexedAssertion
+type TransactionHeaderV2 struct {
+	NotaryPublicKey PublicKey
+	NotaryIsSignatory bool
+	TipBasisPoints uint32
 }
 
-func (r *TransactionManifestModifications) Destroy() {
-		FfiDestroyerSequenceAddress{}.Destroy(r.AddAccessControllerProofs);
-		FfiDestroyerOptionalTypeLockFeeModification{}.Destroy(r.AddLockFee);
-		FfiDestroyerSequenceTypeIndexedAssertion{}.Destroy(r.AddAssertions);
+func (r *TransactionHeaderV2) Destroy() {
+		FfiDestroyerTypePublicKey{}.Destroy(r.NotaryPublicKey);
+		FfiDestroyerBool{}.Destroy(r.NotaryIsSignatory);
+		FfiDestroyerUint32{}.Destroy(r.TipBasisPoints);
 }
 
-type FfiConverterTypeTransactionManifestModifications struct {}
+type FfiConverterTypeTransactionHeaderV2 struct {}
 
-var FfiConverterTypeTransactionManifestModificationsINSTANCE = FfiConverterTypeTransactionManifestModifications{}
+var FfiConverterTypeTransactionHeaderV2INSTANCE = FfiConverterTypeTransactionHeaderV2{}
 
-func (c FfiConverterTypeTransactionManifestModifications) Lift(rb RustBufferI) TransactionManifestModifications {
-	return LiftFromRustBuffer[TransactionManifestModifications](c, rb)
+func (c FfiConverterTypeTransactionHeaderV2) Lift(rb RustBufferI) TransactionHeaderV2 {
+	return LiftFromRustBuffer[TransactionHeaderV2](c, rb)
 }
 
-func (c FfiConverterTypeTransactionManifestModifications) Read(reader io.Reader) TransactionManifestModifications {
-	return TransactionManifestModifications {
-			FfiConverterSequenceAddressINSTANCE.Read(reader),
-			FfiConverterOptionalTypeLockFeeModificationINSTANCE.Read(reader),
-			FfiConverterSequenceTypeIndexedAssertionINSTANCE.Read(reader),
+func (c FfiConverterTypeTransactionHeaderV2) Read(reader io.Reader) TransactionHeaderV2 {
+	return TransactionHeaderV2 {
+			FfiConverterTypePublicKeyINSTANCE.Read(reader),
+			FfiConverterBoolINSTANCE.Read(reader),
+			FfiConverterUint32INSTANCE.Read(reader),
 	}
 }
 
-func (c FfiConverterTypeTransactionManifestModifications) Lower(value TransactionManifestModifications) RustBuffer {
-	return LowerIntoRustBuffer[TransactionManifestModifications](c, value)
+func (c FfiConverterTypeTransactionHeaderV2) Lower(value TransactionHeaderV2) RustBuffer {
+	return LowerIntoRustBuffer[TransactionHeaderV2](c, value)
 }
 
-func (c FfiConverterTypeTransactionManifestModifications) Write(writer io.Writer, value TransactionManifestModifications) {
-		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AddAccessControllerProofs);
-		FfiConverterOptionalTypeLockFeeModificationINSTANCE.Write(writer, value.AddLockFee);
-		FfiConverterSequenceTypeIndexedAssertionINSTANCE.Write(writer, value.AddAssertions);
+func (c FfiConverterTypeTransactionHeaderV2) Write(writer io.Writer, value TransactionHeaderV2) {
+		FfiConverterTypePublicKeyINSTANCE.Write(writer, value.NotaryPublicKey);
+		FfiConverterBoolINSTANCE.Write(writer, value.NotaryIsSignatory);
+		FfiConverterUint32INSTANCE.Write(writer, value.TipBasisPoints);
 }
 
-type FfiDestroyerTypeTransactionManifestModifications struct {}
+type FfiDestroyerTypeTransactionHeaderV2 struct {}
 
-func (_ FfiDestroyerTypeTransactionManifestModifications) Destroy(value TransactionManifestModifications) {
+func (_ FfiDestroyerTypeTransactionHeaderV2) Destroy(value TransactionHeaderV2) {
 	value.Destroy()
 }
 
@@ -14284,6 +20250,92 @@ func (_ FfiDestroyerTypeAccountDefaultDepositRule) Destroy(value AccountDefaultD
 
 
 
+type AccountDeposit interface {
+	Destroy()
+}
+type AccountDepositKnownFungible struct {
+	ResourceAddress *Address
+	Bounds SimpleFungibleResourceBounds
+}
+
+func (e AccountDepositKnownFungible) Destroy() {
+		FfiDestroyerAddress{}.Destroy(e.ResourceAddress);
+		FfiDestroyerTypeSimpleFungibleResourceBounds{}.Destroy(e.Bounds);
+}
+type AccountDepositKnownNonFungible struct {
+	ResourceAddress *Address
+	Bounds SimpleNonFungibleResourceBounds
+}
+
+func (e AccountDepositKnownNonFungible) Destroy() {
+		FfiDestroyerAddress{}.Destroy(e.ResourceAddress);
+		FfiDestroyerTypeSimpleNonFungibleResourceBounds{}.Destroy(e.Bounds);
+}
+type AccountDepositUnknown struct {
+}
+
+func (e AccountDepositUnknown) Destroy() {
+}
+
+type FfiConverterTypeAccountDeposit struct {}
+
+var FfiConverterTypeAccountDepositINSTANCE = FfiConverterTypeAccountDeposit{}
+
+func (c FfiConverterTypeAccountDeposit) Lift(rb RustBufferI) AccountDeposit {
+	return LiftFromRustBuffer[AccountDeposit](c, rb)
+}
+
+func (c FfiConverterTypeAccountDeposit) Lower(value AccountDeposit) RustBuffer {
+	return LowerIntoRustBuffer[AccountDeposit](c, value)
+}
+func (FfiConverterTypeAccountDeposit) Read(reader io.Reader) AccountDeposit {
+	id := readInt32(reader)
+	switch (id) {
+		case 1:
+			return AccountDepositKnownFungible{
+				FfiConverterAddressINSTANCE.Read(reader),
+				FfiConverterTypeSimpleFungibleResourceBoundsINSTANCE.Read(reader),
+			};
+		case 2:
+			return AccountDepositKnownNonFungible{
+				FfiConverterAddressINSTANCE.Read(reader),
+				FfiConverterTypeSimpleNonFungibleResourceBoundsINSTANCE.Read(reader),
+			};
+		case 3:
+			return AccountDepositUnknown{
+			};
+		default:
+			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeAccountDeposit.Read()", id));
+	}
+}
+
+func (FfiConverterTypeAccountDeposit) Write(writer io.Writer, value AccountDeposit) {
+	switch variant_value := value.(type) {
+		case AccountDepositKnownFungible:
+			writeInt32(writer, 1)
+			FfiConverterAddressINSTANCE.Write(writer, variant_value.ResourceAddress)
+			FfiConverterTypeSimpleFungibleResourceBoundsINSTANCE.Write(writer, variant_value.Bounds)
+		case AccountDepositKnownNonFungible:
+			writeInt32(writer, 2)
+			FfiConverterAddressINSTANCE.Write(writer, variant_value.ResourceAddress)
+			FfiConverterTypeSimpleNonFungibleResourceBoundsINSTANCE.Write(writer, variant_value.Bounds)
+		case AccountDepositUnknown:
+			writeInt32(writer, 3)
+		default:
+			_ = variant_value
+			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeAccountDeposit.Write", value))
+	}
+}
+
+type FfiDestroyerTypeAccountDeposit struct {}
+
+func (_ FfiDestroyerTypeAccountDeposit) Destroy(value AccountDeposit) {
+	value.Destroy()
+}
+
+
+
+
 type AccountDepositEvent interface {
 	Destroy()
 }
@@ -14436,6 +20488,82 @@ func (_ FfiDestroyerTypeAccountRejectedDepositEvent) Destroy(value AccountReject
 
 
 
+type AccountWithdraw interface {
+	Destroy()
+}
+type AccountWithdrawAmount struct {
+	ResourceAddress *Address
+	Amount *Decimal
+}
+
+func (e AccountWithdrawAmount) Destroy() {
+		FfiDestroyerAddress{}.Destroy(e.ResourceAddress);
+		FfiDestroyerDecimal{}.Destroy(e.Amount);
+}
+type AccountWithdrawIds struct {
+	ResourceAddress *Address
+	Ids []NonFungibleLocalId
+}
+
+func (e AccountWithdrawIds) Destroy() {
+		FfiDestroyerAddress{}.Destroy(e.ResourceAddress);
+		FfiDestroyerSequenceTypeNonFungibleLocalId{}.Destroy(e.Ids);
+}
+
+type FfiConverterTypeAccountWithdraw struct {}
+
+var FfiConverterTypeAccountWithdrawINSTANCE = FfiConverterTypeAccountWithdraw{}
+
+func (c FfiConverterTypeAccountWithdraw) Lift(rb RustBufferI) AccountWithdraw {
+	return LiftFromRustBuffer[AccountWithdraw](c, rb)
+}
+
+func (c FfiConverterTypeAccountWithdraw) Lower(value AccountWithdraw) RustBuffer {
+	return LowerIntoRustBuffer[AccountWithdraw](c, value)
+}
+func (FfiConverterTypeAccountWithdraw) Read(reader io.Reader) AccountWithdraw {
+	id := readInt32(reader)
+	switch (id) {
+		case 1:
+			return AccountWithdrawAmount{
+				FfiConverterAddressINSTANCE.Read(reader),
+				FfiConverterDecimalINSTANCE.Read(reader),
+			};
+		case 2:
+			return AccountWithdrawIds{
+				FfiConverterAddressINSTANCE.Read(reader),
+				FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Read(reader),
+			};
+		default:
+			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeAccountWithdraw.Read()", id));
+	}
+}
+
+func (FfiConverterTypeAccountWithdraw) Write(writer io.Writer, value AccountWithdraw) {
+	switch variant_value := value.(type) {
+		case AccountWithdrawAmount:
+			writeInt32(writer, 1)
+			FfiConverterAddressINSTANCE.Write(writer, variant_value.ResourceAddress)
+			FfiConverterDecimalINSTANCE.Write(writer, variant_value.Amount)
+		case AccountWithdrawIds:
+			writeInt32(writer, 2)
+			FfiConverterAddressINSTANCE.Write(writer, variant_value.ResourceAddress)
+			FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Write(writer, variant_value.Ids)
+		default:
+			_ = variant_value
+			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeAccountWithdraw.Write", value))
+	}
+}
+
+type FfiDestroyerTypeAccountWithdraw struct {}
+
+func (_ FfiDestroyerTypeAccountWithdraw) Destroy(value AccountWithdraw) {
+	value.Destroy()
+}
+
+
+
+
 type AccountWithdrawEvent interface {
 	Destroy()
 }
@@ -14512,76 +20640,64 @@ func (_ FfiDestroyerTypeAccountWithdrawEvent) Destroy(value AccountWithdrawEvent
 
 
 
-type Assertion interface {
+type AllowedIds interface {
 	Destroy()
 }
-type AssertionAmount struct {
-	ResourceAddress *Address
-	Amount *Decimal
-}
-
-func (e AssertionAmount) Destroy() {
-		FfiDestroyerAddress{}.Destroy(e.ResourceAddress);
-		FfiDestroyerDecimal{}.Destroy(e.Amount);
-}
-type AssertionIds struct {
-	ResourceAddress *Address
+type AllowedIdsAllowlist struct {
 	Ids []NonFungibleLocalId
 }
 
-func (e AssertionIds) Destroy() {
-		FfiDestroyerAddress{}.Destroy(e.ResourceAddress);
+func (e AllowedIdsAllowlist) Destroy() {
 		FfiDestroyerSequenceTypeNonFungibleLocalId{}.Destroy(e.Ids);
 }
-
-type FfiConverterTypeAssertion struct {}
-
-var FfiConverterTypeAssertionINSTANCE = FfiConverterTypeAssertion{}
-
-func (c FfiConverterTypeAssertion) Lift(rb RustBufferI) Assertion {
-	return LiftFromRustBuffer[Assertion](c, rb)
+type AllowedIdsAny struct {
 }
 
-func (c FfiConverterTypeAssertion) Lower(value Assertion) RustBuffer {
-	return LowerIntoRustBuffer[Assertion](c, value)
+func (e AllowedIdsAny) Destroy() {
 }
-func (FfiConverterTypeAssertion) Read(reader io.Reader) Assertion {
+
+type FfiConverterTypeAllowedIds struct {}
+
+var FfiConverterTypeAllowedIdsINSTANCE = FfiConverterTypeAllowedIds{}
+
+func (c FfiConverterTypeAllowedIds) Lift(rb RustBufferI) AllowedIds {
+	return LiftFromRustBuffer[AllowedIds](c, rb)
+}
+
+func (c FfiConverterTypeAllowedIds) Lower(value AllowedIds) RustBuffer {
+	return LowerIntoRustBuffer[AllowedIds](c, value)
+}
+func (FfiConverterTypeAllowedIds) Read(reader io.Reader) AllowedIds {
 	id := readInt32(reader)
 	switch (id) {
 		case 1:
-			return AssertionAmount{
-				FfiConverterAddressINSTANCE.Read(reader),
-				FfiConverterDecimalINSTANCE.Read(reader),
-			};
-		case 2:
-			return AssertionIds{
-				FfiConverterAddressINSTANCE.Read(reader),
+			return AllowedIdsAllowlist{
 				FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Read(reader),
 			};
+		case 2:
+			return AllowedIdsAny{
+			};
 		default:
-			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeAssertion.Read()", id));
+			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeAllowedIds.Read()", id));
 	}
 }
 
-func (FfiConverterTypeAssertion) Write(writer io.Writer, value Assertion) {
+func (FfiConverterTypeAllowedIds) Write(writer io.Writer, value AllowedIds) {
 	switch variant_value := value.(type) {
-		case AssertionAmount:
+		case AllowedIdsAllowlist:
 			writeInt32(writer, 1)
-			FfiConverterAddressINSTANCE.Write(writer, variant_value.ResourceAddress)
-			FfiConverterDecimalINSTANCE.Write(writer, variant_value.Amount)
-		case AssertionIds:
-			writeInt32(writer, 2)
-			FfiConverterAddressINSTANCE.Write(writer, variant_value.ResourceAddress)
 			FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Write(writer, variant_value.Ids)
+		case AllowedIdsAny:
+			writeInt32(writer, 2)
 		default:
 			_ = variant_value
-			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeAssertion.Write", value))
+			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeAllowedIds.Write", value))
 	}
 }
 
-type FfiDestroyerTypeAssertion struct {}
+type FfiDestroyerTypeAllowedIds struct {}
 
-func (_ FfiDestroyerTypeAssertion) Destroy(value Assertion) {
+func (_ FfiDestroyerTypeAllowedIds) Destroy(value AllowedIds) {
 	value.Destroy()
 }
 
@@ -14623,111 +20739,222 @@ func (_ FfiDestroyerTypeCurve) Destroy(value Curve) {
 
 
 
-type CurveType uint
+type CurveTypeV1 uint
 
 const (
-	CurveTypeEd25519 CurveType = 1
-	CurveTypeSecp256k1 CurveType = 2
+	CurveTypeV1Ed25519 CurveTypeV1 = 1
+	CurveTypeV1Secp256k1 CurveTypeV1 = 2
 )
 
-type FfiConverterTypeCurveType struct {}
+type FfiConverterTypeCurveTypeV1 struct {}
 
-var FfiConverterTypeCurveTypeINSTANCE = FfiConverterTypeCurveType{}
+var FfiConverterTypeCurveTypeV1INSTANCE = FfiConverterTypeCurveTypeV1{}
 
-func (c FfiConverterTypeCurveType) Lift(rb RustBufferI) CurveType {
-	return LiftFromRustBuffer[CurveType](c, rb)
+func (c FfiConverterTypeCurveTypeV1) Lift(rb RustBufferI) CurveTypeV1 {
+	return LiftFromRustBuffer[CurveTypeV1](c, rb)
 }
 
-func (c FfiConverterTypeCurveType) Lower(value CurveType) RustBuffer {
-	return LowerIntoRustBuffer[CurveType](c, value)
+func (c FfiConverterTypeCurveTypeV1) Lower(value CurveTypeV1) RustBuffer {
+	return LowerIntoRustBuffer[CurveTypeV1](c, value)
 }
-func (FfiConverterTypeCurveType) Read(reader io.Reader) CurveType {
+func (FfiConverterTypeCurveTypeV1) Read(reader io.Reader) CurveTypeV1 {
 	id := readInt32(reader)
-	return CurveType(id)
+	return CurveTypeV1(id)
 }
 
-func (FfiConverterTypeCurveType) Write(writer io.Writer, value CurveType) {
+func (FfiConverterTypeCurveTypeV1) Write(writer io.Writer, value CurveTypeV1) {
 	writeInt32(writer, int32(value))
 }
 
-type FfiDestroyerTypeCurveType struct {}
+type FfiDestroyerTypeCurveTypeV1 struct {}
 
-func (_ FfiDestroyerTypeCurveType) Destroy(value CurveType) {
+func (_ FfiDestroyerTypeCurveTypeV1) Destroy(value CurveTypeV1) {
 }
 
 
 
 
-type DecryptorsByCurve interface {
+type CurveTypeV2 uint
+
+const (
+	CurveTypeV2Ed25519 CurveTypeV2 = 1
+	CurveTypeV2Secp256k1 CurveTypeV2 = 2
+)
+
+type FfiConverterTypeCurveTypeV2 struct {}
+
+var FfiConverterTypeCurveTypeV2INSTANCE = FfiConverterTypeCurveTypeV2{}
+
+func (c FfiConverterTypeCurveTypeV2) Lift(rb RustBufferI) CurveTypeV2 {
+	return LiftFromRustBuffer[CurveTypeV2](c, rb)
+}
+
+func (c FfiConverterTypeCurveTypeV2) Lower(value CurveTypeV2) RustBuffer {
+	return LowerIntoRustBuffer[CurveTypeV2](c, value)
+}
+func (FfiConverterTypeCurveTypeV2) Read(reader io.Reader) CurveTypeV2 {
+	id := readInt32(reader)
+	return CurveTypeV2(id)
+}
+
+func (FfiConverterTypeCurveTypeV2) Write(writer io.Writer, value CurveTypeV2) {
+	writeInt32(writer, int32(value))
+}
+
+type FfiDestroyerTypeCurveTypeV2 struct {}
+
+func (_ FfiDestroyerTypeCurveTypeV2) Destroy(value CurveTypeV2) {
+}
+
+
+
+
+type DecryptorsByCurveV1 interface {
 	Destroy()
 }
-type DecryptorsByCurveEd25519 struct {
+type DecryptorsByCurveV1Ed25519 struct {
+	DhEphemeralPublicKey Ed25519PublicKey
+	Decryptors map[PublicKeyFingerprintV1][]byte
+}
+
+func (e DecryptorsByCurveV1Ed25519) Destroy() {
+		FfiDestroyerTypeEd25519PublicKey{}.Destroy(e.DhEphemeralPublicKey);
+		FfiDestroyerMapTypePublicKeyFingerprintV1Bytes{}.Destroy(e.Decryptors);
+}
+type DecryptorsByCurveV1Secp256k1 struct {
+	DhEphemeralPublicKey Secp256k1PublicKey
+	Decryptors map[PublicKeyFingerprintV1][]byte
+}
+
+func (e DecryptorsByCurveV1Secp256k1) Destroy() {
+		FfiDestroyerTypeSecp256k1PublicKey{}.Destroy(e.DhEphemeralPublicKey);
+		FfiDestroyerMapTypePublicKeyFingerprintV1Bytes{}.Destroy(e.Decryptors);
+}
+
+type FfiConverterTypeDecryptorsByCurveV1 struct {}
+
+var FfiConverterTypeDecryptorsByCurveV1INSTANCE = FfiConverterTypeDecryptorsByCurveV1{}
+
+func (c FfiConverterTypeDecryptorsByCurveV1) Lift(rb RustBufferI) DecryptorsByCurveV1 {
+	return LiftFromRustBuffer[DecryptorsByCurveV1](c, rb)
+}
+
+func (c FfiConverterTypeDecryptorsByCurveV1) Lower(value DecryptorsByCurveV1) RustBuffer {
+	return LowerIntoRustBuffer[DecryptorsByCurveV1](c, value)
+}
+func (FfiConverterTypeDecryptorsByCurveV1) Read(reader io.Reader) DecryptorsByCurveV1 {
+	id := readInt32(reader)
+	switch (id) {
+		case 1:
+			return DecryptorsByCurveV1Ed25519{
+				FfiConverterTypeEd25519PublicKeyINSTANCE.Read(reader),
+				FfiConverterMapTypePublicKeyFingerprintV1BytesINSTANCE.Read(reader),
+			};
+		case 2:
+			return DecryptorsByCurveV1Secp256k1{
+				FfiConverterTypeSecp256k1PublicKeyINSTANCE.Read(reader),
+				FfiConverterMapTypePublicKeyFingerprintV1BytesINSTANCE.Read(reader),
+			};
+		default:
+			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeDecryptorsByCurveV1.Read()", id));
+	}
+}
+
+func (FfiConverterTypeDecryptorsByCurveV1) Write(writer io.Writer, value DecryptorsByCurveV1) {
+	switch variant_value := value.(type) {
+		case DecryptorsByCurveV1Ed25519:
+			writeInt32(writer, 1)
+			FfiConverterTypeEd25519PublicKeyINSTANCE.Write(writer, variant_value.DhEphemeralPublicKey)
+			FfiConverterMapTypePublicKeyFingerprintV1BytesINSTANCE.Write(writer, variant_value.Decryptors)
+		case DecryptorsByCurveV1Secp256k1:
+			writeInt32(writer, 2)
+			FfiConverterTypeSecp256k1PublicKeyINSTANCE.Write(writer, variant_value.DhEphemeralPublicKey)
+			FfiConverterMapTypePublicKeyFingerprintV1BytesINSTANCE.Write(writer, variant_value.Decryptors)
+		default:
+			_ = variant_value
+			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeDecryptorsByCurveV1.Write", value))
+	}
+}
+
+type FfiDestroyerTypeDecryptorsByCurveV1 struct {}
+
+func (_ FfiDestroyerTypeDecryptorsByCurveV1) Destroy(value DecryptorsByCurveV1) {
+	value.Destroy()
+}
+
+
+
+
+type DecryptorsByCurveV2 interface {
+	Destroy()
+}
+type DecryptorsByCurveV2Ed25519 struct {
 	DhEphemeralPublicKey Ed25519PublicKey
 	Decryptors map[PublicKeyFingerprint][]byte
 }
 
-func (e DecryptorsByCurveEd25519) Destroy() {
+func (e DecryptorsByCurveV2Ed25519) Destroy() {
 		FfiDestroyerTypeEd25519PublicKey{}.Destroy(e.DhEphemeralPublicKey);
 		FfiDestroyerMapTypePublicKeyFingerprintBytes{}.Destroy(e.Decryptors);
 }
-type DecryptorsByCurveSecp256k1 struct {
+type DecryptorsByCurveV2Secp256k1 struct {
 	DhEphemeralPublicKey Secp256k1PublicKey
 	Decryptors map[PublicKeyFingerprint][]byte
 }
 
-func (e DecryptorsByCurveSecp256k1) Destroy() {
+func (e DecryptorsByCurveV2Secp256k1) Destroy() {
 		FfiDestroyerTypeSecp256k1PublicKey{}.Destroy(e.DhEphemeralPublicKey);
 		FfiDestroyerMapTypePublicKeyFingerprintBytes{}.Destroy(e.Decryptors);
 }
 
-type FfiConverterTypeDecryptorsByCurve struct {}
+type FfiConverterTypeDecryptorsByCurveV2 struct {}
 
-var FfiConverterTypeDecryptorsByCurveINSTANCE = FfiConverterTypeDecryptorsByCurve{}
+var FfiConverterTypeDecryptorsByCurveV2INSTANCE = FfiConverterTypeDecryptorsByCurveV2{}
 
-func (c FfiConverterTypeDecryptorsByCurve) Lift(rb RustBufferI) DecryptorsByCurve {
-	return LiftFromRustBuffer[DecryptorsByCurve](c, rb)
+func (c FfiConverterTypeDecryptorsByCurveV2) Lift(rb RustBufferI) DecryptorsByCurveV2 {
+	return LiftFromRustBuffer[DecryptorsByCurveV2](c, rb)
 }
 
-func (c FfiConverterTypeDecryptorsByCurve) Lower(value DecryptorsByCurve) RustBuffer {
-	return LowerIntoRustBuffer[DecryptorsByCurve](c, value)
+func (c FfiConverterTypeDecryptorsByCurveV2) Lower(value DecryptorsByCurveV2) RustBuffer {
+	return LowerIntoRustBuffer[DecryptorsByCurveV2](c, value)
 }
-func (FfiConverterTypeDecryptorsByCurve) Read(reader io.Reader) DecryptorsByCurve {
+func (FfiConverterTypeDecryptorsByCurveV2) Read(reader io.Reader) DecryptorsByCurveV2 {
 	id := readInt32(reader)
 	switch (id) {
 		case 1:
-			return DecryptorsByCurveEd25519{
+			return DecryptorsByCurveV2Ed25519{
 				FfiConverterTypeEd25519PublicKeyINSTANCE.Read(reader),
 				FfiConverterMapTypePublicKeyFingerprintBytesINSTANCE.Read(reader),
 			};
 		case 2:
-			return DecryptorsByCurveSecp256k1{
+			return DecryptorsByCurveV2Secp256k1{
 				FfiConverterTypeSecp256k1PublicKeyINSTANCE.Read(reader),
 				FfiConverterMapTypePublicKeyFingerprintBytesINSTANCE.Read(reader),
 			};
 		default:
-			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeDecryptorsByCurve.Read()", id));
+			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeDecryptorsByCurveV2.Read()", id));
 	}
 }
 
-func (FfiConverterTypeDecryptorsByCurve) Write(writer io.Writer, value DecryptorsByCurve) {
+func (FfiConverterTypeDecryptorsByCurveV2) Write(writer io.Writer, value DecryptorsByCurveV2) {
 	switch variant_value := value.(type) {
-		case DecryptorsByCurveEd25519:
+		case DecryptorsByCurveV2Ed25519:
 			writeInt32(writer, 1)
 			FfiConverterTypeEd25519PublicKeyINSTANCE.Write(writer, variant_value.DhEphemeralPublicKey)
 			FfiConverterMapTypePublicKeyFingerprintBytesINSTANCE.Write(writer, variant_value.Decryptors)
-		case DecryptorsByCurveSecp256k1:
+		case DecryptorsByCurveV2Secp256k1:
 			writeInt32(writer, 2)
 			FfiConverterTypeSecp256k1PublicKeyINSTANCE.Write(writer, variant_value.DhEphemeralPublicKey)
 			FfiConverterMapTypePublicKeyFingerprintBytesINSTANCE.Write(writer, variant_value.Decryptors)
 		default:
 			_ = variant_value
-			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeDecryptorsByCurve.Write", value))
+			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeDecryptorsByCurveV2.Write", value))
 	}
 }
 
-type FfiDestroyerTypeDecryptorsByCurve struct {}
+type FfiDestroyerTypeDecryptorsByCurveV2 struct {}
 
-func (_ FfiDestroyerTypeDecryptorsByCurve) Destroy(value DecryptorsByCurve) {
+func (_ FfiDestroyerTypeDecryptorsByCurveV2) Destroy(value DecryptorsByCurveV2) {
 	value.Destroy()
 }
 
@@ -15170,10 +21397,10 @@ const (
 	EntityTypeGlobalAccount EntityType = 7
 	EntityTypeGlobalIdentity EntityType = 8
 	EntityTypeGlobalGenericComponent EntityType = 9
-	EntityTypeGlobalVirtualSecp256k1Account EntityType = 10
-	EntityTypeGlobalVirtualEd25519Account EntityType = 11
-	EntityTypeGlobalVirtualSecp256k1Identity EntityType = 12
-	EntityTypeGlobalVirtualEd25519Identity EntityType = 13
+	EntityTypeGlobalPreallocatedSecp256k1Account EntityType = 10
+	EntityTypeGlobalPreallocatedEd25519Account EntityType = 11
+	EntityTypeGlobalPreallocatedSecp256k1Identity EntityType = 12
+	EntityTypeGlobalPreallocatedEd25519Identity EntityType = 13
 	EntityTypeGlobalOneResourcePool EntityType = 14
 	EntityTypeGlobalTwoResourcePool EntityType = 15
 	EntityTypeGlobalMultiResourcePool EntityType = 16
@@ -15281,524 +21508,1168 @@ func (_ FfiDestroyerTypeFungibleResourceIndicator) Destroy(value FungibleResourc
 
 
 
-type Instruction interface {
+type InstructionV1 interface {
 	Destroy()
 }
-type InstructionTakeAllFromWorktop struct {
+type InstructionV1TakeAllFromWorktop struct {
 	ResourceAddress *Address
 }
 
-func (e InstructionTakeAllFromWorktop) Destroy() {
+func (e InstructionV1TakeAllFromWorktop) Destroy() {
 		FfiDestroyerAddress{}.Destroy(e.ResourceAddress);
 }
-type InstructionTakeFromWorktop struct {
+type InstructionV1TakeFromWorktop struct {
 	ResourceAddress *Address
 	Amount *Decimal
 }
 
-func (e InstructionTakeFromWorktop) Destroy() {
+func (e InstructionV1TakeFromWorktop) Destroy() {
 		FfiDestroyerAddress{}.Destroy(e.ResourceAddress);
 		FfiDestroyerDecimal{}.Destroy(e.Amount);
 }
-type InstructionTakeNonFungiblesFromWorktop struct {
+type InstructionV1TakeNonFungiblesFromWorktop struct {
 	ResourceAddress *Address
 	Ids []NonFungibleLocalId
 }
 
-func (e InstructionTakeNonFungiblesFromWorktop) Destroy() {
+func (e InstructionV1TakeNonFungiblesFromWorktop) Destroy() {
 		FfiDestroyerAddress{}.Destroy(e.ResourceAddress);
 		FfiDestroyerSequenceTypeNonFungibleLocalId{}.Destroy(e.Ids);
 }
-type InstructionReturnToWorktop struct {
+type InstructionV1ReturnToWorktop struct {
 	BucketId ManifestBucket
 }
 
-func (e InstructionReturnToWorktop) Destroy() {
+func (e InstructionV1ReturnToWorktop) Destroy() {
 		FfiDestroyerTypeManifestBucket{}.Destroy(e.BucketId);
 }
-type InstructionAssertWorktopContains struct {
+type InstructionV1AssertWorktopContains struct {
 	ResourceAddress *Address
 	Amount *Decimal
 }
 
-func (e InstructionAssertWorktopContains) Destroy() {
+func (e InstructionV1AssertWorktopContains) Destroy() {
 		FfiDestroyerAddress{}.Destroy(e.ResourceAddress);
 		FfiDestroyerDecimal{}.Destroy(e.Amount);
 }
-type InstructionAssertWorktopContainsAny struct {
+type InstructionV1AssertWorktopContainsAny struct {
 	ResourceAddress *Address
 }
 
-func (e InstructionAssertWorktopContainsAny) Destroy() {
+func (e InstructionV1AssertWorktopContainsAny) Destroy() {
 		FfiDestroyerAddress{}.Destroy(e.ResourceAddress);
 }
-type InstructionAssertWorktopContainsNonFungibles struct {
+type InstructionV1AssertWorktopContainsNonFungibles struct {
 	ResourceAddress *Address
 	Ids []NonFungibleLocalId
 }
 
-func (e InstructionAssertWorktopContainsNonFungibles) Destroy() {
+func (e InstructionV1AssertWorktopContainsNonFungibles) Destroy() {
 		FfiDestroyerAddress{}.Destroy(e.ResourceAddress);
 		FfiDestroyerSequenceTypeNonFungibleLocalId{}.Destroy(e.Ids);
 }
-type InstructionPopFromAuthZone struct {
+type InstructionV1PopFromAuthZone struct {
 }
 
-func (e InstructionPopFromAuthZone) Destroy() {
+func (e InstructionV1PopFromAuthZone) Destroy() {
 }
-type InstructionPushToAuthZone struct {
+type InstructionV1PushToAuthZone struct {
 	ProofId ManifestProof
 }
 
-func (e InstructionPushToAuthZone) Destroy() {
+func (e InstructionV1PushToAuthZone) Destroy() {
 		FfiDestroyerTypeManifestProof{}.Destroy(e.ProofId);
 }
-type InstructionCreateProofFromAuthZoneOfAmount struct {
+type InstructionV1CreateProofFromAuthZoneOfAmount struct {
 	ResourceAddress *Address
 	Amount *Decimal
 }
 
-func (e InstructionCreateProofFromAuthZoneOfAmount) Destroy() {
+func (e InstructionV1CreateProofFromAuthZoneOfAmount) Destroy() {
 		FfiDestroyerAddress{}.Destroy(e.ResourceAddress);
 		FfiDestroyerDecimal{}.Destroy(e.Amount);
 }
-type InstructionCreateProofFromAuthZoneOfNonFungibles struct {
+type InstructionV1CreateProofFromAuthZoneOfNonFungibles struct {
 	ResourceAddress *Address
 	Ids []NonFungibleLocalId
 }
 
-func (e InstructionCreateProofFromAuthZoneOfNonFungibles) Destroy() {
+func (e InstructionV1CreateProofFromAuthZoneOfNonFungibles) Destroy() {
 		FfiDestroyerAddress{}.Destroy(e.ResourceAddress);
 		FfiDestroyerSequenceTypeNonFungibleLocalId{}.Destroy(e.Ids);
 }
-type InstructionCreateProofFromAuthZoneOfAll struct {
+type InstructionV1CreateProofFromAuthZoneOfAll struct {
 	ResourceAddress *Address
 }
 
-func (e InstructionCreateProofFromAuthZoneOfAll) Destroy() {
+func (e InstructionV1CreateProofFromAuthZoneOfAll) Destroy() {
 		FfiDestroyerAddress{}.Destroy(e.ResourceAddress);
 }
-type InstructionDropAllProofs struct {
+type InstructionV1DropAllProofs struct {
 }
 
-func (e InstructionDropAllProofs) Destroy() {
+func (e InstructionV1DropAllProofs) Destroy() {
 }
-type InstructionDropNamedProofs struct {
-}
-
-func (e InstructionDropNamedProofs) Destroy() {
-}
-type InstructionDropAuthZoneProofs struct {
+type InstructionV1DropNamedProofs struct {
 }
 
-func (e InstructionDropAuthZoneProofs) Destroy() {
+func (e InstructionV1DropNamedProofs) Destroy() {
 }
-type InstructionDropAuthZoneRegularProofs struct {
-}
-
-func (e InstructionDropAuthZoneRegularProofs) Destroy() {
-}
-type InstructionDropAuthZoneSignatureProofs struct {
+type InstructionV1DropAuthZoneProofs struct {
 }
 
-func (e InstructionDropAuthZoneSignatureProofs) Destroy() {
+func (e InstructionV1DropAuthZoneProofs) Destroy() {
 }
-type InstructionCreateProofFromBucketOfAmount struct {
+type InstructionV1DropAuthZoneRegularProofs struct {
+}
+
+func (e InstructionV1DropAuthZoneRegularProofs) Destroy() {
+}
+type InstructionV1DropAuthZoneSignatureProofs struct {
+}
+
+func (e InstructionV1DropAuthZoneSignatureProofs) Destroy() {
+}
+type InstructionV1CreateProofFromBucketOfAmount struct {
 	BucketId ManifestBucket
 	Amount *Decimal
 }
 
-func (e InstructionCreateProofFromBucketOfAmount) Destroy() {
+func (e InstructionV1CreateProofFromBucketOfAmount) Destroy() {
 		FfiDestroyerTypeManifestBucket{}.Destroy(e.BucketId);
 		FfiDestroyerDecimal{}.Destroy(e.Amount);
 }
-type InstructionCreateProofFromBucketOfNonFungibles struct {
+type InstructionV1CreateProofFromBucketOfNonFungibles struct {
 	BucketId ManifestBucket
 	Ids []NonFungibleLocalId
 }
 
-func (e InstructionCreateProofFromBucketOfNonFungibles) Destroy() {
+func (e InstructionV1CreateProofFromBucketOfNonFungibles) Destroy() {
 		FfiDestroyerTypeManifestBucket{}.Destroy(e.BucketId);
 		FfiDestroyerSequenceTypeNonFungibleLocalId{}.Destroy(e.Ids);
 }
-type InstructionCreateProofFromBucketOfAll struct {
+type InstructionV1CreateProofFromBucketOfAll struct {
 	BucketId ManifestBucket
 }
 
-func (e InstructionCreateProofFromBucketOfAll) Destroy() {
+func (e InstructionV1CreateProofFromBucketOfAll) Destroy() {
 		FfiDestroyerTypeManifestBucket{}.Destroy(e.BucketId);
 }
-type InstructionBurnResource struct {
+type InstructionV1BurnResource struct {
 	BucketId ManifestBucket
 }
 
-func (e InstructionBurnResource) Destroy() {
+func (e InstructionV1BurnResource) Destroy() {
 		FfiDestroyerTypeManifestBucket{}.Destroy(e.BucketId);
 }
-type InstructionCloneProof struct {
+type InstructionV1CloneProof struct {
 	ProofId ManifestProof
 }
 
-func (e InstructionCloneProof) Destroy() {
+func (e InstructionV1CloneProof) Destroy() {
 		FfiDestroyerTypeManifestProof{}.Destroy(e.ProofId);
 }
-type InstructionDropProof struct {
+type InstructionV1DropProof struct {
 	ProofId ManifestProof
 }
 
-func (e InstructionDropProof) Destroy() {
+func (e InstructionV1DropProof) Destroy() {
 		FfiDestroyerTypeManifestProof{}.Destroy(e.ProofId);
 }
-type InstructionCallFunction struct {
+type InstructionV1CallFunction struct {
 	PackageAddress ManifestAddress
 	BlueprintName string
 	FunctionName string
 	Args ManifestValue
 }
 
-func (e InstructionCallFunction) Destroy() {
+func (e InstructionV1CallFunction) Destroy() {
 		FfiDestroyerTypeManifestAddress{}.Destroy(e.PackageAddress);
 		FfiDestroyerString{}.Destroy(e.BlueprintName);
 		FfiDestroyerString{}.Destroy(e.FunctionName);
 		FfiDestroyerTypeManifestValue{}.Destroy(e.Args);
 }
-type InstructionCallMethod struct {
+type InstructionV1CallMethod struct {
 	Address ManifestAddress
 	MethodName string
 	Args ManifestValue
 }
 
-func (e InstructionCallMethod) Destroy() {
+func (e InstructionV1CallMethod) Destroy() {
 		FfiDestroyerTypeManifestAddress{}.Destroy(e.Address);
 		FfiDestroyerString{}.Destroy(e.MethodName);
 		FfiDestroyerTypeManifestValue{}.Destroy(e.Args);
 }
-type InstructionCallRoyaltyMethod struct {
+type InstructionV1CallRoyaltyMethod struct {
 	Address ManifestAddress
 	MethodName string
 	Args ManifestValue
 }
 
-func (e InstructionCallRoyaltyMethod) Destroy() {
+func (e InstructionV1CallRoyaltyMethod) Destroy() {
 		FfiDestroyerTypeManifestAddress{}.Destroy(e.Address);
 		FfiDestroyerString{}.Destroy(e.MethodName);
 		FfiDestroyerTypeManifestValue{}.Destroy(e.Args);
 }
-type InstructionCallMetadataMethod struct {
+type InstructionV1CallMetadataMethod struct {
 	Address ManifestAddress
 	MethodName string
 	Args ManifestValue
 }
 
-func (e InstructionCallMetadataMethod) Destroy() {
+func (e InstructionV1CallMetadataMethod) Destroy() {
 		FfiDestroyerTypeManifestAddress{}.Destroy(e.Address);
 		FfiDestroyerString{}.Destroy(e.MethodName);
 		FfiDestroyerTypeManifestValue{}.Destroy(e.Args);
 }
-type InstructionCallRoleAssignmentMethod struct {
+type InstructionV1CallRoleAssignmentMethod struct {
 	Address ManifestAddress
 	MethodName string
 	Args ManifestValue
 }
 
-func (e InstructionCallRoleAssignmentMethod) Destroy() {
+func (e InstructionV1CallRoleAssignmentMethod) Destroy() {
 		FfiDestroyerTypeManifestAddress{}.Destroy(e.Address);
 		FfiDestroyerString{}.Destroy(e.MethodName);
 		FfiDestroyerTypeManifestValue{}.Destroy(e.Args);
 }
-type InstructionCallDirectVaultMethod struct {
+type InstructionV1CallDirectVaultMethod struct {
 	Address *Address
 	MethodName string
 	Args ManifestValue
 }
 
-func (e InstructionCallDirectVaultMethod) Destroy() {
+func (e InstructionV1CallDirectVaultMethod) Destroy() {
 		FfiDestroyerAddress{}.Destroy(e.Address);
 		FfiDestroyerString{}.Destroy(e.MethodName);
 		FfiDestroyerTypeManifestValue{}.Destroy(e.Args);
 }
-type InstructionAllocateGlobalAddress struct {
+type InstructionV1AllocateGlobalAddress struct {
 	PackageAddress *Address
 	BlueprintName string
 }
 
-func (e InstructionAllocateGlobalAddress) Destroy() {
+func (e InstructionV1AllocateGlobalAddress) Destroy() {
 		FfiDestroyerAddress{}.Destroy(e.PackageAddress);
 		FfiDestroyerString{}.Destroy(e.BlueprintName);
 }
 
-type FfiConverterTypeInstruction struct {}
+type FfiConverterTypeInstructionV1 struct {}
 
-var FfiConverterTypeInstructionINSTANCE = FfiConverterTypeInstruction{}
+var FfiConverterTypeInstructionV1INSTANCE = FfiConverterTypeInstructionV1{}
 
-func (c FfiConverterTypeInstruction) Lift(rb RustBufferI) Instruction {
-	return LiftFromRustBuffer[Instruction](c, rb)
+func (c FfiConverterTypeInstructionV1) Lift(rb RustBufferI) InstructionV1 {
+	return LiftFromRustBuffer[InstructionV1](c, rb)
 }
 
-func (c FfiConverterTypeInstruction) Lower(value Instruction) RustBuffer {
-	return LowerIntoRustBuffer[Instruction](c, value)
+func (c FfiConverterTypeInstructionV1) Lower(value InstructionV1) RustBuffer {
+	return LowerIntoRustBuffer[InstructionV1](c, value)
 }
-func (FfiConverterTypeInstruction) Read(reader io.Reader) Instruction {
+func (FfiConverterTypeInstructionV1) Read(reader io.Reader) InstructionV1 {
 	id := readInt32(reader)
 	switch (id) {
 		case 1:
-			return InstructionTakeAllFromWorktop{
+			return InstructionV1TakeAllFromWorktop{
 				FfiConverterAddressINSTANCE.Read(reader),
 			};
 		case 2:
-			return InstructionTakeFromWorktop{
+			return InstructionV1TakeFromWorktop{
 				FfiConverterAddressINSTANCE.Read(reader),
 				FfiConverterDecimalINSTANCE.Read(reader),
 			};
 		case 3:
-			return InstructionTakeNonFungiblesFromWorktop{
+			return InstructionV1TakeNonFungiblesFromWorktop{
 				FfiConverterAddressINSTANCE.Read(reader),
 				FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Read(reader),
 			};
 		case 4:
-			return InstructionReturnToWorktop{
+			return InstructionV1ReturnToWorktop{
 				FfiConverterTypeManifestBucketINSTANCE.Read(reader),
 			};
 		case 5:
-			return InstructionAssertWorktopContains{
+			return InstructionV1AssertWorktopContains{
 				FfiConverterAddressINSTANCE.Read(reader),
 				FfiConverterDecimalINSTANCE.Read(reader),
 			};
 		case 6:
-			return InstructionAssertWorktopContainsAny{
+			return InstructionV1AssertWorktopContainsAny{
 				FfiConverterAddressINSTANCE.Read(reader),
 			};
 		case 7:
-			return InstructionAssertWorktopContainsNonFungibles{
+			return InstructionV1AssertWorktopContainsNonFungibles{
 				FfiConverterAddressINSTANCE.Read(reader),
 				FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Read(reader),
 			};
 		case 8:
-			return InstructionPopFromAuthZone{
+			return InstructionV1PopFromAuthZone{
 			};
 		case 9:
-			return InstructionPushToAuthZone{
+			return InstructionV1PushToAuthZone{
 				FfiConverterTypeManifestProofINSTANCE.Read(reader),
 			};
 		case 10:
-			return InstructionCreateProofFromAuthZoneOfAmount{
+			return InstructionV1CreateProofFromAuthZoneOfAmount{
 				FfiConverterAddressINSTANCE.Read(reader),
 				FfiConverterDecimalINSTANCE.Read(reader),
 			};
 		case 11:
-			return InstructionCreateProofFromAuthZoneOfNonFungibles{
+			return InstructionV1CreateProofFromAuthZoneOfNonFungibles{
 				FfiConverterAddressINSTANCE.Read(reader),
 				FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Read(reader),
 			};
 		case 12:
-			return InstructionCreateProofFromAuthZoneOfAll{
+			return InstructionV1CreateProofFromAuthZoneOfAll{
 				FfiConverterAddressINSTANCE.Read(reader),
 			};
 		case 13:
-			return InstructionDropAllProofs{
+			return InstructionV1DropAllProofs{
 			};
 		case 14:
-			return InstructionDropNamedProofs{
+			return InstructionV1DropNamedProofs{
 			};
 		case 15:
-			return InstructionDropAuthZoneProofs{
+			return InstructionV1DropAuthZoneProofs{
 			};
 		case 16:
-			return InstructionDropAuthZoneRegularProofs{
+			return InstructionV1DropAuthZoneRegularProofs{
 			};
 		case 17:
-			return InstructionDropAuthZoneSignatureProofs{
+			return InstructionV1DropAuthZoneSignatureProofs{
 			};
 		case 18:
-			return InstructionCreateProofFromBucketOfAmount{
+			return InstructionV1CreateProofFromBucketOfAmount{
 				FfiConverterTypeManifestBucketINSTANCE.Read(reader),
 				FfiConverterDecimalINSTANCE.Read(reader),
 			};
 		case 19:
-			return InstructionCreateProofFromBucketOfNonFungibles{
+			return InstructionV1CreateProofFromBucketOfNonFungibles{
 				FfiConverterTypeManifestBucketINSTANCE.Read(reader),
 				FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Read(reader),
 			};
 		case 20:
-			return InstructionCreateProofFromBucketOfAll{
+			return InstructionV1CreateProofFromBucketOfAll{
 				FfiConverterTypeManifestBucketINSTANCE.Read(reader),
 			};
 		case 21:
-			return InstructionBurnResource{
+			return InstructionV1BurnResource{
 				FfiConverterTypeManifestBucketINSTANCE.Read(reader),
 			};
 		case 22:
-			return InstructionCloneProof{
+			return InstructionV1CloneProof{
 				FfiConverterTypeManifestProofINSTANCE.Read(reader),
 			};
 		case 23:
-			return InstructionDropProof{
+			return InstructionV1DropProof{
 				FfiConverterTypeManifestProofINSTANCE.Read(reader),
 			};
 		case 24:
-			return InstructionCallFunction{
+			return InstructionV1CallFunction{
 				FfiConverterTypeManifestAddressINSTANCE.Read(reader),
 				FfiConverterStringINSTANCE.Read(reader),
 				FfiConverterStringINSTANCE.Read(reader),
 				FfiConverterTypeManifestValueINSTANCE.Read(reader),
 			};
 		case 25:
-			return InstructionCallMethod{
+			return InstructionV1CallMethod{
 				FfiConverterTypeManifestAddressINSTANCE.Read(reader),
 				FfiConverterStringINSTANCE.Read(reader),
 				FfiConverterTypeManifestValueINSTANCE.Read(reader),
 			};
 		case 26:
-			return InstructionCallRoyaltyMethod{
+			return InstructionV1CallRoyaltyMethod{
 				FfiConverterTypeManifestAddressINSTANCE.Read(reader),
 				FfiConverterStringINSTANCE.Read(reader),
 				FfiConverterTypeManifestValueINSTANCE.Read(reader),
 			};
 		case 27:
-			return InstructionCallMetadataMethod{
+			return InstructionV1CallMetadataMethod{
 				FfiConverterTypeManifestAddressINSTANCE.Read(reader),
 				FfiConverterStringINSTANCE.Read(reader),
 				FfiConverterTypeManifestValueINSTANCE.Read(reader),
 			};
 		case 28:
-			return InstructionCallRoleAssignmentMethod{
+			return InstructionV1CallRoleAssignmentMethod{
 				FfiConverterTypeManifestAddressINSTANCE.Read(reader),
 				FfiConverterStringINSTANCE.Read(reader),
 				FfiConverterTypeManifestValueINSTANCE.Read(reader),
 			};
 		case 29:
-			return InstructionCallDirectVaultMethod{
+			return InstructionV1CallDirectVaultMethod{
 				FfiConverterAddressINSTANCE.Read(reader),
 				FfiConverterStringINSTANCE.Read(reader),
 				FfiConverterTypeManifestValueINSTANCE.Read(reader),
 			};
 		case 30:
-			return InstructionAllocateGlobalAddress{
+			return InstructionV1AllocateGlobalAddress{
 				FfiConverterAddressINSTANCE.Read(reader),
 				FfiConverterStringINSTANCE.Read(reader),
 			};
 		default:
-			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeInstruction.Read()", id));
+			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeInstructionV1.Read()", id));
 	}
 }
 
-func (FfiConverterTypeInstruction) Write(writer io.Writer, value Instruction) {
+func (FfiConverterTypeInstructionV1) Write(writer io.Writer, value InstructionV1) {
 	switch variant_value := value.(type) {
-		case InstructionTakeAllFromWorktop:
+		case InstructionV1TakeAllFromWorktop:
 			writeInt32(writer, 1)
 			FfiConverterAddressINSTANCE.Write(writer, variant_value.ResourceAddress)
-		case InstructionTakeFromWorktop:
+		case InstructionV1TakeFromWorktop:
 			writeInt32(writer, 2)
 			FfiConverterAddressINSTANCE.Write(writer, variant_value.ResourceAddress)
 			FfiConverterDecimalINSTANCE.Write(writer, variant_value.Amount)
-		case InstructionTakeNonFungiblesFromWorktop:
+		case InstructionV1TakeNonFungiblesFromWorktop:
 			writeInt32(writer, 3)
 			FfiConverterAddressINSTANCE.Write(writer, variant_value.ResourceAddress)
 			FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Write(writer, variant_value.Ids)
-		case InstructionReturnToWorktop:
+		case InstructionV1ReturnToWorktop:
 			writeInt32(writer, 4)
 			FfiConverterTypeManifestBucketINSTANCE.Write(writer, variant_value.BucketId)
-		case InstructionAssertWorktopContains:
+		case InstructionV1AssertWorktopContains:
 			writeInt32(writer, 5)
 			FfiConverterAddressINSTANCE.Write(writer, variant_value.ResourceAddress)
 			FfiConverterDecimalINSTANCE.Write(writer, variant_value.Amount)
-		case InstructionAssertWorktopContainsAny:
+		case InstructionV1AssertWorktopContainsAny:
 			writeInt32(writer, 6)
 			FfiConverterAddressINSTANCE.Write(writer, variant_value.ResourceAddress)
-		case InstructionAssertWorktopContainsNonFungibles:
+		case InstructionV1AssertWorktopContainsNonFungibles:
 			writeInt32(writer, 7)
 			FfiConverterAddressINSTANCE.Write(writer, variant_value.ResourceAddress)
 			FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Write(writer, variant_value.Ids)
-		case InstructionPopFromAuthZone:
+		case InstructionV1PopFromAuthZone:
 			writeInt32(writer, 8)
-		case InstructionPushToAuthZone:
+		case InstructionV1PushToAuthZone:
 			writeInt32(writer, 9)
 			FfiConverterTypeManifestProofINSTANCE.Write(writer, variant_value.ProofId)
-		case InstructionCreateProofFromAuthZoneOfAmount:
+		case InstructionV1CreateProofFromAuthZoneOfAmount:
 			writeInt32(writer, 10)
 			FfiConverterAddressINSTANCE.Write(writer, variant_value.ResourceAddress)
 			FfiConverterDecimalINSTANCE.Write(writer, variant_value.Amount)
-		case InstructionCreateProofFromAuthZoneOfNonFungibles:
+		case InstructionV1CreateProofFromAuthZoneOfNonFungibles:
 			writeInt32(writer, 11)
 			FfiConverterAddressINSTANCE.Write(writer, variant_value.ResourceAddress)
 			FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Write(writer, variant_value.Ids)
-		case InstructionCreateProofFromAuthZoneOfAll:
+		case InstructionV1CreateProofFromAuthZoneOfAll:
 			writeInt32(writer, 12)
 			FfiConverterAddressINSTANCE.Write(writer, variant_value.ResourceAddress)
-		case InstructionDropAllProofs:
+		case InstructionV1DropAllProofs:
 			writeInt32(writer, 13)
-		case InstructionDropNamedProofs:
+		case InstructionV1DropNamedProofs:
 			writeInt32(writer, 14)
-		case InstructionDropAuthZoneProofs:
+		case InstructionV1DropAuthZoneProofs:
 			writeInt32(writer, 15)
-		case InstructionDropAuthZoneRegularProofs:
+		case InstructionV1DropAuthZoneRegularProofs:
 			writeInt32(writer, 16)
-		case InstructionDropAuthZoneSignatureProofs:
+		case InstructionV1DropAuthZoneSignatureProofs:
 			writeInt32(writer, 17)
-		case InstructionCreateProofFromBucketOfAmount:
+		case InstructionV1CreateProofFromBucketOfAmount:
 			writeInt32(writer, 18)
 			FfiConverterTypeManifestBucketINSTANCE.Write(writer, variant_value.BucketId)
 			FfiConverterDecimalINSTANCE.Write(writer, variant_value.Amount)
-		case InstructionCreateProofFromBucketOfNonFungibles:
+		case InstructionV1CreateProofFromBucketOfNonFungibles:
 			writeInt32(writer, 19)
 			FfiConverterTypeManifestBucketINSTANCE.Write(writer, variant_value.BucketId)
 			FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Write(writer, variant_value.Ids)
-		case InstructionCreateProofFromBucketOfAll:
+		case InstructionV1CreateProofFromBucketOfAll:
 			writeInt32(writer, 20)
 			FfiConverterTypeManifestBucketINSTANCE.Write(writer, variant_value.BucketId)
-		case InstructionBurnResource:
+		case InstructionV1BurnResource:
 			writeInt32(writer, 21)
 			FfiConverterTypeManifestBucketINSTANCE.Write(writer, variant_value.BucketId)
-		case InstructionCloneProof:
+		case InstructionV1CloneProof:
 			writeInt32(writer, 22)
 			FfiConverterTypeManifestProofINSTANCE.Write(writer, variant_value.ProofId)
-		case InstructionDropProof:
+		case InstructionV1DropProof:
 			writeInt32(writer, 23)
 			FfiConverterTypeManifestProofINSTANCE.Write(writer, variant_value.ProofId)
-		case InstructionCallFunction:
+		case InstructionV1CallFunction:
 			writeInt32(writer, 24)
 			FfiConverterTypeManifestAddressINSTANCE.Write(writer, variant_value.PackageAddress)
 			FfiConverterStringINSTANCE.Write(writer, variant_value.BlueprintName)
 			FfiConverterStringINSTANCE.Write(writer, variant_value.FunctionName)
 			FfiConverterTypeManifestValueINSTANCE.Write(writer, variant_value.Args)
-		case InstructionCallMethod:
+		case InstructionV1CallMethod:
 			writeInt32(writer, 25)
 			FfiConverterTypeManifestAddressINSTANCE.Write(writer, variant_value.Address)
 			FfiConverterStringINSTANCE.Write(writer, variant_value.MethodName)
 			FfiConverterTypeManifestValueINSTANCE.Write(writer, variant_value.Args)
-		case InstructionCallRoyaltyMethod:
+		case InstructionV1CallRoyaltyMethod:
 			writeInt32(writer, 26)
 			FfiConverterTypeManifestAddressINSTANCE.Write(writer, variant_value.Address)
 			FfiConverterStringINSTANCE.Write(writer, variant_value.MethodName)
 			FfiConverterTypeManifestValueINSTANCE.Write(writer, variant_value.Args)
-		case InstructionCallMetadataMethod:
+		case InstructionV1CallMetadataMethod:
 			writeInt32(writer, 27)
 			FfiConverterTypeManifestAddressINSTANCE.Write(writer, variant_value.Address)
 			FfiConverterStringINSTANCE.Write(writer, variant_value.MethodName)
 			FfiConverterTypeManifestValueINSTANCE.Write(writer, variant_value.Args)
-		case InstructionCallRoleAssignmentMethod:
+		case InstructionV1CallRoleAssignmentMethod:
 			writeInt32(writer, 28)
 			FfiConverterTypeManifestAddressINSTANCE.Write(writer, variant_value.Address)
 			FfiConverterStringINSTANCE.Write(writer, variant_value.MethodName)
 			FfiConverterTypeManifestValueINSTANCE.Write(writer, variant_value.Args)
-		case InstructionCallDirectVaultMethod:
+		case InstructionV1CallDirectVaultMethod:
 			writeInt32(writer, 29)
 			FfiConverterAddressINSTANCE.Write(writer, variant_value.Address)
 			FfiConverterStringINSTANCE.Write(writer, variant_value.MethodName)
 			FfiConverterTypeManifestValueINSTANCE.Write(writer, variant_value.Args)
-		case InstructionAllocateGlobalAddress:
+		case InstructionV1AllocateGlobalAddress:
 			writeInt32(writer, 30)
 			FfiConverterAddressINSTANCE.Write(writer, variant_value.PackageAddress)
 			FfiConverterStringINSTANCE.Write(writer, variant_value.BlueprintName)
 		default:
 			_ = variant_value
-			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeInstruction.Write", value))
+			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeInstructionV1.Write", value))
 	}
 }
 
-type FfiDestroyerTypeInstruction struct {}
+type FfiDestroyerTypeInstructionV1 struct {}
 
-func (_ FfiDestroyerTypeInstruction) Destroy(value Instruction) {
+func (_ FfiDestroyerTypeInstructionV1) Destroy(value InstructionV1) {
+	value.Destroy()
+}
+
+
+
+
+type InstructionV2 interface {
+	Destroy()
+}
+type InstructionV2TakeAllFromWorktop struct {
+	ResourceAddress *Address
+}
+
+func (e InstructionV2TakeAllFromWorktop) Destroy() {
+		FfiDestroyerAddress{}.Destroy(e.ResourceAddress);
+}
+type InstructionV2TakeFromWorktop struct {
+	ResourceAddress *Address
+	Amount *Decimal
+}
+
+func (e InstructionV2TakeFromWorktop) Destroy() {
+		FfiDestroyerAddress{}.Destroy(e.ResourceAddress);
+		FfiDestroyerDecimal{}.Destroy(e.Amount);
+}
+type InstructionV2TakeNonFungiblesFromWorktop struct {
+	ResourceAddress *Address
+	Ids []NonFungibleLocalId
+}
+
+func (e InstructionV2TakeNonFungiblesFromWorktop) Destroy() {
+		FfiDestroyerAddress{}.Destroy(e.ResourceAddress);
+		FfiDestroyerSequenceTypeNonFungibleLocalId{}.Destroy(e.Ids);
+}
+type InstructionV2ReturnToWorktop struct {
+	BucketId ManifestBucket
+}
+
+func (e InstructionV2ReturnToWorktop) Destroy() {
+		FfiDestroyerTypeManifestBucket{}.Destroy(e.BucketId);
+}
+type InstructionV2AssertWorktopContains struct {
+	ResourceAddress *Address
+	Amount *Decimal
+}
+
+func (e InstructionV2AssertWorktopContains) Destroy() {
+		FfiDestroyerAddress{}.Destroy(e.ResourceAddress);
+		FfiDestroyerDecimal{}.Destroy(e.Amount);
+}
+type InstructionV2AssertWorktopContainsAny struct {
+	ResourceAddress *Address
+}
+
+func (e InstructionV2AssertWorktopContainsAny) Destroy() {
+		FfiDestroyerAddress{}.Destroy(e.ResourceAddress);
+}
+type InstructionV2AssertWorktopContainsNonFungibles struct {
+	ResourceAddress *Address
+	Ids []NonFungibleLocalId
+}
+
+func (e InstructionV2AssertWorktopContainsNonFungibles) Destroy() {
+		FfiDestroyerAddress{}.Destroy(e.ResourceAddress);
+		FfiDestroyerSequenceTypeNonFungibleLocalId{}.Destroy(e.Ids);
+}
+type InstructionV2PopFromAuthZone struct {
+}
+
+func (e InstructionV2PopFromAuthZone) Destroy() {
+}
+type InstructionV2PushToAuthZone struct {
+	ProofId ManifestProof
+}
+
+func (e InstructionV2PushToAuthZone) Destroy() {
+		FfiDestroyerTypeManifestProof{}.Destroy(e.ProofId);
+}
+type InstructionV2CreateProofFromAuthZoneOfAmount struct {
+	ResourceAddress *Address
+	Amount *Decimal
+}
+
+func (e InstructionV2CreateProofFromAuthZoneOfAmount) Destroy() {
+		FfiDestroyerAddress{}.Destroy(e.ResourceAddress);
+		FfiDestroyerDecimal{}.Destroy(e.Amount);
+}
+type InstructionV2CreateProofFromAuthZoneOfNonFungibles struct {
+	ResourceAddress *Address
+	Ids []NonFungibleLocalId
+}
+
+func (e InstructionV2CreateProofFromAuthZoneOfNonFungibles) Destroy() {
+		FfiDestroyerAddress{}.Destroy(e.ResourceAddress);
+		FfiDestroyerSequenceTypeNonFungibleLocalId{}.Destroy(e.Ids);
+}
+type InstructionV2CreateProofFromAuthZoneOfAll struct {
+	ResourceAddress *Address
+}
+
+func (e InstructionV2CreateProofFromAuthZoneOfAll) Destroy() {
+		FfiDestroyerAddress{}.Destroy(e.ResourceAddress);
+}
+type InstructionV2DropAllProofs struct {
+}
+
+func (e InstructionV2DropAllProofs) Destroy() {
+}
+type InstructionV2DropNamedProofs struct {
+}
+
+func (e InstructionV2DropNamedProofs) Destroy() {
+}
+type InstructionV2DropAuthZoneProofs struct {
+}
+
+func (e InstructionV2DropAuthZoneProofs) Destroy() {
+}
+type InstructionV2DropAuthZoneRegularProofs struct {
+}
+
+func (e InstructionV2DropAuthZoneRegularProofs) Destroy() {
+}
+type InstructionV2DropAuthZoneSignatureProofs struct {
+}
+
+func (e InstructionV2DropAuthZoneSignatureProofs) Destroy() {
+}
+type InstructionV2CreateProofFromBucketOfAmount struct {
+	BucketId ManifestBucket
+	Amount *Decimal
+}
+
+func (e InstructionV2CreateProofFromBucketOfAmount) Destroy() {
+		FfiDestroyerTypeManifestBucket{}.Destroy(e.BucketId);
+		FfiDestroyerDecimal{}.Destroy(e.Amount);
+}
+type InstructionV2CreateProofFromBucketOfNonFungibles struct {
+	BucketId ManifestBucket
+	Ids []NonFungibleLocalId
+}
+
+func (e InstructionV2CreateProofFromBucketOfNonFungibles) Destroy() {
+		FfiDestroyerTypeManifestBucket{}.Destroy(e.BucketId);
+		FfiDestroyerSequenceTypeNonFungibleLocalId{}.Destroy(e.Ids);
+}
+type InstructionV2CreateProofFromBucketOfAll struct {
+	BucketId ManifestBucket
+}
+
+func (e InstructionV2CreateProofFromBucketOfAll) Destroy() {
+		FfiDestroyerTypeManifestBucket{}.Destroy(e.BucketId);
+}
+type InstructionV2BurnResource struct {
+	BucketId ManifestBucket
+}
+
+func (e InstructionV2BurnResource) Destroy() {
+		FfiDestroyerTypeManifestBucket{}.Destroy(e.BucketId);
+}
+type InstructionV2CloneProof struct {
+	ProofId ManifestProof
+}
+
+func (e InstructionV2CloneProof) Destroy() {
+		FfiDestroyerTypeManifestProof{}.Destroy(e.ProofId);
+}
+type InstructionV2DropProof struct {
+	ProofId ManifestProof
+}
+
+func (e InstructionV2DropProof) Destroy() {
+		FfiDestroyerTypeManifestProof{}.Destroy(e.ProofId);
+}
+type InstructionV2CallFunction struct {
+	PackageAddress ManifestAddress
+	BlueprintName string
+	FunctionName string
+	Args ManifestValue
+}
+
+func (e InstructionV2CallFunction) Destroy() {
+		FfiDestroyerTypeManifestAddress{}.Destroy(e.PackageAddress);
+		FfiDestroyerString{}.Destroy(e.BlueprintName);
+		FfiDestroyerString{}.Destroy(e.FunctionName);
+		FfiDestroyerTypeManifestValue{}.Destroy(e.Args);
+}
+type InstructionV2CallMethod struct {
+	Address ManifestAddress
+	MethodName string
+	Args ManifestValue
+}
+
+func (e InstructionV2CallMethod) Destroy() {
+		FfiDestroyerTypeManifestAddress{}.Destroy(e.Address);
+		FfiDestroyerString{}.Destroy(e.MethodName);
+		FfiDestroyerTypeManifestValue{}.Destroy(e.Args);
+}
+type InstructionV2CallRoyaltyMethod struct {
+	Address ManifestAddress
+	MethodName string
+	Args ManifestValue
+}
+
+func (e InstructionV2CallRoyaltyMethod) Destroy() {
+		FfiDestroyerTypeManifestAddress{}.Destroy(e.Address);
+		FfiDestroyerString{}.Destroy(e.MethodName);
+		FfiDestroyerTypeManifestValue{}.Destroy(e.Args);
+}
+type InstructionV2CallMetadataMethod struct {
+	Address ManifestAddress
+	MethodName string
+	Args ManifestValue
+}
+
+func (e InstructionV2CallMetadataMethod) Destroy() {
+		FfiDestroyerTypeManifestAddress{}.Destroy(e.Address);
+		FfiDestroyerString{}.Destroy(e.MethodName);
+		FfiDestroyerTypeManifestValue{}.Destroy(e.Args);
+}
+type InstructionV2CallRoleAssignmentMethod struct {
+	Address ManifestAddress
+	MethodName string
+	Args ManifestValue
+}
+
+func (e InstructionV2CallRoleAssignmentMethod) Destroy() {
+		FfiDestroyerTypeManifestAddress{}.Destroy(e.Address);
+		FfiDestroyerString{}.Destroy(e.MethodName);
+		FfiDestroyerTypeManifestValue{}.Destroy(e.Args);
+}
+type InstructionV2CallDirectVaultMethod struct {
+	Address *Address
+	MethodName string
+	Args ManifestValue
+}
+
+func (e InstructionV2CallDirectVaultMethod) Destroy() {
+		FfiDestroyerAddress{}.Destroy(e.Address);
+		FfiDestroyerString{}.Destroy(e.MethodName);
+		FfiDestroyerTypeManifestValue{}.Destroy(e.Args);
+}
+type InstructionV2AllocateGlobalAddress struct {
+	PackageAddress *Address
+	BlueprintName string
+}
+
+func (e InstructionV2AllocateGlobalAddress) Destroy() {
+		FfiDestroyerAddress{}.Destroy(e.PackageAddress);
+		FfiDestroyerString{}.Destroy(e.BlueprintName);
+}
+type InstructionV2YieldToParent struct {
+	Args ManifestValue
+}
+
+func (e InstructionV2YieldToParent) Destroy() {
+		FfiDestroyerTypeManifestValue{}.Destroy(e.Args);
+}
+type InstructionV2YieldToChild struct {
+	ChildIndex uint32
+	Args ManifestValue
+}
+
+func (e InstructionV2YieldToChild) Destroy() {
+		FfiDestroyerUint32{}.Destroy(e.ChildIndex);
+		FfiDestroyerTypeManifestValue{}.Destroy(e.Args);
+}
+type InstructionV2VerifyParent struct {
+	AccessRule *AccessRule
+}
+
+func (e InstructionV2VerifyParent) Destroy() {
+		FfiDestroyerAccessRule{}.Destroy(e.AccessRule);
+}
+type InstructionV2AssertWorktopResourcesOnly struct {
+	Constraints map[string]ManifestResourceConstraint
+}
+
+func (e InstructionV2AssertWorktopResourcesOnly) Destroy() {
+		FfiDestroyerMapStringTypeManifestResourceConstraint{}.Destroy(e.Constraints);
+}
+type InstructionV2AssertWorktopResourcesInclude struct {
+	Constraints map[string]ManifestResourceConstraint
+}
+
+func (e InstructionV2AssertWorktopResourcesInclude) Destroy() {
+		FfiDestroyerMapStringTypeManifestResourceConstraint{}.Destroy(e.Constraints);
+}
+type InstructionV2AssertNextCallReturnsOnly struct {
+	Constraints map[string]ManifestResourceConstraint
+}
+
+func (e InstructionV2AssertNextCallReturnsOnly) Destroy() {
+		FfiDestroyerMapStringTypeManifestResourceConstraint{}.Destroy(e.Constraints);
+}
+type InstructionV2AssertNextCallReturnsInclude struct {
+	Constraints map[string]ManifestResourceConstraint
+}
+
+func (e InstructionV2AssertNextCallReturnsInclude) Destroy() {
+		FfiDestroyerMapStringTypeManifestResourceConstraint{}.Destroy(e.Constraints);
+}
+type InstructionV2AssertBucketContents struct {
+	BucketId ManifestBucket
+	Constraint ManifestResourceConstraint
+}
+
+func (e InstructionV2AssertBucketContents) Destroy() {
+		FfiDestroyerTypeManifestBucket{}.Destroy(e.BucketId);
+		FfiDestroyerTypeManifestResourceConstraint{}.Destroy(e.Constraint);
+}
+
+type FfiConverterTypeInstructionV2 struct {}
+
+var FfiConverterTypeInstructionV2INSTANCE = FfiConverterTypeInstructionV2{}
+
+func (c FfiConverterTypeInstructionV2) Lift(rb RustBufferI) InstructionV2 {
+	return LiftFromRustBuffer[InstructionV2](c, rb)
+}
+
+func (c FfiConverterTypeInstructionV2) Lower(value InstructionV2) RustBuffer {
+	return LowerIntoRustBuffer[InstructionV2](c, value)
+}
+func (FfiConverterTypeInstructionV2) Read(reader io.Reader) InstructionV2 {
+	id := readInt32(reader)
+	switch (id) {
+		case 1:
+			return InstructionV2TakeAllFromWorktop{
+				FfiConverterAddressINSTANCE.Read(reader),
+			};
+		case 2:
+			return InstructionV2TakeFromWorktop{
+				FfiConverterAddressINSTANCE.Read(reader),
+				FfiConverterDecimalINSTANCE.Read(reader),
+			};
+		case 3:
+			return InstructionV2TakeNonFungiblesFromWorktop{
+				FfiConverterAddressINSTANCE.Read(reader),
+				FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Read(reader),
+			};
+		case 4:
+			return InstructionV2ReturnToWorktop{
+				FfiConverterTypeManifestBucketINSTANCE.Read(reader),
+			};
+		case 5:
+			return InstructionV2AssertWorktopContains{
+				FfiConverterAddressINSTANCE.Read(reader),
+				FfiConverterDecimalINSTANCE.Read(reader),
+			};
+		case 6:
+			return InstructionV2AssertWorktopContainsAny{
+				FfiConverterAddressINSTANCE.Read(reader),
+			};
+		case 7:
+			return InstructionV2AssertWorktopContainsNonFungibles{
+				FfiConverterAddressINSTANCE.Read(reader),
+				FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Read(reader),
+			};
+		case 8:
+			return InstructionV2PopFromAuthZone{
+			};
+		case 9:
+			return InstructionV2PushToAuthZone{
+				FfiConverterTypeManifestProofINSTANCE.Read(reader),
+			};
+		case 10:
+			return InstructionV2CreateProofFromAuthZoneOfAmount{
+				FfiConverterAddressINSTANCE.Read(reader),
+				FfiConverterDecimalINSTANCE.Read(reader),
+			};
+		case 11:
+			return InstructionV2CreateProofFromAuthZoneOfNonFungibles{
+				FfiConverterAddressINSTANCE.Read(reader),
+				FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Read(reader),
+			};
+		case 12:
+			return InstructionV2CreateProofFromAuthZoneOfAll{
+				FfiConverterAddressINSTANCE.Read(reader),
+			};
+		case 13:
+			return InstructionV2DropAllProofs{
+			};
+		case 14:
+			return InstructionV2DropNamedProofs{
+			};
+		case 15:
+			return InstructionV2DropAuthZoneProofs{
+			};
+		case 16:
+			return InstructionV2DropAuthZoneRegularProofs{
+			};
+		case 17:
+			return InstructionV2DropAuthZoneSignatureProofs{
+			};
+		case 18:
+			return InstructionV2CreateProofFromBucketOfAmount{
+				FfiConverterTypeManifestBucketINSTANCE.Read(reader),
+				FfiConverterDecimalINSTANCE.Read(reader),
+			};
+		case 19:
+			return InstructionV2CreateProofFromBucketOfNonFungibles{
+				FfiConverterTypeManifestBucketINSTANCE.Read(reader),
+				FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Read(reader),
+			};
+		case 20:
+			return InstructionV2CreateProofFromBucketOfAll{
+				FfiConverterTypeManifestBucketINSTANCE.Read(reader),
+			};
+		case 21:
+			return InstructionV2BurnResource{
+				FfiConverterTypeManifestBucketINSTANCE.Read(reader),
+			};
+		case 22:
+			return InstructionV2CloneProof{
+				FfiConverterTypeManifestProofINSTANCE.Read(reader),
+			};
+		case 23:
+			return InstructionV2DropProof{
+				FfiConverterTypeManifestProofINSTANCE.Read(reader),
+			};
+		case 24:
+			return InstructionV2CallFunction{
+				FfiConverterTypeManifestAddressINSTANCE.Read(reader),
+				FfiConverterStringINSTANCE.Read(reader),
+				FfiConverterStringINSTANCE.Read(reader),
+				FfiConverterTypeManifestValueINSTANCE.Read(reader),
+			};
+		case 25:
+			return InstructionV2CallMethod{
+				FfiConverterTypeManifestAddressINSTANCE.Read(reader),
+				FfiConverterStringINSTANCE.Read(reader),
+				FfiConverterTypeManifestValueINSTANCE.Read(reader),
+			};
+		case 26:
+			return InstructionV2CallRoyaltyMethod{
+				FfiConverterTypeManifestAddressINSTANCE.Read(reader),
+				FfiConverterStringINSTANCE.Read(reader),
+				FfiConverterTypeManifestValueINSTANCE.Read(reader),
+			};
+		case 27:
+			return InstructionV2CallMetadataMethod{
+				FfiConverterTypeManifestAddressINSTANCE.Read(reader),
+				FfiConverterStringINSTANCE.Read(reader),
+				FfiConverterTypeManifestValueINSTANCE.Read(reader),
+			};
+		case 28:
+			return InstructionV2CallRoleAssignmentMethod{
+				FfiConverterTypeManifestAddressINSTANCE.Read(reader),
+				FfiConverterStringINSTANCE.Read(reader),
+				FfiConverterTypeManifestValueINSTANCE.Read(reader),
+			};
+		case 29:
+			return InstructionV2CallDirectVaultMethod{
+				FfiConverterAddressINSTANCE.Read(reader),
+				FfiConverterStringINSTANCE.Read(reader),
+				FfiConverterTypeManifestValueINSTANCE.Read(reader),
+			};
+		case 30:
+			return InstructionV2AllocateGlobalAddress{
+				FfiConverterAddressINSTANCE.Read(reader),
+				FfiConverterStringINSTANCE.Read(reader),
+			};
+		case 31:
+			return InstructionV2YieldToParent{
+				FfiConverterTypeManifestValueINSTANCE.Read(reader),
+			};
+		case 32:
+			return InstructionV2YieldToChild{
+				FfiConverterUint32INSTANCE.Read(reader),
+				FfiConverterTypeManifestValueINSTANCE.Read(reader),
+			};
+		case 33:
+			return InstructionV2VerifyParent{
+				FfiConverterAccessRuleINSTANCE.Read(reader),
+			};
+		case 34:
+			return InstructionV2AssertWorktopResourcesOnly{
+				FfiConverterMapStringTypeManifestResourceConstraintINSTANCE.Read(reader),
+			};
+		case 35:
+			return InstructionV2AssertWorktopResourcesInclude{
+				FfiConverterMapStringTypeManifestResourceConstraintINSTANCE.Read(reader),
+			};
+		case 36:
+			return InstructionV2AssertNextCallReturnsOnly{
+				FfiConverterMapStringTypeManifestResourceConstraintINSTANCE.Read(reader),
+			};
+		case 37:
+			return InstructionV2AssertNextCallReturnsInclude{
+				FfiConverterMapStringTypeManifestResourceConstraintINSTANCE.Read(reader),
+			};
+		case 38:
+			return InstructionV2AssertBucketContents{
+				FfiConverterTypeManifestBucketINSTANCE.Read(reader),
+				FfiConverterTypeManifestResourceConstraintINSTANCE.Read(reader),
+			};
+		default:
+			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeInstructionV2.Read()", id));
+	}
+}
+
+func (FfiConverterTypeInstructionV2) Write(writer io.Writer, value InstructionV2) {
+	switch variant_value := value.(type) {
+		case InstructionV2TakeAllFromWorktop:
+			writeInt32(writer, 1)
+			FfiConverterAddressINSTANCE.Write(writer, variant_value.ResourceAddress)
+		case InstructionV2TakeFromWorktop:
+			writeInt32(writer, 2)
+			FfiConverterAddressINSTANCE.Write(writer, variant_value.ResourceAddress)
+			FfiConverterDecimalINSTANCE.Write(writer, variant_value.Amount)
+		case InstructionV2TakeNonFungiblesFromWorktop:
+			writeInt32(writer, 3)
+			FfiConverterAddressINSTANCE.Write(writer, variant_value.ResourceAddress)
+			FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Write(writer, variant_value.Ids)
+		case InstructionV2ReturnToWorktop:
+			writeInt32(writer, 4)
+			FfiConverterTypeManifestBucketINSTANCE.Write(writer, variant_value.BucketId)
+		case InstructionV2AssertWorktopContains:
+			writeInt32(writer, 5)
+			FfiConverterAddressINSTANCE.Write(writer, variant_value.ResourceAddress)
+			FfiConverterDecimalINSTANCE.Write(writer, variant_value.Amount)
+		case InstructionV2AssertWorktopContainsAny:
+			writeInt32(writer, 6)
+			FfiConverterAddressINSTANCE.Write(writer, variant_value.ResourceAddress)
+		case InstructionV2AssertWorktopContainsNonFungibles:
+			writeInt32(writer, 7)
+			FfiConverterAddressINSTANCE.Write(writer, variant_value.ResourceAddress)
+			FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Write(writer, variant_value.Ids)
+		case InstructionV2PopFromAuthZone:
+			writeInt32(writer, 8)
+		case InstructionV2PushToAuthZone:
+			writeInt32(writer, 9)
+			FfiConverterTypeManifestProofINSTANCE.Write(writer, variant_value.ProofId)
+		case InstructionV2CreateProofFromAuthZoneOfAmount:
+			writeInt32(writer, 10)
+			FfiConverterAddressINSTANCE.Write(writer, variant_value.ResourceAddress)
+			FfiConverterDecimalINSTANCE.Write(writer, variant_value.Amount)
+		case InstructionV2CreateProofFromAuthZoneOfNonFungibles:
+			writeInt32(writer, 11)
+			FfiConverterAddressINSTANCE.Write(writer, variant_value.ResourceAddress)
+			FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Write(writer, variant_value.Ids)
+		case InstructionV2CreateProofFromAuthZoneOfAll:
+			writeInt32(writer, 12)
+			FfiConverterAddressINSTANCE.Write(writer, variant_value.ResourceAddress)
+		case InstructionV2DropAllProofs:
+			writeInt32(writer, 13)
+		case InstructionV2DropNamedProofs:
+			writeInt32(writer, 14)
+		case InstructionV2DropAuthZoneProofs:
+			writeInt32(writer, 15)
+		case InstructionV2DropAuthZoneRegularProofs:
+			writeInt32(writer, 16)
+		case InstructionV2DropAuthZoneSignatureProofs:
+			writeInt32(writer, 17)
+		case InstructionV2CreateProofFromBucketOfAmount:
+			writeInt32(writer, 18)
+			FfiConverterTypeManifestBucketINSTANCE.Write(writer, variant_value.BucketId)
+			FfiConverterDecimalINSTANCE.Write(writer, variant_value.Amount)
+		case InstructionV2CreateProofFromBucketOfNonFungibles:
+			writeInt32(writer, 19)
+			FfiConverterTypeManifestBucketINSTANCE.Write(writer, variant_value.BucketId)
+			FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Write(writer, variant_value.Ids)
+		case InstructionV2CreateProofFromBucketOfAll:
+			writeInt32(writer, 20)
+			FfiConverterTypeManifestBucketINSTANCE.Write(writer, variant_value.BucketId)
+		case InstructionV2BurnResource:
+			writeInt32(writer, 21)
+			FfiConverterTypeManifestBucketINSTANCE.Write(writer, variant_value.BucketId)
+		case InstructionV2CloneProof:
+			writeInt32(writer, 22)
+			FfiConverterTypeManifestProofINSTANCE.Write(writer, variant_value.ProofId)
+		case InstructionV2DropProof:
+			writeInt32(writer, 23)
+			FfiConverterTypeManifestProofINSTANCE.Write(writer, variant_value.ProofId)
+		case InstructionV2CallFunction:
+			writeInt32(writer, 24)
+			FfiConverterTypeManifestAddressINSTANCE.Write(writer, variant_value.PackageAddress)
+			FfiConverterStringINSTANCE.Write(writer, variant_value.BlueprintName)
+			FfiConverterStringINSTANCE.Write(writer, variant_value.FunctionName)
+			FfiConverterTypeManifestValueINSTANCE.Write(writer, variant_value.Args)
+		case InstructionV2CallMethod:
+			writeInt32(writer, 25)
+			FfiConverterTypeManifestAddressINSTANCE.Write(writer, variant_value.Address)
+			FfiConverterStringINSTANCE.Write(writer, variant_value.MethodName)
+			FfiConverterTypeManifestValueINSTANCE.Write(writer, variant_value.Args)
+		case InstructionV2CallRoyaltyMethod:
+			writeInt32(writer, 26)
+			FfiConverterTypeManifestAddressINSTANCE.Write(writer, variant_value.Address)
+			FfiConverterStringINSTANCE.Write(writer, variant_value.MethodName)
+			FfiConverterTypeManifestValueINSTANCE.Write(writer, variant_value.Args)
+		case InstructionV2CallMetadataMethod:
+			writeInt32(writer, 27)
+			FfiConverterTypeManifestAddressINSTANCE.Write(writer, variant_value.Address)
+			FfiConverterStringINSTANCE.Write(writer, variant_value.MethodName)
+			FfiConverterTypeManifestValueINSTANCE.Write(writer, variant_value.Args)
+		case InstructionV2CallRoleAssignmentMethod:
+			writeInt32(writer, 28)
+			FfiConverterTypeManifestAddressINSTANCE.Write(writer, variant_value.Address)
+			FfiConverterStringINSTANCE.Write(writer, variant_value.MethodName)
+			FfiConverterTypeManifestValueINSTANCE.Write(writer, variant_value.Args)
+		case InstructionV2CallDirectVaultMethod:
+			writeInt32(writer, 29)
+			FfiConverterAddressINSTANCE.Write(writer, variant_value.Address)
+			FfiConverterStringINSTANCE.Write(writer, variant_value.MethodName)
+			FfiConverterTypeManifestValueINSTANCE.Write(writer, variant_value.Args)
+		case InstructionV2AllocateGlobalAddress:
+			writeInt32(writer, 30)
+			FfiConverterAddressINSTANCE.Write(writer, variant_value.PackageAddress)
+			FfiConverterStringINSTANCE.Write(writer, variant_value.BlueprintName)
+		case InstructionV2YieldToParent:
+			writeInt32(writer, 31)
+			FfiConverterTypeManifestValueINSTANCE.Write(writer, variant_value.Args)
+		case InstructionV2YieldToChild:
+			writeInt32(writer, 32)
+			FfiConverterUint32INSTANCE.Write(writer, variant_value.ChildIndex)
+			FfiConverterTypeManifestValueINSTANCE.Write(writer, variant_value.Args)
+		case InstructionV2VerifyParent:
+			writeInt32(writer, 33)
+			FfiConverterAccessRuleINSTANCE.Write(writer, variant_value.AccessRule)
+		case InstructionV2AssertWorktopResourcesOnly:
+			writeInt32(writer, 34)
+			FfiConverterMapStringTypeManifestResourceConstraintINSTANCE.Write(writer, variant_value.Constraints)
+		case InstructionV2AssertWorktopResourcesInclude:
+			writeInt32(writer, 35)
+			FfiConverterMapStringTypeManifestResourceConstraintINSTANCE.Write(writer, variant_value.Constraints)
+		case InstructionV2AssertNextCallReturnsOnly:
+			writeInt32(writer, 36)
+			FfiConverterMapStringTypeManifestResourceConstraintINSTANCE.Write(writer, variant_value.Constraints)
+		case InstructionV2AssertNextCallReturnsInclude:
+			writeInt32(writer, 37)
+			FfiConverterMapStringTypeManifestResourceConstraintINSTANCE.Write(writer, variant_value.Constraints)
+		case InstructionV2AssertBucketContents:
+			writeInt32(writer, 38)
+			FfiConverterTypeManifestBucketINSTANCE.Write(writer, variant_value.BucketId)
+			FfiConverterTypeManifestResourceConstraintINSTANCE.Write(writer, variant_value.Constraint)
+		default:
+			_ = variant_value
+			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeInstructionV2.Write", value))
+	}
+}
+
+type FfiDestroyerTypeInstructionV2 struct {}
+
+func (_ FfiDestroyerTypeInstructionV2) Destroy(value InstructionV2) {
 	value.Destroy()
 }
 
@@ -15867,6 +22738,70 @@ func (FfiConverterTypeLocalTypeId) Write(writer io.Writer, value LocalTypeId) {
 type FfiDestroyerTypeLocalTypeId struct {}
 
 func (_ FfiDestroyerTypeLocalTypeId) Destroy(value LocalTypeId) {
+	value.Destroy()
+}
+
+
+
+
+type LowerBound interface {
+	Destroy()
+}
+type LowerBoundNonZero struct {
+}
+
+func (e LowerBoundNonZero) Destroy() {
+}
+type LowerBoundInclusive struct {
+	Value *Decimal
+}
+
+func (e LowerBoundInclusive) Destroy() {
+		FfiDestroyerDecimal{}.Destroy(e.Value);
+}
+
+type FfiConverterTypeLowerBound struct {}
+
+var FfiConverterTypeLowerBoundINSTANCE = FfiConverterTypeLowerBound{}
+
+func (c FfiConverterTypeLowerBound) Lift(rb RustBufferI) LowerBound {
+	return LiftFromRustBuffer[LowerBound](c, rb)
+}
+
+func (c FfiConverterTypeLowerBound) Lower(value LowerBound) RustBuffer {
+	return LowerIntoRustBuffer[LowerBound](c, value)
+}
+func (FfiConverterTypeLowerBound) Read(reader io.Reader) LowerBound {
+	id := readInt32(reader)
+	switch (id) {
+		case 1:
+			return LowerBoundNonZero{
+			};
+		case 2:
+			return LowerBoundInclusive{
+				FfiConverterDecimalINSTANCE.Read(reader),
+			};
+		default:
+			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeLowerBound.Read()", id));
+	}
+}
+
+func (FfiConverterTypeLowerBound) Write(writer io.Writer, value LowerBound) {
+	switch variant_value := value.(type) {
+		case LowerBoundNonZero:
+			writeInt32(writer, 1)
+		case LowerBoundInclusive:
+			writeInt32(writer, 2)
+			FfiConverterDecimalINSTANCE.Write(writer, variant_value.Value)
+		default:
+			_ = variant_value
+			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeLowerBound.Write", value))
+	}
+}
+
+type FfiDestroyerTypeLowerBound struct {}
+
+func (_ FfiDestroyerTypeLowerBound) Destroy(value LowerBound) {
 	value.Destroy()
 }
 
@@ -16549,6 +23484,126 @@ func (_ FfiDestroyerTypeManifestExpression) Destroy(value ManifestExpression) {
 
 
 
+type ManifestResourceConstraint interface {
+	Destroy()
+}
+type ManifestResourceConstraintNonZeroAmount struct {
+}
+
+func (e ManifestResourceConstraintNonZeroAmount) Destroy() {
+}
+type ManifestResourceConstraintExactAmount struct {
+	Value *Decimal
+}
+
+func (e ManifestResourceConstraintExactAmount) Destroy() {
+		FfiDestroyerDecimal{}.Destroy(e.Value);
+}
+type ManifestResourceConstraintAtLeastAmount struct {
+	Value *Decimal
+}
+
+func (e ManifestResourceConstraintAtLeastAmount) Destroy() {
+		FfiDestroyerDecimal{}.Destroy(e.Value);
+}
+type ManifestResourceConstraintExactNonFungibles struct {
+	Value []NonFungibleLocalId
+}
+
+func (e ManifestResourceConstraintExactNonFungibles) Destroy() {
+		FfiDestroyerSequenceTypeNonFungibleLocalId{}.Destroy(e.Value);
+}
+type ManifestResourceConstraintAtLeastNonFungibles struct {
+	Value []NonFungibleLocalId
+}
+
+func (e ManifestResourceConstraintAtLeastNonFungibles) Destroy() {
+		FfiDestroyerSequenceTypeNonFungibleLocalId{}.Destroy(e.Value);
+}
+type ManifestResourceConstraintGeneral struct {
+	Value GeneralResourceConstraint
+}
+
+func (e ManifestResourceConstraintGeneral) Destroy() {
+		FfiDestroyerTypeGeneralResourceConstraint{}.Destroy(e.Value);
+}
+
+type FfiConverterTypeManifestResourceConstraint struct {}
+
+var FfiConverterTypeManifestResourceConstraintINSTANCE = FfiConverterTypeManifestResourceConstraint{}
+
+func (c FfiConverterTypeManifestResourceConstraint) Lift(rb RustBufferI) ManifestResourceConstraint {
+	return LiftFromRustBuffer[ManifestResourceConstraint](c, rb)
+}
+
+func (c FfiConverterTypeManifestResourceConstraint) Lower(value ManifestResourceConstraint) RustBuffer {
+	return LowerIntoRustBuffer[ManifestResourceConstraint](c, value)
+}
+func (FfiConverterTypeManifestResourceConstraint) Read(reader io.Reader) ManifestResourceConstraint {
+	id := readInt32(reader)
+	switch (id) {
+		case 1:
+			return ManifestResourceConstraintNonZeroAmount{
+			};
+		case 2:
+			return ManifestResourceConstraintExactAmount{
+				FfiConverterDecimalINSTANCE.Read(reader),
+			};
+		case 3:
+			return ManifestResourceConstraintAtLeastAmount{
+				FfiConverterDecimalINSTANCE.Read(reader),
+			};
+		case 4:
+			return ManifestResourceConstraintExactNonFungibles{
+				FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Read(reader),
+			};
+		case 5:
+			return ManifestResourceConstraintAtLeastNonFungibles{
+				FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Read(reader),
+			};
+		case 6:
+			return ManifestResourceConstraintGeneral{
+				FfiConverterTypeGeneralResourceConstraintINSTANCE.Read(reader),
+			};
+		default:
+			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeManifestResourceConstraint.Read()", id));
+	}
+}
+
+func (FfiConverterTypeManifestResourceConstraint) Write(writer io.Writer, value ManifestResourceConstraint) {
+	switch variant_value := value.(type) {
+		case ManifestResourceConstraintNonZeroAmount:
+			writeInt32(writer, 1)
+		case ManifestResourceConstraintExactAmount:
+			writeInt32(writer, 2)
+			FfiConverterDecimalINSTANCE.Write(writer, variant_value.Value)
+		case ManifestResourceConstraintAtLeastAmount:
+			writeInt32(writer, 3)
+			FfiConverterDecimalINSTANCE.Write(writer, variant_value.Value)
+		case ManifestResourceConstraintExactNonFungibles:
+			writeInt32(writer, 4)
+			FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Write(writer, variant_value.Value)
+		case ManifestResourceConstraintAtLeastNonFungibles:
+			writeInt32(writer, 5)
+			FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Write(writer, variant_value.Value)
+		case ManifestResourceConstraintGeneral:
+			writeInt32(writer, 6)
+			FfiConverterTypeGeneralResourceConstraintINSTANCE.Write(writer, variant_value.Value)
+		default:
+			_ = variant_value
+			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeManifestResourceConstraint.Write", value))
+	}
+}
+
+type FfiDestroyerTypeManifestResourceConstraint struct {}
+
+func (_ FfiDestroyerTypeManifestResourceConstraint) Destroy(value ManifestResourceConstraint) {
+	value.Destroy()
+}
+
+
+
+
 type ManifestSborStringRepresentation interface {
 	Destroy()
 }
@@ -17077,146 +24132,292 @@ func (_ FfiDestroyerTypeManifestValueKind) Destroy(value ManifestValueKind) {
 
 
 
-type Message interface {
+type MessageContentV1 interface {
 	Destroy()
 }
-type MessageNone struct {
+type MessageContentV1Str struct {
+	Value string
 }
 
-func (e MessageNone) Destroy() {
+func (e MessageContentV1Str) Destroy() {
+		FfiDestroyerString{}.Destroy(e.Value);
 }
-type MessagePlainText struct {
-	Value PlainTextMessage
-}
-
-func (e MessagePlainText) Destroy() {
-		FfiDestroyerTypePlainTextMessage{}.Destroy(e.Value);
-}
-type MessageEncrypted struct {
-	Value EncryptedMessage
+type MessageContentV1Bytes struct {
+	Value []byte
 }
 
-func (e MessageEncrypted) Destroy() {
-		FfiDestroyerTypeEncryptedMessage{}.Destroy(e.Value);
+func (e MessageContentV1Bytes) Destroy() {
+		FfiDestroyerBytes{}.Destroy(e.Value);
 }
 
-type FfiConverterTypeMessage struct {}
+type FfiConverterTypeMessageContentV1 struct {}
 
-var FfiConverterTypeMessageINSTANCE = FfiConverterTypeMessage{}
+var FfiConverterTypeMessageContentV1INSTANCE = FfiConverterTypeMessageContentV1{}
 
-func (c FfiConverterTypeMessage) Lift(rb RustBufferI) Message {
-	return LiftFromRustBuffer[Message](c, rb)
+func (c FfiConverterTypeMessageContentV1) Lift(rb RustBufferI) MessageContentV1 {
+	return LiftFromRustBuffer[MessageContentV1](c, rb)
 }
 
-func (c FfiConverterTypeMessage) Lower(value Message) RustBuffer {
-	return LowerIntoRustBuffer[Message](c, value)
+func (c FfiConverterTypeMessageContentV1) Lower(value MessageContentV1) RustBuffer {
+	return LowerIntoRustBuffer[MessageContentV1](c, value)
 }
-func (FfiConverterTypeMessage) Read(reader io.Reader) Message {
+func (FfiConverterTypeMessageContentV1) Read(reader io.Reader) MessageContentV1 {
 	id := readInt32(reader)
 	switch (id) {
 		case 1:
-			return MessageNone{
+			return MessageContentV1Str{
+				FfiConverterStringINSTANCE.Read(reader),
 			};
 		case 2:
-			return MessagePlainText{
-				FfiConverterTypePlainTextMessageINSTANCE.Read(reader),
-			};
-		case 3:
-			return MessageEncrypted{
-				FfiConverterTypeEncryptedMessageINSTANCE.Read(reader),
+			return MessageContentV1Bytes{
+				FfiConverterBytesINSTANCE.Read(reader),
 			};
 		default:
-			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeMessage.Read()", id));
+			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeMessageContentV1.Read()", id));
 	}
 }
 
-func (FfiConverterTypeMessage) Write(writer io.Writer, value Message) {
+func (FfiConverterTypeMessageContentV1) Write(writer io.Writer, value MessageContentV1) {
 	switch variant_value := value.(type) {
-		case MessageNone:
+		case MessageContentV1Str:
 			writeInt32(writer, 1)
-		case MessagePlainText:
+			FfiConverterStringINSTANCE.Write(writer, variant_value.Value)
+		case MessageContentV1Bytes:
 			writeInt32(writer, 2)
-			FfiConverterTypePlainTextMessageINSTANCE.Write(writer, variant_value.Value)
-		case MessageEncrypted:
-			writeInt32(writer, 3)
-			FfiConverterTypeEncryptedMessageINSTANCE.Write(writer, variant_value.Value)
+			FfiConverterBytesINSTANCE.Write(writer, variant_value.Value)
 		default:
 			_ = variant_value
-			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeMessage.Write", value))
+			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeMessageContentV1.Write", value))
 	}
 }
 
-type FfiDestroyerTypeMessage struct {}
+type FfiDestroyerTypeMessageContentV1 struct {}
 
-func (_ FfiDestroyerTypeMessage) Destroy(value Message) {
+func (_ FfiDestroyerTypeMessageContentV1) Destroy(value MessageContentV1) {
 	value.Destroy()
 }
 
 
 
 
-type MessageContent interface {
+type MessageContentsV2 interface {
 	Destroy()
 }
-type MessageContentStr struct {
+type MessageContentsV2Str struct {
 	Value string
 }
 
-func (e MessageContentStr) Destroy() {
+func (e MessageContentsV2Str) Destroy() {
 		FfiDestroyerString{}.Destroy(e.Value);
 }
-type MessageContentBytes struct {
+type MessageContentsV2Bytes struct {
 	Value []byte
 }
 
-func (e MessageContentBytes) Destroy() {
+func (e MessageContentsV2Bytes) Destroy() {
 		FfiDestroyerBytes{}.Destroy(e.Value);
 }
 
-type FfiConverterTypeMessageContent struct {}
+type FfiConverterTypeMessageContentsV2 struct {}
 
-var FfiConverterTypeMessageContentINSTANCE = FfiConverterTypeMessageContent{}
+var FfiConverterTypeMessageContentsV2INSTANCE = FfiConverterTypeMessageContentsV2{}
 
-func (c FfiConverterTypeMessageContent) Lift(rb RustBufferI) MessageContent {
-	return LiftFromRustBuffer[MessageContent](c, rb)
+func (c FfiConverterTypeMessageContentsV2) Lift(rb RustBufferI) MessageContentsV2 {
+	return LiftFromRustBuffer[MessageContentsV2](c, rb)
 }
 
-func (c FfiConverterTypeMessageContent) Lower(value MessageContent) RustBuffer {
-	return LowerIntoRustBuffer[MessageContent](c, value)
+func (c FfiConverterTypeMessageContentsV2) Lower(value MessageContentsV2) RustBuffer {
+	return LowerIntoRustBuffer[MessageContentsV2](c, value)
 }
-func (FfiConverterTypeMessageContent) Read(reader io.Reader) MessageContent {
+func (FfiConverterTypeMessageContentsV2) Read(reader io.Reader) MessageContentsV2 {
 	id := readInt32(reader)
 	switch (id) {
 		case 1:
-			return MessageContentStr{
+			return MessageContentsV2Str{
 				FfiConverterStringINSTANCE.Read(reader),
 			};
 		case 2:
-			return MessageContentBytes{
+			return MessageContentsV2Bytes{
 				FfiConverterBytesINSTANCE.Read(reader),
 			};
 		default:
-			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeMessageContent.Read()", id));
+			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeMessageContentsV2.Read()", id));
 	}
 }
 
-func (FfiConverterTypeMessageContent) Write(writer io.Writer, value MessageContent) {
+func (FfiConverterTypeMessageContentsV2) Write(writer io.Writer, value MessageContentsV2) {
 	switch variant_value := value.(type) {
-		case MessageContentStr:
+		case MessageContentsV2Str:
 			writeInt32(writer, 1)
 			FfiConverterStringINSTANCE.Write(writer, variant_value.Value)
-		case MessageContentBytes:
+		case MessageContentsV2Bytes:
 			writeInt32(writer, 2)
 			FfiConverterBytesINSTANCE.Write(writer, variant_value.Value)
 		default:
 			_ = variant_value
-			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeMessageContent.Write", value))
+			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeMessageContentsV2.Write", value))
 	}
 }
 
-type FfiDestroyerTypeMessageContent struct {}
+type FfiDestroyerTypeMessageContentsV2 struct {}
 
-func (_ FfiDestroyerTypeMessageContent) Destroy(value MessageContent) {
+func (_ FfiDestroyerTypeMessageContentsV2) Destroy(value MessageContentsV2) {
+	value.Destroy()
+}
+
+
+
+
+type MessageV1 interface {
+	Destroy()
+}
+type MessageV1None struct {
+}
+
+func (e MessageV1None) Destroy() {
+}
+type MessageV1PlainText struct {
+	Value PlainTextMessageV1
+}
+
+func (e MessageV1PlainText) Destroy() {
+		FfiDestroyerTypePlainTextMessageV1{}.Destroy(e.Value);
+}
+type MessageV1Encrypted struct {
+	Value EncryptedMessageV1
+}
+
+func (e MessageV1Encrypted) Destroy() {
+		FfiDestroyerTypeEncryptedMessageV1{}.Destroy(e.Value);
+}
+
+type FfiConverterTypeMessageV1 struct {}
+
+var FfiConverterTypeMessageV1INSTANCE = FfiConverterTypeMessageV1{}
+
+func (c FfiConverterTypeMessageV1) Lift(rb RustBufferI) MessageV1 {
+	return LiftFromRustBuffer[MessageV1](c, rb)
+}
+
+func (c FfiConverterTypeMessageV1) Lower(value MessageV1) RustBuffer {
+	return LowerIntoRustBuffer[MessageV1](c, value)
+}
+func (FfiConverterTypeMessageV1) Read(reader io.Reader) MessageV1 {
+	id := readInt32(reader)
+	switch (id) {
+		case 1:
+			return MessageV1None{
+			};
+		case 2:
+			return MessageV1PlainText{
+				FfiConverterTypePlainTextMessageV1INSTANCE.Read(reader),
+			};
+		case 3:
+			return MessageV1Encrypted{
+				FfiConverterTypeEncryptedMessageV1INSTANCE.Read(reader),
+			};
+		default:
+			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeMessageV1.Read()", id));
+	}
+}
+
+func (FfiConverterTypeMessageV1) Write(writer io.Writer, value MessageV1) {
+	switch variant_value := value.(type) {
+		case MessageV1None:
+			writeInt32(writer, 1)
+		case MessageV1PlainText:
+			writeInt32(writer, 2)
+			FfiConverterTypePlainTextMessageV1INSTANCE.Write(writer, variant_value.Value)
+		case MessageV1Encrypted:
+			writeInt32(writer, 3)
+			FfiConverterTypeEncryptedMessageV1INSTANCE.Write(writer, variant_value.Value)
+		default:
+			_ = variant_value
+			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeMessageV1.Write", value))
+	}
+}
+
+type FfiDestroyerTypeMessageV1 struct {}
+
+func (_ FfiDestroyerTypeMessageV1) Destroy(value MessageV1) {
+	value.Destroy()
+}
+
+
+
+
+type MessageV2 interface {
+	Destroy()
+}
+type MessageV2None struct {
+}
+
+func (e MessageV2None) Destroy() {
+}
+type MessageV2PlainText struct {
+	Value PlainTextMessageV2
+}
+
+func (e MessageV2PlainText) Destroy() {
+		FfiDestroyerTypePlainTextMessageV2{}.Destroy(e.Value);
+}
+type MessageV2Encrypted struct {
+	Value EncryptedMessageV2
+}
+
+func (e MessageV2Encrypted) Destroy() {
+		FfiDestroyerTypeEncryptedMessageV2{}.Destroy(e.Value);
+}
+
+type FfiConverterTypeMessageV2 struct {}
+
+var FfiConverterTypeMessageV2INSTANCE = FfiConverterTypeMessageV2{}
+
+func (c FfiConverterTypeMessageV2) Lift(rb RustBufferI) MessageV2 {
+	return LiftFromRustBuffer[MessageV2](c, rb)
+}
+
+func (c FfiConverterTypeMessageV2) Lower(value MessageV2) RustBuffer {
+	return LowerIntoRustBuffer[MessageV2](c, value)
+}
+func (FfiConverterTypeMessageV2) Read(reader io.Reader) MessageV2 {
+	id := readInt32(reader)
+	switch (id) {
+		case 1:
+			return MessageV2None{
+			};
+		case 2:
+			return MessageV2PlainText{
+				FfiConverterTypePlainTextMessageV2INSTANCE.Read(reader),
+			};
+		case 3:
+			return MessageV2Encrypted{
+				FfiConverterTypeEncryptedMessageV2INSTANCE.Read(reader),
+			};
+		default:
+			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeMessageV2.Read()", id));
+	}
+}
+
+func (FfiConverterTypeMessageV2) Write(writer io.Writer, value MessageV2) {
+	switch variant_value := value.(type) {
+		case MessageV2None:
+			writeInt32(writer, 1)
+		case MessageV2PlainText:
+			writeInt32(writer, 2)
+			FfiConverterTypePlainTextMessageV2INSTANCE.Write(writer, variant_value.Value)
+		case MessageV2Encrypted:
+			writeInt32(writer, 3)
+			FfiConverterTypeEncryptedMessageV2INSTANCE.Write(writer, variant_value.Value)
+		default:
+			_ = variant_value
+			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeMessageV2.Write", value))
+	}
+}
+
+type FfiDestroyerTypeMessageV2 struct {}
+
+func (_ FfiDestroyerTypeMessageV2) Destroy(value MessageV2) {
 	value.Destroy()
 }
 
@@ -18366,11 +25567,12 @@ var ErrRadixEngineToolkitErrorScryptoSborError = fmt.Errorf("RadixEngineToolkitE
 var ErrRadixEngineToolkitErrorTypedNativeEventError = fmt.Errorf("RadixEngineToolkitErrorTypedNativeEventError")
 var ErrRadixEngineToolkitErrorFailedToDecodeTransactionHash = fmt.Errorf("RadixEngineToolkitErrorFailedToDecodeTransactionHash")
 var ErrRadixEngineToolkitErrorManifestBuilderNameRecordError = fmt.Errorf("RadixEngineToolkitErrorManifestBuilderNameRecordError")
-var ErrRadixEngineToolkitErrorManifestModificationError = fmt.Errorf("RadixEngineToolkitErrorManifestModificationError")
 var ErrRadixEngineToolkitErrorInvalidEntityTypeIdError = fmt.Errorf("RadixEngineToolkitErrorInvalidEntityTypeIdError")
 var ErrRadixEngineToolkitErrorDecimalError = fmt.Errorf("RadixEngineToolkitErrorDecimalError")
 var ErrRadixEngineToolkitErrorSignerError = fmt.Errorf("RadixEngineToolkitErrorSignerError")
 var ErrRadixEngineToolkitErrorInvalidReceipt = fmt.Errorf("RadixEngineToolkitErrorInvalidReceipt")
+var ErrRadixEngineToolkitErrorStaticAnalysisFailed = fmt.Errorf("RadixEngineToolkitErrorStaticAnalysisFailed")
+var ErrRadixEngineToolkitErrorNotAllBuilderItemsWereSpecified = fmt.Errorf("RadixEngineToolkitErrorNotAllBuilderItemsWereSpecified")
 
 // Variant structs
 type RadixEngineToolkitErrorInvalidLength struct {
@@ -18885,31 +26087,6 @@ func (err RadixEngineToolkitErrorManifestBuilderNameRecordError) Error() string 
 func (self RadixEngineToolkitErrorManifestBuilderNameRecordError) Is(target error) bool {
 	return target == ErrRadixEngineToolkitErrorManifestBuilderNameRecordError
 }
-type RadixEngineToolkitErrorManifestModificationError struct {
-	Error_ string
-}
-func NewRadixEngineToolkitErrorManifestModificationError(
-	error string,
-) *RadixEngineToolkitError {
-	return &RadixEngineToolkitError{
-		err: &RadixEngineToolkitErrorManifestModificationError{
-			Error_: error,
-		},
-	}
-}
-
-func (err RadixEngineToolkitErrorManifestModificationError) Error() string {
-	return fmt.Sprint("ManifestModificationError",
-		": ",
-		
-		"Error_=",
-		err.Error_,
-	)
-}
-
-func (self RadixEngineToolkitErrorManifestModificationError) Is(target error) bool {
-	return target == ErrRadixEngineToolkitErrorManifestModificationError
-}
 type RadixEngineToolkitErrorInvalidEntityTypeIdError struct {
 	Error_ string
 }
@@ -18997,6 +26174,44 @@ func (err RadixEngineToolkitErrorInvalidReceipt) Error() string {
 
 func (self RadixEngineToolkitErrorInvalidReceipt) Is(target error) bool {
 	return target == ErrRadixEngineToolkitErrorInvalidReceipt
+}
+type RadixEngineToolkitErrorStaticAnalysisFailed struct {
+}
+func NewRadixEngineToolkitErrorStaticAnalysisFailed(
+) *RadixEngineToolkitError {
+	return &RadixEngineToolkitError{
+		err: &RadixEngineToolkitErrorStaticAnalysisFailed{
+		},
+	}
+}
+
+func (err RadixEngineToolkitErrorStaticAnalysisFailed) Error() string {
+	return fmt.Sprint("StaticAnalysisFailed",
+		
+	)
+}
+
+func (self RadixEngineToolkitErrorStaticAnalysisFailed) Is(target error) bool {
+	return target == ErrRadixEngineToolkitErrorStaticAnalysisFailed
+}
+type RadixEngineToolkitErrorNotAllBuilderItemsWereSpecified struct {
+}
+func NewRadixEngineToolkitErrorNotAllBuilderItemsWereSpecified(
+) *RadixEngineToolkitError {
+	return &RadixEngineToolkitError{
+		err: &RadixEngineToolkitErrorNotAllBuilderItemsWereSpecified{
+		},
+	}
+}
+
+func (err RadixEngineToolkitErrorNotAllBuilderItemsWereSpecified) Error() string {
+	return fmt.Sprint("NotAllBuilderItemsWereSpecified",
+		
+	)
+}
+
+func (self RadixEngineToolkitErrorNotAllBuilderItemsWereSpecified) Is(target error) bool {
+	return target == ErrRadixEngineToolkitErrorNotAllBuilderItemsWereSpecified
 }
 
 type FfiConverterTypeRadixEngineToolkitError struct{}
@@ -19098,22 +26313,24 @@ func (c FfiConverterTypeRadixEngineToolkitError) Read(reader io.Reader) error {
 			Error_: FfiConverterTypeNameRecordErrorINSTANCE.Read(reader),
 		}}
 	case 21:
-		return &RadixEngineToolkitError{&RadixEngineToolkitErrorManifestModificationError{
-			Error_: FfiConverterStringINSTANCE.Read(reader),
-		}}
-	case 22:
 		return &RadixEngineToolkitError{&RadixEngineToolkitErrorInvalidEntityTypeIdError{
 			Error_: FfiConverterStringINSTANCE.Read(reader),
 		}}
-	case 23:
+	case 22:
 		return &RadixEngineToolkitError{&RadixEngineToolkitErrorDecimalError{
 		}}
-	case 24:
+	case 23:
 		return &RadixEngineToolkitError{&RadixEngineToolkitErrorSignerError{
 			Error_: FfiConverterStringINSTANCE.Read(reader),
 		}}
-	case 25:
+	case 24:
 		return &RadixEngineToolkitError{&RadixEngineToolkitErrorInvalidReceipt{
+		}}
+	case 25:
+		return &RadixEngineToolkitError{&RadixEngineToolkitErrorStaticAnalysisFailed{
+		}}
+	case 26:
+		return &RadixEngineToolkitError{&RadixEngineToolkitErrorNotAllBuilderItemsWereSpecified{
 		}}
 	default:
 		panic(fmt.Sprintf("Unknown error code %d in FfiConverterTypeRadixEngineToolkitError.Read()", errorID))
@@ -19184,19 +26401,20 @@ func (c FfiConverterTypeRadixEngineToolkitError) Write(writer io.Writer, value *
 		case *RadixEngineToolkitErrorManifestBuilderNameRecordError:
 			writeInt32(writer, 20)
 			FfiConverterTypeNameRecordErrorINSTANCE.Write(writer, variantValue.Error_)
-		case *RadixEngineToolkitErrorManifestModificationError:
+		case *RadixEngineToolkitErrorInvalidEntityTypeIdError:
 			writeInt32(writer, 21)
 			FfiConverterStringINSTANCE.Write(writer, variantValue.Error_)
-		case *RadixEngineToolkitErrorInvalidEntityTypeIdError:
-			writeInt32(writer, 22)
-			FfiConverterStringINSTANCE.Write(writer, variantValue.Error_)
 		case *RadixEngineToolkitErrorDecimalError:
-			writeInt32(writer, 23)
+			writeInt32(writer, 22)
 		case *RadixEngineToolkitErrorSignerError:
-			writeInt32(writer, 24)
+			writeInt32(writer, 23)
 			FfiConverterStringINSTANCE.Write(writer, variantValue.Error_)
 		case *RadixEngineToolkitErrorInvalidReceipt:
+			writeInt32(writer, 24)
+		case *RadixEngineToolkitErrorStaticAnalysisFailed:
 			writeInt32(writer, 25)
+		case *RadixEngineToolkitErrorNotAllBuilderItemsWereSpecified:
+			writeInt32(writer, 26)
 		default:
 			_ = variantValue
 			panic(fmt.Sprintf("invalid error value `%v` in FfiConverterTypeRadixEngineToolkitError.Write", value))
@@ -19873,140 +27091,334 @@ func (_ FfiDestroyerTypeSerializationMode) Destroy(value SerializationMode) {
 
 
 
-type Signature interface {
+type SignatureV1 interface {
 	Destroy()
 }
-type SignatureSecp256k1 struct {
+type SignatureV1Secp256k1 struct {
 	Value []byte
 }
 
-func (e SignatureSecp256k1) Destroy() {
+func (e SignatureV1Secp256k1) Destroy() {
 		FfiDestroyerBytes{}.Destroy(e.Value);
 }
-type SignatureEd25519 struct {
+type SignatureV1Ed25519 struct {
 	Value []byte
 }
 
-func (e SignatureEd25519) Destroy() {
+func (e SignatureV1Ed25519) Destroy() {
 		FfiDestroyerBytes{}.Destroy(e.Value);
 }
 
-type FfiConverterTypeSignature struct {}
+type FfiConverterTypeSignatureV1 struct {}
 
-var FfiConverterTypeSignatureINSTANCE = FfiConverterTypeSignature{}
+var FfiConverterTypeSignatureV1INSTANCE = FfiConverterTypeSignatureV1{}
 
-func (c FfiConverterTypeSignature) Lift(rb RustBufferI) Signature {
-	return LiftFromRustBuffer[Signature](c, rb)
+func (c FfiConverterTypeSignatureV1) Lift(rb RustBufferI) SignatureV1 {
+	return LiftFromRustBuffer[SignatureV1](c, rb)
 }
 
-func (c FfiConverterTypeSignature) Lower(value Signature) RustBuffer {
-	return LowerIntoRustBuffer[Signature](c, value)
+func (c FfiConverterTypeSignatureV1) Lower(value SignatureV1) RustBuffer {
+	return LowerIntoRustBuffer[SignatureV1](c, value)
 }
-func (FfiConverterTypeSignature) Read(reader io.Reader) Signature {
+func (FfiConverterTypeSignatureV1) Read(reader io.Reader) SignatureV1 {
 	id := readInt32(reader)
 	switch (id) {
 		case 1:
-			return SignatureSecp256k1{
+			return SignatureV1Secp256k1{
 				FfiConverterBytesINSTANCE.Read(reader),
 			};
 		case 2:
-			return SignatureEd25519{
+			return SignatureV1Ed25519{
 				FfiConverterBytesINSTANCE.Read(reader),
 			};
 		default:
-			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeSignature.Read()", id));
+			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeSignatureV1.Read()", id));
 	}
 }
 
-func (FfiConverterTypeSignature) Write(writer io.Writer, value Signature) {
+func (FfiConverterTypeSignatureV1) Write(writer io.Writer, value SignatureV1) {
 	switch variant_value := value.(type) {
-		case SignatureSecp256k1:
+		case SignatureV1Secp256k1:
 			writeInt32(writer, 1)
 			FfiConverterBytesINSTANCE.Write(writer, variant_value.Value)
-		case SignatureEd25519:
+		case SignatureV1Ed25519:
 			writeInt32(writer, 2)
 			FfiConverterBytesINSTANCE.Write(writer, variant_value.Value)
 		default:
 			_ = variant_value
-			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeSignature.Write", value))
+			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeSignatureV1.Write", value))
 	}
 }
 
-type FfiDestroyerTypeSignature struct {}
+type FfiDestroyerTypeSignatureV1 struct {}
 
-func (_ FfiDestroyerTypeSignature) Destroy(value Signature) {
+func (_ FfiDestroyerTypeSignatureV1) Destroy(value SignatureV1) {
 	value.Destroy()
 }
 
 
 
 
-type SignatureWithPublicKey interface {
+type SignatureWithPublicKeyV1 interface {
 	Destroy()
 }
-type SignatureWithPublicKeySecp256k1 struct {
+type SignatureWithPublicKeyV1Secp256k1 struct {
 	Signature []byte
 }
 
-func (e SignatureWithPublicKeySecp256k1) Destroy() {
+func (e SignatureWithPublicKeyV1Secp256k1) Destroy() {
 		FfiDestroyerBytes{}.Destroy(e.Signature);
 }
-type SignatureWithPublicKeyEd25519 struct {
+type SignatureWithPublicKeyV1Ed25519 struct {
 	Signature []byte
 	PublicKey []byte
 }
 
-func (e SignatureWithPublicKeyEd25519) Destroy() {
+func (e SignatureWithPublicKeyV1Ed25519) Destroy() {
 		FfiDestroyerBytes{}.Destroy(e.Signature);
 		FfiDestroyerBytes{}.Destroy(e.PublicKey);
 }
 
-type FfiConverterTypeSignatureWithPublicKey struct {}
+type FfiConverterTypeSignatureWithPublicKeyV1 struct {}
 
-var FfiConverterTypeSignatureWithPublicKeyINSTANCE = FfiConverterTypeSignatureWithPublicKey{}
+var FfiConverterTypeSignatureWithPublicKeyV1INSTANCE = FfiConverterTypeSignatureWithPublicKeyV1{}
 
-func (c FfiConverterTypeSignatureWithPublicKey) Lift(rb RustBufferI) SignatureWithPublicKey {
-	return LiftFromRustBuffer[SignatureWithPublicKey](c, rb)
+func (c FfiConverterTypeSignatureWithPublicKeyV1) Lift(rb RustBufferI) SignatureWithPublicKeyV1 {
+	return LiftFromRustBuffer[SignatureWithPublicKeyV1](c, rb)
 }
 
-func (c FfiConverterTypeSignatureWithPublicKey) Lower(value SignatureWithPublicKey) RustBuffer {
-	return LowerIntoRustBuffer[SignatureWithPublicKey](c, value)
+func (c FfiConverterTypeSignatureWithPublicKeyV1) Lower(value SignatureWithPublicKeyV1) RustBuffer {
+	return LowerIntoRustBuffer[SignatureWithPublicKeyV1](c, value)
 }
-func (FfiConverterTypeSignatureWithPublicKey) Read(reader io.Reader) SignatureWithPublicKey {
+func (FfiConverterTypeSignatureWithPublicKeyV1) Read(reader io.Reader) SignatureWithPublicKeyV1 {
 	id := readInt32(reader)
 	switch (id) {
 		case 1:
-			return SignatureWithPublicKeySecp256k1{
+			return SignatureWithPublicKeyV1Secp256k1{
 				FfiConverterBytesINSTANCE.Read(reader),
 			};
 		case 2:
-			return SignatureWithPublicKeyEd25519{
+			return SignatureWithPublicKeyV1Ed25519{
 				FfiConverterBytesINSTANCE.Read(reader),
 				FfiConverterBytesINSTANCE.Read(reader),
 			};
 		default:
-			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeSignatureWithPublicKey.Read()", id));
+			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeSignatureWithPublicKeyV1.Read()", id));
 	}
 }
 
-func (FfiConverterTypeSignatureWithPublicKey) Write(writer io.Writer, value SignatureWithPublicKey) {
+func (FfiConverterTypeSignatureWithPublicKeyV1) Write(writer io.Writer, value SignatureWithPublicKeyV1) {
 	switch variant_value := value.(type) {
-		case SignatureWithPublicKeySecp256k1:
+		case SignatureWithPublicKeyV1Secp256k1:
 			writeInt32(writer, 1)
 			FfiConverterBytesINSTANCE.Write(writer, variant_value.Signature)
-		case SignatureWithPublicKeyEd25519:
+		case SignatureWithPublicKeyV1Ed25519:
 			writeInt32(writer, 2)
 			FfiConverterBytesINSTANCE.Write(writer, variant_value.Signature)
 			FfiConverterBytesINSTANCE.Write(writer, variant_value.PublicKey)
 		default:
 			_ = variant_value
-			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeSignatureWithPublicKey.Write", value))
+			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeSignatureWithPublicKeyV1.Write", value))
 	}
 }
 
-type FfiDestroyerTypeSignatureWithPublicKey struct {}
+type FfiDestroyerTypeSignatureWithPublicKeyV1 struct {}
 
-func (_ FfiDestroyerTypeSignatureWithPublicKey) Destroy(value SignatureWithPublicKey) {
+func (_ FfiDestroyerTypeSignatureWithPublicKeyV1) Destroy(value SignatureWithPublicKeyV1) {
+	value.Destroy()
+}
+
+
+
+
+type SimpleFungibleResourceBounds interface {
+	Destroy()
+}
+type SimpleFungibleResourceBoundsExact struct {
+	Value *Decimal
+}
+
+func (e SimpleFungibleResourceBoundsExact) Destroy() {
+		FfiDestroyerDecimal{}.Destroy(e.Value);
+}
+type SimpleFungibleResourceBoundsAtMost struct {
+	Value *Decimal
+}
+
+func (e SimpleFungibleResourceBoundsAtMost) Destroy() {
+		FfiDestroyerDecimal{}.Destroy(e.Value);
+}
+type SimpleFungibleResourceBoundsAtLeast struct {
+	Value *Decimal
+}
+
+func (e SimpleFungibleResourceBoundsAtLeast) Destroy() {
+		FfiDestroyerDecimal{}.Destroy(e.Value);
+}
+type SimpleFungibleResourceBoundsBetween struct {
+	LowerBoundInclusive *Decimal
+	UpperBoundInclusive *Decimal
+}
+
+func (e SimpleFungibleResourceBoundsBetween) Destroy() {
+		FfiDestroyerDecimal{}.Destroy(e.LowerBoundInclusive);
+		FfiDestroyerDecimal{}.Destroy(e.UpperBoundInclusive);
+}
+type SimpleFungibleResourceBoundsUnknownAmount struct {
+}
+
+func (e SimpleFungibleResourceBoundsUnknownAmount) Destroy() {
+}
+
+type FfiConverterTypeSimpleFungibleResourceBounds struct {}
+
+var FfiConverterTypeSimpleFungibleResourceBoundsINSTANCE = FfiConverterTypeSimpleFungibleResourceBounds{}
+
+func (c FfiConverterTypeSimpleFungibleResourceBounds) Lift(rb RustBufferI) SimpleFungibleResourceBounds {
+	return LiftFromRustBuffer[SimpleFungibleResourceBounds](c, rb)
+}
+
+func (c FfiConverterTypeSimpleFungibleResourceBounds) Lower(value SimpleFungibleResourceBounds) RustBuffer {
+	return LowerIntoRustBuffer[SimpleFungibleResourceBounds](c, value)
+}
+func (FfiConverterTypeSimpleFungibleResourceBounds) Read(reader io.Reader) SimpleFungibleResourceBounds {
+	id := readInt32(reader)
+	switch (id) {
+		case 1:
+			return SimpleFungibleResourceBoundsExact{
+				FfiConverterDecimalINSTANCE.Read(reader),
+			};
+		case 2:
+			return SimpleFungibleResourceBoundsAtMost{
+				FfiConverterDecimalINSTANCE.Read(reader),
+			};
+		case 3:
+			return SimpleFungibleResourceBoundsAtLeast{
+				FfiConverterDecimalINSTANCE.Read(reader),
+			};
+		case 4:
+			return SimpleFungibleResourceBoundsBetween{
+				FfiConverterDecimalINSTANCE.Read(reader),
+				FfiConverterDecimalINSTANCE.Read(reader),
+			};
+		case 5:
+			return SimpleFungibleResourceBoundsUnknownAmount{
+			};
+		default:
+			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeSimpleFungibleResourceBounds.Read()", id));
+	}
+}
+
+func (FfiConverterTypeSimpleFungibleResourceBounds) Write(writer io.Writer, value SimpleFungibleResourceBounds) {
+	switch variant_value := value.(type) {
+		case SimpleFungibleResourceBoundsExact:
+			writeInt32(writer, 1)
+			FfiConverterDecimalINSTANCE.Write(writer, variant_value.Value)
+		case SimpleFungibleResourceBoundsAtMost:
+			writeInt32(writer, 2)
+			FfiConverterDecimalINSTANCE.Write(writer, variant_value.Value)
+		case SimpleFungibleResourceBoundsAtLeast:
+			writeInt32(writer, 3)
+			FfiConverterDecimalINSTANCE.Write(writer, variant_value.Value)
+		case SimpleFungibleResourceBoundsBetween:
+			writeInt32(writer, 4)
+			FfiConverterDecimalINSTANCE.Write(writer, variant_value.LowerBoundInclusive)
+			FfiConverterDecimalINSTANCE.Write(writer, variant_value.UpperBoundInclusive)
+		case SimpleFungibleResourceBoundsUnknownAmount:
+			writeInt32(writer, 5)
+		default:
+			_ = variant_value
+			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeSimpleFungibleResourceBounds.Write", value))
+	}
+}
+
+type FfiDestroyerTypeSimpleFungibleResourceBounds struct {}
+
+func (_ FfiDestroyerTypeSimpleFungibleResourceBounds) Destroy(value SimpleFungibleResourceBounds) {
+	value.Destroy()
+}
+
+
+
+
+type SimpleNonFungibleResourceBounds interface {
+	Destroy()
+}
+type SimpleNonFungibleResourceBoundsExact struct {
+	Amount *Decimal
+	CertainIds []NonFungibleLocalId
+}
+
+func (e SimpleNonFungibleResourceBoundsExact) Destroy() {
+		FfiDestroyerDecimal{}.Destroy(e.Amount);
+		FfiDestroyerSequenceTypeNonFungibleLocalId{}.Destroy(e.CertainIds);
+}
+type SimpleNonFungibleResourceBoundsNotExact struct {
+	CertainIds []NonFungibleLocalId
+	LowerBound LowerBound
+	UpperBound UpperBound
+	AllowedIds AllowedIds
+}
+
+func (e SimpleNonFungibleResourceBoundsNotExact) Destroy() {
+		FfiDestroyerSequenceTypeNonFungibleLocalId{}.Destroy(e.CertainIds);
+		FfiDestroyerTypeLowerBound{}.Destroy(e.LowerBound);
+		FfiDestroyerTypeUpperBound{}.Destroy(e.UpperBound);
+		FfiDestroyerTypeAllowedIds{}.Destroy(e.AllowedIds);
+}
+
+type FfiConverterTypeSimpleNonFungibleResourceBounds struct {}
+
+var FfiConverterTypeSimpleNonFungibleResourceBoundsINSTANCE = FfiConverterTypeSimpleNonFungibleResourceBounds{}
+
+func (c FfiConverterTypeSimpleNonFungibleResourceBounds) Lift(rb RustBufferI) SimpleNonFungibleResourceBounds {
+	return LiftFromRustBuffer[SimpleNonFungibleResourceBounds](c, rb)
+}
+
+func (c FfiConverterTypeSimpleNonFungibleResourceBounds) Lower(value SimpleNonFungibleResourceBounds) RustBuffer {
+	return LowerIntoRustBuffer[SimpleNonFungibleResourceBounds](c, value)
+}
+func (FfiConverterTypeSimpleNonFungibleResourceBounds) Read(reader io.Reader) SimpleNonFungibleResourceBounds {
+	id := readInt32(reader)
+	switch (id) {
+		case 1:
+			return SimpleNonFungibleResourceBoundsExact{
+				FfiConverterDecimalINSTANCE.Read(reader),
+				FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Read(reader),
+			};
+		case 2:
+			return SimpleNonFungibleResourceBoundsNotExact{
+				FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Read(reader),
+				FfiConverterTypeLowerBoundINSTANCE.Read(reader),
+				FfiConverterTypeUpperBoundINSTANCE.Read(reader),
+				FfiConverterTypeAllowedIdsINSTANCE.Read(reader),
+			};
+		default:
+			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeSimpleNonFungibleResourceBounds.Read()", id));
+	}
+}
+
+func (FfiConverterTypeSimpleNonFungibleResourceBounds) Write(writer io.Writer, value SimpleNonFungibleResourceBounds) {
+	switch variant_value := value.(type) {
+		case SimpleNonFungibleResourceBoundsExact:
+			writeInt32(writer, 1)
+			FfiConverterDecimalINSTANCE.Write(writer, variant_value.Amount)
+			FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Write(writer, variant_value.CertainIds)
+		case SimpleNonFungibleResourceBoundsNotExact:
+			writeInt32(writer, 2)
+			FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Write(writer, variant_value.CertainIds)
+			FfiConverterTypeLowerBoundINSTANCE.Write(writer, variant_value.LowerBound)
+			FfiConverterTypeUpperBoundINSTANCE.Write(writer, variant_value.UpperBound)
+			FfiConverterTypeAllowedIdsINSTANCE.Write(writer, variant_value.AllowedIds)
+		default:
+			_ = variant_value
+			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeSimpleNonFungibleResourceBounds.Write", value))
+	}
+}
+
+type FfiDestroyerTypeSimpleNonFungibleResourceBounds struct {}
+
+func (_ FfiDestroyerTypeSimpleNonFungibleResourceBounds) Destroy(value SimpleNonFungibleResourceBounds) {
 	value.Destroy()
 }
 
@@ -22137,6 +29549,70 @@ func (_ FfiDestroyerTypeTypedValidatorBlueprintEvent) Destroy(value TypedValidat
 
 
 
+type UpperBound interface {
+	Destroy()
+}
+type UpperBoundInclusive struct {
+	Value *Decimal
+}
+
+func (e UpperBoundInclusive) Destroy() {
+		FfiDestroyerDecimal{}.Destroy(e.Value);
+}
+type UpperBoundUnbounded struct {
+}
+
+func (e UpperBoundUnbounded) Destroy() {
+}
+
+type FfiConverterTypeUpperBound struct {}
+
+var FfiConverterTypeUpperBoundINSTANCE = FfiConverterTypeUpperBound{}
+
+func (c FfiConverterTypeUpperBound) Lift(rb RustBufferI) UpperBound {
+	return LiftFromRustBuffer[UpperBound](c, rb)
+}
+
+func (c FfiConverterTypeUpperBound) Lower(value UpperBound) RustBuffer {
+	return LowerIntoRustBuffer[UpperBound](c, value)
+}
+func (FfiConverterTypeUpperBound) Read(reader io.Reader) UpperBound {
+	id := readInt32(reader)
+	switch (id) {
+		case 1:
+			return UpperBoundInclusive{
+				FfiConverterDecimalINSTANCE.Read(reader),
+			};
+		case 2:
+			return UpperBoundUnbounded{
+			};
+		default:
+			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeUpperBound.Read()", id));
+	}
+}
+
+func (FfiConverterTypeUpperBound) Write(writer io.Writer, value UpperBound) {
+	switch variant_value := value.(type) {
+		case UpperBoundInclusive:
+			writeInt32(writer, 1)
+			FfiConverterDecimalINSTANCE.Write(writer, variant_value.Value)
+		case UpperBoundUnbounded:
+			writeInt32(writer, 2)
+		default:
+			_ = variant_value
+			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeUpperBound.Write", value))
+	}
+}
+
+type FfiDestroyerTypeUpperBound struct {}
+
+func (_ FfiDestroyerTypeUpperBound) Destroy(value UpperBound) {
+	value.Destroy()
+}
+
+
+
+
 type WithdrawResourceEvent interface {
 	Destroy()
 }
@@ -22357,9 +29833,9 @@ type Signer interface {
 	
 	Sign(hash *Hash) []byte
 	
-	SignToSignature(hash *Hash) Signature
+	SignToSignature(hash *Hash) SignatureV1
 	
-	SignToSignatureWithPublicKey(hash *Hash) SignatureWithPublicKey
+	SignToSignatureWithPublicKey(hash *Hash) SignatureWithPublicKeyV1
 	
 	PublicKey() PublicKey
 	
@@ -22421,7 +29897,7 @@ func (foreignCallbackCallbackInterfaceSigner) InvokeSignToSignature (callback Si
 	result :=callback.SignToSignature(FfiConverterHashINSTANCE.Read(reader));
 
         
-	*outBuf = LowerIntoRustBuffer[Signature](FfiConverterTypeSignatureINSTANCE, result)
+	*outBuf = LowerIntoRustBuffer[SignatureV1](FfiConverterTypeSignatureV1INSTANCE, result)
 	return uniffiCallbackResultSuccess
 }
 func (foreignCallbackCallbackInterfaceSigner) InvokeSignToSignatureWithPublicKey (callback Signer, args []byte, outBuf *C.RustBuffer) uniffiCallbackResult {
@@ -22429,7 +29905,7 @@ func (foreignCallbackCallbackInterfaceSigner) InvokeSignToSignatureWithPublicKey
 	result :=callback.SignToSignatureWithPublicKey(FfiConverterHashINSTANCE.Read(reader));
 
         
-	*outBuf = LowerIntoRustBuffer[SignatureWithPublicKey](FfiConverterTypeSignatureWithPublicKeyINSTANCE, result)
+	*outBuf = LowerIntoRustBuffer[SignatureWithPublicKeyV1](FfiConverterTypeSignatureWithPublicKeyV1INSTANCE, result)
 	return uniffiCallbackResultSuccess
 }
 func (foreignCallbackCallbackInterfaceSigner) InvokePublicKey (callback Signer, args []byte, outBuf *C.RustBuffer) uniffiCallbackResult {
@@ -22500,6 +29976,45 @@ type FfiDestroyerOptionalUint32 struct {}
 func (_ FfiDestroyerOptionalUint32) Destroy(value *uint32) {
 	if value != nil {
 		FfiDestroyerUint32{}.Destroy(*value)
+	}
+}
+
+
+
+type FfiConverterOptionalInt64 struct{}
+
+var FfiConverterOptionalInt64INSTANCE = FfiConverterOptionalInt64{}
+
+func (c FfiConverterOptionalInt64) Lift(rb RustBufferI) *int64 {
+	return LiftFromRustBuffer[*int64](c, rb)
+}
+
+func (_ FfiConverterOptionalInt64) Read(reader io.Reader) *int64 {
+	if readInt8(reader) == 0 {
+		return nil
+	}
+	temp := FfiConverterInt64INSTANCE.Read(reader)
+	return &temp
+}
+
+func (c FfiConverterOptionalInt64) Lower(value *int64) RustBuffer {
+	return LowerIntoRustBuffer[*int64](c, value)
+}
+
+func (_ FfiConverterOptionalInt64) Write(writer io.Writer, value *int64) {
+	if value == nil {
+		writeInt8(writer, 0)
+	} else {
+		writeInt8(writer, 1)
+		FfiConverterInt64INSTANCE.Write(writer, *value)
+	}
+}
+
+type FfiDestroyerOptionalInt64 struct {}
+
+func (_ FfiDestroyerOptionalInt64) Destroy(value *int64) {
+	if value != nil {
+		FfiDestroyerInt64{}.Destroy(*value)
 	}
 }
 
@@ -22617,45 +30132,6 @@ type FfiDestroyerOptionalPreciseDecimal struct {}
 func (_ FfiDestroyerOptionalPreciseDecimal) Destroy(value **PreciseDecimal) {
 	if value != nil {
 		FfiDestroyerPreciseDecimal{}.Destroy(*value)
-	}
-}
-
-
-
-type FfiConverterOptionalTypeLockFeeModification struct{}
-
-var FfiConverterOptionalTypeLockFeeModificationINSTANCE = FfiConverterOptionalTypeLockFeeModification{}
-
-func (c FfiConverterOptionalTypeLockFeeModification) Lift(rb RustBufferI) *LockFeeModification {
-	return LiftFromRustBuffer[*LockFeeModification](c, rb)
-}
-
-func (_ FfiConverterOptionalTypeLockFeeModification) Read(reader io.Reader) *LockFeeModification {
-	if readInt8(reader) == 0 {
-		return nil
-	}
-	temp := FfiConverterTypeLockFeeModificationINSTANCE.Read(reader)
-	return &temp
-}
-
-func (c FfiConverterOptionalTypeLockFeeModification) Lower(value *LockFeeModification) RustBuffer {
-	return LowerIntoRustBuffer[*LockFeeModification](c, value)
-}
-
-func (_ FfiConverterOptionalTypeLockFeeModification) Write(writer io.Writer, value *LockFeeModification) {
-	if value == nil {
-		writeInt8(writer, 0)
-	} else {
-		writeInt8(writer, 1)
-		FfiConverterTypeLockFeeModificationINSTANCE.Write(writer, *value)
-	}
-}
-
-type FfiDestroyerOptionalTypeLockFeeModification struct {}
-
-func (_ FfiDestroyerOptionalTypeLockFeeModification) Destroy(value *LockFeeModification) {
-	if value != nil {
-		FfiDestroyerTypeLockFeeModification{}.Destroy(*value)
 	}
 }
 
@@ -23261,6 +30737,96 @@ func (FfiDestroyerSequenceDecimal) Destroy(sequence []*Decimal) {
 
 
 
+type FfiConverterSequenceHash struct{}
+
+var FfiConverterSequenceHashINSTANCE = FfiConverterSequenceHash{}
+
+func (c FfiConverterSequenceHash) Lift(rb RustBufferI) []*Hash {
+	return LiftFromRustBuffer[[]*Hash](c, rb)
+}
+
+func (c FfiConverterSequenceHash) Read(reader io.Reader) []*Hash {
+	length := readInt32(reader)
+	if length == 0 {
+		return nil
+	}
+	result := make([]*Hash, 0, length)
+	for i := int32(0); i < length; i++ {
+		result = append(result, FfiConverterHashINSTANCE.Read(reader))
+	}
+	return result
+}
+
+func (c FfiConverterSequenceHash) Lower(value []*Hash) RustBuffer {
+	return LowerIntoRustBuffer[[]*Hash](c, value)
+}
+
+func (c FfiConverterSequenceHash) Write(writer io.Writer, value []*Hash) {
+	if len(value) > math.MaxInt32 {
+		panic("[]*Hash is too large to fit into Int32")
+	}
+
+	writeInt32(writer, int32(len(value)))
+	for _, item := range value {
+		FfiConverterHashINSTANCE.Write(writer, item)
+	}
+}
+
+type FfiDestroyerSequenceHash struct {}
+
+func (FfiDestroyerSequenceHash) Destroy(sequence []*Hash) {
+	for _, value := range sequence {
+		FfiDestroyerHash{}.Destroy(value)	
+	}
+}
+
+
+
+type FfiConverterSequenceIntentCoreV2 struct{}
+
+var FfiConverterSequenceIntentCoreV2INSTANCE = FfiConverterSequenceIntentCoreV2{}
+
+func (c FfiConverterSequenceIntentCoreV2) Lift(rb RustBufferI) []*IntentCoreV2 {
+	return LiftFromRustBuffer[[]*IntentCoreV2](c, rb)
+}
+
+func (c FfiConverterSequenceIntentCoreV2) Read(reader io.Reader) []*IntentCoreV2 {
+	length := readInt32(reader)
+	if length == 0 {
+		return nil
+	}
+	result := make([]*IntentCoreV2, 0, length)
+	for i := int32(0); i < length; i++ {
+		result = append(result, FfiConverterIntentCoreV2INSTANCE.Read(reader))
+	}
+	return result
+}
+
+func (c FfiConverterSequenceIntentCoreV2) Lower(value []*IntentCoreV2) RustBuffer {
+	return LowerIntoRustBuffer[[]*IntentCoreV2](c, value)
+}
+
+func (c FfiConverterSequenceIntentCoreV2) Write(writer io.Writer, value []*IntentCoreV2) {
+	if len(value) > math.MaxInt32 {
+		panic("[]*IntentCoreV2 is too large to fit into Int32")
+	}
+
+	writeInt32(writer, int32(len(value)))
+	for _, item := range value {
+		FfiConverterIntentCoreV2INSTANCE.Write(writer, item)
+	}
+}
+
+type FfiDestroyerSequenceIntentCoreV2 struct {}
+
+func (FfiDestroyerSequenceIntentCoreV2) Destroy(sequence []*IntentCoreV2) {
+	for _, value := range sequence {
+		FfiDestroyerIntentCoreV2{}.Destroy(value)	
+	}
+}
+
+
+
 type FfiConverterSequenceNonFungibleGlobalId struct{}
 
 var FfiConverterSequenceNonFungibleGlobalIdINSTANCE = FfiConverterSequenceNonFungibleGlobalId{}
@@ -23301,51 +30867,6 @@ type FfiDestroyerSequenceNonFungibleGlobalId struct {}
 func (FfiDestroyerSequenceNonFungibleGlobalId) Destroy(sequence []*NonFungibleGlobalId) {
 	for _, value := range sequence {
 		FfiDestroyerNonFungibleGlobalId{}.Destroy(value)	
-	}
-}
-
-
-
-type FfiConverterSequenceTypeIndexedAssertion struct{}
-
-var FfiConverterSequenceTypeIndexedAssertionINSTANCE = FfiConverterSequenceTypeIndexedAssertion{}
-
-func (c FfiConverterSequenceTypeIndexedAssertion) Lift(rb RustBufferI) []IndexedAssertion {
-	return LiftFromRustBuffer[[]IndexedAssertion](c, rb)
-}
-
-func (c FfiConverterSequenceTypeIndexedAssertion) Read(reader io.Reader) []IndexedAssertion {
-	length := readInt32(reader)
-	if length == 0 {
-		return nil
-	}
-	result := make([]IndexedAssertion, 0, length)
-	for i := int32(0); i < length; i++ {
-		result = append(result, FfiConverterTypeIndexedAssertionINSTANCE.Read(reader))
-	}
-	return result
-}
-
-func (c FfiConverterSequenceTypeIndexedAssertion) Lower(value []IndexedAssertion) RustBuffer {
-	return LowerIntoRustBuffer[[]IndexedAssertion](c, value)
-}
-
-func (c FfiConverterSequenceTypeIndexedAssertion) Write(writer io.Writer, value []IndexedAssertion) {
-	if len(value) > math.MaxInt32 {
-		panic("[]IndexedAssertion is too large to fit into Int32")
-	}
-
-	writeInt32(writer, int32(len(value)))
-	for _, item := range value {
-		FfiConverterTypeIndexedAssertionINSTANCE.Write(writer, item)
-	}
-}
-
-type FfiDestroyerSequenceTypeIndexedAssertion struct {}
-
-func (FfiDestroyerSequenceTypeIndexedAssertion) Destroy(sequence []IndexedAssertion) {
-	for _, value := range sequence {
-		FfiDestroyerTypeIndexedAssertion{}.Destroy(value)	
 	}
 }
 
@@ -23756,6 +31277,96 @@ func (FfiDestroyerSequenceTypeUnstakeDataEntry) Destroy(sequence []UnstakeDataEn
 
 
 
+type FfiConverterSequenceTypeAccountDeposit struct{}
+
+var FfiConverterSequenceTypeAccountDepositINSTANCE = FfiConverterSequenceTypeAccountDeposit{}
+
+func (c FfiConverterSequenceTypeAccountDeposit) Lift(rb RustBufferI) []AccountDeposit {
+	return LiftFromRustBuffer[[]AccountDeposit](c, rb)
+}
+
+func (c FfiConverterSequenceTypeAccountDeposit) Read(reader io.Reader) []AccountDeposit {
+	length := readInt32(reader)
+	if length == 0 {
+		return nil
+	}
+	result := make([]AccountDeposit, 0, length)
+	for i := int32(0); i < length; i++ {
+		result = append(result, FfiConverterTypeAccountDepositINSTANCE.Read(reader))
+	}
+	return result
+}
+
+func (c FfiConverterSequenceTypeAccountDeposit) Lower(value []AccountDeposit) RustBuffer {
+	return LowerIntoRustBuffer[[]AccountDeposit](c, value)
+}
+
+func (c FfiConverterSequenceTypeAccountDeposit) Write(writer io.Writer, value []AccountDeposit) {
+	if len(value) > math.MaxInt32 {
+		panic("[]AccountDeposit is too large to fit into Int32")
+	}
+
+	writeInt32(writer, int32(len(value)))
+	for _, item := range value {
+		FfiConverterTypeAccountDepositINSTANCE.Write(writer, item)
+	}
+}
+
+type FfiDestroyerSequenceTypeAccountDeposit struct {}
+
+func (FfiDestroyerSequenceTypeAccountDeposit) Destroy(sequence []AccountDeposit) {
+	for _, value := range sequence {
+		FfiDestroyerTypeAccountDeposit{}.Destroy(value)	
+	}
+}
+
+
+
+type FfiConverterSequenceTypeAccountWithdraw struct{}
+
+var FfiConverterSequenceTypeAccountWithdrawINSTANCE = FfiConverterSequenceTypeAccountWithdraw{}
+
+func (c FfiConverterSequenceTypeAccountWithdraw) Lift(rb RustBufferI) []AccountWithdraw {
+	return LiftFromRustBuffer[[]AccountWithdraw](c, rb)
+}
+
+func (c FfiConverterSequenceTypeAccountWithdraw) Read(reader io.Reader) []AccountWithdraw {
+	length := readInt32(reader)
+	if length == 0 {
+		return nil
+	}
+	result := make([]AccountWithdraw, 0, length)
+	for i := int32(0); i < length; i++ {
+		result = append(result, FfiConverterTypeAccountWithdrawINSTANCE.Read(reader))
+	}
+	return result
+}
+
+func (c FfiConverterSequenceTypeAccountWithdraw) Lower(value []AccountWithdraw) RustBuffer {
+	return LowerIntoRustBuffer[[]AccountWithdraw](c, value)
+}
+
+func (c FfiConverterSequenceTypeAccountWithdraw) Write(writer io.Writer, value []AccountWithdraw) {
+	if len(value) > math.MaxInt32 {
+		panic("[]AccountWithdraw is too large to fit into Int32")
+	}
+
+	writeInt32(writer, int32(len(value)))
+	for _, item := range value {
+		FfiConverterTypeAccountWithdrawINSTANCE.Write(writer, item)
+	}
+}
+
+type FfiDestroyerSequenceTypeAccountWithdraw struct {}
+
+func (FfiDestroyerSequenceTypeAccountWithdraw) Destroy(sequence []AccountWithdraw) {
+	for _, value := range sequence {
+		FfiDestroyerTypeAccountWithdraw{}.Destroy(value)	
+	}
+}
+
+
+
 type FfiConverterSequenceTypeDetailedManifestClass struct{}
 
 var FfiConverterSequenceTypeDetailedManifestClassINSTANCE = FfiConverterSequenceTypeDetailedManifestClass{}
@@ -23846,46 +31457,91 @@ func (FfiDestroyerSequenceTypeEntityType) Destroy(sequence []EntityType) {
 
 
 
-type FfiConverterSequenceTypeInstruction struct{}
+type FfiConverterSequenceTypeInstructionV1 struct{}
 
-var FfiConverterSequenceTypeInstructionINSTANCE = FfiConverterSequenceTypeInstruction{}
+var FfiConverterSequenceTypeInstructionV1INSTANCE = FfiConverterSequenceTypeInstructionV1{}
 
-func (c FfiConverterSequenceTypeInstruction) Lift(rb RustBufferI) []Instruction {
-	return LiftFromRustBuffer[[]Instruction](c, rb)
+func (c FfiConverterSequenceTypeInstructionV1) Lift(rb RustBufferI) []InstructionV1 {
+	return LiftFromRustBuffer[[]InstructionV1](c, rb)
 }
 
-func (c FfiConverterSequenceTypeInstruction) Read(reader io.Reader) []Instruction {
+func (c FfiConverterSequenceTypeInstructionV1) Read(reader io.Reader) []InstructionV1 {
 	length := readInt32(reader)
 	if length == 0 {
 		return nil
 	}
-	result := make([]Instruction, 0, length)
+	result := make([]InstructionV1, 0, length)
 	for i := int32(0); i < length; i++ {
-		result = append(result, FfiConverterTypeInstructionINSTANCE.Read(reader))
+		result = append(result, FfiConverterTypeInstructionV1INSTANCE.Read(reader))
 	}
 	return result
 }
 
-func (c FfiConverterSequenceTypeInstruction) Lower(value []Instruction) RustBuffer {
-	return LowerIntoRustBuffer[[]Instruction](c, value)
+func (c FfiConverterSequenceTypeInstructionV1) Lower(value []InstructionV1) RustBuffer {
+	return LowerIntoRustBuffer[[]InstructionV1](c, value)
 }
 
-func (c FfiConverterSequenceTypeInstruction) Write(writer io.Writer, value []Instruction) {
+func (c FfiConverterSequenceTypeInstructionV1) Write(writer io.Writer, value []InstructionV1) {
 	if len(value) > math.MaxInt32 {
-		panic("[]Instruction is too large to fit into Int32")
+		panic("[]InstructionV1 is too large to fit into Int32")
 	}
 
 	writeInt32(writer, int32(len(value)))
 	for _, item := range value {
-		FfiConverterTypeInstructionINSTANCE.Write(writer, item)
+		FfiConverterTypeInstructionV1INSTANCE.Write(writer, item)
 	}
 }
 
-type FfiDestroyerSequenceTypeInstruction struct {}
+type FfiDestroyerSequenceTypeInstructionV1 struct {}
 
-func (FfiDestroyerSequenceTypeInstruction) Destroy(sequence []Instruction) {
+func (FfiDestroyerSequenceTypeInstructionV1) Destroy(sequence []InstructionV1) {
 	for _, value := range sequence {
-		FfiDestroyerTypeInstruction{}.Destroy(value)	
+		FfiDestroyerTypeInstructionV1{}.Destroy(value)	
+	}
+}
+
+
+
+type FfiConverterSequenceTypeInstructionV2 struct{}
+
+var FfiConverterSequenceTypeInstructionV2INSTANCE = FfiConverterSequenceTypeInstructionV2{}
+
+func (c FfiConverterSequenceTypeInstructionV2) Lift(rb RustBufferI) []InstructionV2 {
+	return LiftFromRustBuffer[[]InstructionV2](c, rb)
+}
+
+func (c FfiConverterSequenceTypeInstructionV2) Read(reader io.Reader) []InstructionV2 {
+	length := readInt32(reader)
+	if length == 0 {
+		return nil
+	}
+	result := make([]InstructionV2, 0, length)
+	for i := int32(0); i < length; i++ {
+		result = append(result, FfiConverterTypeInstructionV2INSTANCE.Read(reader))
+	}
+	return result
+}
+
+func (c FfiConverterSequenceTypeInstructionV2) Lower(value []InstructionV2) RustBuffer {
+	return LowerIntoRustBuffer[[]InstructionV2](c, value)
+}
+
+func (c FfiConverterSequenceTypeInstructionV2) Write(writer io.Writer, value []InstructionV2) {
+	if len(value) > math.MaxInt32 {
+		panic("[]InstructionV2 is too large to fit into Int32")
+	}
+
+	writeInt32(writer, int32(len(value)))
+	for _, item := range value {
+		FfiConverterTypeInstructionV2INSTANCE.Write(writer, item)
+	}
+}
+
+type FfiDestroyerSequenceTypeInstructionV2 struct {}
+
+func (FfiDestroyerSequenceTypeInstructionV2) Destroy(sequence []InstructionV2) {
+	for _, value := range sequence {
+		FfiDestroyerTypeInstructionV2{}.Destroy(value)	
 	}
 }
 
@@ -24341,46 +31997,91 @@ func (FfiDestroyerSequenceTypeResourceSpecifier) Destroy(sequence []ResourceSpec
 
 
 
-type FfiConverterSequenceTypeSignatureWithPublicKey struct{}
+type FfiConverterSequenceTypeSignatureWithPublicKeyV1 struct{}
 
-var FfiConverterSequenceTypeSignatureWithPublicKeyINSTANCE = FfiConverterSequenceTypeSignatureWithPublicKey{}
+var FfiConverterSequenceTypeSignatureWithPublicKeyV1INSTANCE = FfiConverterSequenceTypeSignatureWithPublicKeyV1{}
 
-func (c FfiConverterSequenceTypeSignatureWithPublicKey) Lift(rb RustBufferI) []SignatureWithPublicKey {
-	return LiftFromRustBuffer[[]SignatureWithPublicKey](c, rb)
+func (c FfiConverterSequenceTypeSignatureWithPublicKeyV1) Lift(rb RustBufferI) []SignatureWithPublicKeyV1 {
+	return LiftFromRustBuffer[[]SignatureWithPublicKeyV1](c, rb)
 }
 
-func (c FfiConverterSequenceTypeSignatureWithPublicKey) Read(reader io.Reader) []SignatureWithPublicKey {
+func (c FfiConverterSequenceTypeSignatureWithPublicKeyV1) Read(reader io.Reader) []SignatureWithPublicKeyV1 {
 	length := readInt32(reader)
 	if length == 0 {
 		return nil
 	}
-	result := make([]SignatureWithPublicKey, 0, length)
+	result := make([]SignatureWithPublicKeyV1, 0, length)
 	for i := int32(0); i < length; i++ {
-		result = append(result, FfiConverterTypeSignatureWithPublicKeyINSTANCE.Read(reader))
+		result = append(result, FfiConverterTypeSignatureWithPublicKeyV1INSTANCE.Read(reader))
 	}
 	return result
 }
 
-func (c FfiConverterSequenceTypeSignatureWithPublicKey) Lower(value []SignatureWithPublicKey) RustBuffer {
-	return LowerIntoRustBuffer[[]SignatureWithPublicKey](c, value)
+func (c FfiConverterSequenceTypeSignatureWithPublicKeyV1) Lower(value []SignatureWithPublicKeyV1) RustBuffer {
+	return LowerIntoRustBuffer[[]SignatureWithPublicKeyV1](c, value)
 }
 
-func (c FfiConverterSequenceTypeSignatureWithPublicKey) Write(writer io.Writer, value []SignatureWithPublicKey) {
+func (c FfiConverterSequenceTypeSignatureWithPublicKeyV1) Write(writer io.Writer, value []SignatureWithPublicKeyV1) {
 	if len(value) > math.MaxInt32 {
-		panic("[]SignatureWithPublicKey is too large to fit into Int32")
+		panic("[]SignatureWithPublicKeyV1 is too large to fit into Int32")
 	}
 
 	writeInt32(writer, int32(len(value)))
 	for _, item := range value {
-		FfiConverterTypeSignatureWithPublicKeyINSTANCE.Write(writer, item)
+		FfiConverterTypeSignatureWithPublicKeyV1INSTANCE.Write(writer, item)
 	}
 }
 
-type FfiDestroyerSequenceTypeSignatureWithPublicKey struct {}
+type FfiDestroyerSequenceTypeSignatureWithPublicKeyV1 struct {}
 
-func (FfiDestroyerSequenceTypeSignatureWithPublicKey) Destroy(sequence []SignatureWithPublicKey) {
+func (FfiDestroyerSequenceTypeSignatureWithPublicKeyV1) Destroy(sequence []SignatureWithPublicKeyV1) {
 	for _, value := range sequence {
-		FfiDestroyerTypeSignatureWithPublicKey{}.Destroy(value)	
+		FfiDestroyerTypeSignatureWithPublicKeyV1{}.Destroy(value)	
+	}
+}
+
+
+
+type FfiConverterSequenceSequenceTypeSignatureWithPublicKeyV1 struct{}
+
+var FfiConverterSequenceSequenceTypeSignatureWithPublicKeyV1INSTANCE = FfiConverterSequenceSequenceTypeSignatureWithPublicKeyV1{}
+
+func (c FfiConverterSequenceSequenceTypeSignatureWithPublicKeyV1) Lift(rb RustBufferI) [][]SignatureWithPublicKeyV1 {
+	return LiftFromRustBuffer[[][]SignatureWithPublicKeyV1](c, rb)
+}
+
+func (c FfiConverterSequenceSequenceTypeSignatureWithPublicKeyV1) Read(reader io.Reader) [][]SignatureWithPublicKeyV1 {
+	length := readInt32(reader)
+	if length == 0 {
+		return nil
+	}
+	result := make([][]SignatureWithPublicKeyV1, 0, length)
+	for i := int32(0); i < length; i++ {
+		result = append(result, FfiConverterSequenceTypeSignatureWithPublicKeyV1INSTANCE.Read(reader))
+	}
+	return result
+}
+
+func (c FfiConverterSequenceSequenceTypeSignatureWithPublicKeyV1) Lower(value [][]SignatureWithPublicKeyV1) RustBuffer {
+	return LowerIntoRustBuffer[[][]SignatureWithPublicKeyV1](c, value)
+}
+
+func (c FfiConverterSequenceSequenceTypeSignatureWithPublicKeyV1) Write(writer io.Writer, value [][]SignatureWithPublicKeyV1) {
+	if len(value) > math.MaxInt32 {
+		panic("[][]SignatureWithPublicKeyV1 is too large to fit into Int32")
+	}
+
+	writeInt32(writer, int32(len(value)))
+	for _, item := range value {
+		FfiConverterSequenceTypeSignatureWithPublicKeyV1INSTANCE.Write(writer, item)
+	}
+}
+
+type FfiDestroyerSequenceSequenceTypeSignatureWithPublicKeyV1 struct {}
+
+func (FfiDestroyerSequenceSequenceTypeSignatureWithPublicKeyV1) Destroy(sequence [][]SignatureWithPublicKeyV1) {
+	for _, value := range sequence {
+		FfiDestroyerSequenceTypeSignatureWithPublicKeyV1{}.Destroy(value)	
 	}
 }
 
@@ -24570,6 +32271,52 @@ func (_ FfiDestroyerMapStringTypeAccountDefaultDepositRule) Destroy(mapValue map
 
 
 
+type FfiConverterMapStringTypeManifestResourceConstraint struct {}
+
+var FfiConverterMapStringTypeManifestResourceConstraintINSTANCE = FfiConverterMapStringTypeManifestResourceConstraint{}
+
+func (c FfiConverterMapStringTypeManifestResourceConstraint) Lift(rb RustBufferI) map[string]ManifestResourceConstraint {
+	return LiftFromRustBuffer[map[string]ManifestResourceConstraint](c, rb)
+}
+
+func (_ FfiConverterMapStringTypeManifestResourceConstraint) Read(reader io.Reader) map[string]ManifestResourceConstraint {
+	result := make(map[string]ManifestResourceConstraint)
+	length := readInt32(reader)
+	for i := int32(0); i < length; i++ {
+		key := FfiConverterStringINSTANCE.Read(reader)
+		value := FfiConverterTypeManifestResourceConstraintINSTANCE.Read(reader)
+		result[key] = value
+	}
+	return result
+}
+
+func (c FfiConverterMapStringTypeManifestResourceConstraint) Lower(value map[string]ManifestResourceConstraint) RustBuffer {
+	return LowerIntoRustBuffer[map[string]ManifestResourceConstraint](c, value)
+}
+
+func (_ FfiConverterMapStringTypeManifestResourceConstraint) Write(writer io.Writer, mapValue map[string]ManifestResourceConstraint) {
+	if len(mapValue) > math.MaxInt32 {
+		panic("map[string]ManifestResourceConstraint is too large to fit into Int32")
+	}
+
+	writeInt32(writer, int32(len(mapValue)))
+	for key, value := range mapValue {
+		FfiConverterStringINSTANCE.Write(writer, key)
+		FfiConverterTypeManifestResourceConstraintINSTANCE.Write(writer, value)
+	}
+}
+
+type FfiDestroyerMapStringTypeManifestResourceConstraint struct {}
+
+func (_ FfiDestroyerMapStringTypeManifestResourceConstraint) Destroy(mapValue map[string]ManifestResourceConstraint) {
+	for key, value := range mapValue {
+		FfiDestroyerString{}.Destroy(key)
+		FfiDestroyerTypeManifestResourceConstraint{}.Destroy(value)	
+	}
+}
+
+
+
 type FfiConverterMapStringTypeResourcePreferenceUpdate struct {}
 
 var FfiConverterMapStringTypeResourcePreferenceUpdateINSTANCE = FfiConverterMapStringTypeResourcePreferenceUpdate{}
@@ -24749,6 +32496,98 @@ func (_ FfiDestroyerMapStringOptionalTypeMetadataValue) Destroy(mapValue map[str
 	for key, value := range mapValue {
 		FfiDestroyerString{}.Destroy(key)
 		FfiDestroyerOptionalTypeMetadataValue{}.Destroy(value)	
+	}
+}
+
+
+
+type FfiConverterMapStringSequenceTypeAccountDeposit struct {}
+
+var FfiConverterMapStringSequenceTypeAccountDepositINSTANCE = FfiConverterMapStringSequenceTypeAccountDeposit{}
+
+func (c FfiConverterMapStringSequenceTypeAccountDeposit) Lift(rb RustBufferI) map[string][]AccountDeposit {
+	return LiftFromRustBuffer[map[string][]AccountDeposit](c, rb)
+}
+
+func (_ FfiConverterMapStringSequenceTypeAccountDeposit) Read(reader io.Reader) map[string][]AccountDeposit {
+	result := make(map[string][]AccountDeposit)
+	length := readInt32(reader)
+	for i := int32(0); i < length; i++ {
+		key := FfiConverterStringINSTANCE.Read(reader)
+		value := FfiConverterSequenceTypeAccountDepositINSTANCE.Read(reader)
+		result[key] = value
+	}
+	return result
+}
+
+func (c FfiConverterMapStringSequenceTypeAccountDeposit) Lower(value map[string][]AccountDeposit) RustBuffer {
+	return LowerIntoRustBuffer[map[string][]AccountDeposit](c, value)
+}
+
+func (_ FfiConverterMapStringSequenceTypeAccountDeposit) Write(writer io.Writer, mapValue map[string][]AccountDeposit) {
+	if len(mapValue) > math.MaxInt32 {
+		panic("map[string][]AccountDeposit is too large to fit into Int32")
+	}
+
+	writeInt32(writer, int32(len(mapValue)))
+	for key, value := range mapValue {
+		FfiConverterStringINSTANCE.Write(writer, key)
+		FfiConverterSequenceTypeAccountDepositINSTANCE.Write(writer, value)
+	}
+}
+
+type FfiDestroyerMapStringSequenceTypeAccountDeposit struct {}
+
+func (_ FfiDestroyerMapStringSequenceTypeAccountDeposit) Destroy(mapValue map[string][]AccountDeposit) {
+	for key, value := range mapValue {
+		FfiDestroyerString{}.Destroy(key)
+		FfiDestroyerSequenceTypeAccountDeposit{}.Destroy(value)	
+	}
+}
+
+
+
+type FfiConverterMapStringSequenceTypeAccountWithdraw struct {}
+
+var FfiConverterMapStringSequenceTypeAccountWithdrawINSTANCE = FfiConverterMapStringSequenceTypeAccountWithdraw{}
+
+func (c FfiConverterMapStringSequenceTypeAccountWithdraw) Lift(rb RustBufferI) map[string][]AccountWithdraw {
+	return LiftFromRustBuffer[map[string][]AccountWithdraw](c, rb)
+}
+
+func (_ FfiConverterMapStringSequenceTypeAccountWithdraw) Read(reader io.Reader) map[string][]AccountWithdraw {
+	result := make(map[string][]AccountWithdraw)
+	length := readInt32(reader)
+	for i := int32(0); i < length; i++ {
+		key := FfiConverterStringINSTANCE.Read(reader)
+		value := FfiConverterSequenceTypeAccountWithdrawINSTANCE.Read(reader)
+		result[key] = value
+	}
+	return result
+}
+
+func (c FfiConverterMapStringSequenceTypeAccountWithdraw) Lower(value map[string][]AccountWithdraw) RustBuffer {
+	return LowerIntoRustBuffer[map[string][]AccountWithdraw](c, value)
+}
+
+func (_ FfiConverterMapStringSequenceTypeAccountWithdraw) Write(writer io.Writer, mapValue map[string][]AccountWithdraw) {
+	if len(mapValue) > math.MaxInt32 {
+		panic("map[string][]AccountWithdraw is too large to fit into Int32")
+	}
+
+	writeInt32(writer, int32(len(mapValue)))
+	for key, value := range mapValue {
+		FfiConverterStringINSTANCE.Write(writer, key)
+		FfiConverterSequenceTypeAccountWithdrawINSTANCE.Write(writer, value)
+	}
+}
+
+type FfiDestroyerMapStringSequenceTypeAccountWithdraw struct {}
+
+func (_ FfiDestroyerMapStringSequenceTypeAccountWithdraw) Destroy(mapValue map[string][]AccountWithdraw) {
+	for key, value := range mapValue {
+		FfiDestroyerString{}.Destroy(key)
+		FfiDestroyerSequenceTypeAccountWithdraw{}.Destroy(value)	
 	}
 }
 
@@ -25030,47 +32869,139 @@ func (_ FfiDestroyerMapTypePublicKeyFingerprintBytes) Destroy(mapValue map[Publi
 
 
 
-type FfiConverterMapTypeCurveTypeTypeDecryptorsByCurve struct {}
+type FfiConverterMapTypePublicKeyFingerprintV1Bytes struct {}
 
-var FfiConverterMapTypeCurveTypeTypeDecryptorsByCurveINSTANCE = FfiConverterMapTypeCurveTypeTypeDecryptorsByCurve{}
+var FfiConverterMapTypePublicKeyFingerprintV1BytesINSTANCE = FfiConverterMapTypePublicKeyFingerprintV1Bytes{}
 
-func (c FfiConverterMapTypeCurveTypeTypeDecryptorsByCurve) Lift(rb RustBufferI) map[CurveType]DecryptorsByCurve {
-	return LiftFromRustBuffer[map[CurveType]DecryptorsByCurve](c, rb)
+func (c FfiConverterMapTypePublicKeyFingerprintV1Bytes) Lift(rb RustBufferI) map[PublicKeyFingerprintV1][]byte {
+	return LiftFromRustBuffer[map[PublicKeyFingerprintV1][]byte](c, rb)
 }
 
-func (_ FfiConverterMapTypeCurveTypeTypeDecryptorsByCurve) Read(reader io.Reader) map[CurveType]DecryptorsByCurve {
-	result := make(map[CurveType]DecryptorsByCurve)
+func (_ FfiConverterMapTypePublicKeyFingerprintV1Bytes) Read(reader io.Reader) map[PublicKeyFingerprintV1][]byte {
+	result := make(map[PublicKeyFingerprintV1][]byte)
 	length := readInt32(reader)
 	for i := int32(0); i < length; i++ {
-		key := FfiConverterTypeCurveTypeINSTANCE.Read(reader)
-		value := FfiConverterTypeDecryptorsByCurveINSTANCE.Read(reader)
+		key := FfiConverterTypePublicKeyFingerprintV1INSTANCE.Read(reader)
+		value := FfiConverterBytesINSTANCE.Read(reader)
 		result[key] = value
 	}
 	return result
 }
 
-func (c FfiConverterMapTypeCurveTypeTypeDecryptorsByCurve) Lower(value map[CurveType]DecryptorsByCurve) RustBuffer {
-	return LowerIntoRustBuffer[map[CurveType]DecryptorsByCurve](c, value)
+func (c FfiConverterMapTypePublicKeyFingerprintV1Bytes) Lower(value map[PublicKeyFingerprintV1][]byte) RustBuffer {
+	return LowerIntoRustBuffer[map[PublicKeyFingerprintV1][]byte](c, value)
 }
 
-func (_ FfiConverterMapTypeCurveTypeTypeDecryptorsByCurve) Write(writer io.Writer, mapValue map[CurveType]DecryptorsByCurve) {
+func (_ FfiConverterMapTypePublicKeyFingerprintV1Bytes) Write(writer io.Writer, mapValue map[PublicKeyFingerprintV1][]byte) {
 	if len(mapValue) > math.MaxInt32 {
-		panic("map[CurveType]DecryptorsByCurve is too large to fit into Int32")
+		panic("map[PublicKeyFingerprintV1][]byte is too large to fit into Int32")
 	}
 
 	writeInt32(writer, int32(len(mapValue)))
 	for key, value := range mapValue {
-		FfiConverterTypeCurveTypeINSTANCE.Write(writer, key)
-		FfiConverterTypeDecryptorsByCurveINSTANCE.Write(writer, value)
+		FfiConverterTypePublicKeyFingerprintV1INSTANCE.Write(writer, key)
+		FfiConverterBytesINSTANCE.Write(writer, value)
 	}
 }
 
-type FfiDestroyerMapTypeCurveTypeTypeDecryptorsByCurve struct {}
+type FfiDestroyerMapTypePublicKeyFingerprintV1Bytes struct {}
 
-func (_ FfiDestroyerMapTypeCurveTypeTypeDecryptorsByCurve) Destroy(mapValue map[CurveType]DecryptorsByCurve) {
+func (_ FfiDestroyerMapTypePublicKeyFingerprintV1Bytes) Destroy(mapValue map[PublicKeyFingerprintV1][]byte) {
 	for key, value := range mapValue {
-		FfiDestroyerTypeCurveType{}.Destroy(key)
-		FfiDestroyerTypeDecryptorsByCurve{}.Destroy(value)	
+		FfiDestroyerTypePublicKeyFingerprintV1{}.Destroy(key)
+		FfiDestroyerBytes{}.Destroy(value)	
+	}
+}
+
+
+
+type FfiConverterMapTypeCurveTypeV1TypeDecryptorsByCurveV1 struct {}
+
+var FfiConverterMapTypeCurveTypeV1TypeDecryptorsByCurveV1INSTANCE = FfiConverterMapTypeCurveTypeV1TypeDecryptorsByCurveV1{}
+
+func (c FfiConverterMapTypeCurveTypeV1TypeDecryptorsByCurveV1) Lift(rb RustBufferI) map[CurveTypeV1]DecryptorsByCurveV1 {
+	return LiftFromRustBuffer[map[CurveTypeV1]DecryptorsByCurveV1](c, rb)
+}
+
+func (_ FfiConverterMapTypeCurveTypeV1TypeDecryptorsByCurveV1) Read(reader io.Reader) map[CurveTypeV1]DecryptorsByCurveV1 {
+	result := make(map[CurveTypeV1]DecryptorsByCurveV1)
+	length := readInt32(reader)
+	for i := int32(0); i < length; i++ {
+		key := FfiConverterTypeCurveTypeV1INSTANCE.Read(reader)
+		value := FfiConverterTypeDecryptorsByCurveV1INSTANCE.Read(reader)
+		result[key] = value
+	}
+	return result
+}
+
+func (c FfiConverterMapTypeCurveTypeV1TypeDecryptorsByCurveV1) Lower(value map[CurveTypeV1]DecryptorsByCurveV1) RustBuffer {
+	return LowerIntoRustBuffer[map[CurveTypeV1]DecryptorsByCurveV1](c, value)
+}
+
+func (_ FfiConverterMapTypeCurveTypeV1TypeDecryptorsByCurveV1) Write(writer io.Writer, mapValue map[CurveTypeV1]DecryptorsByCurveV1) {
+	if len(mapValue) > math.MaxInt32 {
+		panic("map[CurveTypeV1]DecryptorsByCurveV1 is too large to fit into Int32")
+	}
+
+	writeInt32(writer, int32(len(mapValue)))
+	for key, value := range mapValue {
+		FfiConverterTypeCurveTypeV1INSTANCE.Write(writer, key)
+		FfiConverterTypeDecryptorsByCurveV1INSTANCE.Write(writer, value)
+	}
+}
+
+type FfiDestroyerMapTypeCurveTypeV1TypeDecryptorsByCurveV1 struct {}
+
+func (_ FfiDestroyerMapTypeCurveTypeV1TypeDecryptorsByCurveV1) Destroy(mapValue map[CurveTypeV1]DecryptorsByCurveV1) {
+	for key, value := range mapValue {
+		FfiDestroyerTypeCurveTypeV1{}.Destroy(key)
+		FfiDestroyerTypeDecryptorsByCurveV1{}.Destroy(value)	
+	}
+}
+
+
+
+type FfiConverterMapTypeCurveTypeV2TypeDecryptorsByCurveV2 struct {}
+
+var FfiConverterMapTypeCurveTypeV2TypeDecryptorsByCurveV2INSTANCE = FfiConverterMapTypeCurveTypeV2TypeDecryptorsByCurveV2{}
+
+func (c FfiConverterMapTypeCurveTypeV2TypeDecryptorsByCurveV2) Lift(rb RustBufferI) map[CurveTypeV2]DecryptorsByCurveV2 {
+	return LiftFromRustBuffer[map[CurveTypeV2]DecryptorsByCurveV2](c, rb)
+}
+
+func (_ FfiConverterMapTypeCurveTypeV2TypeDecryptorsByCurveV2) Read(reader io.Reader) map[CurveTypeV2]DecryptorsByCurveV2 {
+	result := make(map[CurveTypeV2]DecryptorsByCurveV2)
+	length := readInt32(reader)
+	for i := int32(0); i < length; i++ {
+		key := FfiConverterTypeCurveTypeV2INSTANCE.Read(reader)
+		value := FfiConverterTypeDecryptorsByCurveV2INSTANCE.Read(reader)
+		result[key] = value
+	}
+	return result
+}
+
+func (c FfiConverterMapTypeCurveTypeV2TypeDecryptorsByCurveV2) Lower(value map[CurveTypeV2]DecryptorsByCurveV2) RustBuffer {
+	return LowerIntoRustBuffer[map[CurveTypeV2]DecryptorsByCurveV2](c, value)
+}
+
+func (_ FfiConverterMapTypeCurveTypeV2TypeDecryptorsByCurveV2) Write(writer io.Writer, mapValue map[CurveTypeV2]DecryptorsByCurveV2) {
+	if len(mapValue) > math.MaxInt32 {
+		panic("map[CurveTypeV2]DecryptorsByCurveV2 is too large to fit into Int32")
+	}
+
+	writeInt32(writer, int32(len(mapValue)))
+	for key, value := range mapValue {
+		FfiConverterTypeCurveTypeV2INSTANCE.Write(writer, key)
+		FfiConverterTypeDecryptorsByCurveV2INSTANCE.Write(writer, value)
+	}
+}
+
+type FfiDestroyerMapTypeCurveTypeV2TypeDecryptorsByCurveV2 struct {}
+
+func (_ FfiDestroyerMapTypeCurveTypeV2TypeDecryptorsByCurveV2) Destroy(mapValue map[CurveTypeV2]DecryptorsByCurveV2) {
+	for key, value := range mapValue {
+		FfiDestroyerTypeCurveTypeV2{}.Destroy(key)
+		FfiDestroyerTypeDecryptorsByCurveV2{}.Destroy(value)	
 	}
 }
 
@@ -25173,6 +33104,42 @@ func DeriveOlympiaAccountAddressFromPublicKey(publicKey PublicKey, olympiaNetwor
 		}
 }
 
+func DerivePreallocatedAccountAddressFromOlympiaAccountAddress(olympiaAccountAddress *OlympiaAddress, networkId uint8) (*Address, error) {
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_derive_preallocated_account_address_from_olympia_account_address(FfiConverterOlympiaAddressINSTANCE.Lower(olympiaAccountAddress), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *Address
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterAddressINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+func DerivePreallocatedAccountAddressFromPublicKey(publicKey PublicKey, networkId uint8) (*Address, error) {
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_derive_preallocated_account_address_from_public_key(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *Address
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterAddressINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+func DerivePreallocatedIdentityAddressFromPublicKey(publicKey PublicKey, networkId uint8) (*Address, error) {
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_derive_preallocated_identity_address_from_public_key(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *Address
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterAddressINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
 func DerivePublicKeyFromOlympiaAccountAddress(olympiaResourceAddress *OlympiaAddress) (PublicKey, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_derive_public_key_from_olympia_account_address(FfiConverterOlympiaAddressINSTANCE.Lower(olympiaResourceAddress), _uniffiStatus)
@@ -25197,45 +33164,9 @@ func DeriveResourceAddressFromOlympiaResourceAddress(olympiaResourceAddress *Oly
 		}
 }
 
-func DeriveVirtualAccountAddressFromOlympiaAccountAddress(olympiaAccountAddress *OlympiaAddress, networkId uint8) (*Address, error) {
+func DeriveSignatureBadgeNonFungibleGlobalIdFromPublicKey(publicKey PublicKey, networkId uint8) (*NonFungibleGlobalId, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_derive_virtual_account_address_from_olympia_account_address(FfiConverterOlympiaAddressINSTANCE.Lower(olympiaAccountAddress), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
-	})
-		if _uniffiErr != nil {
-			var _uniffiDefaultValue *Address
-			return _uniffiDefaultValue, _uniffiErr
-		} else {
-			return FfiConverterAddressINSTANCE.Lift(_uniffiRV), _uniffiErr
-		}
-}
-
-func DeriveVirtualAccountAddressFromPublicKey(publicKey PublicKey, networkId uint8) (*Address, error) {
-	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_derive_virtual_account_address_from_public_key(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
-	})
-		if _uniffiErr != nil {
-			var _uniffiDefaultValue *Address
-			return _uniffiDefaultValue, _uniffiErr
-		} else {
-			return FfiConverterAddressINSTANCE.Lift(_uniffiRV), _uniffiErr
-		}
-}
-
-func DeriveVirtualIdentityAddressFromPublicKey(publicKey PublicKey, networkId uint8) (*Address, error) {
-	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_derive_virtual_identity_address_from_public_key(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
-	})
-		if _uniffiErr != nil {
-			var _uniffiDefaultValue *Address
-			return _uniffiDefaultValue, _uniffiErr
-		} else {
-			return FfiConverterAddressINSTANCE.Lift(_uniffiRV), _uniffiErr
-		}
-}
-
-func DeriveVirtualSignatureNonFungibleGlobalIdFromPublicKey(publicKey PublicKey, networkId uint8) (*NonFungibleGlobalId, error) {
-	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_derive_virtual_signature_non_fungible_global_id_from_public_key(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_derive_signature_badge_non_fungible_global_id_from_public_key(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *NonFungibleGlobalId
@@ -25347,15 +33278,27 @@ func NonFungibleLocalIdSborEncode(value NonFungibleLocalId) ([]byte, error) {
 		}
 }
 
-func PublicKeyFingerprintFromVec(bytes []byte) PublicKeyFingerprint {
-	return FfiConverterTypePublicKeyFingerprintINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_public_key_fingerprint_from_vec(FfiConverterBytesINSTANCE.Lower(bytes), _uniffiStatus)
+func PublicKeyFingerprintV1FromVec(bytes []byte) PublicKeyFingerprintV1 {
+	return FfiConverterTypePublicKeyFingerprintV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_public_key_fingerprint_v1_from_vec(FfiConverterBytesINSTANCE.Lower(bytes), _uniffiStatus)
 	}))
 }
 
-func PublicKeyFingerprintToVec(value PublicKeyFingerprint) []byte {
+func PublicKeyFingerprintV1ToVec(value PublicKeyFingerprintV1) []byte {
 	return FfiConverterBytesINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_public_key_fingerprint_to_vec(FfiConverterTypePublicKeyFingerprintINSTANCE.Lower(value), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_public_key_fingerprint_v1_to_vec(FfiConverterTypePublicKeyFingerprintV1INSTANCE.Lower(value), _uniffiStatus)
+	}))
+}
+
+func PublicKeyFingerprintV2FromVec(bytes []byte) PublicKeyFingerprint {
+	return FfiConverterTypePublicKeyFingerprintINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_public_key_fingerprint_v2_from_vec(FfiConverterBytesINSTANCE.Lower(bytes), _uniffiStatus)
+	}))
+}
+
+func PublicKeyFingerprintV2ToVec(value PublicKeyFingerprint) []byte {
+	return FfiConverterBytesINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_public_key_fingerprint_v2_to_vec(FfiConverterTypePublicKeyFingerprintINSTANCE.Lower(value), _uniffiStatus)
 	}))
 }
 
@@ -25371,9 +33314,9 @@ func SborDecodeToStringRepresentation(bytes []byte, representation Serialization
 		}
 }
 
-func SborDecodeToTypedNativeEvent(eventTypeIdentifier EventTypeIdentifier, eventData []byte, networkId uint8) (TypedNativeEvent, error) {
+func ScryptoSborDecodeToNativeEvent(eventTypeIdentifier EventTypeIdentifier, eventData []byte, networkId uint8) (TypedNativeEvent, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_sbor_decode_to_typed_native_event(FfiConverterTypeEventTypeIdentifierINSTANCE.Lower(eventTypeIdentifier), FfiConverterBytesINSTANCE.Lower(eventData), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_scrypto_sbor_decode_to_native_event(FfiConverterTypeEventTypeIdentifierINSTANCE.Lower(eventTypeIdentifier), FfiConverterBytesINSTANCE.Lower(eventData), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue TypedNativeEvent
