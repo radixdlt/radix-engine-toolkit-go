@@ -3048,6 +3048,15 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_add_instruction(uniffiStatus)
+	})
+	if checksum != 35858 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_add_instruction: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_allocate_global_address(uniffiStatus)
 	})
 	if checksum != 19420 {
@@ -3086,7 +3095,7 @@ func uniffiCheckChecksums() {
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_build(uniffiStatus)
 	})
-	if checksum != 23646 {
+	if checksum != 60418 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_build: UniFFI API checksum mismatch")
 	}
@@ -5282,7 +5291,7 @@ func uniffiCheckChecksums() {
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_manifestv2builder_new(uniffiStatus)
 	})
-	if checksum != 37050 {
+	if checksum != 15308 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_manifestv2builder_new: UniFFI API checksum mismatch")
 	}
@@ -9981,9 +9990,9 @@ func (_ FfiDestroyerManifestV1Builder) Destroy(value *ManifestV1Builder) {
 type ManifestV2Builder struct {
 	ffiObject FfiObject
 }
-func NewManifestV2Builder() *ManifestV2Builder {
+func NewManifestV2Builder(networkId uint8) *ManifestV2Builder {
 	return FfiConverterManifestV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_manifestv2builder_new( _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_manifestv2builder_new(FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	}))
 }
 
@@ -10918,6 +10927,22 @@ func (_self *ManifestV2Builder)AccountWithdrawNonFungibles(address *Address, res
 }
 
 
+func (_self *ManifestV2Builder)AddInstruction(instruction InstructionV2) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_add_instruction(
+		_pointer,FfiConverterTypeInstructionV2INSTANCE.Lower(instruction), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
 func (_self *ManifestV2Builder)AllocateGlobalAddress(packageAddress *Address, blueprintName string, intoAddressReservation ManifestBuilderAddressReservation, intoNamedAddress ManifestBuilderNamedAddress) (*ManifestV2Builder, error) {
 	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
 	defer _self.ffiObject.decrementPointer()
@@ -10982,12 +11007,12 @@ func (_self *ManifestV2Builder)AssertWorktopContainsNonFungibles(resourceAddress
 }
 
 
-func (_self *ManifestV2Builder)Build(networkId uint8) *TransactionManifestV2 {
+func (_self *ManifestV2Builder)Build() *TransactionManifestV2 {
 	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterTransactionManifestV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_build(
-		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		_pointer, _uniffiStatus)
 	}))
 }
 
