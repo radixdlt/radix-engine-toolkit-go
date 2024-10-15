@@ -524,11 +524,6 @@ void uniffi_radix_engine_toolkit_uniffi_fn_free_intentcorev2(
 	RustCallStatus* out_status
 );
 
-void* uniffi_radix_engine_toolkit_uniffi_fn_constructor_intentcorev2_from_payload_bytes(
-	RustBuffer compiled_intent,
-	RustCallStatus* out_status
-);
-
 void* uniffi_radix_engine_toolkit_uniffi_fn_constructor_intentcorev2_new(
 	RustBuffer header,
 	RustBuffer blobs,
@@ -548,11 +543,6 @@ RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_children(
 	RustCallStatus* out_status
 );
 
-void* uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_hash(
-	void* ptr,
-	RustCallStatus* out_status
-);
-
 RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_header(
 	void* ptr,
 	RustCallStatus* out_status
@@ -563,22 +553,12 @@ void* uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_instructions(
 	RustCallStatus* out_status
 );
 
-void* uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_intent_hash(
+void* uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_into_subintent(
 	void* ptr,
 	RustCallStatus* out_status
 );
 
 RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_message(
-	void* ptr,
-	RustCallStatus* out_status
-);
-
-void* uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_subintent_hash(
-	void* ptr,
-	RustCallStatus* out_status
-);
-
-RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_to_payload_bytes(
 	void* ptr,
 	RustCallStatus* out_status
 );
@@ -3005,22 +2985,17 @@ void* uniffi_radix_engine_toolkit_uniffi_fn_constructor_partialtransactionv2_new
 	RustCallStatus* out_status
 );
 
-void* uniffi_radix_engine_toolkit_uniffi_fn_method_partialtransactionv2_hash(
-	void* ptr,
-	RustCallStatus* out_status
-);
-
-void* uniffi_radix_engine_toolkit_uniffi_fn_method_partialtransactionv2_intent_hash(
-	void* ptr,
-	RustCallStatus* out_status
-);
-
 RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_method_partialtransactionv2_non_root_subintents(
 	void* ptr,
 	RustCallStatus* out_status
 );
 
 void* uniffi_radix_engine_toolkit_uniffi_fn_method_partialtransactionv2_root_subintent(
+	void* ptr,
+	RustCallStatus* out_status
+);
+
+void* uniffi_radix_engine_toolkit_uniffi_fn_method_partialtransactionv2_root_subintent_hash(
 	void* ptr,
 	RustCallStatus* out_status
 );
@@ -3276,22 +3251,17 @@ void* uniffi_radix_engine_toolkit_uniffi_fn_constructor_signedpartialtransaction
 	RustCallStatus* out_status
 );
 
-void* uniffi_radix_engine_toolkit_uniffi_fn_method_signedpartialtransactionv2_hash(
-	void* ptr,
-	RustCallStatus* out_status
-);
-
-void* uniffi_radix_engine_toolkit_uniffi_fn_method_signedpartialtransactionv2_intent_hash(
-	void* ptr,
-	RustCallStatus* out_status
-);
-
 RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_method_signedpartialtransactionv2_non_root_subintent_signatures(
 	void* ptr,
 	RustCallStatus* out_status
 );
 
 void* uniffi_radix_engine_toolkit_uniffi_fn_method_signedpartialtransactionv2_partial_transaction(
+	void* ptr,
+	RustCallStatus* out_status
+);
+
+void* uniffi_radix_engine_toolkit_uniffi_fn_method_signedpartialtransactionv2_root_subintent_hash(
 	void* ptr,
 	RustCallStatus* out_status
 );
@@ -3465,6 +3435,26 @@ RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_method_signedtransactionintentv
 	RustCallStatus* out_status
 );
 
+void uniffi_radix_engine_toolkit_uniffi_fn_free_subintentv2(
+	void* ptr,
+	RustCallStatus* out_status
+);
+
+void* uniffi_radix_engine_toolkit_uniffi_fn_constructor_subintentv2_from_payload_bytes(
+	RustBuffer compiled_intent,
+	RustCallStatus* out_status
+);
+
+void* uniffi_radix_engine_toolkit_uniffi_fn_constructor_subintentv2_new(
+	void* intent_core,
+	RustCallStatus* out_status
+);
+
+void* uniffi_radix_engine_toolkit_uniffi_fn_method_subintentv2_subintent_hash(
+	void* ptr,
+	RustCallStatus* out_status
+);
+
 void uniffi_radix_engine_toolkit_uniffi_fn_free_transactionhash(
 	void* ptr,
 	RustCallStatus* out_status
@@ -3518,11 +3508,6 @@ void* uniffi_radix_engine_toolkit_uniffi_fn_method_transactionintentv2_hash(
 	RustCallStatus* out_status
 );
 
-void* uniffi_radix_engine_toolkit_uniffi_fn_method_transactionintentv2_intent_hash(
-	void* ptr,
-	RustCallStatus* out_status
-);
-
 RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_method_transactionintentv2_non_root_subintents(
 	void* ptr,
 	RustCallStatus* out_status
@@ -3539,6 +3524,11 @@ RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_method_transactionintentv2_to_p
 );
 
 RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_method_transactionintentv2_transaction_header(
+	void* ptr,
+	RustCallStatus* out_status
+);
+
+void* uniffi_radix_engine_toolkit_uniffi_fn_method_transactionintentv2_transaction_intent_hash(
 	void* ptr,
 	RustCallStatus* out_status
 );
@@ -4577,10 +4567,6 @@ uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_childre
 	RustCallStatus* out_status
 );
 
-uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_hash(
-	RustCallStatus* out_status
-);
-
 uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_header(
 	RustCallStatus* out_status
 );
@@ -4589,19 +4575,11 @@ uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_instruc
 	RustCallStatus* out_status
 );
 
-uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_intent_hash(
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_into_subintent(
 	RustCallStatus* out_status
 );
 
 uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_message(
-	RustCallStatus* out_status
-);
-
-uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_subintent_hash(
-	RustCallStatus* out_status
-);
-
-uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_to_payload_bytes(
 	RustCallStatus* out_status
 );
 
@@ -5909,19 +5887,15 @@ uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_olympiaaddress_publi
 	RustCallStatus* out_status
 );
 
-uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2_hash(
-	RustCallStatus* out_status
-);
-
-uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2_intent_hash(
-	RustCallStatus* out_status
-);
-
 uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2_non_root_subintents(
 	RustCallStatus* out_status
 );
 
 uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2_root_subintent(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2_root_subintent_hash(
 	RustCallStatus* out_status
 );
 
@@ -6057,19 +6031,15 @@ uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_privatekey_sign_to_s
 	RustCallStatus* out_status
 );
 
-uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2_hash(
-	RustCallStatus* out_status
-);
-
-uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2_intent_hash(
-	RustCallStatus* out_status
-);
-
 uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2_non_root_subintent_signatures(
 	RustCallStatus* out_status
 );
 
 uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2_partial_transaction(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2_root_subintent_hash(
 	RustCallStatus* out_status
 );
 
@@ -6165,6 +6135,10 @@ uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_signedtransactionint
 	RustCallStatus* out_status
 );
 
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_subintentv2_subintent_hash(
+	RustCallStatus* out_status
+);
+
 uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionhash_as_hash(
 	RustCallStatus* out_status
 );
@@ -6185,10 +6159,6 @@ uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionintentv2_
 	RustCallStatus* out_status
 );
 
-uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionintentv2_intent_hash(
-	RustCallStatus* out_status
-);
-
 uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionintentv2_non_root_subintents(
 	RustCallStatus* out_status
 );
@@ -6202,6 +6172,10 @@ uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionintentv2_
 );
 
 uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionintentv2_transaction_header(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionintentv2_transaction_intent_hash(
 	RustCallStatus* out_status
 );
 
@@ -6445,10 +6419,6 @@ uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_constructor_instructionsv2_
 	RustCallStatus* out_status
 );
 
-uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_constructor_intentcorev2_from_payload_bytes(
-	RustCallStatus* out_status
-);
-
 uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_constructor_intentcorev2_new(
 	RustCallStatus* out_status
 );
@@ -6570,6 +6540,14 @@ uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_constructor_signedtransacti
 );
 
 uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_constructor_signedtransactionintentv2_new(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_constructor_subintentv2_from_payload_bytes(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_constructor_subintentv2_new(
 	RustCallStatus* out_status
 );
 

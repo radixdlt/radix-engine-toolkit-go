@@ -1077,15 +1077,6 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_hash(uniffiStatus)
-	})
-	if checksum != 12837 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_hash: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_header(uniffiStatus)
 	})
 	if checksum != 42313 {
@@ -1104,11 +1095,11 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_intent_hash(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_into_subintent(uniffiStatus)
 	})
-	if checksum != 3317 {
+	if checksum != 3577 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_intent_hash: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_into_subintent: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -1118,24 +1109,6 @@ func uniffiCheckChecksums() {
 	if checksum != 9657 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_message: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_subintent_hash(uniffiStatus)
-	})
-	if checksum != 47178 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_subintent_hash: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_to_payload_bytes(uniffiStatus)
-	})
-	if checksum != 46112 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_intentcorev2_to_payload_bytes: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -4074,27 +4047,9 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2_hash(uniffiStatus)
-	})
-	if checksum != 7316 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2_hash: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2_intent_hash(uniffiStatus)
-	})
-	if checksum != 55700 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2_intent_hash: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2_non_root_subintents(uniffiStatus)
 	})
-	if checksum != 49721 {
+	if checksum != 48381 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2_non_root_subintents: UniFFI API checksum mismatch")
 	}
@@ -4103,9 +4058,18 @@ func uniffiCheckChecksums() {
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2_root_subintent(uniffiStatus)
 	})
-	if checksum != 40364 {
+	if checksum != 44096 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2_root_subintent: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2_root_subintent_hash(uniffiStatus)
+	})
+	if checksum != 47571 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2_root_subintent_hash: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -4407,24 +4371,6 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2_hash(uniffiStatus)
-	})
-	if checksum != 44538 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2_hash: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2_intent_hash(uniffiStatus)
-	})
-	if checksum != 53171 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2_intent_hash: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2_non_root_subintent_signatures(uniffiStatus)
 	})
 	if checksum != 60250 {
@@ -4439,6 +4385,15 @@ func uniffiCheckChecksums() {
 	if checksum != 33675 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2_partial_transaction: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2_root_subintent_hash(uniffiStatus)
+	})
+	if checksum != 56046 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2_root_subintent_hash: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -4650,6 +4605,15 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_subintentv2_subintent_hash(uniffiStatus)
+	})
+	if checksum != 63266 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_subintentv2_subintent_hash: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionhash_as_hash(uniffiStatus)
 	})
 	if checksum != 1343 {
@@ -4695,18 +4659,9 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionintentv2_intent_hash(uniffiStatus)
-	})
-	if checksum != 59290 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionintentv2_intent_hash: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionintentv2_non_root_subintents(uniffiStatus)
 	})
-	if checksum != 20904 {
+	if checksum != 36705 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionintentv2_non_root_subintents: UniFFI API checksum mismatch")
 	}
@@ -4736,6 +4691,15 @@ func uniffiCheckChecksums() {
 	if checksum != 26458 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionintentv2_transaction_header: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionintentv2_transaction_intent_hash(uniffiStatus)
+	})
+	if checksum != 33090 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionintentv2_transaction_intent_hash: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -5280,15 +5244,6 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_intentcorev2_from_payload_bytes(uniffiStatus)
-	})
-	if checksum != 5622 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_intentcorev2_from_payload_bytes: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_intentcorev2_new(uniffiStatus)
 	})
 	if checksum != 44152 {
@@ -5417,7 +5372,7 @@ func uniffiCheckChecksums() {
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_partialtransactionv2_new(uniffiStatus)
 	})
-	if checksum != 49244 {
+	if checksum != 33234 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_partialtransactionv2_new: UniFFI API checksum mismatch")
 	}
@@ -5568,6 +5523,24 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_subintentv2_from_payload_bytes(uniffiStatus)
+	})
+	if checksum != 32674 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_subintentv2_from_payload_bytes: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_subintentv2_new(uniffiStatus)
+	})
+	if checksum != 39119 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_subintentv2_new: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_transactionhash_from_str(uniffiStatus)
 	})
 	if checksum != 37610 {
@@ -5588,7 +5561,7 @@ func uniffiCheckChecksums() {
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_transactionintentv2_new(uniffiStatus)
 	})
-	if checksum != 50610 {
+	if checksum != 41531 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_transactionintentv2_new: UniFFI API checksum mismatch")
 	}
@@ -7285,18 +7258,6 @@ func NewIntentCoreV2(header IntentHeaderV2, blobs [][]byte, message MessageV2, c
 }
 
 
-func IntentCoreV2FromPayloadBytes(compiledIntent []byte) (*IntentCoreV2, error) {
-	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_intentcorev2_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiledIntent), _uniffiStatus)
-	})
-		if _uniffiErr != nil {
-			var _uniffiDefaultValue *IntentCoreV2
-			return _uniffiDefaultValue, _uniffiErr
-		} else {
-			return FfiConverterIntentCoreV2INSTANCE.Lift(_uniffiRV), _uniffiErr
-		}
-}
-
 
 
 func (_self *IntentCoreV2)Blobs() [][]byte {
@@ -7316,22 +7277,6 @@ func (_self *IntentCoreV2)Children() []*Hash {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_children(
 		_pointer, _uniffiStatus)
 	}))
-}
-
-
-func (_self *IntentCoreV2)Hash() (*TransactionHash, error) {
-	_pointer := _self.ffiObject.incrementPointer("*IntentCoreV2")
-	defer _self.ffiObject.decrementPointer()
-	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_hash(
-		_pointer, _uniffiStatus)
-	})
-		if _uniffiErr != nil {
-			var _uniffiDefaultValue *TransactionHash
-			return _uniffiDefaultValue, _uniffiErr
-		} else {
-			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
-		}
 }
 
 
@@ -7355,19 +7300,13 @@ func (_self *IntentCoreV2)Instructions() *InstructionsV2 {
 }
 
 
-func (_self *IntentCoreV2)IntentHash() (*TransactionHash, error) {
+func (_self *IntentCoreV2)IntoSubintent() *SubintentV2 {
 	_pointer := _self.ffiObject.incrementPointer("*IntentCoreV2")
 	defer _self.ffiObject.decrementPointer()
-	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_intent_hash(
+	return FfiConverterSubintentV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_into_subintent(
 		_pointer, _uniffiStatus)
-	})
-		if _uniffiErr != nil {
-			var _uniffiDefaultValue *TransactionHash
-			return _uniffiDefaultValue, _uniffiErr
-		} else {
-			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
-		}
+	}))
 }
 
 
@@ -7378,38 +7317,6 @@ func (_self *IntentCoreV2)Message() MessageV2 {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_message(
 		_pointer, _uniffiStatus)
 	}))
-}
-
-
-func (_self *IntentCoreV2)SubintentHash() (*TransactionHash, error) {
-	_pointer := _self.ffiObject.incrementPointer("*IntentCoreV2")
-	defer _self.ffiObject.decrementPointer()
-	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_subintent_hash(
-		_pointer, _uniffiStatus)
-	})
-		if _uniffiErr != nil {
-			var _uniffiDefaultValue *TransactionHash
-			return _uniffiDefaultValue, _uniffiErr
-		} else {
-			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
-		}
-}
-
-
-func (_self *IntentCoreV2)ToPayloadBytes() ([]byte, error) {
-	_pointer := _self.ffiObject.incrementPointer("*IntentCoreV2")
-	defer _self.ffiObject.decrementPointer()
-	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_to_payload_bytes(
-		_pointer, _uniffiStatus)
-	})
-		if _uniffiErr != nil {
-			var _uniffiDefaultValue []byte
-			return _uniffiDefaultValue, _uniffiErr
-		} else {
-			return FfiConverterBytesINSTANCE.Lift(_uniffiRV), _uniffiErr
-		}
 }
 
 
@@ -13064,9 +12971,9 @@ func (_ FfiDestroyerOlympiaAddress) Destroy(value *OlympiaAddress) {
 type PartialTransactionV2 struct {
 	ffiObject FfiObject
 }
-func NewPartialTransactionV2(rootSubintent *IntentCoreV2, nonRootSubintents []*IntentCoreV2) *PartialTransactionV2 {
+func NewPartialTransactionV2(rootSubintent *SubintentV2, nonRootSubintents []*SubintentV2) *PartialTransactionV2 {
 	return FfiConverterPartialTransactionV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_partialtransactionv2_new(FfiConverterIntentCoreV2INSTANCE.Lower(rootSubintent), FfiConverterSequenceIntentCoreV2INSTANCE.Lower(nonRootSubintents), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_partialtransactionv2_new(FfiConverterSubintentV2INSTANCE.Lower(rootSubintent), FfiConverterSequenceSubintentV2INSTANCE.Lower(nonRootSubintents), _uniffiStatus)
 	}))
 }
 
@@ -13085,55 +12992,39 @@ func PartialTransactionV2FromPayloadBytes(compiledIntent []byte) (*PartialTransa
 
 
 
-func (_self *PartialTransactionV2)Hash() (*TransactionHash, error) {
+func (_self *PartialTransactionV2)NonRootSubintents() []*SubintentV2 {
 	_pointer := _self.ffiObject.incrementPointer("*PartialTransactionV2")
 	defer _self.ffiObject.decrementPointer()
-	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_partialtransactionv2_hash(
-		_pointer, _uniffiStatus)
-	})
-		if _uniffiErr != nil {
-			var _uniffiDefaultValue *TransactionHash
-			return _uniffiDefaultValue, _uniffiErr
-		} else {
-			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
-		}
-}
-
-
-func (_self *PartialTransactionV2)IntentHash() (*TransactionHash, error) {
-	_pointer := _self.ffiObject.incrementPointer("*PartialTransactionV2")
-	defer _self.ffiObject.decrementPointer()
-	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_partialtransactionv2_intent_hash(
-		_pointer, _uniffiStatus)
-	})
-		if _uniffiErr != nil {
-			var _uniffiDefaultValue *TransactionHash
-			return _uniffiDefaultValue, _uniffiErr
-		} else {
-			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
-		}
-}
-
-
-func (_self *PartialTransactionV2)NonRootSubintents() []*IntentCoreV2 {
-	_pointer := _self.ffiObject.incrementPointer("*PartialTransactionV2")
-	defer _self.ffiObject.decrementPointer()
-	return FfiConverterSequenceIntentCoreV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+	return FfiConverterSequenceSubintentV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_partialtransactionv2_non_root_subintents(
 		_pointer, _uniffiStatus)
 	}))
 }
 
 
-func (_self *PartialTransactionV2)RootSubintent() *IntentCoreV2 {
+func (_self *PartialTransactionV2)RootSubintent() *SubintentV2 {
 	_pointer := _self.ffiObject.incrementPointer("*PartialTransactionV2")
 	defer _self.ffiObject.decrementPointer()
-	return FfiConverterIntentCoreV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+	return FfiConverterSubintentV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_partialtransactionv2_root_subintent(
 		_pointer, _uniffiStatus)
 	}))
+}
+
+
+func (_self *PartialTransactionV2)RootSubintentHash() (*TransactionHash, error) {
+	_pointer := _self.ffiObject.incrementPointer("*PartialTransactionV2")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_partialtransactionv2_root_subintent_hash(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *TransactionHash
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
 }
 
 
@@ -13785,38 +13676,6 @@ func SignedPartialTransactionV2FromPayloadBytes(compiledIntent []byte) (*SignedP
 
 
 
-func (_self *SignedPartialTransactionV2)Hash() (*TransactionHash, error) {
-	_pointer := _self.ffiObject.incrementPointer("*SignedPartialTransactionV2")
-	defer _self.ffiObject.decrementPointer()
-	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedpartialtransactionv2_hash(
-		_pointer, _uniffiStatus)
-	})
-		if _uniffiErr != nil {
-			var _uniffiDefaultValue *TransactionHash
-			return _uniffiDefaultValue, _uniffiErr
-		} else {
-			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
-		}
-}
-
-
-func (_self *SignedPartialTransactionV2)IntentHash() (*TransactionHash, error) {
-	_pointer := _self.ffiObject.incrementPointer("*SignedPartialTransactionV2")
-	defer _self.ffiObject.decrementPointer()
-	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedpartialtransactionv2_intent_hash(
-		_pointer, _uniffiStatus)
-	})
-		if _uniffiErr != nil {
-			var _uniffiDefaultValue *TransactionHash
-			return _uniffiDefaultValue, _uniffiErr
-		} else {
-			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
-		}
-}
-
-
 func (_self *SignedPartialTransactionV2)NonRootSubintentSignatures() [][]SignatureWithPublicKeyV1 {
 	_pointer := _self.ffiObject.incrementPointer("*SignedPartialTransactionV2")
 	defer _self.ffiObject.decrementPointer()
@@ -13834,6 +13693,22 @@ func (_self *SignedPartialTransactionV2)PartialTransaction() *PartialTransaction
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedpartialtransactionv2_partial_transaction(
 		_pointer, _uniffiStatus)
 	}))
+}
+
+
+func (_self *SignedPartialTransactionV2)RootSubintentHash() (*TransactionHash, error) {
+	_pointer := _self.ffiObject.incrementPointer("*SignedPartialTransactionV2")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedpartialtransactionv2_root_subintent_hash(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *TransactionHash
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
 }
 
 
@@ -14426,6 +14301,92 @@ func (_ FfiDestroyerSignedTransactionIntentV2) Destroy(value *SignedTransactionI
 }
 
 
+type SubintentV2 struct {
+	ffiObject FfiObject
+}
+func NewSubintentV2(intentCore *IntentCoreV2) *SubintentV2 {
+	return FfiConverterSubintentV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_subintentv2_new(FfiConverterIntentCoreV2INSTANCE.Lower(intentCore), _uniffiStatus)
+	}))
+}
+
+
+func SubintentV2FromPayloadBytes(compiledIntent []byte) (*SubintentV2, error) {
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_subintentv2_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiledIntent), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *SubintentV2
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterSubintentV2INSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+
+func (_self *SubintentV2)SubintentHash() (*TransactionHash, error) {
+	_pointer := _self.ffiObject.incrementPointer("*SubintentV2")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_subintentv2_subintent_hash(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *TransactionHash
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+
+func (object *SubintentV2)Destroy() {
+	runtime.SetFinalizer(object, nil)
+	object.ffiObject.destroy()
+}
+
+type FfiConverterSubintentV2 struct {}
+
+var FfiConverterSubintentV2INSTANCE = FfiConverterSubintentV2{}
+
+func (c FfiConverterSubintentV2) Lift(pointer unsafe.Pointer) *SubintentV2 {
+	result := &SubintentV2 {
+		newFfiObject(
+			pointer,
+			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
+				C.uniffi_radix_engine_toolkit_uniffi_fn_free_subintentv2(pointer, status)
+		}),
+	}
+	runtime.SetFinalizer(result, (*SubintentV2).Destroy)
+	return result
+}
+
+func (c FfiConverterSubintentV2) Read(reader io.Reader) *SubintentV2 {
+	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
+}
+
+func (c FfiConverterSubintentV2) Lower(value *SubintentV2) unsafe.Pointer {
+	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
+	// because the pointer will be decremented immediately after this function returns,
+	// and someone will be left holding onto a non-locked pointer.
+	pointer := value.ffiObject.incrementPointer("*SubintentV2")
+	defer value.ffiObject.decrementPointer()
+	return pointer
+}
+
+func (c FfiConverterSubintentV2) Write(writer io.Writer, value *SubintentV2) {
+	writeUint64(writer, uint64(uintptr(c.Lower(value))))
+}
+
+type FfiDestroyerSubintentV2 struct {}
+
+func (_ FfiDestroyerSubintentV2) Destroy(value *SubintentV2) {
+	value.Destroy()
+}
+
+
 type TransactionHash struct {
 	ffiObject FfiObject
 }
@@ -14534,9 +14495,9 @@ func (_ FfiDestroyerTransactionHash) Destroy(value *TransactionHash) {
 type TransactionIntentV2 struct {
 	ffiObject FfiObject
 }
-func NewTransactionIntentV2(transactionHeader TransactionHeaderV2, rootIntentCore *IntentCoreV2, nonRootSubintents []*IntentCoreV2) *TransactionIntentV2 {
+func NewTransactionIntentV2(transactionHeader TransactionHeaderV2, rootIntentCore *IntentCoreV2, nonRootSubintents []*SubintentV2) *TransactionIntentV2 {
 	return FfiConverterTransactionIntentV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_transactionintentv2_new(FfiConverterTypeTransactionHeaderV2INSTANCE.Lower(transactionHeader), FfiConverterIntentCoreV2INSTANCE.Lower(rootIntentCore), FfiConverterSequenceIntentCoreV2INSTANCE.Lower(nonRootSubintents), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_transactionintentv2_new(FfiConverterTypeTransactionHeaderV2INSTANCE.Lower(transactionHeader), FfiConverterIntentCoreV2INSTANCE.Lower(rootIntentCore), FfiConverterSequenceSubintentV2INSTANCE.Lower(nonRootSubintents), _uniffiStatus)
 	}))
 }
 
@@ -14571,26 +14532,10 @@ func (_self *TransactionIntentV2)Hash() (*TransactionHash, error) {
 }
 
 
-func (_self *TransactionIntentV2)IntentHash() (*TransactionHash, error) {
+func (_self *TransactionIntentV2)NonRootSubintents() []*SubintentV2 {
 	_pointer := _self.ffiObject.incrementPointer("*TransactionIntentV2")
 	defer _self.ffiObject.decrementPointer()
-	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionintentv2_intent_hash(
-		_pointer, _uniffiStatus)
-	})
-		if _uniffiErr != nil {
-			var _uniffiDefaultValue *TransactionHash
-			return _uniffiDefaultValue, _uniffiErr
-		} else {
-			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
-		}
-}
-
-
-func (_self *TransactionIntentV2)NonRootSubintents() []*IntentCoreV2 {
-	_pointer := _self.ffiObject.incrementPointer("*TransactionIntentV2")
-	defer _self.ffiObject.decrementPointer()
-	return FfiConverterSequenceIntentCoreV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+	return FfiConverterSequenceSubintentV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionintentv2_non_root_subintents(
 		_pointer, _uniffiStatus)
 	}))
@@ -14630,6 +14575,22 @@ func (_self *TransactionIntentV2)TransactionHeader() TransactionHeaderV2 {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionintentv2_transaction_header(
 		_pointer, _uniffiStatus)
 	}))
+}
+
+
+func (_self *TransactionIntentV2)TransactionIntentHash() (*TransactionHash, error) {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionIntentV2")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionintentv2_transaction_intent_hash(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *TransactionHash
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
 }
 
 
@@ -25668,6 +25629,7 @@ var ErrRadixEngineToolkitErrorNonFungibleContentValidationError = fmt.Errorf("Ra
 var ErrRadixEngineToolkitErrorEntityTypeMismatchError = fmt.Errorf("RadixEngineToolkitErrorEntityTypeMismatchError")
 var ErrRadixEngineToolkitErrorDerivationError = fmt.Errorf("RadixEngineToolkitErrorDerivationError")
 var ErrRadixEngineToolkitErrorInvalidPublicKey = fmt.Errorf("RadixEngineToolkitErrorInvalidPublicKey")
+var ErrRadixEngineToolkitErrorInstructionAddError = fmt.Errorf("RadixEngineToolkitErrorInstructionAddError")
 var ErrRadixEngineToolkitErrorCompileError = fmt.Errorf("RadixEngineToolkitErrorCompileError")
 var ErrRadixEngineToolkitErrorDecompileError = fmt.Errorf("RadixEngineToolkitErrorDecompileError")
 var ErrRadixEngineToolkitErrorPrepareError = fmt.Errorf("RadixEngineToolkitErrorPrepareError")
@@ -25905,6 +25867,31 @@ func (err RadixEngineToolkitErrorInvalidPublicKey) Error() string {
 
 func (self RadixEngineToolkitErrorInvalidPublicKey) Is(target error) bool {
 	return target == ErrRadixEngineToolkitErrorInvalidPublicKey
+}
+type RadixEngineToolkitErrorInstructionAddError struct {
+	Error_ string
+}
+func NewRadixEngineToolkitErrorInstructionAddError(
+	error string,
+) *RadixEngineToolkitError {
+	return &RadixEngineToolkitError{
+		err: &RadixEngineToolkitErrorInstructionAddError{
+			Error_: error,
+		},
+	}
+}
+
+func (err RadixEngineToolkitErrorInstructionAddError) Error() string {
+	return fmt.Sprint("InstructionAddError",
+		": ",
+		
+		"Error_=",
+		err.Error_,
+	)
+}
+
+func (self RadixEngineToolkitErrorInstructionAddError) Is(target error) bool {
+	return target == ErrRadixEngineToolkitErrorInstructionAddError
 }
 type RadixEngineToolkitErrorCompileError struct {
 	Error_ string
@@ -26157,18 +26144,24 @@ func (self RadixEngineToolkitErrorTypedNativeEventError) Is(target error) bool {
 	return target == ErrRadixEngineToolkitErrorTypedNativeEventError
 }
 type RadixEngineToolkitErrorFailedToDecodeTransactionHash struct {
+	Error_ string
 }
 func NewRadixEngineToolkitErrorFailedToDecodeTransactionHash(
+	error string,
 ) *RadixEngineToolkitError {
 	return &RadixEngineToolkitError{
 		err: &RadixEngineToolkitErrorFailedToDecodeTransactionHash{
+			Error_: error,
 		},
 	}
 }
 
 func (err RadixEngineToolkitErrorFailedToDecodeTransactionHash) Error() string {
 	return fmt.Sprint("FailedToDecodeTransactionHash",
+		": ",
 		
+		"Error_=",
+		err.Error_,
 	)
 }
 
@@ -26379,70 +26372,75 @@ func (c FfiConverterTypeRadixEngineToolkitError) Read(reader io.Reader) error {
 		return &RadixEngineToolkitError{&RadixEngineToolkitErrorInvalidPublicKey{
 		}}
 	case 9:
-		return &RadixEngineToolkitError{&RadixEngineToolkitErrorCompileError{
+		return &RadixEngineToolkitError{&RadixEngineToolkitErrorInstructionAddError{
 			Error_: FfiConverterStringINSTANCE.Read(reader),
 		}}
 	case 10:
-		return &RadixEngineToolkitError{&RadixEngineToolkitErrorDecompileError{
+		return &RadixEngineToolkitError{&RadixEngineToolkitErrorCompileError{
 			Error_: FfiConverterStringINSTANCE.Read(reader),
 		}}
 	case 11:
-		return &RadixEngineToolkitError{&RadixEngineToolkitErrorPrepareError{
+		return &RadixEngineToolkitError{&RadixEngineToolkitErrorDecompileError{
 			Error_: FfiConverterStringINSTANCE.Read(reader),
 		}}
 	case 12:
-		return &RadixEngineToolkitError{&RadixEngineToolkitErrorEncodeError{
+		return &RadixEngineToolkitError{&RadixEngineToolkitErrorPrepareError{
 			Error_: FfiConverterStringINSTANCE.Read(reader),
 		}}
 	case 13:
-		return &RadixEngineToolkitError{&RadixEngineToolkitErrorDecodeError{
+		return &RadixEngineToolkitError{&RadixEngineToolkitErrorEncodeError{
 			Error_: FfiConverterStringINSTANCE.Read(reader),
 		}}
 	case 14:
-		return &RadixEngineToolkitError{&RadixEngineToolkitErrorTransactionValidationFailed{
+		return &RadixEngineToolkitError{&RadixEngineToolkitErrorDecodeError{
 			Error_: FfiConverterStringINSTANCE.Read(reader),
 		}}
 	case 15:
-		return &RadixEngineToolkitError{&RadixEngineToolkitErrorExecutionModuleError{
+		return &RadixEngineToolkitError{&RadixEngineToolkitErrorTransactionValidationFailed{
 			Error_: FfiConverterStringINSTANCE.Read(reader),
 		}}
 	case 16:
-		return &RadixEngineToolkitError{&RadixEngineToolkitErrorManifestSborError{
+		return &RadixEngineToolkitError{&RadixEngineToolkitErrorExecutionModuleError{
 			Error_: FfiConverterStringINSTANCE.Read(reader),
 		}}
 	case 17:
-		return &RadixEngineToolkitError{&RadixEngineToolkitErrorScryptoSborError{
+		return &RadixEngineToolkitError{&RadixEngineToolkitErrorManifestSborError{
 			Error_: FfiConverterStringINSTANCE.Read(reader),
 		}}
 	case 18:
-		return &RadixEngineToolkitError{&RadixEngineToolkitErrorTypedNativeEventError{
+		return &RadixEngineToolkitError{&RadixEngineToolkitErrorScryptoSborError{
 			Error_: FfiConverterStringINSTANCE.Read(reader),
 		}}
 	case 19:
-		return &RadixEngineToolkitError{&RadixEngineToolkitErrorFailedToDecodeTransactionHash{
+		return &RadixEngineToolkitError{&RadixEngineToolkitErrorTypedNativeEventError{
+			Error_: FfiConverterStringINSTANCE.Read(reader),
 		}}
 	case 20:
+		return &RadixEngineToolkitError{&RadixEngineToolkitErrorFailedToDecodeTransactionHash{
+			Error_: FfiConverterStringINSTANCE.Read(reader),
+		}}
+	case 21:
 		return &RadixEngineToolkitError{&RadixEngineToolkitErrorManifestBuilderNameRecordError{
 			Error_: FfiConverterTypeNameRecordErrorINSTANCE.Read(reader),
 		}}
-	case 21:
+	case 22:
 		return &RadixEngineToolkitError{&RadixEngineToolkitErrorInvalidEntityTypeIdError{
 			Error_: FfiConverterStringINSTANCE.Read(reader),
 		}}
-	case 22:
+	case 23:
 		return &RadixEngineToolkitError{&RadixEngineToolkitErrorDecimalError{
 		}}
-	case 23:
+	case 24:
 		return &RadixEngineToolkitError{&RadixEngineToolkitErrorSignerError{
 			Error_: FfiConverterStringINSTANCE.Read(reader),
 		}}
-	case 24:
+	case 25:
 		return &RadixEngineToolkitError{&RadixEngineToolkitErrorInvalidReceipt{
 		}}
-	case 25:
+	case 26:
 		return &RadixEngineToolkitError{&RadixEngineToolkitErrorStaticAnalysisFailed{
 		}}
-	case 26:
+	case 27:
 		return &RadixEngineToolkitError{&RadixEngineToolkitErrorNotAllBuilderItemsWereSpecified{
 		}}
 	default:
@@ -26479,55 +26477,59 @@ func (c FfiConverterTypeRadixEngineToolkitError) Write(writer io.Writer, value *
 			FfiConverterStringINSTANCE.Write(writer, variantValue.Error_)
 		case *RadixEngineToolkitErrorInvalidPublicKey:
 			writeInt32(writer, 8)
-		case *RadixEngineToolkitErrorCompileError:
+		case *RadixEngineToolkitErrorInstructionAddError:
 			writeInt32(writer, 9)
 			FfiConverterStringINSTANCE.Write(writer, variantValue.Error_)
-		case *RadixEngineToolkitErrorDecompileError:
+		case *RadixEngineToolkitErrorCompileError:
 			writeInt32(writer, 10)
 			FfiConverterStringINSTANCE.Write(writer, variantValue.Error_)
-		case *RadixEngineToolkitErrorPrepareError:
+		case *RadixEngineToolkitErrorDecompileError:
 			writeInt32(writer, 11)
 			FfiConverterStringINSTANCE.Write(writer, variantValue.Error_)
-		case *RadixEngineToolkitErrorEncodeError:
+		case *RadixEngineToolkitErrorPrepareError:
 			writeInt32(writer, 12)
 			FfiConverterStringINSTANCE.Write(writer, variantValue.Error_)
-		case *RadixEngineToolkitErrorDecodeError:
+		case *RadixEngineToolkitErrorEncodeError:
 			writeInt32(writer, 13)
 			FfiConverterStringINSTANCE.Write(writer, variantValue.Error_)
-		case *RadixEngineToolkitErrorTransactionValidationFailed:
+		case *RadixEngineToolkitErrorDecodeError:
 			writeInt32(writer, 14)
 			FfiConverterStringINSTANCE.Write(writer, variantValue.Error_)
-		case *RadixEngineToolkitErrorExecutionModuleError:
+		case *RadixEngineToolkitErrorTransactionValidationFailed:
 			writeInt32(writer, 15)
 			FfiConverterStringINSTANCE.Write(writer, variantValue.Error_)
-		case *RadixEngineToolkitErrorManifestSborError:
+		case *RadixEngineToolkitErrorExecutionModuleError:
 			writeInt32(writer, 16)
 			FfiConverterStringINSTANCE.Write(writer, variantValue.Error_)
-		case *RadixEngineToolkitErrorScryptoSborError:
+		case *RadixEngineToolkitErrorManifestSborError:
 			writeInt32(writer, 17)
 			FfiConverterStringINSTANCE.Write(writer, variantValue.Error_)
-		case *RadixEngineToolkitErrorTypedNativeEventError:
+		case *RadixEngineToolkitErrorScryptoSborError:
 			writeInt32(writer, 18)
 			FfiConverterStringINSTANCE.Write(writer, variantValue.Error_)
-		case *RadixEngineToolkitErrorFailedToDecodeTransactionHash:
+		case *RadixEngineToolkitErrorTypedNativeEventError:
 			writeInt32(writer, 19)
-		case *RadixEngineToolkitErrorManifestBuilderNameRecordError:
+			FfiConverterStringINSTANCE.Write(writer, variantValue.Error_)
+		case *RadixEngineToolkitErrorFailedToDecodeTransactionHash:
 			writeInt32(writer, 20)
+			FfiConverterStringINSTANCE.Write(writer, variantValue.Error_)
+		case *RadixEngineToolkitErrorManifestBuilderNameRecordError:
+			writeInt32(writer, 21)
 			FfiConverterTypeNameRecordErrorINSTANCE.Write(writer, variantValue.Error_)
 		case *RadixEngineToolkitErrorInvalidEntityTypeIdError:
-			writeInt32(writer, 21)
+			writeInt32(writer, 22)
 			FfiConverterStringINSTANCE.Write(writer, variantValue.Error_)
 		case *RadixEngineToolkitErrorDecimalError:
-			writeInt32(writer, 22)
-		case *RadixEngineToolkitErrorSignerError:
 			writeInt32(writer, 23)
+		case *RadixEngineToolkitErrorSignerError:
+			writeInt32(writer, 24)
 			FfiConverterStringINSTANCE.Write(writer, variantValue.Error_)
 		case *RadixEngineToolkitErrorInvalidReceipt:
-			writeInt32(writer, 24)
-		case *RadixEngineToolkitErrorStaticAnalysisFailed:
 			writeInt32(writer, 25)
-		case *RadixEngineToolkitErrorNotAllBuilderItemsWereSpecified:
+		case *RadixEngineToolkitErrorStaticAnalysisFailed:
 			writeInt32(writer, 26)
+		case *RadixEngineToolkitErrorNotAllBuilderItemsWereSpecified:
+			writeInt32(writer, 27)
 		default:
 			_ = variantValue
 			panic(fmt.Sprintf("invalid error value `%v` in FfiConverterTypeRadixEngineToolkitError.Write", value))
@@ -30895,51 +30897,6 @@ func (FfiDestroyerSequenceHash) Destroy(sequence []*Hash) {
 
 
 
-type FfiConverterSequenceIntentCoreV2 struct{}
-
-var FfiConverterSequenceIntentCoreV2INSTANCE = FfiConverterSequenceIntentCoreV2{}
-
-func (c FfiConverterSequenceIntentCoreV2) Lift(rb RustBufferI) []*IntentCoreV2 {
-	return LiftFromRustBuffer[[]*IntentCoreV2](c, rb)
-}
-
-func (c FfiConverterSequenceIntentCoreV2) Read(reader io.Reader) []*IntentCoreV2 {
-	length := readInt32(reader)
-	if length == 0 {
-		return nil
-	}
-	result := make([]*IntentCoreV2, 0, length)
-	for i := int32(0); i < length; i++ {
-		result = append(result, FfiConverterIntentCoreV2INSTANCE.Read(reader))
-	}
-	return result
-}
-
-func (c FfiConverterSequenceIntentCoreV2) Lower(value []*IntentCoreV2) RustBuffer {
-	return LowerIntoRustBuffer[[]*IntentCoreV2](c, value)
-}
-
-func (c FfiConverterSequenceIntentCoreV2) Write(writer io.Writer, value []*IntentCoreV2) {
-	if len(value) > math.MaxInt32 {
-		panic("[]*IntentCoreV2 is too large to fit into Int32")
-	}
-
-	writeInt32(writer, int32(len(value)))
-	for _, item := range value {
-		FfiConverterIntentCoreV2INSTANCE.Write(writer, item)
-	}
-}
-
-type FfiDestroyerSequenceIntentCoreV2 struct {}
-
-func (FfiDestroyerSequenceIntentCoreV2) Destroy(sequence []*IntentCoreV2) {
-	for _, value := range sequence {
-		FfiDestroyerIntentCoreV2{}.Destroy(value)	
-	}
-}
-
-
-
 type FfiConverterSequenceNonFungibleGlobalId struct{}
 
 var FfiConverterSequenceNonFungibleGlobalIdINSTANCE = FfiConverterSequenceNonFungibleGlobalId{}
@@ -30980,6 +30937,51 @@ type FfiDestroyerSequenceNonFungibleGlobalId struct {}
 func (FfiDestroyerSequenceNonFungibleGlobalId) Destroy(sequence []*NonFungibleGlobalId) {
 	for _, value := range sequence {
 		FfiDestroyerNonFungibleGlobalId{}.Destroy(value)	
+	}
+}
+
+
+
+type FfiConverterSequenceSubintentV2 struct{}
+
+var FfiConverterSequenceSubintentV2INSTANCE = FfiConverterSequenceSubintentV2{}
+
+func (c FfiConverterSequenceSubintentV2) Lift(rb RustBufferI) []*SubintentV2 {
+	return LiftFromRustBuffer[[]*SubintentV2](c, rb)
+}
+
+func (c FfiConverterSequenceSubintentV2) Read(reader io.Reader) []*SubintentV2 {
+	length := readInt32(reader)
+	if length == 0 {
+		return nil
+	}
+	result := make([]*SubintentV2, 0, length)
+	for i := int32(0); i < length; i++ {
+		result = append(result, FfiConverterSubintentV2INSTANCE.Read(reader))
+	}
+	return result
+}
+
+func (c FfiConverterSequenceSubintentV2) Lower(value []*SubintentV2) RustBuffer {
+	return LowerIntoRustBuffer[[]*SubintentV2](c, value)
+}
+
+func (c FfiConverterSequenceSubintentV2) Write(writer io.Writer, value []*SubintentV2) {
+	if len(value) > math.MaxInt32 {
+		panic("[]*SubintentV2 is too large to fit into Int32")
+	}
+
+	writeInt32(writer, int32(len(value)))
+	for _, item := range value {
+		FfiConverterSubintentV2INSTANCE.Write(writer, item)
+	}
+}
+
+type FfiDestroyerSequenceSubintentV2 struct {}
+
+func (FfiDestroyerSequenceSubintentV2) Destroy(sequence []*SubintentV2) {
+	for _, value := range sequence {
+		FfiDestroyerSubintentV2{}.Destroy(value)	
 	}
 }
 
