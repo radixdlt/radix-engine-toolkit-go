@@ -3534,15 +3534,6 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_register_subintent(uniffiStatus)
-	})
-	if checksum != 44269 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_register_subintent: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_return_to_worktop(uniffiStatus)
 	})
 	if checksum != 3045 {
@@ -3701,6 +3692,15 @@ func uniffiCheckChecksums() {
 	if checksum != 8311 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_two_resource_pool_redeem: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_use_child(uniffiStatus)
+	})
+	if checksum != 25776 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_manifestv2builder_use_child: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -4988,6 +4988,42 @@ func uniffiCheckChecksums() {
 	if checksum != 42344 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv2builder_transaction_header: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv2buildersignaturestep_notarize_with_private_key(uniffiStatus)
+	})
+	if checksum != 48137 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv2buildersignaturestep_notarize_with_private_key: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv2buildersignaturestep_notarize_with_signer(uniffiStatus)
+	})
+	if checksum != 25051 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv2buildersignaturestep_notarize_with_signer: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv2buildersignaturestep_sign_with_private_key(uniffiStatus)
+	})
+	if checksum != 12688 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv2buildersignaturestep_sign_with_private_key: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv2buildersignaturestep_sign_with_signer(uniffiStatus)
+	})
+	if checksum != 49560 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionv2buildersignaturestep_sign_with_signer: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -11785,22 +11821,6 @@ func (_self *ManifestV2Builder)PushToAuthZone(proof ManifestBuilderProof) (*Mani
 }
 
 
-func (_self *ManifestV2Builder)RegisterSubintent(subintent *IntentCoreV2, name ManifestBuilderIntent) (*ManifestV2Builder, error) {
-	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
-	defer _self.ffiObject.decrementPointer()
-	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_register_subintent(
-		_pointer,FfiConverterIntentCoreV2INSTANCE.Lower(subintent), FfiConverterTypeManifestBuilderIntentINSTANCE.Lower(name), _uniffiStatus)
-	})
-		if _uniffiErr != nil {
-			var _uniffiDefaultValue *ManifestV2Builder
-			return _uniffiDefaultValue, _uniffiErr
-		} else {
-			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
-		}
-}
-
-
 func (_self *ManifestV2Builder)ReturnToWorktop(bucket ManifestBuilderBucket) (*ManifestV2Builder, error) {
 	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
 	defer _self.ffiObject.decrementPointer()
@@ -12079,6 +12099,22 @@ func (_self *ManifestV2Builder)TwoResourcePoolRedeem(address *Address, bucket Ma
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_two_resource_pool_redeem(
 		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *ManifestV2Builder
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterManifestV2BuilderINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *ManifestV2Builder)UseChild(subintentHash *TransactionHash, name ManifestBuilderIntent) (*ManifestV2Builder, error) {
+	_pointer := _self.ffiObject.incrementPointer("*ManifestV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_use_child(
+		_pointer,FfiConverterTransactionHashINSTANCE.Lower(subintentHash), FfiConverterTypeManifestBuilderIntentINSTANCE.Lower(name), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -15404,6 +15440,58 @@ type TransactionV2BuilderSignatureStep struct {
 }
 
 
+
+
+func (_self *TransactionV2BuilderSignatureStep)NotarizeWithPrivateKey(privateKey *PrivateKey) (*NotarizedTransactionV2, error) {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionV2BuilderSignatureStep")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionv2buildersignaturestep_notarize_with_private_key(
+		_pointer,FfiConverterPrivateKeyINSTANCE.Lower(privateKey), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *NotarizedTransactionV2
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterNotarizedTransactionV2INSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *TransactionV2BuilderSignatureStep)NotarizeWithSigner(privateKey Signer) (*NotarizedTransactionV2, error) {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionV2BuilderSignatureStep")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionv2buildersignaturestep_notarize_with_signer(
+		_pointer,FfiConverterCallbackInterfaceSignerINSTANCE.Lower(privateKey), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *NotarizedTransactionV2
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterNotarizedTransactionV2INSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *TransactionV2BuilderSignatureStep)SignWithPrivateKey(privateKey *PrivateKey) *TransactionV2BuilderSignatureStep {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionV2BuilderSignatureStep")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterTransactionV2BuilderSignatureStepINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionv2buildersignaturestep_sign_with_private_key(
+		_pointer,FfiConverterPrivateKeyINSTANCE.Lower(privateKey), _uniffiStatus)
+	}))
+}
+
+
+func (_self *TransactionV2BuilderSignatureStep)SignWithSigner(signer Signer) *TransactionV2BuilderSignatureStep {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionV2BuilderSignatureStep")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterTransactionV2BuilderSignatureStepINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionv2buildersignaturestep_sign_with_signer(
+		_pointer,FfiConverterCallbackInterfaceSignerINSTANCE.Lower(signer), _uniffiStatus)
+	}))
+}
 
 
 
