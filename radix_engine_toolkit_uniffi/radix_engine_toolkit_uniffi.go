@@ -357,11 +357,29 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_func_derive_global_caller_non_fungible_global_id_from_component_address(uniffiStatus)
+	})
+	if checksum != 25519 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_func_derive_global_caller_non_fungible_global_id_from_component_address: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_func_derive_olympia_account_address_from_public_key(uniffiStatus)
 	})
 	if checksum != 19647 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_func_derive_olympia_account_address_from_public_key: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_func_derive_package_of_direct_caller_non_fungible_global_id_from_component_address(uniffiStatus)
+	})
+	if checksum != 37898 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_func_derive_package_of_direct_caller_non_fungible_global_id_from_component_address: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -4020,6 +4038,15 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv2_statically_validate(uniffiStatus)
+	})
+	if checksum != 49965 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv2_statically_validate: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv2_to_payload_bytes(uniffiStatus)
 	})
 	if checksum != 52602 {
@@ -4407,6 +4434,15 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2_statically_validate(uniffiStatus)
+	})
+	if checksum != 18439 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2_statically_validate: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_signedpartialtransactionv2_to_payload_bytes(uniffiStatus)
 	})
 	if checksum != 13380 {
@@ -4650,6 +4686,15 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_subintentmanifestv2_statically_validate(uniffiStatus)
+	})
+	if checksum != 63790 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_subintentmanifestv2_statically_validate: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_subintentmanifestv2_to_payload_bytes(uniffiStatus)
 	})
 	if checksum != 44508 {
@@ -4862,6 +4907,15 @@ func uniffiCheckChecksums() {
 	if checksum != 25127 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_static_analysis: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_statically_validate(uniffiStatus)
+	})
+	if checksum != 5014 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_statically_validate: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -5109,11 +5163,11 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_accessrule_require_virtual_signature(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_accessrule_require_signature(uniffiStatus)
 	})
-	if checksum != 41270 {
+	if checksum != 24148 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_accessrule_require_virtual_signature: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_accessrule_require_signature: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -5352,6 +5406,15 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_nonfungibleglobalid_global_caller_badge(uniffiStatus)
+	})
+	if checksum != 5635 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_nonfungibleglobalid_global_caller_badge: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_nonfungibleglobalid_new(uniffiStatus)
 	})
 	if checksum != 58056 {
@@ -5361,11 +5424,20 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_nonfungibleglobalid_virtual_signature_badge(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_nonfungibleglobalid_package_of_direct_caller_badge(uniffiStatus)
 	})
-	if checksum != 22546 {
+	if checksum != 11141 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_nonfungibleglobalid_virtual_signature_badge: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_nonfungibleglobalid_package_of_direct_caller_badge: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_nonfungibleglobalid_signature_badge(uniffiStatus)
+	})
+	if checksum != 36312 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_nonfungibleglobalid_signature_badge: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -6202,9 +6274,9 @@ func AccessRuleRequireCountOf(count uint8, resources []ResourceOrNonFungible) (*
 		}
 }
 
-func AccessRuleRequireVirtualSignature(publicKey PublicKey) (*AccessRule, error) {
+func AccessRuleRequireSignature(publicKey PublicKey) (*AccessRule, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_accessrule_require_virtual_signature(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_accessrule_require_signature(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *AccessRule
@@ -12514,9 +12586,33 @@ func NonFungibleGlobalIdFromParts(resourceAddress *Address, nonFungibleLocalId N
 		}
 }
 
-func NonFungibleGlobalIdVirtualSignatureBadge(publicKey PublicKey, networkId uint8) (*NonFungibleGlobalId, error) {
+func NonFungibleGlobalIdGlobalCallerBadge(componentAddress *Address, networkId uint8) (*NonFungibleGlobalId, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_nonfungibleglobalid_virtual_signature_badge(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_nonfungibleglobalid_global_caller_badge(FfiConverterAddressINSTANCE.Lower(componentAddress), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *NonFungibleGlobalId
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterNonFungibleGlobalIdINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+func NonFungibleGlobalIdPackageOfDirectCallerBadge(packageAddress *Address, networkId uint8) (*NonFungibleGlobalId, error) {
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_nonfungibleglobalid_package_of_direct_caller_badge(FfiConverterAddressINSTANCE.Lower(packageAddress), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *NonFungibleGlobalId
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterNonFungibleGlobalIdINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+func NonFungibleGlobalIdSignatureBadge(publicKey PublicKey, networkId uint8) (*NonFungibleGlobalId, error) {
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_nonfungibleglobalid_signature_badge(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *NonFungibleGlobalId
@@ -12891,6 +12987,18 @@ func (_self *NotarizedTransactionV2)SignedTransactionIntentHash() (*TransactionH
 		} else {
 			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
+}
+
+
+func (_self *NotarizedTransactionV2)StaticallyValidate(networkId uint8) error {
+	_pointer := _self.ffiObject.incrementPointer("*NotarizedTransactionV2")
+	defer _self.ffiObject.decrementPointer()
+	_, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) bool {
+		C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv2_statically_validate(
+		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return false
+	})
+		return _uniffiErr
 }
 
 
@@ -13794,6 +13902,18 @@ func (_self *SignedPartialTransactionV2)RootSubintentSignatures() []SignatureWit
 }
 
 
+func (_self *SignedPartialTransactionV2)StaticallyValidate(networkId uint8) error {
+	_pointer := _self.ffiObject.incrementPointer("*SignedPartialTransactionV2")
+	defer _self.ffiObject.decrementPointer()
+	_, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) bool {
+		C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedpartialtransactionv2_statically_validate(
+		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return false
+	})
+		return _uniffiErr
+}
+
+
 func (_self *SignedPartialTransactionV2)ToPayloadBytes() ([]byte, error) {
 	_pointer := _self.ffiObject.incrementPointer("*SignedPartialTransactionV2")
 	defer _self.ffiObject.decrementPointer()
@@ -14453,6 +14573,18 @@ func (_self *SubintentManifestV2)StaticAnalysis(networkId uint8) (StaticAnalysis
 }
 
 
+func (_self *SubintentManifestV2)StaticallyValidate() error {
+	_pointer := _self.ffiObject.incrementPointer("*SubintentManifestV2")
+	defer _self.ffiObject.decrementPointer()
+	_, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) bool {
+		C.uniffi_radix_engine_toolkit_uniffi_fn_method_subintentmanifestv2_statically_validate(
+		_pointer, _uniffiStatus)
+		return false
+	})
+		return _uniffiErr
+}
+
+
 func (_self *SubintentManifestV2)ToPayloadBytes() ([]byte, error) {
 	_pointer := _self.ffiObject.incrementPointer("*SubintentManifestV2")
 	defer _self.ffiObject.decrementPointer()
@@ -15097,6 +15229,18 @@ func (_self *TransactionManifestV2)StaticAnalysis(networkId uint8) (StaticAnalys
 		} else {
 			return FfiConverterTypeStaticAnalysisINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
+}
+
+
+func (_self *TransactionManifestV2)StaticallyValidate() error {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV2")
+	defer _self.ffiObject.decrementPointer()
+	_, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) bool {
+		C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_statically_validate(
+		_pointer, _uniffiStatus)
+		return false
+	})
+		return _uniffiErr
 }
 
 
@@ -25862,6 +26006,7 @@ var ErrRadixEngineToolkitErrorSignerError = fmt.Errorf("RadixEngineToolkitErrorS
 var ErrRadixEngineToolkitErrorInvalidReceipt = fmt.Errorf("RadixEngineToolkitErrorInvalidReceipt")
 var ErrRadixEngineToolkitErrorStaticAnalysisFailed = fmt.Errorf("RadixEngineToolkitErrorStaticAnalysisFailed")
 var ErrRadixEngineToolkitErrorNotAllBuilderItemsWereSpecified = fmt.Errorf("RadixEngineToolkitErrorNotAllBuilderItemsWereSpecified")
+var ErrRadixEngineToolkitErrorManifestValidationError = fmt.Errorf("RadixEngineToolkitErrorManifestValidationError")
 
 // Variant structs
 type RadixEngineToolkitErrorInvalidLength struct {
@@ -26539,6 +26684,31 @@ func (err RadixEngineToolkitErrorNotAllBuilderItemsWereSpecified) Error() string
 func (self RadixEngineToolkitErrorNotAllBuilderItemsWereSpecified) Is(target error) bool {
 	return target == ErrRadixEngineToolkitErrorNotAllBuilderItemsWereSpecified
 }
+type RadixEngineToolkitErrorManifestValidationError struct {
+	Error_ string
+}
+func NewRadixEngineToolkitErrorManifestValidationError(
+	error string,
+) *RadixEngineToolkitError {
+	return &RadixEngineToolkitError{
+		err: &RadixEngineToolkitErrorManifestValidationError{
+			Error_: error,
+		},
+	}
+}
+
+func (err RadixEngineToolkitErrorManifestValidationError) Error() string {
+	return fmt.Sprint("ManifestValidationError",
+		": ",
+		
+		"Error_=",
+		err.Error_,
+	)
+}
+
+func (self RadixEngineToolkitErrorManifestValidationError) Is(target error) bool {
+	return target == ErrRadixEngineToolkitErrorManifestValidationError
+}
 
 type FfiConverterTypeRadixEngineToolkitError struct{}
 
@@ -26664,6 +26834,10 @@ func (c FfiConverterTypeRadixEngineToolkitError) Read(reader io.Reader) error {
 	case 27:
 		return &RadixEngineToolkitError{&RadixEngineToolkitErrorNotAllBuilderItemsWereSpecified{
 		}}
+	case 28:
+		return &RadixEngineToolkitError{&RadixEngineToolkitErrorManifestValidationError{
+			Error_: FfiConverterStringINSTANCE.Read(reader),
+		}}
 	default:
 		panic(fmt.Sprintf("Unknown error code %d in FfiConverterTypeRadixEngineToolkitError.Read()", errorID))
 	}
@@ -26752,6 +26926,9 @@ func (c FfiConverterTypeRadixEngineToolkitError) Write(writer io.Writer, value *
 			FfiConverterStringINSTANCE.Write(writer, variantValue.Error_)
 		case *RadixEngineToolkitErrorNotAllBuilderItemsWereSpecified:
 			writeInt32(writer, 27)
+		case *RadixEngineToolkitErrorManifestValidationError:
+			writeInt32(writer, 28)
+			FfiConverterStringINSTANCE.Write(writer, variantValue.Error_)
 		default:
 			_ = variantValue
 			panic(fmt.Sprintf("invalid error value `%v` in FfiConverterTypeRadixEngineToolkitError.Write", value))
@@ -33467,6 +33644,18 @@ func (FfiDestroyerTypeHashableBytes) Destroy(value HashableBytes) {
 	FfiDestroyerBytes{}.Destroy(builtinValue)
 }
 
+func DeriveGlobalCallerNonFungibleGlobalIdFromComponentAddress(componentAddress *Address, networkId uint8) (*NonFungibleGlobalId, error) {
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_derive_global_caller_non_fungible_global_id_from_component_address(FfiConverterAddressINSTANCE.Lower(componentAddress), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *NonFungibleGlobalId
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterNonFungibleGlobalIdINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
 func DeriveOlympiaAccountAddressFromPublicKey(publicKey PublicKey, olympiaNetwork OlympiaNetwork) (*OlympiaAddress, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_derive_olympia_account_address_from_public_key(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey), FfiConverterTypeOlympiaNetworkINSTANCE.Lower(olympiaNetwork), _uniffiStatus)
@@ -33476,6 +33665,18 @@ func DeriveOlympiaAccountAddressFromPublicKey(publicKey PublicKey, olympiaNetwor
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
 			return FfiConverterOlympiaAddressINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+func DerivePackageOfDirectCallerNonFungibleGlobalIdFromComponentAddress(packageAddress *Address, networkId uint8) (*NonFungibleGlobalId, error) {
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_derive_package_of_direct_caller_non_fungible_global_id_from_component_address(FfiConverterAddressINSTANCE.Lower(packageAddress), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *NonFungibleGlobalId
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterNonFungibleGlobalIdINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
