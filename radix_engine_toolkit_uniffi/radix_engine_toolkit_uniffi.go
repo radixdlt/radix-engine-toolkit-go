@@ -4812,6 +4812,15 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_classify(uniffiStatus)
+	})
+	if checksum != 434 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_classify: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_dynamic_analysis(uniffiStatus)
 	})
 	if checksum != 27204 {
@@ -4839,11 +4848,11 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_static_analysis(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_static_analysis_and_validate(uniffiStatus)
 	})
-	if checksum != 27026 {
+	if checksum != 55818 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_static_analysis: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_static_analysis_and_validate: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -4875,6 +4884,15 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_classify(uniffiStatus)
+	})
+	if checksum != 8493 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_classify: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_dynamic_analysis(uniffiStatus)
 	})
 	if checksum != 2627 {
@@ -4902,11 +4920,11 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_static_analysis(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_static_analysis_and_validate(uniffiStatus)
 	})
-	if checksum != 25127 {
+	if checksum != 5100 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_static_analysis: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_static_analysis_and_validate: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -15020,6 +15038,16 @@ func (_self *TransactionManifestV1)Blobs() [][]byte {
 }
 
 
+func (_self *TransactionManifestV1)Classify() []ManifestClass {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV1")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterSequenceTypeManifestClassINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_classify(
+		_pointer, _uniffiStatus)
+	}))
+}
+
+
 func (_self *TransactionManifestV1)DynamicAnalysis(networkId uint8, toolkitReceipt string) (DynamicAnalysis, error) {
 	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV1")
 	defer _self.ffiObject.decrementPointer()
@@ -15056,11 +15084,11 @@ func (_self *TransactionManifestV1)Instructions() *InstructionsV1 {
 }
 
 
-func (_self *TransactionManifestV1)StaticAnalysis(networkId uint8) (StaticAnalysis, error) {
+func (_self *TransactionManifestV1)StaticAnalysisAndValidate(networkId uint8) (StaticAnalysis, error) {
 	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV1")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_static_analysis(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_static_analysis_and_validate(
 		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
@@ -15180,6 +15208,16 @@ func (_self *TransactionManifestV2)Blobs() [][]byte {
 }
 
 
+func (_self *TransactionManifestV2)Classify() []ManifestClass {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV2")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterSequenceTypeManifestClassINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_classify(
+		_pointer, _uniffiStatus)
+	}))
+}
+
+
 func (_self *TransactionManifestV2)DynamicAnalysis(networkId uint8, toolkitReceipt string) (DynamicAnalysis, error) {
 	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV2")
 	defer _self.ffiObject.decrementPointer()
@@ -15216,11 +15254,11 @@ func (_self *TransactionManifestV2)Instructions() *InstructionsV2 {
 }
 
 
-func (_self *TransactionManifestV2)StaticAnalysis(networkId uint8) (StaticAnalysis, error) {
+func (_self *TransactionManifestV2)StaticAnalysisAndValidate(networkId uint8) (StaticAnalysis, error) {
 	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV2")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_static_analysis(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_static_analysis_and_validate(
 		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
