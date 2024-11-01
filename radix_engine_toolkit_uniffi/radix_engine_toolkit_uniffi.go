@@ -4679,7 +4679,7 @@ func uniffiCheckChecksums() {
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_subintentmanifestv2_static_analysis(uniffiStatus)
 	})
-	if checksum != 40803 {
+	if checksum != 59806 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_subintentmanifestv2_static_analysis: UniFFI API checksum mismatch")
 	}
@@ -4812,20 +4812,11 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_classify(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_dynamically_analyze(uniffiStatus)
 	})
-	if checksum != 434 {
+	if checksum != 1239 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_classify: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_dynamic_analysis(uniffiStatus)
-	})
-	if checksum != 27204 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_dynamic_analysis: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_dynamically_analyze: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -4848,11 +4839,20 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_static_analysis_and_validate(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_statically_analyze(uniffiStatus)
 	})
-	if checksum != 55818 {
+	if checksum != 52728 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_static_analysis_and_validate: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_statically_analyze: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_statically_analyze_and_validate(uniffiStatus)
+	})
+	if checksum != 5080 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_statically_analyze_and_validate: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -4884,20 +4884,11 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_classify(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_dynamically_analyze(uniffiStatus)
 	})
-	if checksum != 8493 {
+	if checksum != 62016 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_classify: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_dynamic_analysis(uniffiStatus)
-	})
-	if checksum != 2627 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_dynamic_analysis: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_dynamically_analyze: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -4920,11 +4911,20 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_static_analysis_and_validate(uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_statically_analyze(uniffiStatus)
 	})
-	if checksum != 5100 {
+	if checksum != 52561 {
 		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_static_analysis_and_validate: UniFFI API checksum mismatch")
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_statically_analyze: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_statically_analyze_and_validate(uniffiStatus)
+	})
+	if checksum != 51639 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_statically_analyze_and_validate: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -14575,7 +14575,7 @@ func (_self *SubintentManifestV2)Instructions() *InstructionsV2 {
 }
 
 
-func (_self *SubintentManifestV2)StaticAnalysis(networkId uint8) (StaticAnalysis, error) {
+func (_self *SubintentManifestV2)StaticAnalysis(networkId uint8) (StaticAnalysisWithResourceMovements, error) {
 	_pointer := _self.ffiObject.incrementPointer("*SubintentManifestV2")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
@@ -14583,10 +14583,10 @@ func (_self *SubintentManifestV2)StaticAnalysis(networkId uint8) (StaticAnalysis
 		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue StaticAnalysis
+			var _uniffiDefaultValue StaticAnalysisWithResourceMovements
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterTypeStaticAnalysisINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterTypeStaticAnalysisWithResourceMovementsINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
@@ -15038,21 +15038,11 @@ func (_self *TransactionManifestV1)Blobs() [][]byte {
 }
 
 
-func (_self *TransactionManifestV1)Classify() []ManifestClass {
-	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV1")
-	defer _self.ffiObject.decrementPointer()
-	return FfiConverterSequenceTypeManifestClassINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_classify(
-		_pointer, _uniffiStatus)
-	}))
-}
-
-
-func (_self *TransactionManifestV1)DynamicAnalysis(networkId uint8, toolkitReceipt string) (DynamicAnalysis, error) {
+func (_self *TransactionManifestV1)DynamicallyAnalyze(networkId uint8, toolkitReceipt string) (DynamicAnalysis, error) {
 	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV1")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_dynamic_analysis(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_dynamically_analyze(
 		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), FfiConverterStringINSTANCE.Lower(toolkitReceipt), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
@@ -15084,18 +15074,28 @@ func (_self *TransactionManifestV1)Instructions() *InstructionsV1 {
 }
 
 
-func (_self *TransactionManifestV1)StaticAnalysisAndValidate(networkId uint8) (StaticAnalysis, error) {
+func (_self *TransactionManifestV1)StaticallyAnalyze(networkId uint8) StaticAnalysis {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV1")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterTypeStaticAnalysisINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_statically_analyze(
+		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+	}))
+}
+
+
+func (_self *TransactionManifestV1)StaticallyAnalyzeAndValidate(networkId uint8) (StaticAnalysisWithResourceMovements, error) {
 	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV1")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_static_analysis_and_validate(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_statically_analyze_and_validate(
 		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue StaticAnalysis
+			var _uniffiDefaultValue StaticAnalysisWithResourceMovements
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterTypeStaticAnalysisINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterTypeStaticAnalysisWithResourceMovementsINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
@@ -15208,21 +15208,11 @@ func (_self *TransactionManifestV2)Blobs() [][]byte {
 }
 
 
-func (_self *TransactionManifestV2)Classify() []ManifestClass {
-	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV2")
-	defer _self.ffiObject.decrementPointer()
-	return FfiConverterSequenceTypeManifestClassINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_classify(
-		_pointer, _uniffiStatus)
-	}))
-}
-
-
-func (_self *TransactionManifestV2)DynamicAnalysis(networkId uint8, toolkitReceipt string) (DynamicAnalysis, error) {
+func (_self *TransactionManifestV2)DynamicallyAnalyze(networkId uint8, toolkitReceipt string) (DynamicAnalysis, error) {
 	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV2")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_dynamic_analysis(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_dynamically_analyze(
 		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), FfiConverterStringINSTANCE.Lower(toolkitReceipt), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
@@ -15254,18 +15244,28 @@ func (_self *TransactionManifestV2)Instructions() *InstructionsV2 {
 }
 
 
-func (_self *TransactionManifestV2)StaticAnalysisAndValidate(networkId uint8) (StaticAnalysis, error) {
+func (_self *TransactionManifestV2)StaticallyAnalyze(networkId uint8) StaticAnalysis {
+	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV2")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterTypeStaticAnalysisINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_statically_analyze(
+		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+	}))
+}
+
+
+func (_self *TransactionManifestV2)StaticallyAnalyzeAndValidate(networkId uint8) (StaticAnalysisWithResourceMovements, error) {
 	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV2")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_static_analysis_and_validate(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_statically_analyze_and_validate(
 		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue StaticAnalysis
+			var _uniffiDefaultValue StaticAnalysisWithResourceMovements
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterTypeStaticAnalysisINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterTypeStaticAnalysisWithResourceMovementsINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
@@ -19559,8 +19559,6 @@ func (_ FfiDestroyerTypeStakeEvent) Destroy(value StakeEvent) {
 
 
 type StaticAnalysis struct {
-	AccountWithdraws map[string][]AccountWithdraw
-	AccountDeposits map[string][]AccountDeposit
 	PresentedProofs map[string][]ResourceSpecifier
 	AccountsWithdrawnFrom []*Address
 	AccountsDepositedInto []*Address
@@ -19572,8 +19570,6 @@ type StaticAnalysis struct {
 }
 
 func (r *StaticAnalysis) Destroy() {
-		FfiDestroyerMapStringSequenceTypeAccountWithdraw{}.Destroy(r.AccountWithdraws);
-		FfiDestroyerMapStringSequenceTypeAccountDeposit{}.Destroy(r.AccountDeposits);
 		FfiDestroyerMapStringSequenceTypeResourceSpecifier{}.Destroy(r.PresentedProofs);
 		FfiDestroyerSequenceAddress{}.Destroy(r.AccountsWithdrawnFrom);
 		FfiDestroyerSequenceAddress{}.Destroy(r.AccountsDepositedInto);
@@ -19594,8 +19590,6 @@ func (c FfiConverterTypeStaticAnalysis) Lift(rb RustBufferI) StaticAnalysis {
 
 func (c FfiConverterTypeStaticAnalysis) Read(reader io.Reader) StaticAnalysis {
 	return StaticAnalysis {
-			FfiConverterMapStringSequenceTypeAccountWithdrawINSTANCE.Read(reader),
-			FfiConverterMapStringSequenceTypeAccountDepositINSTANCE.Read(reader),
 			FfiConverterMapStringSequenceTypeResourceSpecifierINSTANCE.Read(reader),
 			FfiConverterSequenceAddressINSTANCE.Read(reader),
 			FfiConverterSequenceAddressINSTANCE.Read(reader),
@@ -19612,8 +19606,6 @@ func (c FfiConverterTypeStaticAnalysis) Lower(value StaticAnalysis) RustBuffer {
 }
 
 func (c FfiConverterTypeStaticAnalysis) Write(writer io.Writer, value StaticAnalysis) {
-		FfiConverterMapStringSequenceTypeAccountWithdrawINSTANCE.Write(writer, value.AccountWithdraws);
-		FfiConverterMapStringSequenceTypeAccountDepositINSTANCE.Write(writer, value.AccountDeposits);
 		FfiConverterMapStringSequenceTypeResourceSpecifierINSTANCE.Write(writer, value.PresentedProofs);
 		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountsWithdrawnFrom);
 		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountsDepositedInto);
@@ -19627,6 +19619,79 @@ func (c FfiConverterTypeStaticAnalysis) Write(writer io.Writer, value StaticAnal
 type FfiDestroyerTypeStaticAnalysis struct {}
 
 func (_ FfiDestroyerTypeStaticAnalysis) Destroy(value StaticAnalysis) {
+	value.Destroy()
+}
+
+
+type StaticAnalysisWithResourceMovements struct {
+	AccountWithdraws map[string][]AccountWithdraw
+	AccountDeposits map[string][]AccountDeposit
+	PresentedProofs map[string][]ResourceSpecifier
+	AccountsWithdrawnFrom []*Address
+	AccountsDepositedInto []*Address
+	EncounteredEntities []*Address
+	AccountsRequiringAuth []*Address
+	IdentitiesRequiringAuth []*Address
+	ReservedInstructions []ReservedInstruction
+	Classification []ManifestClass
+}
+
+func (r *StaticAnalysisWithResourceMovements) Destroy() {
+		FfiDestroyerMapStringSequenceTypeAccountWithdraw{}.Destroy(r.AccountWithdraws);
+		FfiDestroyerMapStringSequenceTypeAccountDeposit{}.Destroy(r.AccountDeposits);
+		FfiDestroyerMapStringSequenceTypeResourceSpecifier{}.Destroy(r.PresentedProofs);
+		FfiDestroyerSequenceAddress{}.Destroy(r.AccountsWithdrawnFrom);
+		FfiDestroyerSequenceAddress{}.Destroy(r.AccountsDepositedInto);
+		FfiDestroyerSequenceAddress{}.Destroy(r.EncounteredEntities);
+		FfiDestroyerSequenceAddress{}.Destroy(r.AccountsRequiringAuth);
+		FfiDestroyerSequenceAddress{}.Destroy(r.IdentitiesRequiringAuth);
+		FfiDestroyerSequenceTypeReservedInstruction{}.Destroy(r.ReservedInstructions);
+		FfiDestroyerSequenceTypeManifestClass{}.Destroy(r.Classification);
+}
+
+type FfiConverterTypeStaticAnalysisWithResourceMovements struct {}
+
+var FfiConverterTypeStaticAnalysisWithResourceMovementsINSTANCE = FfiConverterTypeStaticAnalysisWithResourceMovements{}
+
+func (c FfiConverterTypeStaticAnalysisWithResourceMovements) Lift(rb RustBufferI) StaticAnalysisWithResourceMovements {
+	return LiftFromRustBuffer[StaticAnalysisWithResourceMovements](c, rb)
+}
+
+func (c FfiConverterTypeStaticAnalysisWithResourceMovements) Read(reader io.Reader) StaticAnalysisWithResourceMovements {
+	return StaticAnalysisWithResourceMovements {
+			FfiConverterMapStringSequenceTypeAccountWithdrawINSTANCE.Read(reader),
+			FfiConverterMapStringSequenceTypeAccountDepositINSTANCE.Read(reader),
+			FfiConverterMapStringSequenceTypeResourceSpecifierINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceTypeReservedInstructionINSTANCE.Read(reader),
+			FfiConverterSequenceTypeManifestClassINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeStaticAnalysisWithResourceMovements) Lower(value StaticAnalysisWithResourceMovements) RustBuffer {
+	return LowerIntoRustBuffer[StaticAnalysisWithResourceMovements](c, value)
+}
+
+func (c FfiConverterTypeStaticAnalysisWithResourceMovements) Write(writer io.Writer, value StaticAnalysisWithResourceMovements) {
+		FfiConverterMapStringSequenceTypeAccountWithdrawINSTANCE.Write(writer, value.AccountWithdraws);
+		FfiConverterMapStringSequenceTypeAccountDepositINSTANCE.Write(writer, value.AccountDeposits);
+		FfiConverterMapStringSequenceTypeResourceSpecifierINSTANCE.Write(writer, value.PresentedProofs);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountsWithdrawnFrom);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountsDepositedInto);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.EncounteredEntities);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountsRequiringAuth);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.IdentitiesRequiringAuth);
+		FfiConverterSequenceTypeReservedInstructionINSTANCE.Write(writer, value.ReservedInstructions);
+		FfiConverterSequenceTypeManifestClassINSTANCE.Write(writer, value.Classification);
+}
+
+type FfiDestroyerTypeStaticAnalysisWithResourceMovements struct {}
+
+func (_ FfiDestroyerTypeStaticAnalysisWithResourceMovements) Destroy(value StaticAnalysisWithResourceMovements) {
 	value.Destroy()
 }
 

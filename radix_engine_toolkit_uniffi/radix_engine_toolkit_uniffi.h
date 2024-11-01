@@ -3634,12 +3634,7 @@ RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_bl
 	RustCallStatus* out_status
 );
 
-RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_classify(
-	void* ptr,
-	RustCallStatus* out_status
-);
-
-RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_dynamic_analysis(
+RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_dynamically_analyze(
 	void* ptr,
 	uint8_t network_id,
 	RustBuffer toolkit_receipt,
@@ -3656,7 +3651,13 @@ void* uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_instruc
 	RustCallStatus* out_status
 );
 
-RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_static_analysis_and_validate(
+RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_statically_analyze(
+	void* ptr,
+	uint8_t network_id,
+	RustCallStatus* out_status
+);
+
+RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_statically_analyze_and_validate(
 	void* ptr,
 	uint8_t network_id,
 	RustCallStatus* out_status
@@ -3696,12 +3697,7 @@ RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_bl
 	RustCallStatus* out_status
 );
 
-RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_classify(
-	void* ptr,
-	RustCallStatus* out_status
-);
-
-RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_dynamic_analysis(
+RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_dynamically_analyze(
 	void* ptr,
 	uint8_t network_id,
 	RustBuffer toolkit_receipt,
@@ -3718,7 +3714,13 @@ void* uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_instruc
 	RustCallStatus* out_status
 );
 
-RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_static_analysis_and_validate(
+RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_statically_analyze(
+	void* ptr,
+	uint8_t network_id,
+	RustCallStatus* out_status
+);
+
+RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_statically_analyze_and_validate(
 	void* ptr,
 	uint8_t network_id,
 	RustCallStatus* out_status
@@ -6333,11 +6335,7 @@ uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv
 	RustCallStatus* out_status
 );
 
-uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_classify(
-	RustCallStatus* out_status
-);
-
-uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_dynamic_analysis(
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_dynamically_analyze(
 	RustCallStatus* out_status
 );
 
@@ -6349,7 +6347,11 @@ uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv
 	RustCallStatus* out_status
 );
 
-uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_static_analysis_and_validate(
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_statically_analyze(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_statically_analyze_and_validate(
 	RustCallStatus* out_status
 );
 
@@ -6365,11 +6367,7 @@ uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv
 	RustCallStatus* out_status
 );
 
-uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_classify(
-	RustCallStatus* out_status
-);
-
-uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_dynamic_analysis(
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_dynamically_analyze(
 	RustCallStatus* out_status
 );
 
@@ -6381,7 +6379,11 @@ uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv
 	RustCallStatus* out_status
 );
 
-uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_static_analysis_and_validate(
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_statically_analyze(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_statically_analyze_and_validate(
 	RustCallStatus* out_status
 );
 
