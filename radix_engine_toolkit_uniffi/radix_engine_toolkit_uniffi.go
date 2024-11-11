@@ -4110,6 +4110,51 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2builder_add_child(uniffiStatus)
+	})
+	if checksum != 63936 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2builder_add_child: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2builder_build(uniffiStatus)
+	})
+	if checksum != 44045 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2builder_build: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2builder_intent_header(uniffiStatus)
+	})
+	if checksum != 22434 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2builder_intent_header: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2builder_manifest(uniffiStatus)
+	})
+	if checksum != 9515 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2builder_manifest: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2builder_message(uniffiStatus)
+	})
+	if checksum != 49253 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_partialtransactionv2builder_message: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_precisedecimal_abs(uniffiStatus)
 	})
 	if checksum != 753 {
@@ -4322,6 +4367,69 @@ func uniffiCheckChecksums() {
 	if checksum != 6841 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_precisedecimal_to_le_bytes: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_previewtransactionv2builder_add_child(uniffiStatus)
+	})
+	if checksum != 49145 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_previewtransactionv2builder_add_child: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_previewtransactionv2builder_add_root_intent_signer(uniffiStatus)
+	})
+	if checksum != 45430 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_previewtransactionv2builder_add_root_intent_signer: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_previewtransactionv2builder_build(uniffiStatus)
+	})
+	if checksum != 17377 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_previewtransactionv2builder_build: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_previewtransactionv2builder_intent_header(uniffiStatus)
+	})
+	if checksum != 11361 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_previewtransactionv2builder_intent_header: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_previewtransactionv2builder_manifest(uniffiStatus)
+	})
+	if checksum != 64146 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_previewtransactionv2builder_manifest: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_previewtransactionv2builder_message(uniffiStatus)
+	})
+	if checksum != 34085 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_previewtransactionv2builder_message: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_previewtransactionv2builder_transaction_header(uniffiStatus)
+	})
+	if checksum != 60706 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_previewtransactionv2builder_transaction_header: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -5523,6 +5631,15 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_partialtransactionv2builder_new(uniffiStatus)
+	})
+	if checksum != 30026 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_partialtransactionv2builder_new: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_precisedecimal_from_le_bytes(uniffiStatus)
 	})
 	if checksum != 24547 {
@@ -5573,6 +5690,15 @@ func uniffiCheckChecksums() {
 	if checksum != 5648 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_precisedecimal_zero: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_previewtransactionv2builder_new(uniffiStatus)
+	})
+	if checksum != 64735 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_previewtransactionv2builder_new: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -13288,6 +13414,120 @@ func (_ FfiDestroyerPartialTransactionV2) Destroy(value *PartialTransactionV2) {
 }
 
 
+type PartialTransactionV2Builder struct {
+	ffiObject FfiObject
+}
+func NewPartialTransactionV2Builder() *PartialTransactionV2Builder {
+	return FfiConverterPartialTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_partialtransactionv2builder_new( _uniffiStatus)
+	}))
+}
+
+
+
+
+func (_self *PartialTransactionV2Builder)AddChild(child *PartialTransactionV2) *PartialTransactionV2Builder {
+	_pointer := _self.ffiObject.incrementPointer("*PartialTransactionV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterPartialTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_partialtransactionv2builder_add_child(
+		_pointer,FfiConverterPartialTransactionV2INSTANCE.Lower(child), _uniffiStatus)
+	}))
+}
+
+
+func (_self *PartialTransactionV2Builder)Build() (*PartialTransactionV2, error) {
+	_pointer := _self.ffiObject.incrementPointer("*PartialTransactionV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_partialtransactionv2builder_build(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *PartialTransactionV2
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterPartialTransactionV2INSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *PartialTransactionV2Builder)IntentHeader(intentHeader IntentHeaderV2) *PartialTransactionV2Builder {
+	_pointer := _self.ffiObject.incrementPointer("*PartialTransactionV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterPartialTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_partialtransactionv2builder_intent_header(
+		_pointer,FfiConverterTypeIntentHeaderV2INSTANCE.Lower(intentHeader), _uniffiStatus)
+	}))
+}
+
+
+func (_self *PartialTransactionV2Builder)Manifest(manifest *TransactionManifestV2) *PartialTransactionV2Builder {
+	_pointer := _self.ffiObject.incrementPointer("*PartialTransactionV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterPartialTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_partialtransactionv2builder_manifest(
+		_pointer,FfiConverterTransactionManifestV2INSTANCE.Lower(manifest), _uniffiStatus)
+	}))
+}
+
+
+func (_self *PartialTransactionV2Builder)Message(message MessageV2) *PartialTransactionV2Builder {
+	_pointer := _self.ffiObject.incrementPointer("*PartialTransactionV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterPartialTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_partialtransactionv2builder_message(
+		_pointer,FfiConverterTypeMessageV2INSTANCE.Lower(message), _uniffiStatus)
+	}))
+}
+
+
+
+func (object *PartialTransactionV2Builder)Destroy() {
+	runtime.SetFinalizer(object, nil)
+	object.ffiObject.destroy()
+}
+
+type FfiConverterPartialTransactionV2Builder struct {}
+
+var FfiConverterPartialTransactionV2BuilderINSTANCE = FfiConverterPartialTransactionV2Builder{}
+
+func (c FfiConverterPartialTransactionV2Builder) Lift(pointer unsafe.Pointer) *PartialTransactionV2Builder {
+	result := &PartialTransactionV2Builder {
+		newFfiObject(
+			pointer,
+			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
+				C.uniffi_radix_engine_toolkit_uniffi_fn_free_partialtransactionv2builder(pointer, status)
+		}),
+	}
+	runtime.SetFinalizer(result, (*PartialTransactionV2Builder).Destroy)
+	return result
+}
+
+func (c FfiConverterPartialTransactionV2Builder) Read(reader io.Reader) *PartialTransactionV2Builder {
+	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
+}
+
+func (c FfiConverterPartialTransactionV2Builder) Lower(value *PartialTransactionV2Builder) unsafe.Pointer {
+	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
+	// because the pointer will be decremented immediately after this function returns,
+	// and someone will be left holding onto a non-locked pointer.
+	pointer := value.ffiObject.incrementPointer("*PartialTransactionV2Builder")
+	defer value.ffiObject.decrementPointer()
+	return pointer
+}
+
+func (c FfiConverterPartialTransactionV2Builder) Write(writer io.Writer, value *PartialTransactionV2Builder) {
+	writeUint64(writer, uint64(uintptr(c.Lower(value))))
+}
+
+type FfiDestroyerPartialTransactionV2Builder struct {}
+
+func (_ FfiDestroyerPartialTransactionV2Builder) Destroy(value *PartialTransactionV2Builder) {
+	value.Destroy()
+}
+
+
 type PreciseDecimal struct {
 	ffiObject FfiObject
 }
@@ -13678,6 +13918,140 @@ func (c FfiConverterPreciseDecimal) Write(writer io.Writer, value *PreciseDecima
 type FfiDestroyerPreciseDecimal struct {}
 
 func (_ FfiDestroyerPreciseDecimal) Destroy(value *PreciseDecimal) {
+	value.Destroy()
+}
+
+
+type PreviewTransactionV2Builder struct {
+	ffiObject FfiObject
+}
+func NewPreviewTransactionV2Builder() *PreviewTransactionV2Builder {
+	return FfiConverterPreviewTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_previewtransactionv2builder_new( _uniffiStatus)
+	}))
+}
+
+
+
+
+func (_self *PreviewTransactionV2Builder)AddChild(partialTransaction *PartialTransactionV2, signers []PublicKey) *PreviewTransactionV2Builder {
+	_pointer := _self.ffiObject.incrementPointer("*PreviewTransactionV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterPreviewTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewtransactionv2builder_add_child(
+		_pointer,FfiConverterPartialTransactionV2INSTANCE.Lower(partialTransaction), FfiConverterSequenceTypePublicKeyINSTANCE.Lower(signers), _uniffiStatus)
+	}))
+}
+
+
+func (_self *PreviewTransactionV2Builder)AddRootIntentSigner(signer PublicKey) *PreviewTransactionV2Builder {
+	_pointer := _self.ffiObject.incrementPointer("*PreviewTransactionV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterPreviewTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewtransactionv2builder_add_root_intent_signer(
+		_pointer,FfiConverterTypePublicKeyINSTANCE.Lower(signer), _uniffiStatus)
+	}))
+}
+
+
+func (_self *PreviewTransactionV2Builder)Build() ([]byte, error) {
+	_pointer := _self.ffiObject.incrementPointer("*PreviewTransactionV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewtransactionv2builder_build(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue []byte
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterBytesINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *PreviewTransactionV2Builder)IntentHeader(intentHeader IntentHeaderV2) *PreviewTransactionV2Builder {
+	_pointer := _self.ffiObject.incrementPointer("*PreviewTransactionV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterPreviewTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewtransactionv2builder_intent_header(
+		_pointer,FfiConverterTypeIntentHeaderV2INSTANCE.Lower(intentHeader), _uniffiStatus)
+	}))
+}
+
+
+func (_self *PreviewTransactionV2Builder)Manifest(manifest *TransactionManifestV2) *PreviewTransactionV2Builder {
+	_pointer := _self.ffiObject.incrementPointer("*PreviewTransactionV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterPreviewTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewtransactionv2builder_manifest(
+		_pointer,FfiConverterTransactionManifestV2INSTANCE.Lower(manifest), _uniffiStatus)
+	}))
+}
+
+
+func (_self *PreviewTransactionV2Builder)Message(message MessageV2) *PreviewTransactionV2Builder {
+	_pointer := _self.ffiObject.incrementPointer("*PreviewTransactionV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterPreviewTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewtransactionv2builder_message(
+		_pointer,FfiConverterTypeMessageV2INSTANCE.Lower(message), _uniffiStatus)
+	}))
+}
+
+
+func (_self *PreviewTransactionV2Builder)TransactionHeader(transactionHeader TransactionHeaderV2) *PreviewTransactionV2Builder {
+	_pointer := _self.ffiObject.incrementPointer("*PreviewTransactionV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterPreviewTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewtransactionv2builder_transaction_header(
+		_pointer,FfiConverterTypeTransactionHeaderV2INSTANCE.Lower(transactionHeader), _uniffiStatus)
+	}))
+}
+
+
+
+func (object *PreviewTransactionV2Builder)Destroy() {
+	runtime.SetFinalizer(object, nil)
+	object.ffiObject.destroy()
+}
+
+type FfiConverterPreviewTransactionV2Builder struct {}
+
+var FfiConverterPreviewTransactionV2BuilderINSTANCE = FfiConverterPreviewTransactionV2Builder{}
+
+func (c FfiConverterPreviewTransactionV2Builder) Lift(pointer unsafe.Pointer) *PreviewTransactionV2Builder {
+	result := &PreviewTransactionV2Builder {
+		newFfiObject(
+			pointer,
+			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
+				C.uniffi_radix_engine_toolkit_uniffi_fn_free_previewtransactionv2builder(pointer, status)
+		}),
+	}
+	runtime.SetFinalizer(result, (*PreviewTransactionV2Builder).Destroy)
+	return result
+}
+
+func (c FfiConverterPreviewTransactionV2Builder) Read(reader io.Reader) *PreviewTransactionV2Builder {
+	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
+}
+
+func (c FfiConverterPreviewTransactionV2Builder) Lower(value *PreviewTransactionV2Builder) unsafe.Pointer {
+	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
+	// because the pointer will be decremented immediately after this function returns,
+	// and someone will be left holding onto a non-locked pointer.
+	pointer := value.ffiObject.incrementPointer("*PreviewTransactionV2Builder")
+	defer value.ffiObject.decrementPointer()
+	return pointer
+}
+
+func (c FfiConverterPreviewTransactionV2Builder) Write(writer io.Writer, value *PreviewTransactionV2Builder) {
+	writeUint64(writer, uint64(uintptr(c.Lower(value))))
+}
+
+type FfiDestroyerPreviewTransactionV2Builder struct {}
+
+func (_ FfiDestroyerPreviewTransactionV2Builder) Destroy(value *PreviewTransactionV2Builder) {
 	value.Destroy()
 }
 
