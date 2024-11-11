@@ -4371,9 +4371,90 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransactionv2_non_root_subintent_signers(uniffiStatus)
+	})
+	if checksum != 14111 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransactionv2_non_root_subintent_signers: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransactionv2_partial_transaction(uniffiStatus)
+	})
+	if checksum != 58385 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransactionv2_partial_transaction: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransactionv2_root_subintent_hash(uniffiStatus)
+	})
+	if checksum != 8019 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransactionv2_root_subintent_hash: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransactionv2_root_subintent_signers(uniffiStatus)
+	})
+	if checksum != 58907 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransactionv2_root_subintent_signers: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransactionv2builder_add_child(uniffiStatus)
+	})
+	if checksum != 42126 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransactionv2builder_add_child: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransactionv2builder_intent_header(uniffiStatus)
+	})
+	if checksum != 61016 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransactionv2builder_intent_header: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransactionv2builder_manifest(uniffiStatus)
+	})
+	if checksum != 2732 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransactionv2builder_manifest: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransactionv2builder_message(uniffiStatus)
+	})
+	if checksum != 61966 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransactionv2builder_message: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransactionv2builder_prepare_for_signing(uniffiStatus)
+	})
+	if checksum != 49234 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransactionv2builder_prepare_for_signing: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_previewtransactionv2builder_add_child(uniffiStatus)
 	})
-	if checksum != 49145 {
+	if checksum != 13075 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_previewtransactionv2builder_add_child: UniFFI API checksum mismatch")
 	}
@@ -5690,6 +5771,24 @@ func uniffiCheckChecksums() {
 	if checksum != 5648 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_precisedecimal_zero: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_previewpartialtransactionv2_new(uniffiStatus)
+	})
+	if checksum != 48844 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_previewpartialtransactionv2_new: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_constructor_previewpartialtransactionv2builder_new(uniffiStatus)
+	})
+	if checksum != 47773 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_constructor_previewpartialtransactionv2builder_new: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -13922,6 +14021,224 @@ func (_ FfiDestroyerPreciseDecimal) Destroy(value *PreciseDecimal) {
 }
 
 
+type PreviewPartialTransactionV2 struct {
+	ffiObject FfiObject
+}
+func NewPreviewPartialTransactionV2(partialTransaction *PartialTransactionV2, rootSubintentSigners []PublicKey, nonRootSubintentSigners [][]PublicKey) *PreviewPartialTransactionV2 {
+	return FfiConverterPreviewPartialTransactionV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_previewpartialtransactionv2_new(FfiConverterPartialTransactionV2INSTANCE.Lower(partialTransaction), FfiConverterSequenceTypePublicKeyINSTANCE.Lower(rootSubintentSigners), FfiConverterSequenceSequenceTypePublicKeyINSTANCE.Lower(nonRootSubintentSigners), _uniffiStatus)
+	}))
+}
+
+
+
+
+func (_self *PreviewPartialTransactionV2)NonRootSubintentSigners() [][]PublicKey {
+	_pointer := _self.ffiObject.incrementPointer("*PreviewPartialTransactionV2")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterSequenceSequenceTypePublicKeyINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewpartialtransactionv2_non_root_subintent_signers(
+		_pointer, _uniffiStatus)
+	}))
+}
+
+
+func (_self *PreviewPartialTransactionV2)PartialTransaction() *PartialTransactionV2 {
+	_pointer := _self.ffiObject.incrementPointer("*PreviewPartialTransactionV2")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterPartialTransactionV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewpartialtransactionv2_partial_transaction(
+		_pointer, _uniffiStatus)
+	}))
+}
+
+
+func (_self *PreviewPartialTransactionV2)RootSubintentHash() (*TransactionHash, error) {
+	_pointer := _self.ffiObject.incrementPointer("*PreviewPartialTransactionV2")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewpartialtransactionv2_root_subintent_hash(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *TransactionHash
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterTransactionHashINSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+func (_self *PreviewPartialTransactionV2)RootSubintentSigners() []PublicKey {
+	_pointer := _self.ffiObject.incrementPointer("*PreviewPartialTransactionV2")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterSequenceTypePublicKeyINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewpartialtransactionv2_root_subintent_signers(
+		_pointer, _uniffiStatus)
+	}))
+}
+
+
+
+func (object *PreviewPartialTransactionV2)Destroy() {
+	runtime.SetFinalizer(object, nil)
+	object.ffiObject.destroy()
+}
+
+type FfiConverterPreviewPartialTransactionV2 struct {}
+
+var FfiConverterPreviewPartialTransactionV2INSTANCE = FfiConverterPreviewPartialTransactionV2{}
+
+func (c FfiConverterPreviewPartialTransactionV2) Lift(pointer unsafe.Pointer) *PreviewPartialTransactionV2 {
+	result := &PreviewPartialTransactionV2 {
+		newFfiObject(
+			pointer,
+			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
+				C.uniffi_radix_engine_toolkit_uniffi_fn_free_previewpartialtransactionv2(pointer, status)
+		}),
+	}
+	runtime.SetFinalizer(result, (*PreviewPartialTransactionV2).Destroy)
+	return result
+}
+
+func (c FfiConverterPreviewPartialTransactionV2) Read(reader io.Reader) *PreviewPartialTransactionV2 {
+	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
+}
+
+func (c FfiConverterPreviewPartialTransactionV2) Lower(value *PreviewPartialTransactionV2) unsafe.Pointer {
+	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
+	// because the pointer will be decremented immediately after this function returns,
+	// and someone will be left holding onto a non-locked pointer.
+	pointer := value.ffiObject.incrementPointer("*PreviewPartialTransactionV2")
+	defer value.ffiObject.decrementPointer()
+	return pointer
+}
+
+func (c FfiConverterPreviewPartialTransactionV2) Write(writer io.Writer, value *PreviewPartialTransactionV2) {
+	writeUint64(writer, uint64(uintptr(c.Lower(value))))
+}
+
+type FfiDestroyerPreviewPartialTransactionV2 struct {}
+
+func (_ FfiDestroyerPreviewPartialTransactionV2) Destroy(value *PreviewPartialTransactionV2) {
+	value.Destroy()
+}
+
+
+type PreviewPartialTransactionV2Builder struct {
+	ffiObject FfiObject
+}
+func NewPreviewPartialTransactionV2Builder() *PreviewPartialTransactionV2Builder {
+	return FfiConverterPreviewPartialTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_previewpartialtransactionv2builder_new( _uniffiStatus)
+	}))
+}
+
+
+
+
+func (_self *PreviewPartialTransactionV2Builder)AddChild(child *PreviewPartialTransactionV2) *PreviewPartialTransactionV2Builder {
+	_pointer := _self.ffiObject.incrementPointer("*PreviewPartialTransactionV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterPreviewPartialTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewpartialtransactionv2builder_add_child(
+		_pointer,FfiConverterPreviewPartialTransactionV2INSTANCE.Lower(child), _uniffiStatus)
+	}))
+}
+
+
+func (_self *PreviewPartialTransactionV2Builder)IntentHeader(intentHeader IntentHeaderV2) *PreviewPartialTransactionV2Builder {
+	_pointer := _self.ffiObject.incrementPointer("*PreviewPartialTransactionV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterPreviewPartialTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewpartialtransactionv2builder_intent_header(
+		_pointer,FfiConverterTypeIntentHeaderV2INSTANCE.Lower(intentHeader), _uniffiStatus)
+	}))
+}
+
+
+func (_self *PreviewPartialTransactionV2Builder)Manifest(manifest *TransactionManifestV2) *PreviewPartialTransactionV2Builder {
+	_pointer := _self.ffiObject.incrementPointer("*PreviewPartialTransactionV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterPreviewPartialTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewpartialtransactionv2builder_manifest(
+		_pointer,FfiConverterTransactionManifestV2INSTANCE.Lower(manifest), _uniffiStatus)
+	}))
+}
+
+
+func (_self *PreviewPartialTransactionV2Builder)Message(message MessageV2) *PreviewPartialTransactionV2Builder {
+	_pointer := _self.ffiObject.incrementPointer("*PreviewPartialTransactionV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterPreviewPartialTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewpartialtransactionv2builder_message(
+		_pointer,FfiConverterTypeMessageV2INSTANCE.Lower(message), _uniffiStatus)
+	}))
+}
+
+
+func (_self *PreviewPartialTransactionV2Builder)PrepareForSigning() (*PreviewPartialTransactionV2, error) {
+	_pointer := _self.ffiObject.incrementPointer("*PreviewPartialTransactionV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewpartialtransactionv2builder_prepare_for_signing(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *PreviewPartialTransactionV2
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterPreviewPartialTransactionV2INSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
+
+func (object *PreviewPartialTransactionV2Builder)Destroy() {
+	runtime.SetFinalizer(object, nil)
+	object.ffiObject.destroy()
+}
+
+type FfiConverterPreviewPartialTransactionV2Builder struct {}
+
+var FfiConverterPreviewPartialTransactionV2BuilderINSTANCE = FfiConverterPreviewPartialTransactionV2Builder{}
+
+func (c FfiConverterPreviewPartialTransactionV2Builder) Lift(pointer unsafe.Pointer) *PreviewPartialTransactionV2Builder {
+	result := &PreviewPartialTransactionV2Builder {
+		newFfiObject(
+			pointer,
+			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
+				C.uniffi_radix_engine_toolkit_uniffi_fn_free_previewpartialtransactionv2builder(pointer, status)
+		}),
+	}
+	runtime.SetFinalizer(result, (*PreviewPartialTransactionV2Builder).Destroy)
+	return result
+}
+
+func (c FfiConverterPreviewPartialTransactionV2Builder) Read(reader io.Reader) *PreviewPartialTransactionV2Builder {
+	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
+}
+
+func (c FfiConverterPreviewPartialTransactionV2Builder) Lower(value *PreviewPartialTransactionV2Builder) unsafe.Pointer {
+	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
+	// because the pointer will be decremented immediately after this function returns,
+	// and someone will be left holding onto a non-locked pointer.
+	pointer := value.ffiObject.incrementPointer("*PreviewPartialTransactionV2Builder")
+	defer value.ffiObject.decrementPointer()
+	return pointer
+}
+
+func (c FfiConverterPreviewPartialTransactionV2Builder) Write(writer io.Writer, value *PreviewPartialTransactionV2Builder) {
+	writeUint64(writer, uint64(uintptr(c.Lower(value))))
+}
+
+type FfiDestroyerPreviewPartialTransactionV2Builder struct {}
+
+func (_ FfiDestroyerPreviewPartialTransactionV2Builder) Destroy(value *PreviewPartialTransactionV2Builder) {
+	value.Destroy()
+}
+
+
 type PreviewTransactionV2Builder struct {
 	ffiObject FfiObject
 }
@@ -13934,12 +14251,12 @@ func NewPreviewTransactionV2Builder() *PreviewTransactionV2Builder {
 
 
 
-func (_self *PreviewTransactionV2Builder)AddChild(partialTransaction *PartialTransactionV2, signers []PublicKey) *PreviewTransactionV2Builder {
+func (_self *PreviewTransactionV2Builder)AddChild(partialPreviewTransaction *PreviewPartialTransactionV2) *PreviewTransactionV2Builder {
 	_pointer := _self.ffiObject.incrementPointer("*PreviewTransactionV2Builder")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterPreviewTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewtransactionv2builder_add_child(
-		_pointer,FfiConverterPartialTransactionV2INSTANCE.Lower(partialTransaction), FfiConverterSequenceTypePublicKeyINSTANCE.Lower(signers), _uniffiStatus)
+		_pointer,FfiConverterPreviewPartialTransactionV2INSTANCE.Lower(partialPreviewTransaction), _uniffiStatus)
 	}))
 }
 
@@ -33066,6 +33383,51 @@ type FfiDestroyerSequenceTypeSignatureWithPublicKeyV1 struct {}
 func (FfiDestroyerSequenceTypeSignatureWithPublicKeyV1) Destroy(sequence []SignatureWithPublicKeyV1) {
 	for _, value := range sequence {
 		FfiDestroyerTypeSignatureWithPublicKeyV1{}.Destroy(value)	
+	}
+}
+
+
+
+type FfiConverterSequenceSequenceTypePublicKey struct{}
+
+var FfiConverterSequenceSequenceTypePublicKeyINSTANCE = FfiConverterSequenceSequenceTypePublicKey{}
+
+func (c FfiConverterSequenceSequenceTypePublicKey) Lift(rb RustBufferI) [][]PublicKey {
+	return LiftFromRustBuffer[[][]PublicKey](c, rb)
+}
+
+func (c FfiConverterSequenceSequenceTypePublicKey) Read(reader io.Reader) [][]PublicKey {
+	length := readInt32(reader)
+	if length == 0 {
+		return nil
+	}
+	result := make([][]PublicKey, 0, length)
+	for i := int32(0); i < length; i++ {
+		result = append(result, FfiConverterSequenceTypePublicKeyINSTANCE.Read(reader))
+	}
+	return result
+}
+
+func (c FfiConverterSequenceSequenceTypePublicKey) Lower(value [][]PublicKey) RustBuffer {
+	return LowerIntoRustBuffer[[][]PublicKey](c, value)
+}
+
+func (c FfiConverterSequenceSequenceTypePublicKey) Write(writer io.Writer, value [][]PublicKey) {
+	if len(value) > math.MaxInt32 {
+		panic("[][]PublicKey is too large to fit into Int32")
+	}
+
+	writeInt32(writer, int32(len(value)))
+	for _, item := range value {
+		FfiConverterSequenceTypePublicKeyINSTANCE.Write(writer, item)
+	}
+}
+
+type FfiDestroyerSequenceSequenceTypePublicKey struct {}
+
+func (FfiDestroyerSequenceSequenceTypePublicKey) Destroy(sequence [][]PublicKey) {
+	for _, value := range sequence {
+		FfiDestroyerSequenceTypePublicKey{}.Destroy(value)	
 	}
 }
 
