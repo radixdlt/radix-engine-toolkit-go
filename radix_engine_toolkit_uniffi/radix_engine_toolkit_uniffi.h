@@ -3273,6 +3273,17 @@ void* uniffi_radix_engine_toolkit_uniffi_fn_method_previewpartialtransactionv2bu
 	RustCallStatus* out_status
 );
 
+void* uniffi_radix_engine_toolkit_uniffi_fn_method_previewpartialtransactionv2builder_add_root_subintent_signer(
+	void* ptr,
+	RustBuffer signer,
+	RustCallStatus* out_status
+);
+
+void* uniffi_radix_engine_toolkit_uniffi_fn_method_previewpartialtransactionv2builder_build(
+	void* ptr,
+	RustCallStatus* out_status
+);
+
 void* uniffi_radix_engine_toolkit_uniffi_fn_method_previewpartialtransactionv2builder_intent_header(
 	void* ptr,
 	RustBuffer intent_header,
@@ -3288,11 +3299,6 @@ void* uniffi_radix_engine_toolkit_uniffi_fn_method_previewpartialtransactionv2bu
 void* uniffi_radix_engine_toolkit_uniffi_fn_method_previewpartialtransactionv2builder_message(
 	void* ptr,
 	RustBuffer message,
-	RustCallStatus* out_status
-);
-
-void* uniffi_radix_engine_toolkit_uniffi_fn_method_previewpartialtransactionv2builder_prepare_for_signing(
-	void* ptr,
 	RustCallStatus* out_status
 );
 
@@ -6317,6 +6323,14 @@ uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransa
 	RustCallStatus* out_status
 );
 
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransactionv2builder_add_root_subintent_signer(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransactionv2builder_build(
+	RustCallStatus* out_status
+);
+
 uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransactionv2builder_intent_header(
 	RustCallStatus* out_status
 );
@@ -6326,10 +6340,6 @@ uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransa
 );
 
 uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransactionv2builder_message(
-	RustCallStatus* out_status
-);
-
-uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransactionv2builder_prepare_for_signing(
 	RustCallStatus* out_status
 );
 

@@ -4416,6 +4416,24 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransactionv2builder_add_root_subintent_signer(uniffiStatus)
+	})
+	if checksum != 45374 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransactionv2builder_add_root_subintent_signer: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransactionv2builder_build(uniffiStatus)
+	})
+	if checksum != 62773 {
+		// If this happens try cleaning and rebuilding your project
+		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransactionv2builder_build: UniFFI API checksum mismatch")
+	}
+	}
+	{
+	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransactionv2builder_intent_header(uniffiStatus)
 	})
 	if checksum != 61016 {
@@ -4439,15 +4457,6 @@ func uniffiCheckChecksums() {
 	if checksum != 61966 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransactionv2builder_message: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransactionv2builder_prepare_for_signing(uniffiStatus)
-	})
-	if checksum != 49234 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_previewpartialtransactionv2builder_prepare_for_signing: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -14147,6 +14156,32 @@ func (_self *PreviewPartialTransactionV2Builder)AddChild(child *PreviewPartialTr
 }
 
 
+func (_self *PreviewPartialTransactionV2Builder)AddRootSubintentSigner(signer PublicKey) *PreviewPartialTransactionV2Builder {
+	_pointer := _self.ffiObject.incrementPointer("*PreviewPartialTransactionV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterPreviewPartialTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewpartialtransactionv2builder_add_root_subintent_signer(
+		_pointer,FfiConverterTypePublicKeyINSTANCE.Lower(signer), _uniffiStatus)
+	}))
+}
+
+
+func (_self *PreviewPartialTransactionV2Builder)Build() (*PreviewPartialTransactionV2, error) {
+	_pointer := _self.ffiObject.incrementPointer("*PreviewPartialTransactionV2Builder")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewpartialtransactionv2builder_build(
+		_pointer, _uniffiStatus)
+	})
+		if _uniffiErr != nil {
+			var _uniffiDefaultValue *PreviewPartialTransactionV2
+			return _uniffiDefaultValue, _uniffiErr
+		} else {
+			return FfiConverterPreviewPartialTransactionV2INSTANCE.Lift(_uniffiRV), _uniffiErr
+		}
+}
+
+
 func (_self *PreviewPartialTransactionV2Builder)IntentHeader(intentHeader IntentHeaderV2) *PreviewPartialTransactionV2Builder {
 	_pointer := _self.ffiObject.incrementPointer("*PreviewPartialTransactionV2Builder")
 	defer _self.ffiObject.decrementPointer()
@@ -14174,22 +14209,6 @@ func (_self *PreviewPartialTransactionV2Builder)Message(message MessageV2) *Prev
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewpartialtransactionv2builder_message(
 		_pointer,FfiConverterTypeMessageV2INSTANCE.Lower(message), _uniffiStatus)
 	}))
-}
-
-
-func (_self *PreviewPartialTransactionV2Builder)PrepareForSigning() (*PreviewPartialTransactionV2, error) {
-	_pointer := _self.ffiObject.incrementPointer("*PreviewPartialTransactionV2Builder")
-	defer _self.ffiObject.decrementPointer()
-	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewpartialtransactionv2builder_prepare_for_signing(
-		_pointer, _uniffiStatus)
-	})
-		if _uniffiErr != nil {
-			var _uniffiDefaultValue *PreviewPartialTransactionV2
-			return _uniffiDefaultValue, _uniffiErr
-		} else {
-			return FfiConverterPreviewPartialTransactionV2INSTANCE.Lift(_uniffiRV), _uniffiErr
-		}
 }
 
 
