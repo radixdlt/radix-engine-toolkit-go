@@ -24656,14 +24656,15 @@ func (_ FfiDestroyerTypeManifestBuilderValueKind) Destroy(value ManifestBuilderV
 type ManifestClass uint
 
 const (
-	ManifestClassGeneral ManifestClass = 1
-	ManifestClassTransfer ManifestClass = 2
-	ManifestClassPoolContribution ManifestClass = 3
-	ManifestClassPoolRedemption ManifestClass = 4
-	ManifestClassValidatorStake ManifestClass = 5
-	ManifestClassValidatorUnstake ManifestClass = 6
-	ManifestClassValidatorClaim ManifestClass = 7
-	ManifestClassAccountDepositSettingsUpdate ManifestClass = 8
+	ManifestClassGeneralSubintent ManifestClass = 1
+	ManifestClassGeneral ManifestClass = 2
+	ManifestClassTransfer ManifestClass = 3
+	ManifestClassPoolContribution ManifestClass = 4
+	ManifestClassPoolRedemption ManifestClass = 5
+	ManifestClassValidatorStake ManifestClass = 6
+	ManifestClassValidatorUnstake ManifestClass = 7
+	ManifestClassValidatorClaim ManifestClass = 8
+	ManifestClassAccountDepositSettingsUpdate ManifestClass = 9
 )
 
 type FfiConverterTypeManifestClass struct {}
@@ -27823,8 +27824,12 @@ type ReservedInstruction uint
 const (
 	ReservedInstructionAccountLockFee ReservedInstruction = 1
 	ReservedInstructionAccountSecurify ReservedInstruction = 2
-	ReservedInstructionIdentitySecurify ReservedInstruction = 3
-	ReservedInstructionAccessControllerMethod ReservedInstruction = 4
+	ReservedInstructionAccountLockOwnerKeysMetadataField ReservedInstruction = 3
+	ReservedInstructionAccountUpdateOwnerKeysMetadataField ReservedInstruction = 4
+	ReservedInstructionIdentitySecurify ReservedInstruction = 5
+	ReservedInstructionIdentityLockOwnerKeysMetadataField ReservedInstruction = 6
+	ReservedInstructionIdentityUpdateOwnerKeysMetadataField ReservedInstruction = 7
+	ReservedInstructionAccessControllerMethod ReservedInstruction = 8
 )
 
 type FfiConverterTypeReservedInstruction struct {}
