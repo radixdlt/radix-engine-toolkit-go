@@ -81,6 +81,11 @@ void* uniffi_radix_engine_toolkit_uniffi_fn_constructor_accessrule_deny_all(
 	RustCallStatus* out_status
 );
 
+void* uniffi_radix_engine_toolkit_uniffi_fn_constructor_accessrule_from_scrypto_sbor_payload(
+	RustBuffer payload,
+	RustCallStatus* out_status
+);
+
 void* uniffi_radix_engine_toolkit_uniffi_fn_constructor_accessrule_require(
 	RustBuffer resource_or_non_fungible,
 	RustCallStatus* out_status
@@ -116,6 +121,12 @@ void* uniffi_radix_engine_toolkit_uniffi_fn_constructor_accessrule_require_signa
 void* uniffi_radix_engine_toolkit_uniffi_fn_method_accessrule_and(
 	void* ptr,
 	void* other,
+	RustCallStatus* out_status
+);
+
+RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_method_accessrule_extract_entities(
+	void* ptr,
+	uint8_t network_id,
 	RustCallStatus* out_status
 );
 
@@ -2815,7 +2826,14 @@ void* uniffi_radix_engine_toolkit_uniffi_fn_constructor_nonfungibleglobalid_from
 	RustCallStatus* out_status
 );
 
-void* uniffi_radix_engine_toolkit_uniffi_fn_constructor_nonfungibleglobalid_global_caller_badge(
+void* uniffi_radix_engine_toolkit_uniffi_fn_constructor_nonfungibleglobalid_global_caller_badge_from_blueprint_id(
+	void* package_address,
+	RustBuffer blueprint_name,
+	uint8_t network_id,
+	RustCallStatus* out_status
+);
+
+void* uniffi_radix_engine_toolkit_uniffi_fn_constructor_nonfungibleglobalid_global_caller_badge_from_global_address(
 	void* component_address,
 	uint8_t network_id,
 	RustCallStatus* out_status
@@ -2839,6 +2857,16 @@ void* uniffi_radix_engine_toolkit_uniffi_fn_constructor_nonfungibleglobalid_sign
 );
 
 RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_method_nonfungibleglobalid_as_str(
+	void* ptr,
+	RustCallStatus* out_status
+);
+
+int8_t uniffi_radix_engine_toolkit_uniffi_fn_method_nonfungibleglobalid_is_global_caller_badge(
+	void* ptr,
+	RustCallStatus* out_status
+);
+
+int8_t uniffi_radix_engine_toolkit_uniffi_fn_method_nonfungibleglobalid_is_package_of_direct_caller_badge(
 	void* ptr,
 	RustCallStatus* out_status
 );
@@ -2899,6 +2927,11 @@ void* uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv1_signed
 	RustCallStatus* out_status
 );
 
+RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv1_signer_public_keys(
+	void* ptr,
+	RustCallStatus* out_status
+);
+
 void uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv1_statically_validate(
 	void* ptr,
 	uint8_t network_id,
@@ -2952,6 +2985,11 @@ void* uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv2_signed
 );
 
 void* uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv2_signed_transaction_intent_hash(
+	void* ptr,
+	RustCallStatus* out_status
+);
+
+RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv2_signer_public_keys(
 	void* ptr,
 	RustCallStatus* out_status
 );
@@ -4061,8 +4099,15 @@ void uniffi_radix_engine_toolkit_uniffi_fn_init_callback_signer(
 	RustCallStatus* out_status
 );
 
-void* uniffi_radix_engine_toolkit_uniffi_fn_func_derive_global_caller_non_fungible_global_id_from_component_address(
-	void* component_address,
+void* uniffi_radix_engine_toolkit_uniffi_fn_func_derive_global_caller_non_fungible_global_id_from_blueprint_id(
+	void* package_address,
+	RustBuffer blueprint_name,
+	uint8_t network_id,
+	RustCallStatus* out_status
+);
+
+void* uniffi_radix_engine_toolkit_uniffi_fn_func_derive_global_caller_non_fungible_global_id_from_global_address(
+	void* global_address,
 	uint8_t network_id,
 	RustCallStatus* out_status
 );
@@ -4073,7 +4118,7 @@ void* uniffi_radix_engine_toolkit_uniffi_fn_func_derive_olympia_account_address_
 	RustCallStatus* out_status
 );
 
-void* uniffi_radix_engine_toolkit_uniffi_fn_func_derive_package_of_direct_caller_non_fungible_global_id_from_component_address(
+void* uniffi_radix_engine_toolkit_uniffi_fn_func_derive_package_of_direct_caller_non_fungible_global_id_from_package_address(
 	void* package_address,
 	uint8_t network_id,
 	RustCallStatus* out_status
@@ -4184,6 +4229,11 @@ RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_func_public_key_fingerprint_v2_
 
 RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_func_public_key_fingerprint_v2_to_vec(
 	RustBuffer value,
+	RustCallStatus* out_status
+);
+
+RustBuffer uniffi_radix_engine_toolkit_uniffi_fn_func_public_key_hash_from_public_key(
+	RustBuffer public_key,
 	RustCallStatus* out_status
 );
 
@@ -4519,7 +4569,11 @@ void ffi_radix_engine_toolkit_uniffi_rust_future_complete_void(
 	RustCallStatus* out_status
 );
 
-uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_func_derive_global_caller_non_fungible_global_id_from_component_address(
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_func_derive_global_caller_non_fungible_global_id_from_blueprint_id(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_func_derive_global_caller_non_fungible_global_id_from_global_address(
 	RustCallStatus* out_status
 );
 
@@ -4527,7 +4581,7 @@ uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_func_derive_olympia_account
 	RustCallStatus* out_status
 );
 
-uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_func_derive_package_of_direct_caller_non_fungible_global_id_from_component_address(
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_func_derive_package_of_direct_caller_non_fungible_global_id_from_package_address(
 	RustCallStatus* out_status
 );
 
@@ -4611,6 +4665,10 @@ uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_func_public_key_fingerprint
 	RustCallStatus* out_status
 );
 
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_func_public_key_hash_from_public_key(
+	RustCallStatus* out_status
+);
+
 uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_func_sbor_decode_to_string_representation(
 	RustCallStatus* out_status
 );
@@ -4632,6 +4690,10 @@ uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_func_test_panic(
 );
 
 uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_accessrule_and(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_accessrule_extract_entities(
 	RustCallStatus* out_status
 );
 
@@ -6091,6 +6153,14 @@ uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_nonfungibleglobalid_
 	RustCallStatus* out_status
 );
 
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_nonfungibleglobalid_is_global_caller_badge(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_nonfungibleglobalid_is_package_of_direct_caller_badge(
+	RustCallStatus* out_status
+);
+
 uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_nonfungibleglobalid_local_id(
 	RustCallStatus* out_status
 );
@@ -6123,6 +6193,10 @@ uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransaction
 	RustCallStatus* out_status
 );
 
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv1_signer_public_keys(
+	RustCallStatus* out_status
+);
+
 uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv1_statically_validate(
 	RustCallStatus* out_status
 );
@@ -6152,6 +6226,10 @@ uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransaction
 );
 
 uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv2_signed_transaction_intent_hash(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_method_notarizedtransactionv2_signer_public_keys(
 	RustCallStatus* out_status
 );
 
@@ -6731,6 +6809,10 @@ uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_constructor_accessrule_deny
 	RustCallStatus* out_status
 );
 
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_constructor_accessrule_from_scrypto_sbor_payload(
+	RustCallStatus* out_status
+);
+
 uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_constructor_accessrule_require(
 	RustCallStatus* out_status
 );
@@ -6859,7 +6941,11 @@ uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_constructor_nonfungibleglob
 	RustCallStatus* out_status
 );
 
-uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_constructor_nonfungibleglobalid_global_caller_badge(
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_constructor_nonfungibleglobalid_global_caller_badge_from_blueprint_id(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_radix_engine_toolkit_uniffi_checksum_constructor_nonfungibleglobalid_global_caller_badge_from_global_address(
 	RustCallStatus* out_status
 );
 
