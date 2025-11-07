@@ -18,7 +18,11 @@ import (
 
 
 
-type RustBuffer = C.RustBuffer
+type RustBuffer struct {
+	capacity C.int
+	len      C.int
+	data     *C.uchar
+}
 
 type RustBufferI interface {
 	AsReader() *bytes.Reader
@@ -29,11 +33,28 @@ type RustBufferI interface {
 	Capacity() int
 }
 
+// Conversion helpers for Go 1.25+ strict type checking
+func (rb RustBuffer) toCRustBuffer() C.RustBuffer {
+	return C.RustBuffer{
+		capacity: rb.capacity,
+		len:      rb.len,
+		data:     rb.data,
+	}
+}
+
+func cRustBufferToRustBuffer(crb C.RustBuffer) RustBuffer {
+	return RustBuffer{
+		capacity: crb.capacity,
+		len:      crb.len,
+		data:     crb.data,
+	}
+}
+
 func RustBufferFromExternal(b RustBufferI) RustBuffer {
-	return RustBuffer {
+	return RustBuffer{
 		capacity: C.int(b.Capacity()),
-		len: C.int(b.Len()),
-		data: (*C.uchar)(b.Data()),
+		len:      C.int(b.Len()),
+		data:     (*C.uchar)(b.Data()),
 	}
 }
 
@@ -56,7 +77,7 @@ func (cb RustBuffer) AsReader() *bytes.Reader {
 
 func (cb RustBuffer) Free() {
 	rustCall(func( status *C.RustCallStatus) bool {
-		C.ffi_radix_engine_toolkit_uniffi_rustbuffer_free(cb, status)
+		C.ffi_radix_engine_toolkit_uniffi_rustbuffer_free(cb.toCRustBuffer(), status)
 		return false
 	})
 }
@@ -80,9 +101,9 @@ func bytesToRustBuffer(b []byte) RustBuffer {
 		len: C.int(len(b)),
 		data: (*C.uchar)(unsafe.Pointer(&b[0])),
 	}
-	
+
 	return rustCall(func( status *C.RustCallStatus) RustBuffer {
-		return C.ffi_radix_engine_toolkit_uniffi_rustbuffer_from_bytes(foreign, status)
+		return cRustBufferToRustBuffer(C.ffi_radix_engine_toolkit_uniffi_rustbuffer_from_bytes(foreign, status))
 	})
 }
 
@@ -152,13 +173,13 @@ func checkCallStatus(converter BufLifter[error], status C.RustCallStatus) error 
 	case 0:
 		return nil
 	case 1:
-		return converter.Lift(status.errorBuf)
+		return converter.Lift(cRustBufferToRustBuffer(status.errorBuf))
 	case 2:
 		// when the rust code sees a panic, it tries to construct a rustbuffer
 		// with the message.  but if that code panics, then it just sends back
 		// an empty buffer.
 		if status.errorBuf.len > 0 {
-			panic(fmt.Errorf("%s", FfiConverterStringINSTANCE.Lift(status.errorBuf)))
+			panic(fmt.Errorf("%s", FfiConverterStringINSTANCE.Lift(cRustBufferToRustBuffer(status.errorBuf))))
 		} else {
 			panic(fmt.Errorf("Rust panicked while handling Rust panic"))
 		}
@@ -178,7 +199,7 @@ func checkCallStatusUnknown(status C.RustCallStatus) error {
 		// with the message.  but if that code panics, then it just sends back
 		// an empty buffer.
 		if status.errorBuf.len > 0 {
-			panic(fmt.Errorf("%s", FfiConverterStringINSTANCE.Lift(status.errorBuf)))
+			panic(fmt.Errorf("%s", FfiConverterStringINSTANCE.Lift(cRustBufferToRustBuffer(status.errorBuf))))
 		} else {
 			panic(fmt.Errorf("Rust panicked while handling Rust panic"))
 		}
@@ -6549,7 +6570,7 @@ func AccessRuleDenyAll() *AccessRule {
 
 func AccessRuleFromScryptoSborPayload(payload []byte) (*AccessRule, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_accessrule_from_scrypto_sbor_payload(FfiConverterBytesINSTANCE.Lower(payload), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_accessrule_from_scrypto_sbor_payload(FfiConverterBytesINSTANCE.Lower(payload).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *AccessRule
@@ -6561,7 +6582,7 @@ func AccessRuleFromScryptoSborPayload(payload []byte) (*AccessRule, error) {
 
 func AccessRuleRequire(resourceOrNonFungible ResourceOrNonFungible) (*AccessRule, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_accessrule_require(FfiConverterTypeResourceOrNonFungibleINSTANCE.Lower(resourceOrNonFungible), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_accessrule_require(FfiConverterTypeResourceOrNonFungibleINSTANCE.Lower(resourceOrNonFungible).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *AccessRule
@@ -6573,7 +6594,7 @@ func AccessRuleRequire(resourceOrNonFungible ResourceOrNonFungible) (*AccessRule
 
 func AccessRuleRequireAllOf(resources []ResourceOrNonFungible) (*AccessRule, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_accessrule_require_all_of(FfiConverterSequenceTypeResourceOrNonFungibleINSTANCE.Lower(resources), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_accessrule_require_all_of(FfiConverterSequenceTypeResourceOrNonFungibleINSTANCE.Lower(resources).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *AccessRule
@@ -6597,7 +6618,7 @@ func AccessRuleRequireAmount(amount *Decimal, resource *Address) (*AccessRule, e
 
 func AccessRuleRequireAnyOf(resources []ResourceOrNonFungible) (*AccessRule, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_accessrule_require_any_of(FfiConverterSequenceTypeResourceOrNonFungibleINSTANCE.Lower(resources), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_accessrule_require_any_of(FfiConverterSequenceTypeResourceOrNonFungibleINSTANCE.Lower(resources).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *AccessRule
@@ -6609,7 +6630,7 @@ func AccessRuleRequireAnyOf(resources []ResourceOrNonFungible) (*AccessRule, err
 
 func AccessRuleRequireCountOf(count uint8, resources []ResourceOrNonFungible) (*AccessRule, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_accessrule_require_count_of(FfiConverterUint8INSTANCE.Lower(count), FfiConverterSequenceTypeResourceOrNonFungibleINSTANCE.Lower(resources), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_accessrule_require_count_of(FfiConverterUint8INSTANCE.Lower(count), FfiConverterSequenceTypeResourceOrNonFungibleINSTANCE.Lower(resources).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *AccessRule
@@ -6621,7 +6642,7 @@ func AccessRuleRequireCountOf(count uint8, resources []ResourceOrNonFungible) (*
 
 func AccessRuleRequireSignature(publicKey PublicKey) (*AccessRule, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_accessrule_require_signature(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_accessrule_require_signature(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *AccessRule
@@ -6647,8 +6668,8 @@ func (_self *AccessRule)ExtractEntities(networkId uint8) []ResourceOrNonFungible
 	_pointer := _self.ffiObject.incrementPointer("*AccessRule")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSequenceTypeResourceOrNonFungibleINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_accessrule_extract_entities(
-		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_accessrule_extract_entities(
+		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus))
 	}))
 }
 
@@ -6714,7 +6735,7 @@ type Address struct {
 }
 func NewAddress(address string) (*Address, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_address_new(FfiConverterStringINSTANCE.Lower(address), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_address_new(FfiConverterStringINSTANCE.Lower(address).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *Address
@@ -6727,7 +6748,7 @@ func NewAddress(address string) (*Address, error) {
 
 func AddressFromRaw(nodeIdBytes []byte, networkId uint8) (*Address, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_address_from_raw(FfiConverterBytesINSTANCE.Lower(nodeIdBytes), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_address_from_raw(FfiConverterBytesINSTANCE.Lower(nodeIdBytes).toCRustBuffer(), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *Address
@@ -6751,7 +6772,7 @@ func AddressPreallocatedAccountAddressFromOlympiaAddress(olympiaAccountAddress *
 
 func AddressPreallocatedAccountAddressFromPublicKey(publicKey PublicKey, networkId uint8) (*Address, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_address_preallocated_account_address_from_public_key(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_address_preallocated_account_address_from_public_key(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey).toCRustBuffer(), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *Address
@@ -6763,7 +6784,7 @@ func AddressPreallocatedAccountAddressFromPublicKey(publicKey PublicKey, network
 
 func AddressPreallocatedIdentityAddressFromPublicKey(publicKey PublicKey, networkId uint8) (*Address, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_address_preallocated_identity_address_from_public_key(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_address_preallocated_identity_address_from_public_key(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey).toCRustBuffer(), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *Address
@@ -6791,8 +6812,8 @@ func (_self *Address)AddressString() string {
 	_pointer := _self.ffiObject.incrementPointer("*Address")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterStringINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_address_address_string(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_address_address_string(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -6801,8 +6822,8 @@ func (_self *Address)AsStr() string {
 	_pointer := _self.ffiObject.incrementPointer("*Address")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterStringINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_address_as_str(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_address_as_str(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -6811,8 +6832,8 @@ func (_self *Address)Bytes() []byte {
 	_pointer := _self.ffiObject.incrementPointer("*Address")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBytesINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_address_bytes(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_address_bytes(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -6821,8 +6842,8 @@ func (_self *Address)EntityType() EntityType {
 	_pointer := _self.ffiObject.incrementPointer("*Address")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterTypeEntityTypeINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_address_entity_type(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_address_entity_type(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -7018,7 +7039,7 @@ type Decimal struct {
 }
 func NewDecimal(value string) (*Decimal, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_decimal_new(FfiConverterStringINSTANCE.Lower(value), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_decimal_new(FfiConverterStringINSTANCE.Lower(value).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *Decimal
@@ -7031,7 +7052,7 @@ func NewDecimal(value string) (*Decimal, error) {
 
 func DecimalFromLeBytes(value []byte) *Decimal {
 	return FfiConverterDecimalINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_decimal_from_le_bytes(FfiConverterBytesINSTANCE.Lower(value), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_decimal_from_le_bytes(FfiConverterBytesINSTANCE.Lower(value).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
@@ -7097,8 +7118,8 @@ func (_self *Decimal)AsStr() string {
 	_pointer := _self.ffiObject.incrementPointer("*Decimal")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterStringINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_decimal_as_str(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_decimal_as_str(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -7251,8 +7272,8 @@ func (_self *Decimal)Mantissa() string {
 	_pointer := _self.ffiObject.incrementPointer("*Decimal")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterStringINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_decimal_mantissa(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_decimal_mantissa(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -7287,8 +7308,8 @@ func (_self *Decimal)NthRoot(n uint32) **Decimal {
 	_pointer := _self.ffiObject.incrementPointer("*Decimal")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalDecimalINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_decimal_nth_root(
-		_pointer,FfiConverterUint32INSTANCE.Lower(n), _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_decimal_nth_root(
+		_pointer,FfiConverterUint32INSTANCE.Lower(n), _uniffiStatus))
 	}))
 }
 
@@ -7314,7 +7335,7 @@ func (_self *Decimal)Round(decimalPlaces int32, roundingMode RoundingMode) (*Dec
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_decimal_round(
-		_pointer,FfiConverterInt32INSTANCE.Lower(decimalPlaces), FfiConverterTypeRoundingModeINSTANCE.Lower(roundingMode), _uniffiStatus)
+		_pointer,FfiConverterInt32INSTANCE.Lower(decimalPlaces), FfiConverterTypeRoundingModeINSTANCE.Lower(roundingMode).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *Decimal
@@ -7329,8 +7350,8 @@ func (_self *Decimal)Sqrt() **Decimal {
 	_pointer := _self.ffiObject.incrementPointer("*Decimal")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalDecimalINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_decimal_sqrt(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_decimal_sqrt(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -7355,8 +7376,8 @@ func (_self *Decimal)ToLeBytes() []byte {
 	_pointer := _self.ffiObject.incrementPointer("*Decimal")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBytesINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_decimal_to_le_bytes(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_decimal_to_le_bytes(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -7412,7 +7433,7 @@ type Hash struct {
 }
 func NewHash(hash []byte) (*Hash, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_hash_new(FfiConverterBytesINSTANCE.Lower(hash), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_hash_new(FfiConverterBytesINSTANCE.Lower(hash).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *Hash
@@ -7425,7 +7446,7 @@ func NewHash(hash []byte) (*Hash, error) {
 
 func HashFromHexString(hash string) (*Hash, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_hash_from_hex_string(FfiConverterStringINSTANCE.Lower(hash), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_hash_from_hex_string(FfiConverterStringINSTANCE.Lower(hash).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *Hash
@@ -7437,13 +7458,13 @@ func HashFromHexString(hash string) (*Hash, error) {
 
 func HashFromUnhashedBytes(bytes []byte) *Hash {
 	return FfiConverterHashINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_hash_from_unhashed_bytes(FfiConverterBytesINSTANCE.Lower(bytes), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_hash_from_unhashed_bytes(FfiConverterBytesINSTANCE.Lower(bytes).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
 func HashSborDecode(bytes []byte) (*Hash, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_hash_sbor_decode(FfiConverterBytesINSTANCE.Lower(bytes), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_hash_sbor_decode(FfiConverterBytesINSTANCE.Lower(bytes).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *Hash
@@ -7459,8 +7480,8 @@ func (_self *Hash)AsStr() string {
 	_pointer := _self.ffiObject.incrementPointer("*Hash")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterStringINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_hash_as_str(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_hash_as_str(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -7469,8 +7490,8 @@ func (_self *Hash)Bytes() []byte {
 	_pointer := _self.ffiObject.incrementPointer("*Hash")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBytesINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_hash_bytes(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_hash_bytes(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -7528,7 +7549,7 @@ type InstructionsV1 struct {
 
 func InstructionsV1FromInstructions(instructions []InstructionV1, networkId uint8) (*InstructionsV1, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_instructionsv1_from_instructions(FfiConverterSequenceTypeInstructionV1INSTANCE.Lower(instructions), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_instructionsv1_from_instructions(FfiConverterSequenceTypeInstructionV1INSTANCE.Lower(instructions).toCRustBuffer(), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *InstructionsV1
@@ -7540,7 +7561,7 @@ func InstructionsV1FromInstructions(instructions []InstructionV1, networkId uint
 
 func InstructionsV1FromString(string string, networkId uint8) (*InstructionsV1, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_instructionsv1_from_string(FfiConverterStringINSTANCE.Lower(string), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_instructionsv1_from_string(FfiConverterStringINSTANCE.Lower(string).toCRustBuffer(), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *InstructionsV1
@@ -7556,8 +7577,8 @@ func (_self *InstructionsV1)AsStr() (string, error) {
 	_pointer := _self.ffiObject.incrementPointer("*InstructionsV1")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_instructionsv1_as_str(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_instructionsv1_as_str(
+		_pointer, _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue string
@@ -7572,8 +7593,8 @@ func (_self *InstructionsV1)InstructionsList() []InstructionV1 {
 	_pointer := _self.ffiObject.incrementPointer("*InstructionsV1")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSequenceTypeInstructionV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_instructionsv1_instructions_list(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_instructionsv1_instructions_list(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -7641,7 +7662,7 @@ type InstructionsV2 struct {
 
 func InstructionsV2FromInstructions(instructions []InstructionV2, networkId uint8) (*InstructionsV2, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_instructionsv2_from_instructions(FfiConverterSequenceTypeInstructionV2INSTANCE.Lower(instructions), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_instructionsv2_from_instructions(FfiConverterSequenceTypeInstructionV2INSTANCE.Lower(instructions).toCRustBuffer(), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *InstructionsV2
@@ -7653,7 +7674,7 @@ func InstructionsV2FromInstructions(instructions []InstructionV2, networkId uint
 
 func InstructionsV2FromString(string string, networkId uint8) (*InstructionsV2, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_instructionsv2_from_string(FfiConverterStringINSTANCE.Lower(string), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_instructionsv2_from_string(FfiConverterStringINSTANCE.Lower(string).toCRustBuffer(), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *InstructionsV2
@@ -7669,8 +7690,8 @@ func (_self *InstructionsV2)AsStr() (string, error) {
 	_pointer := _self.ffiObject.incrementPointer("*InstructionsV2")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_instructionsv2_as_str(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_instructionsv2_as_str(
+		_pointer, _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue string
@@ -7685,8 +7706,8 @@ func (_self *InstructionsV2)InstructionsList() []InstructionV2 {
 	_pointer := _self.ffiObject.incrementPointer("*InstructionsV2")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSequenceTypeInstructionV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_instructionsv2_instructions_list(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_instructionsv2_instructions_list(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -7752,7 +7773,7 @@ type IntentCoreV2 struct {
 }
 func NewIntentCoreV2(header IntentHeaderV2, blobs [][]byte, message MessageV2, children []*Hash, instructions *InstructionsV2) *IntentCoreV2 {
 	return FfiConverterIntentCoreV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_intentcorev2_new(FfiConverterTypeIntentHeaderV2INSTANCE.Lower(header), FfiConverterSequenceBytesINSTANCE.Lower(blobs), FfiConverterTypeMessageV2INSTANCE.Lower(message), FfiConverterSequenceHashINSTANCE.Lower(children), FfiConverterInstructionsV2INSTANCE.Lower(instructions), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_intentcorev2_new(FfiConverterTypeIntentHeaderV2INSTANCE.Lower(header).toCRustBuffer(), FfiConverterSequenceBytesINSTANCE.Lower(blobs).toCRustBuffer(), FfiConverterTypeMessageV2INSTANCE.Lower(message).toCRustBuffer(), FfiConverterSequenceHashINSTANCE.Lower(children).toCRustBuffer(), FfiConverterInstructionsV2INSTANCE.Lower(instructions), _uniffiStatus)
 	}))
 }
 
@@ -7763,8 +7784,8 @@ func (_self *IntentCoreV2)Blobs() [][]byte {
 	_pointer := _self.ffiObject.incrementPointer("*IntentCoreV2")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSequenceBytesINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_blobs(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_blobs(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -7773,8 +7794,8 @@ func (_self *IntentCoreV2)Children() []*Hash {
 	_pointer := _self.ffiObject.incrementPointer("*IntentCoreV2")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSequenceHashINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_children(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_children(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -7783,8 +7804,8 @@ func (_self *IntentCoreV2)Header() IntentHeaderV2 {
 	_pointer := _self.ffiObject.incrementPointer("*IntentCoreV2")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterTypeIntentHeaderV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_header(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_header(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -7813,8 +7834,8 @@ func (_self *IntentCoreV2)Message() MessageV2 {
 	_pointer := _self.ffiObject.incrementPointer("*IntentCoreV2")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterTypeMessageV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_message(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentcorev2_message(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -7870,14 +7891,14 @@ type IntentV1 struct {
 }
 func NewIntentV1(header TransactionHeaderV1, manifest *TransactionManifestV1, message MessageV1) *IntentV1 {
 	return FfiConverterIntentV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_intentv1_new(FfiConverterTypeTransactionHeaderV1INSTANCE.Lower(header), FfiConverterTransactionManifestV1INSTANCE.Lower(manifest), FfiConverterTypeMessageV1INSTANCE.Lower(message), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_intentv1_new(FfiConverterTypeTransactionHeaderV1INSTANCE.Lower(header).toCRustBuffer(), FfiConverterTransactionManifestV1INSTANCE.Lower(manifest), FfiConverterTypeMessageV1INSTANCE.Lower(message).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
 
 func IntentV1FromPayloadBytes(compiledIntent []byte) (*IntentV1, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_intentv1_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiledIntent), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_intentv1_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiledIntent).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *IntentV1
@@ -7909,8 +7930,8 @@ func (_self *IntentV1)Header() TransactionHeaderV1 {
 	_pointer := _self.ffiObject.incrementPointer("*IntentV1")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterTypeTransactionHeaderV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentv1_header(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentv1_header(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -7945,8 +7966,8 @@ func (_self *IntentV1)Message() MessageV1 {
 	_pointer := _self.ffiObject.incrementPointer("*IntentV1")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterTypeMessageV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentv1_message(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentv1_message(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -7967,8 +7988,8 @@ func (_self *IntentV1)ToPayloadBytes() ([]byte, error) {
 	_pointer := _self.ffiObject.incrementPointer("*IntentV1")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentv1_to_payload_bytes(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_intentv1_to_payload_bytes(
+		_pointer, _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue []byte
@@ -8106,7 +8127,7 @@ func (_self *ManifestV1Builder)AccessControllerCreate(controlledAsset ManifestBu
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_access_controller_create(
-		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(controlledAsset), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
+		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(controlledAsset).toCRustBuffer(), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet).toCRustBuffer(), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes).toCRustBuffer(), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -8138,7 +8159,7 @@ func (_self *ManifestV1Builder)AccessControllerCreateWithSecurityStructure(contr
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_access_controller_create_with_security_structure(
-		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(controlledAsset), FfiConverterTypeSecurityStructureRoleINSTANCE.Lower(primaryRole), FfiConverterTypeSecurityStructureRoleINSTANCE.Lower(recoveryRole), FfiConverterTypeSecurityStructureRoleINSTANCE.Lower(confirmationRole), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
+		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(controlledAsset).toCRustBuffer(), FfiConverterTypeSecurityStructureRoleINSTANCE.Lower(primaryRole).toCRustBuffer(), FfiConverterTypeSecurityStructureRoleINSTANCE.Lower(recoveryRole).toCRustBuffer(), FfiConverterTypeSecurityStructureRoleINSTANCE.Lower(confirmationRole).toCRustBuffer(), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes).toCRustBuffer(), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -8186,7 +8207,7 @@ func (_self *ManifestV1Builder)AccessControllerInitiateRecoveryAsPrimary(address
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_access_controller_initiate_recovery_as_primary(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet).toCRustBuffer(), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -8202,7 +8223,7 @@ func (_self *ManifestV1Builder)AccessControllerInitiateRecoveryAsRecovery(addres
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_access_controller_initiate_recovery_as_recovery(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet).toCRustBuffer(), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -8234,7 +8255,7 @@ func (_self *ManifestV1Builder)AccessControllerMintRecoveryBadges(address *Addre
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_access_controller_mint_recovery_badges(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(nonFungibleLocalIds), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(nonFungibleLocalIds).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -8250,7 +8271,7 @@ func (_self *ManifestV1Builder)AccessControllerNewFromPublicKeys(controlledAsset
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_access_controller_new_from_public_keys(
-		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(controlledAsset), FfiConverterTypePublicKeyINSTANCE.Lower(primaryRole), FfiConverterTypePublicKeyINSTANCE.Lower(recoveryRole), FfiConverterTypePublicKeyINSTANCE.Lower(confirmationRole), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
+		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(controlledAsset).toCRustBuffer(), FfiConverterTypePublicKeyINSTANCE.Lower(primaryRole).toCRustBuffer(), FfiConverterTypePublicKeyINSTANCE.Lower(recoveryRole).toCRustBuffer(), FfiConverterTypePublicKeyINSTANCE.Lower(confirmationRole).toCRustBuffer(), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes).toCRustBuffer(), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -8282,7 +8303,7 @@ func (_self *ManifestV1Builder)AccessControllerQuickConfirmPrimaryRoleRecoveryPr
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_access_controller_quick_confirm_primary_role_recovery_proposal(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet).toCRustBuffer(), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -8314,7 +8335,7 @@ func (_self *ManifestV1Builder)AccessControllerQuickConfirmRecoveryRoleRecoveryP
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_access_controller_quick_confirm_recovery_role_recovery_proposal(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet).toCRustBuffer(), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -8330,7 +8351,7 @@ func (_self *ManifestV1Builder)AccessControllerStopTimedRecovery(address *Addres
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_access_controller_stop_timed_recovery(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet).toCRustBuffer(), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -8346,7 +8367,7 @@ func (_self *ManifestV1Builder)AccessControllerTimedConfirmRecovery(address *Add
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_access_controller_timed_confirm_recovery(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet).toCRustBuffer(), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -8378,7 +8399,7 @@ func (_self *ManifestV1Builder)AccountAddAuthorizedDepositor(address *Address, b
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_add_authorized_depositor(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeResourceOrNonFungibleINSTANCE.Lower(badge), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeResourceOrNonFungibleINSTANCE.Lower(badge).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -8410,7 +8431,7 @@ func (_self *ManifestV1Builder)AccountBurnNonFungibles(address *Address, resourc
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_burn_non_fungibles(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -8442,7 +8463,7 @@ func (_self *ManifestV1Builder)AccountCreateAdvanced(ownerRole OwnerRole, addres
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_create_advanced(
-		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
+		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole).toCRustBuffer(), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -8474,7 +8495,7 @@ func (_self *ManifestV1Builder)AccountCreateProofOfNonFungibles(address *Address
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_create_proof_of_non_fungibles(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -8490,7 +8511,7 @@ func (_self *ManifestV1Builder)AccountDeposit(address *Address, bucket ManifestB
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_deposit(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -8506,7 +8527,7 @@ func (_self *ManifestV1Builder)AccountDepositBatch(address *Address, buckets []M
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_deposit_batch(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeManifestBuilderBucketINSTANCE.Lower(buckets), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeManifestBuilderBucketINSTANCE.Lower(buckets).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -8586,7 +8607,7 @@ func (_self *ManifestV1Builder)AccountLockFeeAndWithdrawNonFungibles(address *Ad
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_lock_fee_and_withdraw_non_fungibles(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterDecimalINSTANCE.Lower(amountToLock), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterDecimalINSTANCE.Lower(amountToLock), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -8602,7 +8623,7 @@ func (_self *ManifestV1Builder)AccountLockerAirdrop(address *Address, claimants 
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_locker_airdrop(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterMapStringTypeResourceSpecifierINSTANCE.Lower(claimants), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), FfiConverterBoolINSTANCE.Lower(tryDirectSend), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterMapStringTypeResourceSpecifierINSTANCE.Lower(claimants).toCRustBuffer(), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), FfiConverterBoolINSTANCE.Lower(tryDirectSend), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -8634,7 +8655,7 @@ func (_self *ManifestV1Builder)AccountLockerClaimNonFungibles(address *Address, 
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_locker_claim_non_fungibles(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -8682,7 +8703,7 @@ func (_self *ManifestV1Builder)AccountLockerInstantiate(ownerRole OwnerRole, sto
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_locker_instantiate(
-		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), FfiConverterAccessRuleINSTANCE.Lower(storerRole), FfiConverterAccessRuleINSTANCE.Lower(storerUpdaterRole), FfiConverterAccessRuleINSTANCE.Lower(recovererRole), FfiConverterAccessRuleINSTANCE.Lower(recovererUpdaterRole), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
+		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole).toCRustBuffer(), FfiConverterAccessRuleINSTANCE.Lower(storerRole), FfiConverterAccessRuleINSTANCE.Lower(storerUpdaterRole), FfiConverterAccessRuleINSTANCE.Lower(recovererRole), FfiConverterAccessRuleINSTANCE.Lower(recovererUpdaterRole), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -8730,7 +8751,7 @@ func (_self *ManifestV1Builder)AccountLockerRecoverNonFungibles(address *Address
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_locker_recover_non_fungibles(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -8746,7 +8767,7 @@ func (_self *ManifestV1Builder)AccountLockerStore(address *Address, claimant *Ad
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_locker_store(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), FfiConverterBoolINSTANCE.Lower(tryDirectSend), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), FfiConverterBoolINSTANCE.Lower(tryDirectSend), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -8762,7 +8783,7 @@ func (_self *ManifestV1Builder)AccountRemoveAuthorizedDepositor(address *Address
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_remove_authorized_depositor(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeResourceOrNonFungibleINSTANCE.Lower(badge), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeResourceOrNonFungibleINSTANCE.Lower(badge).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -8810,7 +8831,7 @@ func (_self *ManifestV1Builder)AccountSetDefaultDepositRule(address *Address, de
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_set_default_deposit_rule(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeAccountDefaultDepositRuleINSTANCE.Lower(defaultDepositRule), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeAccountDefaultDepositRuleINSTANCE.Lower(defaultDepositRule).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -8826,7 +8847,7 @@ func (_self *ManifestV1Builder)AccountSetResourcePreference(address *Address, re
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_set_resource_preference(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterTypeResourcePreferenceINSTANCE.Lower(resourcePreference), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterTypeResourcePreferenceINSTANCE.Lower(resourcePreference).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -8842,7 +8863,7 @@ func (_self *ManifestV1Builder)AccountTryDepositBatchOrAbort(address *Address, b
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_try_deposit_batch_or_abort(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeManifestBuilderBucketINSTANCE.Lower(buckets), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeManifestBuilderBucketINSTANCE.Lower(buckets).toCRustBuffer(), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -8858,7 +8879,7 @@ func (_self *ManifestV1Builder)AccountTryDepositBatchOrRefund(address *Address, 
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_try_deposit_batch_or_refund(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeManifestBuilderBucketINSTANCE.Lower(buckets), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeManifestBuilderBucketINSTANCE.Lower(buckets).toCRustBuffer(), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -8874,7 +8895,7 @@ func (_self *ManifestV1Builder)AccountTryDepositEntireWorktopOrAbort(accountAddr
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_try_deposit_entire_worktop_or_abort(
-		_pointer,FfiConverterAddressINSTANCE.Lower(accountAddress), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(accountAddress), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -8890,7 +8911,7 @@ func (_self *ManifestV1Builder)AccountTryDepositEntireWorktopOrRefund(accountAdd
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_try_deposit_entire_worktop_or_refund(
-		_pointer,FfiConverterAddressINSTANCE.Lower(accountAddress), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(accountAddress), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -8906,7 +8927,7 @@ func (_self *ManifestV1Builder)AccountTryDepositOrAbort(address *Address, bucket
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_try_deposit_or_abort(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -8922,7 +8943,7 @@ func (_self *ManifestV1Builder)AccountTryDepositOrRefund(address *Address, bucke
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_try_deposit_or_refund(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -8954,7 +8975,7 @@ func (_self *ManifestV1Builder)AccountWithdrawNonFungibles(address *Address, res
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_account_withdraw_non_fungibles(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -8970,7 +8991,7 @@ func (_self *ManifestV1Builder)AllocateGlobalAddress(packageAddress *Address, bl
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_allocate_global_address(
-		_pointer,FfiConverterAddressINSTANCE.Lower(packageAddress), FfiConverterStringINSTANCE.Lower(blueprintName), FfiConverterTypeManifestBuilderAddressReservationINSTANCE.Lower(intoAddressReservation), FfiConverterTypeManifestBuilderNamedAddressINSTANCE.Lower(intoNamedAddress), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(packageAddress), FfiConverterStringINSTANCE.Lower(blueprintName).toCRustBuffer(), FfiConverterTypeManifestBuilderAddressReservationINSTANCE.Lower(intoAddressReservation).toCRustBuffer(), FfiConverterTypeManifestBuilderNamedAddressINSTANCE.Lower(intoNamedAddress).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9018,7 +9039,7 @@ func (_self *ManifestV1Builder)AssertWorktopContainsNonFungibles(resourceAddress
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_assert_worktop_contains_non_fungibles(
-		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9044,7 +9065,7 @@ func (_self *ManifestV1Builder)BurnResource(bucket ManifestBuilderBucket) (*Mani
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_burn_resource(
-		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9060,7 +9081,7 @@ func (_self *ManifestV1Builder)CallAccessRulesMethod(address ManifestBuilderAddr
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_call_access_rules_method(
-		_pointer,FfiConverterTypeManifestBuilderAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(methodName), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args), _uniffiStatus)
+		_pointer,FfiConverterTypeManifestBuilderAddressINSTANCE.Lower(address).toCRustBuffer(), FfiConverterStringINSTANCE.Lower(methodName).toCRustBuffer(), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9076,7 +9097,7 @@ func (_self *ManifestV1Builder)CallDirectVaultMethod(address *Address, methodNam
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_call_direct_vault_method(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(methodName), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(methodName).toCRustBuffer(), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9092,7 +9113,7 @@ func (_self *ManifestV1Builder)CallFunction(address ManifestBuilderAddress, blue
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_call_function(
-		_pointer,FfiConverterTypeManifestBuilderAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(blueprintName), FfiConverterStringINSTANCE.Lower(functionName), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args), _uniffiStatus)
+		_pointer,FfiConverterTypeManifestBuilderAddressINSTANCE.Lower(address).toCRustBuffer(), FfiConverterStringINSTANCE.Lower(blueprintName).toCRustBuffer(), FfiConverterStringINSTANCE.Lower(functionName).toCRustBuffer(), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9108,7 +9129,7 @@ func (_self *ManifestV1Builder)CallMetadataMethod(address ManifestBuilderAddress
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_call_metadata_method(
-		_pointer,FfiConverterTypeManifestBuilderAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(methodName), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args), _uniffiStatus)
+		_pointer,FfiConverterTypeManifestBuilderAddressINSTANCE.Lower(address).toCRustBuffer(), FfiConverterStringINSTANCE.Lower(methodName).toCRustBuffer(), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9124,7 +9145,7 @@ func (_self *ManifestV1Builder)CallMethod(address ManifestBuilderAddress, method
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_call_method(
-		_pointer,FfiConverterTypeManifestBuilderAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(methodName), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args), _uniffiStatus)
+		_pointer,FfiConverterTypeManifestBuilderAddressINSTANCE.Lower(address).toCRustBuffer(), FfiConverterStringINSTANCE.Lower(methodName).toCRustBuffer(), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9140,7 +9161,7 @@ func (_self *ManifestV1Builder)CallRoyaltyMethod(address ManifestBuilderAddress,
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_call_royalty_method(
-		_pointer,FfiConverterTypeManifestBuilderAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(methodName), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args), _uniffiStatus)
+		_pointer,FfiConverterTypeManifestBuilderAddressINSTANCE.Lower(address).toCRustBuffer(), FfiConverterStringINSTANCE.Lower(methodName).toCRustBuffer(), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9156,7 +9177,7 @@ func (_self *ManifestV1Builder)CloneProof(proof ManifestBuilderProof, intoProof 
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_clone_proof(
-		_pointer,FfiConverterTypeManifestBuilderProofINSTANCE.Lower(proof), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof), _uniffiStatus)
+		_pointer,FfiConverterTypeManifestBuilderProofINSTANCE.Lower(proof).toCRustBuffer(), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9172,7 +9193,7 @@ func (_self *ManifestV1Builder)CreateFungibleResourceManager(ownerRole OwnerRole
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_create_fungible_resource_manager(
-		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), FfiConverterBoolINSTANCE.Lower(trackTotalSupply), FfiConverterUint8INSTANCE.Lower(divisibility), FfiConverterOptionalDecimalINSTANCE.Lower(initialSupply), FfiConverterTypeFungibleResourceRolesINSTANCE.Lower(resourceRoles), FfiConverterTypeMetadataModuleConfigINSTANCE.Lower(metadata), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
+		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole).toCRustBuffer(), FfiConverterBoolINSTANCE.Lower(trackTotalSupply), FfiConverterUint8INSTANCE.Lower(divisibility), FfiConverterOptionalDecimalINSTANCE.Lower(initialSupply).toCRustBuffer(), FfiConverterTypeFungibleResourceRolesINSTANCE.Lower(resourceRoles).toCRustBuffer(), FfiConverterTypeMetadataModuleConfigINSTANCE.Lower(metadata).toCRustBuffer(), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9188,7 +9209,7 @@ func (_self *ManifestV1Builder)CreateProofFromAuthZoneOfAll(resourceAddress *Add
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_create_proof_from_auth_zone_of_all(
-		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9204,7 +9225,7 @@ func (_self *ManifestV1Builder)CreateProofFromAuthZoneOfAmount(resourceAddress *
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_create_proof_from_auth_zone_of_amount(
-		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9220,7 +9241,7 @@ func (_self *ManifestV1Builder)CreateProofFromAuthZoneOfNonFungibles(resourceAdd
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_create_proof_from_auth_zone_of_non_fungibles(
-		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids).toCRustBuffer(), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9236,7 +9257,7 @@ func (_self *ManifestV1Builder)CreateProofFromBucketOfAll(bucket ManifestBuilder
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_create_proof_from_bucket_of_all(
-		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof), _uniffiStatus)
+		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9252,7 +9273,7 @@ func (_self *ManifestV1Builder)CreateProofFromBucketOfAmount(amount *Decimal, bu
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_create_proof_from_bucket_of_amount(
-		_pointer,FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof), _uniffiStatus)
+		_pointer,FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9268,7 +9289,7 @@ func (_self *ManifestV1Builder)CreateProofFromBucketOfNonFungibles(ids []NonFung
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_create_proof_from_bucket_of_non_fungibles(
-		_pointer,FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof), _uniffiStatus)
+		_pointer,FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids).toCRustBuffer(), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9332,7 +9353,7 @@ func (_self *ManifestV1Builder)DropProof(proof ManifestBuilderProof) (*ManifestV
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_drop_proof(
-		_pointer,FfiConverterTypeManifestBuilderProofINSTANCE.Lower(proof), _uniffiStatus)
+		_pointer,FfiConverterTypeManifestBuilderProofINSTANCE.Lower(proof).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9396,7 +9417,7 @@ func (_self *ManifestV1Builder)IdentityCreateAdvanced(ownerRole OwnerRole) (*Man
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_identity_create_advanced(
-		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), _uniffiStatus)
+		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9428,7 +9449,7 @@ func (_self *ManifestV1Builder)MetadataGet(address *Address, key string) (*Manif
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_metadata_get(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(key), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(key).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9444,7 +9465,7 @@ func (_self *ManifestV1Builder)MetadataLock(address *Address, key string) (*Mani
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_metadata_lock(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(key), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(key).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9460,7 +9481,7 @@ func (_self *ManifestV1Builder)MetadataRemove(address *Address, key string) (*Ma
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_metadata_remove(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(key), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(key).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9476,7 +9497,7 @@ func (_self *ManifestV1Builder)MetadataSet(address *Address, key string, value M
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_metadata_set(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(key), FfiConverterTypeMetadataValueINSTANCE.Lower(value), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(key).toCRustBuffer(), FfiConverterTypeMetadataValueINSTANCE.Lower(value).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9508,7 +9529,7 @@ func (_self *ManifestV1Builder)MultiResourcePoolContribute(address *Address, buc
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_multi_resource_pool_contribute(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeManifestBuilderBucketINSTANCE.Lower(buckets), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeManifestBuilderBucketINSTANCE.Lower(buckets).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9556,7 +9577,7 @@ func (_self *ManifestV1Builder)MultiResourcePoolInstantiate(ownerRole OwnerRole,
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_multi_resource_pool_instantiate(
-		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), FfiConverterAccessRuleINSTANCE.Lower(poolManagerRule), FfiConverterSequenceAddressINSTANCE.Lower(resourceAddresses), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
+		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole).toCRustBuffer(), FfiConverterAccessRuleINSTANCE.Lower(poolManagerRule), FfiConverterSequenceAddressINSTANCE.Lower(resourceAddresses).toCRustBuffer(), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9572,7 +9593,7 @@ func (_self *ManifestV1Builder)MultiResourcePoolProtectedDeposit(address *Addres
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_multi_resource_pool_protected_deposit(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9588,7 +9609,7 @@ func (_self *ManifestV1Builder)MultiResourcePoolProtectedWithdraw(address *Addre
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_multi_resource_pool_protected_withdraw(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeWithdrawStrategyINSTANCE.Lower(withdrawStrategy), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeWithdrawStrategyINSTANCE.Lower(withdrawStrategy).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9604,7 +9625,7 @@ func (_self *ManifestV1Builder)MultiResourcePoolRedeem(address *Address, bucket 
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_multi_resource_pool_redeem(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9620,7 +9641,7 @@ func (_self *ManifestV1Builder)OneResourcePoolContribute(address *Address, bucke
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_one_resource_pool_contribute(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9668,7 +9689,7 @@ func (_self *ManifestV1Builder)OneResourcePoolInstantiate(ownerRole OwnerRole, p
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_one_resource_pool_instantiate(
-		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), FfiConverterAccessRuleINSTANCE.Lower(poolManagerRule), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
+		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole).toCRustBuffer(), FfiConverterAccessRuleINSTANCE.Lower(poolManagerRule), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9684,7 +9705,7 @@ func (_self *ManifestV1Builder)OneResourcePoolProtectedDeposit(address *Address,
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_one_resource_pool_protected_deposit(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9700,7 +9721,7 @@ func (_self *ManifestV1Builder)OneResourcePoolProtectedWithdraw(address *Address
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_one_resource_pool_protected_withdraw(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeWithdrawStrategyINSTANCE.Lower(withdrawStrategy), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeWithdrawStrategyINSTANCE.Lower(withdrawStrategy).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9716,7 +9737,7 @@ func (_self *ManifestV1Builder)OneResourcePoolRedeem(address *Address, bucket Ma
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_one_resource_pool_redeem(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9748,7 +9769,7 @@ func (_self *ManifestV1Builder)PackagePublish(code []byte, definition []byte, me
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_package_publish(
-		_pointer,FfiConverterBytesINSTANCE.Lower(code), FfiConverterBytesINSTANCE.Lower(definition), FfiConverterMapStringTypeMetadataInitEntryINSTANCE.Lower(metadata), _uniffiStatus)
+		_pointer,FfiConverterBytesINSTANCE.Lower(code).toCRustBuffer(), FfiConverterBytesINSTANCE.Lower(definition).toCRustBuffer(), FfiConverterMapStringTypeMetadataInitEntryINSTANCE.Lower(metadata).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9764,7 +9785,7 @@ func (_self *ManifestV1Builder)PackagePublishAdvanced(ownerRole OwnerRole, code 
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_package_publish_advanced(
-		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), FfiConverterBytesINSTANCE.Lower(code), FfiConverterBytesINSTANCE.Lower(definition), FfiConverterMapStringTypeMetadataInitEntryINSTANCE.Lower(metadata), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(packageAddress), _uniffiStatus)
+		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole).toCRustBuffer(), FfiConverterBytesINSTANCE.Lower(code).toCRustBuffer(), FfiConverterBytesINSTANCE.Lower(definition).toCRustBuffer(), FfiConverterMapStringTypeMetadataInitEntryINSTANCE.Lower(metadata).toCRustBuffer(), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(packageAddress).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9780,7 +9801,7 @@ func (_self *ManifestV1Builder)PopFromAuthZone(intoProof ManifestBuilderProof) (
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_pop_from_auth_zone(
-		_pointer,FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof), _uniffiStatus)
+		_pointer,FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9796,7 +9817,7 @@ func (_self *ManifestV1Builder)PushToAuthZone(proof ManifestBuilderProof) (*Mani
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_push_to_auth_zone(
-		_pointer,FfiConverterTypeManifestBuilderProofINSTANCE.Lower(proof), _uniffiStatus)
+		_pointer,FfiConverterTypeManifestBuilderProofINSTANCE.Lower(proof).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9812,7 +9833,7 @@ func (_self *ManifestV1Builder)ReturnToWorktop(bucket ManifestBuilderBucket) (*M
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_return_to_worktop(
-		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9828,7 +9849,7 @@ func (_self *ManifestV1Builder)RoleAssignmentGet(address *Address, module Module
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_role_assignment_get(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeModuleIdINSTANCE.Lower(module), FfiConverterStringINSTANCE.Lower(roleKey), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeModuleIdINSTANCE.Lower(module).toCRustBuffer(), FfiConverterStringINSTANCE.Lower(roleKey).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9860,7 +9881,7 @@ func (_self *ManifestV1Builder)RoleAssignmentSet(address *Address, module Module
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_role_assignment_set(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeModuleIdINSTANCE.Lower(module), FfiConverterStringINSTANCE.Lower(roleKey), FfiConverterAccessRuleINSTANCE.Lower(rule), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeModuleIdINSTANCE.Lower(module).toCRustBuffer(), FfiConverterStringINSTANCE.Lower(roleKey).toCRustBuffer(), FfiConverterAccessRuleINSTANCE.Lower(rule), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9908,7 +9929,7 @@ func (_self *ManifestV1Builder)RoyaltyLock(address *Address, method string) (*Ma
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_royalty_lock(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(method), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(method).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9924,7 +9945,7 @@ func (_self *ManifestV1Builder)RoyaltySet(address *Address, method string, amoun
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_royalty_set(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(method), FfiConverterTypeRoyaltyAmountINSTANCE.Lower(amount), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(method).toCRustBuffer(), FfiConverterTypeRoyaltyAmountINSTANCE.Lower(amount).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9940,7 +9961,7 @@ func (_self *ManifestV1Builder)TakeAllFromWorktop(resourceAddress *Address, into
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_take_all_from_worktop(
-		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(intoBucket), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(intoBucket).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9956,7 +9977,7 @@ func (_self *ManifestV1Builder)TakeFromWorktop(resourceAddress *Address, amount 
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_take_from_worktop(
-		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(intoBucket), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(intoBucket).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9972,7 +9993,7 @@ func (_self *ManifestV1Builder)TakeNonFungiblesFromWorktop(resourceAddress *Addr
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_take_non_fungibles_from_worktop(
-		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(intoBucket), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids).toCRustBuffer(), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(intoBucket).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -9988,7 +10009,7 @@ func (_self *ManifestV1Builder)TwoResourcePoolContribute(address *Address, bucke
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_two_resource_pool_contribute(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeManifestBuilderBucketINSTANCE.Lower(buckets), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeManifestBuilderBucketINSTANCE.Lower(buckets).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -10036,7 +10057,7 @@ func (_self *ManifestV1Builder)TwoResourcePoolInstantiate(ownerRole OwnerRole, p
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_two_resource_pool_instantiate(
-		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), FfiConverterAccessRuleINSTANCE.Lower(poolManagerRule), FfiConverterSequenceAddressINSTANCE.Lower(resourceAddresses), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
+		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole).toCRustBuffer(), FfiConverterAccessRuleINSTANCE.Lower(poolManagerRule), FfiConverterSequenceAddressINSTANCE.Lower(resourceAddresses).toCRustBuffer(), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -10052,7 +10073,7 @@ func (_self *ManifestV1Builder)TwoResourcePoolProtectedDeposit(address *Address,
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_two_resource_pool_protected_deposit(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -10068,7 +10089,7 @@ func (_self *ManifestV1Builder)TwoResourcePoolProtectedWithdraw(address *Address
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_two_resource_pool_protected_withdraw(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeWithdrawStrategyINSTANCE.Lower(withdrawStrategy), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeWithdrawStrategyINSTANCE.Lower(withdrawStrategy).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -10084,7 +10105,7 @@ func (_self *ManifestV1Builder)TwoResourcePoolRedeem(address *Address, bucket Ma
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_two_resource_pool_redeem(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -10116,7 +10137,7 @@ func (_self *ManifestV1Builder)ValidatorClaimXrd(address *Address, bucket Manife
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_validator_claim_xrd(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -10180,7 +10201,7 @@ func (_self *ManifestV1Builder)ValidatorLockOwnerStakeUnits(address *Address, st
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_validator_lock_owner_stake_units(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(stakeUnitBucket), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(stakeUnitBucket).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -10212,7 +10233,7 @@ func (_self *ManifestV1Builder)ValidatorSignalProtocolUpdateReadiness(address *A
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_validator_signal_protocol_update_readiness(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(vote), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(vote).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -10228,7 +10249,7 @@ func (_self *ManifestV1Builder)ValidatorStake(address *Address, stake ManifestBu
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_validator_stake(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(stake), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(stake).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -10244,7 +10265,7 @@ func (_self *ManifestV1Builder)ValidatorStakeAsOwner(address *Address, stake Man
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_validator_stake_as_owner(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(stake), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(stake).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -10324,7 +10345,7 @@ func (_self *ManifestV1Builder)ValidatorUnstake(address *Address, stakeUnitBucke
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_validator_unstake(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(stakeUnitBucket), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(stakeUnitBucket).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -10372,7 +10393,7 @@ func (_self *ManifestV1Builder)ValidatorUpdateKey(address *Address, key PublicKe
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv1builder_validator_update_key(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypePublicKeyINSTANCE.Lower(key), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypePublicKeyINSTANCE.Lower(key).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV1Builder
@@ -10510,7 +10531,7 @@ func (_self *ManifestV2Builder)AccessControllerCreate(controlledAsset ManifestBu
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_access_controller_create(
-		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(controlledAsset), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
+		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(controlledAsset).toCRustBuffer(), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet).toCRustBuffer(), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes).toCRustBuffer(), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -10542,7 +10563,7 @@ func (_self *ManifestV2Builder)AccessControllerCreateWithSecurityStructure(contr
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_access_controller_create_with_security_structure(
-		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(controlledAsset), FfiConverterTypeSecurityStructureRoleINSTANCE.Lower(primaryRole), FfiConverterTypeSecurityStructureRoleINSTANCE.Lower(recoveryRole), FfiConverterTypeSecurityStructureRoleINSTANCE.Lower(confirmationRole), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
+		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(controlledAsset).toCRustBuffer(), FfiConverterTypeSecurityStructureRoleINSTANCE.Lower(primaryRole).toCRustBuffer(), FfiConverterTypeSecurityStructureRoleINSTANCE.Lower(recoveryRole).toCRustBuffer(), FfiConverterTypeSecurityStructureRoleINSTANCE.Lower(confirmationRole).toCRustBuffer(), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes).toCRustBuffer(), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -10590,7 +10611,7 @@ func (_self *ManifestV2Builder)AccessControllerInitiateRecoveryAsPrimary(address
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_access_controller_initiate_recovery_as_primary(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet).toCRustBuffer(), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -10606,7 +10627,7 @@ func (_self *ManifestV2Builder)AccessControllerInitiateRecoveryAsRecovery(addres
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_access_controller_initiate_recovery_as_recovery(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet).toCRustBuffer(), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -10638,7 +10659,7 @@ func (_self *ManifestV2Builder)AccessControllerMintRecoveryBadges(address *Addre
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_access_controller_mint_recovery_badges(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(nonFungibleLocalIds), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(nonFungibleLocalIds).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -10654,7 +10675,7 @@ func (_self *ManifestV2Builder)AccessControllerNewFromPublicKeys(controlledAsset
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_access_controller_new_from_public_keys(
-		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(controlledAsset), FfiConverterTypePublicKeyINSTANCE.Lower(primaryRole), FfiConverterTypePublicKeyINSTANCE.Lower(recoveryRole), FfiConverterTypePublicKeyINSTANCE.Lower(confirmationRole), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
+		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(controlledAsset).toCRustBuffer(), FfiConverterTypePublicKeyINSTANCE.Lower(primaryRole).toCRustBuffer(), FfiConverterTypePublicKeyINSTANCE.Lower(recoveryRole).toCRustBuffer(), FfiConverterTypePublicKeyINSTANCE.Lower(confirmationRole).toCRustBuffer(), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes).toCRustBuffer(), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -10686,7 +10707,7 @@ func (_self *ManifestV2Builder)AccessControllerQuickConfirmPrimaryRoleRecoveryPr
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_access_controller_quick_confirm_primary_role_recovery_proposal(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet).toCRustBuffer(), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -10718,7 +10739,7 @@ func (_self *ManifestV2Builder)AccessControllerQuickConfirmRecoveryRoleRecoveryP
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_access_controller_quick_confirm_recovery_role_recovery_proposal(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet).toCRustBuffer(), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -10734,7 +10755,7 @@ func (_self *ManifestV2Builder)AccessControllerStopTimedRecovery(address *Addres
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_access_controller_stop_timed_recovery(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet).toCRustBuffer(), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -10750,7 +10771,7 @@ func (_self *ManifestV2Builder)AccessControllerTimedConfirmRecovery(address *Add
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_access_controller_timed_confirm_recovery(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeRuleSetINSTANCE.Lower(ruleSet).toCRustBuffer(), FfiConverterOptionalUint32INSTANCE.Lower(timedRecoveryDelayInMinutes).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -10782,7 +10803,7 @@ func (_self *ManifestV2Builder)AccountAddAuthorizedDepositor(address *Address, b
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_add_authorized_depositor(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeResourceOrNonFungibleINSTANCE.Lower(badge), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeResourceOrNonFungibleINSTANCE.Lower(badge).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -10814,7 +10835,7 @@ func (_self *ManifestV2Builder)AccountBurnNonFungibles(address *Address, resourc
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_burn_non_fungibles(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -10846,7 +10867,7 @@ func (_self *ManifestV2Builder)AccountCreateAdvanced(ownerRole OwnerRole, addres
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_create_advanced(
-		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
+		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole).toCRustBuffer(), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -10878,7 +10899,7 @@ func (_self *ManifestV2Builder)AccountCreateProofOfNonFungibles(address *Address
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_create_proof_of_non_fungibles(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -10894,7 +10915,7 @@ func (_self *ManifestV2Builder)AccountDeposit(address *Address, bucket ManifestB
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_deposit(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -10910,7 +10931,7 @@ func (_self *ManifestV2Builder)AccountDepositBatch(address *Address, buckets []M
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_deposit_batch(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeManifestBuilderBucketINSTANCE.Lower(buckets), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeManifestBuilderBucketINSTANCE.Lower(buckets).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -10990,7 +11011,7 @@ func (_self *ManifestV2Builder)AccountLockFeeAndWithdrawNonFungibles(address *Ad
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_lock_fee_and_withdraw_non_fungibles(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterDecimalINSTANCE.Lower(amountToLock), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterDecimalINSTANCE.Lower(amountToLock), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11006,7 +11027,7 @@ func (_self *ManifestV2Builder)AccountLockerAirdrop(address *Address, claimants 
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_locker_airdrop(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterMapStringTypeResourceSpecifierINSTANCE.Lower(claimants), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), FfiConverterBoolINSTANCE.Lower(tryDirectSend), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterMapStringTypeResourceSpecifierINSTANCE.Lower(claimants).toCRustBuffer(), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), FfiConverterBoolINSTANCE.Lower(tryDirectSend), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11038,7 +11059,7 @@ func (_self *ManifestV2Builder)AccountLockerClaimNonFungibles(address *Address, 
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_locker_claim_non_fungibles(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11086,7 +11107,7 @@ func (_self *ManifestV2Builder)AccountLockerInstantiate(ownerRole OwnerRole, sto
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_locker_instantiate(
-		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), FfiConverterAccessRuleINSTANCE.Lower(storerRole), FfiConverterAccessRuleINSTANCE.Lower(storerUpdaterRole), FfiConverterAccessRuleINSTANCE.Lower(recovererRole), FfiConverterAccessRuleINSTANCE.Lower(recovererUpdaterRole), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
+		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole).toCRustBuffer(), FfiConverterAccessRuleINSTANCE.Lower(storerRole), FfiConverterAccessRuleINSTANCE.Lower(storerUpdaterRole), FfiConverterAccessRuleINSTANCE.Lower(recovererRole), FfiConverterAccessRuleINSTANCE.Lower(recovererUpdaterRole), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11134,7 +11155,7 @@ func (_self *ManifestV2Builder)AccountLockerRecoverNonFungibles(address *Address
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_locker_recover_non_fungibles(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11150,7 +11171,7 @@ func (_self *ManifestV2Builder)AccountLockerStore(address *Address, claimant *Ad
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_locker_store(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), FfiConverterBoolINSTANCE.Lower(tryDirectSend), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(claimant), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), FfiConverterBoolINSTANCE.Lower(tryDirectSend), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11166,7 +11187,7 @@ func (_self *ManifestV2Builder)AccountRemoveAuthorizedDepositor(address *Address
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_remove_authorized_depositor(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeResourceOrNonFungibleINSTANCE.Lower(badge), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeResourceOrNonFungibleINSTANCE.Lower(badge).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11214,7 +11235,7 @@ func (_self *ManifestV2Builder)AccountSetDefaultDepositRule(address *Address, de
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_set_default_deposit_rule(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeAccountDefaultDepositRuleINSTANCE.Lower(defaultDepositRule), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeAccountDefaultDepositRuleINSTANCE.Lower(defaultDepositRule).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11230,7 +11251,7 @@ func (_self *ManifestV2Builder)AccountSetResourcePreference(address *Address, re
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_set_resource_preference(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterTypeResourcePreferenceINSTANCE.Lower(resourcePreference), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterTypeResourcePreferenceINSTANCE.Lower(resourcePreference).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11246,7 +11267,7 @@ func (_self *ManifestV2Builder)AccountTryDepositBatchOrAbort(address *Address, b
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_try_deposit_batch_or_abort(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeManifestBuilderBucketINSTANCE.Lower(buckets), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeManifestBuilderBucketINSTANCE.Lower(buckets).toCRustBuffer(), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11262,7 +11283,7 @@ func (_self *ManifestV2Builder)AccountTryDepositBatchOrRefund(address *Address, 
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_try_deposit_batch_or_refund(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeManifestBuilderBucketINSTANCE.Lower(buckets), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeManifestBuilderBucketINSTANCE.Lower(buckets).toCRustBuffer(), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11278,7 +11299,7 @@ func (_self *ManifestV2Builder)AccountTryDepositEntireWorktopOrAbort(accountAddr
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_try_deposit_entire_worktop_or_abort(
-		_pointer,FfiConverterAddressINSTANCE.Lower(accountAddress), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(accountAddress), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11294,7 +11315,7 @@ func (_self *ManifestV2Builder)AccountTryDepositEntireWorktopOrRefund(accountAdd
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_try_deposit_entire_worktop_or_refund(
-		_pointer,FfiConverterAddressINSTANCE.Lower(accountAddress), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(accountAddress), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11310,7 +11331,7 @@ func (_self *ManifestV2Builder)AccountTryDepositOrAbort(address *Address, bucket
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_try_deposit_or_abort(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11326,7 +11347,7 @@ func (_self *ManifestV2Builder)AccountTryDepositOrRefund(address *Address, bucke
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_try_deposit_or_refund(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), FfiConverterOptionalTypeResourceOrNonFungibleINSTANCE.Lower(authorizedDepositorBadge).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11358,7 +11379,7 @@ func (_self *ManifestV2Builder)AccountWithdrawNonFungibles(address *Address, res
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_account_withdraw_non_fungibles(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11374,7 +11395,7 @@ func (_self *ManifestV2Builder)AddInstruction(instruction InstructionV2) (*Manif
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_add_instruction(
-		_pointer,FfiConverterTypeInstructionV2INSTANCE.Lower(instruction), _uniffiStatus)
+		_pointer,FfiConverterTypeInstructionV2INSTANCE.Lower(instruction).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11390,7 +11411,7 @@ func (_self *ManifestV2Builder)AllocateGlobalAddress(packageAddress *Address, bl
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_allocate_global_address(
-		_pointer,FfiConverterAddressINSTANCE.Lower(packageAddress), FfiConverterStringINSTANCE.Lower(blueprintName), FfiConverterTypeManifestBuilderAddressReservationINSTANCE.Lower(intoAddressReservation), FfiConverterTypeManifestBuilderNamedAddressINSTANCE.Lower(intoNamedAddress), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(packageAddress), FfiConverterStringINSTANCE.Lower(blueprintName).toCRustBuffer(), FfiConverterTypeManifestBuilderAddressReservationINSTANCE.Lower(intoAddressReservation).toCRustBuffer(), FfiConverterTypeManifestBuilderNamedAddressINSTANCE.Lower(intoNamedAddress).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11438,7 +11459,7 @@ func (_self *ManifestV2Builder)AssertWorktopContainsNonFungibles(resourceAddress
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_assert_worktop_contains_non_fungibles(
-		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11464,7 +11485,7 @@ func (_self *ManifestV2Builder)BurnResource(bucket ManifestBuilderBucket) (*Mani
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_burn_resource(
-		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11480,7 +11501,7 @@ func (_self *ManifestV2Builder)CallAccessRulesMethod(address ManifestBuilderAddr
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_call_access_rules_method(
-		_pointer,FfiConverterTypeManifestBuilderAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(methodName), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args), _uniffiStatus)
+		_pointer,FfiConverterTypeManifestBuilderAddressINSTANCE.Lower(address).toCRustBuffer(), FfiConverterStringINSTANCE.Lower(methodName).toCRustBuffer(), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11496,7 +11517,7 @@ func (_self *ManifestV2Builder)CallDirectVaultMethod(address *Address, methodNam
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_call_direct_vault_method(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(methodName), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(methodName).toCRustBuffer(), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11512,7 +11533,7 @@ func (_self *ManifestV2Builder)CallFunction(address ManifestBuilderAddress, blue
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_call_function(
-		_pointer,FfiConverterTypeManifestBuilderAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(blueprintName), FfiConverterStringINSTANCE.Lower(functionName), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args), _uniffiStatus)
+		_pointer,FfiConverterTypeManifestBuilderAddressINSTANCE.Lower(address).toCRustBuffer(), FfiConverterStringINSTANCE.Lower(blueprintName).toCRustBuffer(), FfiConverterStringINSTANCE.Lower(functionName).toCRustBuffer(), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11528,7 +11549,7 @@ func (_self *ManifestV2Builder)CallMetadataMethod(address ManifestBuilderAddress
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_call_metadata_method(
-		_pointer,FfiConverterTypeManifestBuilderAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(methodName), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args), _uniffiStatus)
+		_pointer,FfiConverterTypeManifestBuilderAddressINSTANCE.Lower(address).toCRustBuffer(), FfiConverterStringINSTANCE.Lower(methodName).toCRustBuffer(), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11544,7 +11565,7 @@ func (_self *ManifestV2Builder)CallMethod(address ManifestBuilderAddress, method
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_call_method(
-		_pointer,FfiConverterTypeManifestBuilderAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(methodName), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args), _uniffiStatus)
+		_pointer,FfiConverterTypeManifestBuilderAddressINSTANCE.Lower(address).toCRustBuffer(), FfiConverterStringINSTANCE.Lower(methodName).toCRustBuffer(), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11560,7 +11581,7 @@ func (_self *ManifestV2Builder)CallRoyaltyMethod(address ManifestBuilderAddress,
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_call_royalty_method(
-		_pointer,FfiConverterTypeManifestBuilderAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(methodName), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args), _uniffiStatus)
+		_pointer,FfiConverterTypeManifestBuilderAddressINSTANCE.Lower(address).toCRustBuffer(), FfiConverterStringINSTANCE.Lower(methodName).toCRustBuffer(), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11576,7 +11597,7 @@ func (_self *ManifestV2Builder)CloneProof(proof ManifestBuilderProof, intoProof 
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_clone_proof(
-		_pointer,FfiConverterTypeManifestBuilderProofINSTANCE.Lower(proof), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof), _uniffiStatus)
+		_pointer,FfiConverterTypeManifestBuilderProofINSTANCE.Lower(proof).toCRustBuffer(), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11592,7 +11613,7 @@ func (_self *ManifestV2Builder)CreateFungibleResourceManager(ownerRole OwnerRole
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_create_fungible_resource_manager(
-		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), FfiConverterBoolINSTANCE.Lower(trackTotalSupply), FfiConverterUint8INSTANCE.Lower(divisibility), FfiConverterOptionalDecimalINSTANCE.Lower(initialSupply), FfiConverterTypeFungibleResourceRolesINSTANCE.Lower(resourceRoles), FfiConverterTypeMetadataModuleConfigINSTANCE.Lower(metadata), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
+		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole).toCRustBuffer(), FfiConverterBoolINSTANCE.Lower(trackTotalSupply), FfiConverterUint8INSTANCE.Lower(divisibility), FfiConverterOptionalDecimalINSTANCE.Lower(initialSupply).toCRustBuffer(), FfiConverterTypeFungibleResourceRolesINSTANCE.Lower(resourceRoles).toCRustBuffer(), FfiConverterTypeMetadataModuleConfigINSTANCE.Lower(metadata).toCRustBuffer(), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11608,7 +11629,7 @@ func (_self *ManifestV2Builder)CreateProofFromAuthZoneOfAll(resourceAddress *Add
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_create_proof_from_auth_zone_of_all(
-		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11624,7 +11645,7 @@ func (_self *ManifestV2Builder)CreateProofFromAuthZoneOfAmount(resourceAddress *
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_create_proof_from_auth_zone_of_amount(
-		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11640,7 +11661,7 @@ func (_self *ManifestV2Builder)CreateProofFromAuthZoneOfNonFungibles(resourceAdd
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_create_proof_from_auth_zone_of_non_fungibles(
-		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids).toCRustBuffer(), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11656,7 +11677,7 @@ func (_self *ManifestV2Builder)CreateProofFromBucketOfAll(bucket ManifestBuilder
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_create_proof_from_bucket_of_all(
-		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof), _uniffiStatus)
+		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11672,7 +11693,7 @@ func (_self *ManifestV2Builder)CreateProofFromBucketOfAmount(amount *Decimal, bu
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_create_proof_from_bucket_of_amount(
-		_pointer,FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof), _uniffiStatus)
+		_pointer,FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11688,7 +11709,7 @@ func (_self *ManifestV2Builder)CreateProofFromBucketOfNonFungibles(ids []NonFung
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_create_proof_from_bucket_of_non_fungibles(
-		_pointer,FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof), _uniffiStatus)
+		_pointer,FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids).toCRustBuffer(), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11752,7 +11773,7 @@ func (_self *ManifestV2Builder)DropProof(proof ManifestBuilderProof) (*ManifestV
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_drop_proof(
-		_pointer,FfiConverterTypeManifestBuilderProofINSTANCE.Lower(proof), _uniffiStatus)
+		_pointer,FfiConverterTypeManifestBuilderProofINSTANCE.Lower(proof).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11816,7 +11837,7 @@ func (_self *ManifestV2Builder)IdentityCreateAdvanced(ownerRole OwnerRole) (*Man
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_identity_create_advanced(
-		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), _uniffiStatus)
+		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11848,7 +11869,7 @@ func (_self *ManifestV2Builder)MetadataGet(address *Address, key string) (*Manif
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_metadata_get(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(key), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(key).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11864,7 +11885,7 @@ func (_self *ManifestV2Builder)MetadataLock(address *Address, key string) (*Mani
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_metadata_lock(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(key), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(key).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11880,7 +11901,7 @@ func (_self *ManifestV2Builder)MetadataRemove(address *Address, key string) (*Ma
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_metadata_remove(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(key), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(key).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11896,7 +11917,7 @@ func (_self *ManifestV2Builder)MetadataSet(address *Address, key string, value M
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_metadata_set(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(key), FfiConverterTypeMetadataValueINSTANCE.Lower(value), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(key).toCRustBuffer(), FfiConverterTypeMetadataValueINSTANCE.Lower(value).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11928,7 +11949,7 @@ func (_self *ManifestV2Builder)MultiResourcePoolContribute(address *Address, buc
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_multi_resource_pool_contribute(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeManifestBuilderBucketINSTANCE.Lower(buckets), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeManifestBuilderBucketINSTANCE.Lower(buckets).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11976,7 +11997,7 @@ func (_self *ManifestV2Builder)MultiResourcePoolInstantiate(ownerRole OwnerRole,
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_multi_resource_pool_instantiate(
-		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), FfiConverterAccessRuleINSTANCE.Lower(poolManagerRule), FfiConverterSequenceAddressINSTANCE.Lower(resourceAddresses), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
+		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole).toCRustBuffer(), FfiConverterAccessRuleINSTANCE.Lower(poolManagerRule), FfiConverterSequenceAddressINSTANCE.Lower(resourceAddresses).toCRustBuffer(), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -11992,7 +12013,7 @@ func (_self *ManifestV2Builder)MultiResourcePoolProtectedDeposit(address *Addres
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_multi_resource_pool_protected_deposit(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12008,7 +12029,7 @@ func (_self *ManifestV2Builder)MultiResourcePoolProtectedWithdraw(address *Addre
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_multi_resource_pool_protected_withdraw(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeWithdrawStrategyINSTANCE.Lower(withdrawStrategy), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeWithdrawStrategyINSTANCE.Lower(withdrawStrategy).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12024,7 +12045,7 @@ func (_self *ManifestV2Builder)MultiResourcePoolRedeem(address *Address, bucket 
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_multi_resource_pool_redeem(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12040,7 +12061,7 @@ func (_self *ManifestV2Builder)OneResourcePoolContribute(address *Address, bucke
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_one_resource_pool_contribute(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12088,7 +12109,7 @@ func (_self *ManifestV2Builder)OneResourcePoolInstantiate(ownerRole OwnerRole, p
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_one_resource_pool_instantiate(
-		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), FfiConverterAccessRuleINSTANCE.Lower(poolManagerRule), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
+		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole).toCRustBuffer(), FfiConverterAccessRuleINSTANCE.Lower(poolManagerRule), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12104,7 +12125,7 @@ func (_self *ManifestV2Builder)OneResourcePoolProtectedDeposit(address *Address,
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_one_resource_pool_protected_deposit(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12120,7 +12141,7 @@ func (_self *ManifestV2Builder)OneResourcePoolProtectedWithdraw(address *Address
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_one_resource_pool_protected_withdraw(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeWithdrawStrategyINSTANCE.Lower(withdrawStrategy), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeWithdrawStrategyINSTANCE.Lower(withdrawStrategy).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12136,7 +12157,7 @@ func (_self *ManifestV2Builder)OneResourcePoolRedeem(address *Address, bucket Ma
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_one_resource_pool_redeem(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12168,7 +12189,7 @@ func (_self *ManifestV2Builder)PackagePublish(code []byte, definition []byte, me
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_package_publish(
-		_pointer,FfiConverterBytesINSTANCE.Lower(code), FfiConverterBytesINSTANCE.Lower(definition), FfiConverterMapStringTypeMetadataInitEntryINSTANCE.Lower(metadata), _uniffiStatus)
+		_pointer,FfiConverterBytesINSTANCE.Lower(code).toCRustBuffer(), FfiConverterBytesINSTANCE.Lower(definition).toCRustBuffer(), FfiConverterMapStringTypeMetadataInitEntryINSTANCE.Lower(metadata).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12184,7 +12205,7 @@ func (_self *ManifestV2Builder)PackagePublishAdvanced(ownerRole OwnerRole, code 
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_package_publish_advanced(
-		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), FfiConverterBytesINSTANCE.Lower(code), FfiConverterBytesINSTANCE.Lower(definition), FfiConverterMapStringTypeMetadataInitEntryINSTANCE.Lower(metadata), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(packageAddress), _uniffiStatus)
+		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole).toCRustBuffer(), FfiConverterBytesINSTANCE.Lower(code).toCRustBuffer(), FfiConverterBytesINSTANCE.Lower(definition).toCRustBuffer(), FfiConverterMapStringTypeMetadataInitEntryINSTANCE.Lower(metadata).toCRustBuffer(), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(packageAddress).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12200,7 +12221,7 @@ func (_self *ManifestV2Builder)PopFromAuthZone(intoProof ManifestBuilderProof) (
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_pop_from_auth_zone(
-		_pointer,FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof), _uniffiStatus)
+		_pointer,FfiConverterTypeManifestBuilderProofINSTANCE.Lower(intoProof).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12216,7 +12237,7 @@ func (_self *ManifestV2Builder)PushToAuthZone(proof ManifestBuilderProof) (*Mani
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_push_to_auth_zone(
-		_pointer,FfiConverterTypeManifestBuilderProofINSTANCE.Lower(proof), _uniffiStatus)
+		_pointer,FfiConverterTypeManifestBuilderProofINSTANCE.Lower(proof).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12232,7 +12253,7 @@ func (_self *ManifestV2Builder)ReturnToWorktop(bucket ManifestBuilderBucket) (*M
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_return_to_worktop(
-		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+		_pointer,FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12248,7 +12269,7 @@ func (_self *ManifestV2Builder)RoleAssignmentGet(address *Address, module Module
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_role_assignment_get(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeModuleIdINSTANCE.Lower(module), FfiConverterStringINSTANCE.Lower(roleKey), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeModuleIdINSTANCE.Lower(module).toCRustBuffer(), FfiConverterStringINSTANCE.Lower(roleKey).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12280,7 +12301,7 @@ func (_self *ManifestV2Builder)RoleAssignmentSet(address *Address, module Module
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_role_assignment_set(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeModuleIdINSTANCE.Lower(module), FfiConverterStringINSTANCE.Lower(roleKey), FfiConverterAccessRuleINSTANCE.Lower(rule), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeModuleIdINSTANCE.Lower(module).toCRustBuffer(), FfiConverterStringINSTANCE.Lower(roleKey).toCRustBuffer(), FfiConverterAccessRuleINSTANCE.Lower(rule), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12328,7 +12349,7 @@ func (_self *ManifestV2Builder)RoyaltyLock(address *Address, method string) (*Ma
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_royalty_lock(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(method), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(method).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12344,7 +12365,7 @@ func (_self *ManifestV2Builder)RoyaltySet(address *Address, method string, amoun
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_royalty_set(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(method), FfiConverterTypeRoyaltyAmountINSTANCE.Lower(amount), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(method).toCRustBuffer(), FfiConverterTypeRoyaltyAmountINSTANCE.Lower(amount).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12360,7 +12381,7 @@ func (_self *ManifestV2Builder)TakeAllFromWorktop(resourceAddress *Address, into
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_take_all_from_worktop(
-		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(intoBucket), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(intoBucket).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12376,7 +12397,7 @@ func (_self *ManifestV2Builder)TakeFromWorktop(resourceAddress *Address, amount 
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_take_from_worktop(
-		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(intoBucket), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(intoBucket).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12392,7 +12413,7 @@ func (_self *ManifestV2Builder)TakeNonFungiblesFromWorktop(resourceAddress *Addr
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_take_non_fungibles_from_worktop(
-		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(intoBucket), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Lower(ids).toCRustBuffer(), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(intoBucket).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12408,7 +12429,7 @@ func (_self *ManifestV2Builder)TwoResourcePoolContribute(address *Address, bucke
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_two_resource_pool_contribute(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeManifestBuilderBucketINSTANCE.Lower(buckets), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterSequenceTypeManifestBuilderBucketINSTANCE.Lower(buckets).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12456,7 +12477,7 @@ func (_self *ManifestV2Builder)TwoResourcePoolInstantiate(ownerRole OwnerRole, p
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_two_resource_pool_instantiate(
-		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole), FfiConverterAccessRuleINSTANCE.Lower(poolManagerRule), FfiConverterSequenceAddressINSTANCE.Lower(resourceAddresses), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation), _uniffiStatus)
+		_pointer,FfiConverterTypeOwnerRoleINSTANCE.Lower(ownerRole).toCRustBuffer(), FfiConverterAccessRuleINSTANCE.Lower(poolManagerRule), FfiConverterSequenceAddressINSTANCE.Lower(resourceAddresses).toCRustBuffer(), FfiConverterOptionalTypeManifestBuilderAddressReservationINSTANCE.Lower(addressReservation).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12472,7 +12493,7 @@ func (_self *ManifestV2Builder)TwoResourcePoolProtectedDeposit(address *Address,
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_two_resource_pool_protected_deposit(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12488,7 +12509,7 @@ func (_self *ManifestV2Builder)TwoResourcePoolProtectedWithdraw(address *Address
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_two_resource_pool_protected_withdraw(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeWithdrawStrategyINSTANCE.Lower(withdrawStrategy), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterDecimalINSTANCE.Lower(amount), FfiConverterTypeWithdrawStrategyINSTANCE.Lower(withdrawStrategy).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12504,7 +12525,7 @@ func (_self *ManifestV2Builder)TwoResourcePoolRedeem(address *Address, bucket Ma
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_two_resource_pool_redeem(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12520,7 +12541,7 @@ func (_self *ManifestV2Builder)UseChild(subintentHash *TransactionHash, name Man
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_use_child(
-		_pointer,FfiConverterTransactionHashINSTANCE.Lower(subintentHash), FfiConverterTypeManifestBuilderIntentINSTANCE.Lower(name), _uniffiStatus)
+		_pointer,FfiConverterTransactionHashINSTANCE.Lower(subintentHash), FfiConverterTypeManifestBuilderIntentINSTANCE.Lower(name).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12552,7 +12573,7 @@ func (_self *ManifestV2Builder)ValidatorClaimXrd(address *Address, bucket Manife
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_validator_claim_xrd(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(bucket).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12616,7 +12637,7 @@ func (_self *ManifestV2Builder)ValidatorLockOwnerStakeUnits(address *Address, st
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_validator_lock_owner_stake_units(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(stakeUnitBucket), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(stakeUnitBucket).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12648,7 +12669,7 @@ func (_self *ManifestV2Builder)ValidatorSignalProtocolUpdateReadiness(address *A
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_validator_signal_protocol_update_readiness(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(vote), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterStringINSTANCE.Lower(vote).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12664,7 +12685,7 @@ func (_self *ManifestV2Builder)ValidatorStake(address *Address, stake ManifestBu
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_validator_stake(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(stake), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(stake).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12680,7 +12701,7 @@ func (_self *ManifestV2Builder)ValidatorStakeAsOwner(address *Address, stake Man
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_validator_stake_as_owner(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(stake), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(stake).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12760,7 +12781,7 @@ func (_self *ManifestV2Builder)ValidatorUnstake(address *Address, stakeUnitBucke
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_validator_unstake(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(stakeUnitBucket), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypeManifestBuilderBucketINSTANCE.Lower(stakeUnitBucket).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12808,7 +12829,7 @@ func (_self *ManifestV2Builder)ValidatorUpdateKey(address *Address, key PublicKe
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_validator_update_key(
-		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypePublicKeyINSTANCE.Lower(key), _uniffiStatus)
+		_pointer,FfiConverterAddressINSTANCE.Lower(address), FfiConverterTypePublicKeyINSTANCE.Lower(key).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12840,7 +12861,7 @@ func (_self *ManifestV2Builder)YieldToChild(name ManifestBuilderIntent, args []M
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_yield_to_child(
-		_pointer,FfiConverterTypeManifestBuilderIntentINSTANCE.Lower(name), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args), _uniffiStatus)
+		_pointer,FfiConverterTypeManifestBuilderIntentINSTANCE.Lower(name).toCRustBuffer(), FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12856,7 +12877,7 @@ func (_self *ManifestV2Builder)YieldToParent(args []ManifestBuilderValue) (*Mani
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_manifestv2builder_yield_to_parent(
-		_pointer,FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args), _uniffiStatus)
+		_pointer,FfiConverterSequenceTypeManifestBuilderValueINSTANCE.Lower(args).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *ManifestV2Builder
@@ -12918,7 +12939,7 @@ type NonFungibleGlobalId struct {
 }
 func NewNonFungibleGlobalId(nonFungibleGlobalId string) (*NonFungibleGlobalId, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_nonfungibleglobalid_new(FfiConverterStringINSTANCE.Lower(nonFungibleGlobalId), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_nonfungibleglobalid_new(FfiConverterStringINSTANCE.Lower(nonFungibleGlobalId).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *NonFungibleGlobalId
@@ -12931,7 +12952,7 @@ func NewNonFungibleGlobalId(nonFungibleGlobalId string) (*NonFungibleGlobalId, e
 
 func NonFungibleGlobalIdFromParts(resourceAddress *Address, nonFungibleLocalId NonFungibleLocalId) (*NonFungibleGlobalId, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_nonfungibleglobalid_from_parts(FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterTypeNonFungibleLocalIdINSTANCE.Lower(nonFungibleLocalId), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_nonfungibleglobalid_from_parts(FfiConverterAddressINSTANCE.Lower(resourceAddress), FfiConverterTypeNonFungibleLocalIdINSTANCE.Lower(nonFungibleLocalId).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *NonFungibleGlobalId
@@ -12943,7 +12964,7 @@ func NonFungibleGlobalIdFromParts(resourceAddress *Address, nonFungibleLocalId N
 
 func NonFungibleGlobalIdGlobalCallerBadgeFromBlueprintId(packageAddress *Address, blueprintName string, networkId uint8) (*NonFungibleGlobalId, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_nonfungibleglobalid_global_caller_badge_from_blueprint_id(FfiConverterAddressINSTANCE.Lower(packageAddress), FfiConverterStringINSTANCE.Lower(blueprintName), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_nonfungibleglobalid_global_caller_badge_from_blueprint_id(FfiConverterAddressINSTANCE.Lower(packageAddress), FfiConverterStringINSTANCE.Lower(blueprintName).toCRustBuffer(), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *NonFungibleGlobalId
@@ -12979,7 +13000,7 @@ func NonFungibleGlobalIdPackageOfDirectCallerBadge(packageAddress *Address, netw
 
 func NonFungibleGlobalIdSignatureBadge(publicKey PublicKey, networkId uint8) (*NonFungibleGlobalId, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_nonfungibleglobalid_signature_badge(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_nonfungibleglobalid_signature_badge(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey).toCRustBuffer(), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *NonFungibleGlobalId
@@ -12995,8 +13016,8 @@ func (_self *NonFungibleGlobalId)AsStr() string {
 	_pointer := _self.ffiObject.incrementPointer("*NonFungibleGlobalId")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterStringINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_nonfungibleglobalid_as_str(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_nonfungibleglobalid_as_str(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -13025,8 +13046,8 @@ func (_self *NonFungibleGlobalId)LocalId() NonFungibleLocalId {
 	_pointer := _self.ffiObject.incrementPointer("*NonFungibleGlobalId")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterTypeNonFungibleLocalIdINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_nonfungibleglobalid_local_id(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_nonfungibleglobalid_local_id(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -13092,14 +13113,14 @@ type NotarizedTransactionV1 struct {
 }
 func NewNotarizedTransactionV1(signedIntent *SignedTransactionIntentV1, notarySignature SignatureV1) *NotarizedTransactionV1 {
 	return FfiConverterNotarizedTransactionV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_notarizedtransactionv1_new(FfiConverterSignedTransactionIntentV1INSTANCE.Lower(signedIntent), FfiConverterTypeSignatureV1INSTANCE.Lower(notarySignature), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_notarizedtransactionv1_new(FfiConverterSignedTransactionIntentV1INSTANCE.Lower(signedIntent), FfiConverterTypeSignatureV1INSTANCE.Lower(notarySignature).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
 
 func NotarizedTransactionV1FromPayloadBytes(compiledNotarizedTransaction []byte) (*NotarizedTransactionV1, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_notarizedtransactionv1_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiledNotarizedTransaction), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_notarizedtransactionv1_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiledNotarizedTransaction).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *NotarizedTransactionV1
@@ -13163,8 +13184,8 @@ func (_self *NotarizedTransactionV1)NotarySignature() SignatureV1 {
 	_pointer := _self.ffiObject.incrementPointer("*NotarizedTransactionV1")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterTypeSignatureV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv1_notary_signature(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv1_notary_signature(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -13199,8 +13220,8 @@ func (_self *NotarizedTransactionV1)SignerPublicKeys() ([]PublicKey, error) {
 	_pointer := _self.ffiObject.incrementPointer("*NotarizedTransactionV1")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv1_signer_public_keys(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv1_signer_public_keys(
+		_pointer, _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue []PublicKey
@@ -13227,8 +13248,8 @@ func (_self *NotarizedTransactionV1)ToPayloadBytes() ([]byte, error) {
 	_pointer := _self.ffiObject.incrementPointer("*NotarizedTransactionV1")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv1_to_payload_bytes(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv1_to_payload_bytes(
+		_pointer, _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue []byte
@@ -13290,14 +13311,14 @@ type NotarizedTransactionV2 struct {
 }
 func NewNotarizedTransactionV2(signedTransactionIntent *SignedTransactionIntentV2, notarySignature SignatureV1) *NotarizedTransactionV2 {
 	return FfiConverterNotarizedTransactionV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_notarizedtransactionv2_new(FfiConverterSignedTransactionIntentV2INSTANCE.Lower(signedTransactionIntent), FfiConverterTypeSignatureV1INSTANCE.Lower(notarySignature), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_notarizedtransactionv2_new(FfiConverterSignedTransactionIntentV2INSTANCE.Lower(signedTransactionIntent), FfiConverterTypeSignatureV1INSTANCE.Lower(notarySignature).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
 
 func NotarizedTransactionV2FromPayloadBytes(compiledNotarizedTransaction []byte) (*NotarizedTransactionV2, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_notarizedtransactionv2_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiledNotarizedTransaction), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_notarizedtransactionv2_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiledNotarizedTransaction).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *NotarizedTransactionV2
@@ -13361,8 +13382,8 @@ func (_self *NotarizedTransactionV2)NotarySignature() SignatureV1 {
 	_pointer := _self.ffiObject.incrementPointer("*NotarizedTransactionV2")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterTypeSignatureV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv2_notary_signature(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv2_notary_signature(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -13397,8 +13418,8 @@ func (_self *NotarizedTransactionV2)SignerPublicKeys() ([]PublicKey, error) {
 	_pointer := _self.ffiObject.incrementPointer("*NotarizedTransactionV2")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv2_signer_public_keys(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv2_signer_public_keys(
+		_pointer, _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue []PublicKey
@@ -13425,8 +13446,8 @@ func (_self *NotarizedTransactionV2)ToPayloadBytes() ([]byte, error) {
 	_pointer := _self.ffiObject.incrementPointer("*NotarizedTransactionV2")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv2_to_payload_bytes(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_notarizedtransactionv2_to_payload_bytes(
+		_pointer, _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue []byte
@@ -13488,7 +13509,7 @@ type OlympiaAddress struct {
 }
 func NewOlympiaAddress(address string) *OlympiaAddress {
 	return FfiConverterOlympiaAddressINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_olympiaaddress_new(FfiConverterStringINSTANCE.Lower(address), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_olympiaaddress_new(FfiConverterStringINSTANCE.Lower(address).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
@@ -13499,8 +13520,8 @@ func (_self *OlympiaAddress)AsStr() string {
 	_pointer := _self.ffiObject.incrementPointer("*OlympiaAddress")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterStringINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_olympiaaddress_as_str(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_olympiaaddress_as_str(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -13509,8 +13530,8 @@ func (_self *OlympiaAddress)PublicKey() (PublicKey, error) {
 	_pointer := _self.ffiObject.incrementPointer("*OlympiaAddress")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_olympiaaddress_public_key(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_olympiaaddress_public_key(
+		_pointer, _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue PublicKey
@@ -13572,14 +13593,14 @@ type PartialTransactionV2 struct {
 }
 func NewPartialTransactionV2(rootSubintent *SubintentV2, nonRootSubintents []*SubintentV2) *PartialTransactionV2 {
 	return FfiConverterPartialTransactionV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_partialtransactionv2_new(FfiConverterSubintentV2INSTANCE.Lower(rootSubintent), FfiConverterSequenceSubintentV2INSTANCE.Lower(nonRootSubintents), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_partialtransactionv2_new(FfiConverterSubintentV2INSTANCE.Lower(rootSubintent), FfiConverterSequenceSubintentV2INSTANCE.Lower(nonRootSubintents).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
 
 func PartialTransactionV2FromPayloadBytes(compiledIntent []byte) (*PartialTransactionV2, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_partialtransactionv2_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiledIntent), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_partialtransactionv2_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiledIntent).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *PartialTransactionV2
@@ -13595,8 +13616,8 @@ func (_self *PartialTransactionV2)NonRootSubintents() []*SubintentV2 {
 	_pointer := _self.ffiObject.incrementPointer("*PartialTransactionV2")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSequenceSubintentV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_partialtransactionv2_non_root_subintents(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_partialtransactionv2_non_root_subintents(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -13631,8 +13652,8 @@ func (_self *PartialTransactionV2)ToPayloadBytes() ([]byte, error) {
 	_pointer := _self.ffiObject.incrementPointer("*PartialTransactionV2")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_partialtransactionv2_to_payload_bytes(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_partialtransactionv2_to_payload_bytes(
+		_pointer, _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue []byte
@@ -13732,7 +13753,7 @@ func (_self *PartialTransactionV2Builder)IntentHeader(intentHeader IntentHeaderV
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterPartialTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_partialtransactionv2builder_intent_header(
-		_pointer,FfiConverterTypeIntentHeaderV2INSTANCE.Lower(intentHeader), _uniffiStatus)
+		_pointer,FfiConverterTypeIntentHeaderV2INSTANCE.Lower(intentHeader).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
@@ -13752,7 +13773,7 @@ func (_self *PartialTransactionV2Builder)Message(message MessageV2) *PartialTran
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterPartialTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_partialtransactionv2builder_message(
-		_pointer,FfiConverterTypeMessageV2INSTANCE.Lower(message), _uniffiStatus)
+		_pointer,FfiConverterTypeMessageV2INSTANCE.Lower(message).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
@@ -13808,7 +13829,7 @@ type PreciseDecimal struct {
 }
 func NewPreciseDecimal(value string) (*PreciseDecimal, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_precisedecimal_new(FfiConverterStringINSTANCE.Lower(value), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_precisedecimal_new(FfiConverterStringINSTANCE.Lower(value).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *PreciseDecimal
@@ -13821,7 +13842,7 @@ func NewPreciseDecimal(value string) (*PreciseDecimal, error) {
 
 func PreciseDecimalFromLeBytes(value []byte) *PreciseDecimal {
 	return FfiConverterPreciseDecimalINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_precisedecimal_from_le_bytes(FfiConverterBytesINSTANCE.Lower(value), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_precisedecimal_from_le_bytes(FfiConverterBytesINSTANCE.Lower(value).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
@@ -13887,8 +13908,8 @@ func (_self *PreciseDecimal)AsStr() string {
 	_pointer := _self.ffiObject.incrementPointer("*PreciseDecimal")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterStringINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_precisedecimal_as_str(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_precisedecimal_as_str(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -14041,8 +14062,8 @@ func (_self *PreciseDecimal)Mantissa() string {
 	_pointer := _self.ffiObject.incrementPointer("*PreciseDecimal")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterStringINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_precisedecimal_mantissa(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_precisedecimal_mantissa(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -14077,8 +14098,8 @@ func (_self *PreciseDecimal)NthRoot(n uint32) **PreciseDecimal {
 	_pointer := _self.ffiObject.incrementPointer("*PreciseDecimal")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalPreciseDecimalINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_precisedecimal_nth_root(
-		_pointer,FfiConverterUint32INSTANCE.Lower(n), _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_precisedecimal_nth_root(
+		_pointer,FfiConverterUint32INSTANCE.Lower(n), _uniffiStatus))
 	}))
 }
 
@@ -14104,7 +14125,7 @@ func (_self *PreciseDecimal)Round(decimalPlaces int32, roundingMode RoundingMode
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_precisedecimal_round(
-		_pointer,FfiConverterInt32INSTANCE.Lower(decimalPlaces), FfiConverterTypeRoundingModeINSTANCE.Lower(roundingMode), _uniffiStatus)
+		_pointer,FfiConverterInt32INSTANCE.Lower(decimalPlaces), FfiConverterTypeRoundingModeINSTANCE.Lower(roundingMode).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *PreciseDecimal
@@ -14119,8 +14140,8 @@ func (_self *PreciseDecimal)Sqrt() **PreciseDecimal {
 	_pointer := _self.ffiObject.incrementPointer("*PreciseDecimal")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalPreciseDecimalINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_precisedecimal_sqrt(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_precisedecimal_sqrt(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -14145,8 +14166,8 @@ func (_self *PreciseDecimal)ToLeBytes() []byte {
 	_pointer := _self.ffiObject.incrementPointer("*PreciseDecimal")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBytesINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_precisedecimal_to_le_bytes(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_precisedecimal_to_le_bytes(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -14202,7 +14223,7 @@ type PreviewPartialTransactionV2 struct {
 }
 func NewPreviewPartialTransactionV2(partialTransaction *PartialTransactionV2, rootSubintentSigners []PublicKey, nonRootSubintentSigners [][]PublicKey) *PreviewPartialTransactionV2 {
 	return FfiConverterPreviewPartialTransactionV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_previewpartialtransactionv2_new(FfiConverterPartialTransactionV2INSTANCE.Lower(partialTransaction), FfiConverterSequenceTypePublicKeyINSTANCE.Lower(rootSubintentSigners), FfiConverterSequenceSequenceTypePublicKeyINSTANCE.Lower(nonRootSubintentSigners), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_previewpartialtransactionv2_new(FfiConverterPartialTransactionV2INSTANCE.Lower(partialTransaction), FfiConverterSequenceTypePublicKeyINSTANCE.Lower(rootSubintentSigners).toCRustBuffer(), FfiConverterSequenceSequenceTypePublicKeyINSTANCE.Lower(nonRootSubintentSigners).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
@@ -14213,8 +14234,8 @@ func (_self *PreviewPartialTransactionV2)NonRootSubintentSigners() [][]PublicKey
 	_pointer := _self.ffiObject.incrementPointer("*PreviewPartialTransactionV2")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSequenceSequenceTypePublicKeyINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewpartialtransactionv2_non_root_subintent_signers(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewpartialtransactionv2_non_root_subintent_signers(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -14249,8 +14270,8 @@ func (_self *PreviewPartialTransactionV2)RootSubintentSigners() []PublicKey {
 	_pointer := _self.ffiObject.incrementPointer("*PreviewPartialTransactionV2")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSequenceTypePublicKeyINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewpartialtransactionv2_root_subintent_signers(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewpartialtransactionv2_root_subintent_signers(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -14328,7 +14349,7 @@ func (_self *PreviewPartialTransactionV2Builder)AddRootSubintentSigner(signer Pu
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterPreviewPartialTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewpartialtransactionv2builder_add_root_subintent_signer(
-		_pointer,FfiConverterTypePublicKeyINSTANCE.Lower(signer), _uniffiStatus)
+		_pointer,FfiConverterTypePublicKeyINSTANCE.Lower(signer).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
@@ -14354,7 +14375,7 @@ func (_self *PreviewPartialTransactionV2Builder)IntentHeader(intentHeader Intent
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterPreviewPartialTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewpartialtransactionv2builder_intent_header(
-		_pointer,FfiConverterTypeIntentHeaderV2INSTANCE.Lower(intentHeader), _uniffiStatus)
+		_pointer,FfiConverterTypeIntentHeaderV2INSTANCE.Lower(intentHeader).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
@@ -14374,7 +14395,7 @@ func (_self *PreviewPartialTransactionV2Builder)Message(message MessageV2) *Prev
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterPreviewPartialTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewpartialtransactionv2builder_message(
-		_pointer,FfiConverterTypeMessageV2INSTANCE.Lower(message), _uniffiStatus)
+		_pointer,FfiConverterTypeMessageV2INSTANCE.Lower(message).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
@@ -14452,7 +14473,7 @@ func (_self *PreviewTransactionV2Builder)AddRootIntentSigner(signer PublicKey) *
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterPreviewTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewtransactionv2builder_add_root_intent_signer(
-		_pointer,FfiConverterTypePublicKeyINSTANCE.Lower(signer), _uniffiStatus)
+		_pointer,FfiConverterTypePublicKeyINSTANCE.Lower(signer).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
@@ -14461,8 +14482,8 @@ func (_self *PreviewTransactionV2Builder)Build() ([]byte, error) {
 	_pointer := _self.ffiObject.incrementPointer("*PreviewTransactionV2Builder")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewtransactionv2builder_build(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewtransactionv2builder_build(
+		_pointer, _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue []byte
@@ -14478,7 +14499,7 @@ func (_self *PreviewTransactionV2Builder)IntentHeader(intentHeader IntentHeaderV
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterPreviewTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewtransactionv2builder_intent_header(
-		_pointer,FfiConverterTypeIntentHeaderV2INSTANCE.Lower(intentHeader), _uniffiStatus)
+		_pointer,FfiConverterTypeIntentHeaderV2INSTANCE.Lower(intentHeader).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
@@ -14498,7 +14519,7 @@ func (_self *PreviewTransactionV2Builder)Message(message MessageV2) *PreviewTran
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterPreviewTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewtransactionv2builder_message(
-		_pointer,FfiConverterTypeMessageV2INSTANCE.Lower(message), _uniffiStatus)
+		_pointer,FfiConverterTypeMessageV2INSTANCE.Lower(message).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
@@ -14508,7 +14529,7 @@ func (_self *PreviewTransactionV2Builder)TransactionHeader(transactionHeader Tra
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterPreviewTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_previewtransactionv2builder_transaction_header(
-		_pointer,FfiConverterTypeTransactionHeaderV2INSTANCE.Lower(transactionHeader), _uniffiStatus)
+		_pointer,FfiConverterTypeTransactionHeaderV2INSTANCE.Lower(transactionHeader).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
@@ -14564,7 +14585,7 @@ type PrivateKey struct {
 }
 func NewPrivateKey(bytes []byte, curve Curve) (*PrivateKey, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_privatekey_new(FfiConverterBytesINSTANCE.Lower(bytes), FfiConverterTypeCurveINSTANCE.Lower(curve), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_privatekey_new(FfiConverterBytesINSTANCE.Lower(bytes).toCRustBuffer(), FfiConverterTypeCurveINSTANCE.Lower(curve).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *PrivateKey
@@ -14577,7 +14598,7 @@ func NewPrivateKey(bytes []byte, curve Curve) (*PrivateKey, error) {
 
 func PrivateKeyNewEd25519(bytes []byte) (*PrivateKey, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_privatekey_new_ed25519(FfiConverterBytesINSTANCE.Lower(bytes), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_privatekey_new_ed25519(FfiConverterBytesINSTANCE.Lower(bytes).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *PrivateKey
@@ -14589,7 +14610,7 @@ func PrivateKeyNewEd25519(bytes []byte) (*PrivateKey, error) {
 
 func PrivateKeyNewSecp256k1(bytes []byte) (*PrivateKey, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_privatekey_new_secp256k1(FfiConverterBytesINSTANCE.Lower(bytes), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_privatekey_new_secp256k1(FfiConverterBytesINSTANCE.Lower(bytes).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *PrivateKey
@@ -14605,8 +14626,8 @@ func (_self *PrivateKey)Curve() Curve {
 	_pointer := _self.ffiObject.incrementPointer("*PrivateKey")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterTypeCurveINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_privatekey_curve(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_privatekey_curve(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -14615,8 +14636,8 @@ func (_self *PrivateKey)PublicKey() PublicKey {
 	_pointer := _self.ffiObject.incrementPointer("*PrivateKey")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterTypePublicKeyINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_privatekey_public_key(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_privatekey_public_key(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -14625,8 +14646,8 @@ func (_self *PrivateKey)PublicKeyBytes() []byte {
 	_pointer := _self.ffiObject.incrementPointer("*PrivateKey")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBytesINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_privatekey_public_key_bytes(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_privatekey_public_key_bytes(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -14635,8 +14656,8 @@ func (_self *PrivateKey)Raw() []byte {
 	_pointer := _self.ffiObject.incrementPointer("*PrivateKey")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBytesINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_privatekey_raw(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_privatekey_raw(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -14645,8 +14666,8 @@ func (_self *PrivateKey)RawHex() string {
 	_pointer := _self.ffiObject.incrementPointer("*PrivateKey")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterStringINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_privatekey_raw_hex(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_privatekey_raw_hex(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -14655,8 +14676,8 @@ func (_self *PrivateKey)Sign(hash *Hash) []byte {
 	_pointer := _self.ffiObject.incrementPointer("*PrivateKey")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBytesINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_privatekey_sign(
-		_pointer,FfiConverterHashINSTANCE.Lower(hash), _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_privatekey_sign(
+		_pointer,FfiConverterHashINSTANCE.Lower(hash), _uniffiStatus))
 	}))
 }
 
@@ -14665,8 +14686,8 @@ func (_self *PrivateKey)SignToSignature(hash *Hash) SignatureV1 {
 	_pointer := _self.ffiObject.incrementPointer("*PrivateKey")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterTypeSignatureV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_privatekey_sign_to_signature(
-		_pointer,FfiConverterHashINSTANCE.Lower(hash), _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_privatekey_sign_to_signature(
+		_pointer,FfiConverterHashINSTANCE.Lower(hash), _uniffiStatus))
 	}))
 }
 
@@ -14675,8 +14696,8 @@ func (_self *PrivateKey)SignToSignatureWithPublicKey(hash *Hash) SignatureWithPu
 	_pointer := _self.ffiObject.incrementPointer("*PrivateKey")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterTypeSignatureWithPublicKeyV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_privatekey_sign_to_signature_with_public_key(
-		_pointer,FfiConverterHashINSTANCE.Lower(hash), _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_privatekey_sign_to_signature_with_public_key(
+		_pointer,FfiConverterHashINSTANCE.Lower(hash), _uniffiStatus))
 	}))
 }
 
@@ -14732,14 +14753,14 @@ type SignedPartialTransactionV2 struct {
 }
 func NewSignedPartialTransactionV2(partialTransaction *PartialTransactionV2, rootSubintentSignatures []SignatureWithPublicKeyV1, nonRootSubintentSignatures [][]SignatureWithPublicKeyV1) *SignedPartialTransactionV2 {
 	return FfiConverterSignedPartialTransactionV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_signedpartialtransactionv2_new(FfiConverterPartialTransactionV2INSTANCE.Lower(partialTransaction), FfiConverterSequenceTypeSignatureWithPublicKeyV1INSTANCE.Lower(rootSubintentSignatures), FfiConverterSequenceSequenceTypeSignatureWithPublicKeyV1INSTANCE.Lower(nonRootSubintentSignatures), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_signedpartialtransactionv2_new(FfiConverterPartialTransactionV2INSTANCE.Lower(partialTransaction), FfiConverterSequenceTypeSignatureWithPublicKeyV1INSTANCE.Lower(rootSubintentSignatures).toCRustBuffer(), FfiConverterSequenceSequenceTypeSignatureWithPublicKeyV1INSTANCE.Lower(nonRootSubintentSignatures).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
 
 func SignedPartialTransactionV2FromPayloadBytes(compiledIntent []byte) (*SignedPartialTransactionV2, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_signedpartialtransactionv2_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiledIntent), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_signedpartialtransactionv2_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiledIntent).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *SignedPartialTransactionV2
@@ -14755,8 +14776,8 @@ func (_self *SignedPartialTransactionV2)NonRootSubintentSignatures() [][]Signatu
 	_pointer := _self.ffiObject.incrementPointer("*SignedPartialTransactionV2")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSequenceSequenceTypeSignatureWithPublicKeyV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedpartialtransactionv2_non_root_subintent_signatures(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedpartialtransactionv2_non_root_subintent_signatures(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -14791,8 +14812,8 @@ func (_self *SignedPartialTransactionV2)RootSubintentSignatures() []SignatureWit
 	_pointer := _self.ffiObject.incrementPointer("*SignedPartialTransactionV2")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSequenceTypeSignatureWithPublicKeyV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedpartialtransactionv2_root_subintent_signatures(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedpartialtransactionv2_root_subintent_signatures(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -14813,8 +14834,8 @@ func (_self *SignedPartialTransactionV2)ToPayloadBytes() ([]byte, error) {
 	_pointer := _self.ffiObject.incrementPointer("*SignedPartialTransactionV2")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedpartialtransactionv2_to_payload_bytes(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedpartialtransactionv2_to_payload_bytes(
+		_pointer, _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue []byte
@@ -14898,7 +14919,7 @@ func (_self *SignedPartialTransactionV2Builder)IntentHeader(intentHeader IntentH
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSignedPartialTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedpartialtransactionv2builder_intent_header(
-		_pointer,FfiConverterTypeIntentHeaderV2INSTANCE.Lower(intentHeader), _uniffiStatus)
+		_pointer,FfiConverterTypeIntentHeaderV2INSTANCE.Lower(intentHeader).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
@@ -14918,7 +14939,7 @@ func (_self *SignedPartialTransactionV2Builder)Message(message MessageV2) *Signe
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSignedPartialTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedpartialtransactionv2builder_message(
-		_pointer,FfiConverterTypeMessageV2INSTANCE.Lower(message), _uniffiStatus)
+		_pointer,FfiConverterTypeMessageV2INSTANCE.Lower(message).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
@@ -15073,14 +15094,14 @@ type SignedTransactionIntentV1 struct {
 }
 func NewSignedTransactionIntentV1(intent *IntentV1, intentSignatures []SignatureWithPublicKeyV1) *SignedTransactionIntentV1 {
 	return FfiConverterSignedTransactionIntentV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_signedtransactionintentv1_new(FfiConverterIntentV1INSTANCE.Lower(intent), FfiConverterSequenceTypeSignatureWithPublicKeyV1INSTANCE.Lower(intentSignatures), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_signedtransactionintentv1_new(FfiConverterIntentV1INSTANCE.Lower(intent), FfiConverterSequenceTypeSignatureWithPublicKeyV1INSTANCE.Lower(intentSignatures).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
 
 func SignedTransactionIntentV1FromPayloadBytes(compiledSignedIntent []byte) (*SignedTransactionIntentV1, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_signedtransactionintentv1_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiledSignedIntent), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_signedtransactionintentv1_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiledSignedIntent).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *SignedTransactionIntentV1
@@ -15138,8 +15159,8 @@ func (_self *SignedTransactionIntentV1)IntentSignatures() []SignatureWithPublicK
 	_pointer := _self.ffiObject.incrementPointer("*SignedTransactionIntentV1")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSequenceTypeSignatureWithPublicKeyV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedtransactionintentv1_intent_signatures(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedtransactionintentv1_intent_signatures(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -15176,8 +15197,8 @@ func (_self *SignedTransactionIntentV1)ToPayloadBytes() ([]byte, error) {
 	_pointer := _self.ffiObject.incrementPointer("*SignedTransactionIntentV1")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedtransactionintentv1_to_payload_bytes(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedtransactionintentv1_to_payload_bytes(
+		_pointer, _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue []byte
@@ -15239,14 +15260,14 @@ type SignedTransactionIntentV2 struct {
 }
 func NewSignedTransactionIntentV2(transactionIntent *TransactionIntentV2, transactionIntentSignatures []SignatureWithPublicKeyV1, nonRootSubintentSignatures [][]SignatureWithPublicKeyV1) *SignedTransactionIntentV2 {
 	return FfiConverterSignedTransactionIntentV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_signedtransactionintentv2_new(FfiConverterTransactionIntentV2INSTANCE.Lower(transactionIntent), FfiConverterSequenceTypeSignatureWithPublicKeyV1INSTANCE.Lower(transactionIntentSignatures), FfiConverterSequenceSequenceTypeSignatureWithPublicKeyV1INSTANCE.Lower(nonRootSubintentSignatures), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_signedtransactionintentv2_new(FfiConverterTransactionIntentV2INSTANCE.Lower(transactionIntent), FfiConverterSequenceTypeSignatureWithPublicKeyV1INSTANCE.Lower(transactionIntentSignatures).toCRustBuffer(), FfiConverterSequenceSequenceTypeSignatureWithPublicKeyV1INSTANCE.Lower(nonRootSubintentSignatures).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
 
 func SignedTransactionIntentV2FromPayloadBytes(compiledSignedIntent []byte) (*SignedTransactionIntentV2, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_signedtransactionintentv2_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiledSignedIntent), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_signedtransactionintentv2_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiledSignedIntent).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *SignedTransactionIntentV2
@@ -15310,8 +15331,8 @@ func (_self *SignedTransactionIntentV2)ToPayloadBytes() ([]byte, error) {
 	_pointer := _self.ffiObject.incrementPointer("*SignedTransactionIntentV2")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedtransactionintentv2_to_payload_bytes(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedtransactionintentv2_to_payload_bytes(
+		_pointer, _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue []byte
@@ -15336,8 +15357,8 @@ func (_self *SignedTransactionIntentV2)TransactionIntentSignatures() []Signature
 	_pointer := _self.ffiObject.incrementPointer("*SignedTransactionIntentV2")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSequenceTypeSignatureWithPublicKeyV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedtransactionintentv2_transaction_intent_signatures(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_signedtransactionintentv2_transaction_intent_signatures(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -15393,14 +15414,14 @@ type SubintentManifestV2 struct {
 }
 func NewSubintentManifestV2(instructions *InstructionsV2, blobs [][]byte, children []*Hash) *SubintentManifestV2 {
 	return FfiConverterSubintentManifestV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_subintentmanifestv2_new(FfiConverterInstructionsV2INSTANCE.Lower(instructions), FfiConverterSequenceBytesINSTANCE.Lower(blobs), FfiConverterSequenceHashINSTANCE.Lower(children), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_subintentmanifestv2_new(FfiConverterInstructionsV2INSTANCE.Lower(instructions), FfiConverterSequenceBytesINSTANCE.Lower(blobs).toCRustBuffer(), FfiConverterSequenceHashINSTANCE.Lower(children).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
 
 func SubintentManifestV2FromPayloadBytes(compiled []byte, networkId uint8) (*SubintentManifestV2, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_subintentmanifestv2_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiled), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_subintentmanifestv2_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiled).toCRustBuffer(), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *SubintentManifestV2
@@ -15416,8 +15437,8 @@ func (_self *SubintentManifestV2)AsEnclosed(networkId uint8) **TransactionManife
 	_pointer := _self.ffiObject.incrementPointer("*SubintentManifestV2")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalTransactionManifestV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_subintentmanifestv2_as_enclosed(
-		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_subintentmanifestv2_as_enclosed(
+		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus))
 	}))
 }
 
@@ -15426,8 +15447,8 @@ func (_self *SubintentManifestV2)Blobs() [][]byte {
 	_pointer := _self.ffiObject.incrementPointer("*SubintentManifestV2")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSequenceBytesINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_subintentmanifestv2_blobs(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_subintentmanifestv2_blobs(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -15436,8 +15457,8 @@ func (_self *SubintentManifestV2)ExtractAddresses() map[EntityType][]*Address {
 	_pointer := _self.ffiObject.incrementPointer("*SubintentManifestV2")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterMapTypeEntityTypeSequenceAddressINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_subintentmanifestv2_extract_addresses(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_subintentmanifestv2_extract_addresses(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -15456,8 +15477,8 @@ func (_self *SubintentManifestV2)StaticAnalysis(networkId uint8) (StaticAnalysis
 	_pointer := _self.ffiObject.incrementPointer("*SubintentManifestV2")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_subintentmanifestv2_static_analysis(
-		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_subintentmanifestv2_static_analysis(
+		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue StaticAnalysisWithResourceMovements
@@ -15484,8 +15505,8 @@ func (_self *SubintentManifestV2)ToPayloadBytes() ([]byte, error) {
 	_pointer := _self.ffiObject.incrementPointer("*SubintentManifestV2")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_subintentmanifestv2_to_payload_bytes(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_subintentmanifestv2_to_payload_bytes(
+		_pointer, _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue []byte
@@ -15554,7 +15575,7 @@ func NewSubintentV2(intentCore *IntentCoreV2) *SubintentV2 {
 
 func SubintentV2FromPayloadBytes(compiledIntent []byte) (*SubintentV2, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_subintentv2_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiledIntent), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_subintentv2_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiledIntent).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *SubintentV2
@@ -15635,7 +15656,7 @@ type TransactionHash struct {
 
 func TransactionHashFromStr(string string, networkId uint8) (*TransactionHash, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_transactionhash_from_str(FfiConverterStringINSTANCE.Lower(string), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_transactionhash_from_str(FfiConverterStringINSTANCE.Lower(string).toCRustBuffer(), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *TransactionHash
@@ -15661,8 +15682,8 @@ func (_self *TransactionHash)AsStr() string {
 	_pointer := _self.ffiObject.incrementPointer("*TransactionHash")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterStringINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionhash_as_str(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionhash_as_str(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -15671,8 +15692,8 @@ func (_self *TransactionHash)Bytes() []byte {
 	_pointer := _self.ffiObject.incrementPointer("*TransactionHash")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBytesINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionhash_bytes(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionhash_bytes(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -15738,14 +15759,14 @@ type TransactionIntentV2 struct {
 }
 func NewTransactionIntentV2(transactionHeader TransactionHeaderV2, rootIntentCore *IntentCoreV2, nonRootSubintents []*SubintentV2) *TransactionIntentV2 {
 	return FfiConverterTransactionIntentV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_transactionintentv2_new(FfiConverterTypeTransactionHeaderV2INSTANCE.Lower(transactionHeader), FfiConverterIntentCoreV2INSTANCE.Lower(rootIntentCore), FfiConverterSequenceSubintentV2INSTANCE.Lower(nonRootSubintents), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_transactionintentv2_new(FfiConverterTypeTransactionHeaderV2INSTANCE.Lower(transactionHeader).toCRustBuffer(), FfiConverterIntentCoreV2INSTANCE.Lower(rootIntentCore), FfiConverterSequenceSubintentV2INSTANCE.Lower(nonRootSubintents).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
 
 func TransactionIntentV2FromPayloadBytes(compiledIntent []byte) (*TransactionIntentV2, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_transactionintentv2_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiledIntent), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_transactionintentv2_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiledIntent).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *TransactionIntentV2
@@ -15777,8 +15798,8 @@ func (_self *TransactionIntentV2)NonRootSubintents() []*SubintentV2 {
 	_pointer := _self.ffiObject.incrementPointer("*TransactionIntentV2")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSequenceSubintentV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionintentv2_non_root_subintents(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionintentv2_non_root_subintents(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -15797,8 +15818,8 @@ func (_self *TransactionIntentV2)ToPayloadBytes() ([]byte, error) {
 	_pointer := _self.ffiObject.incrementPointer("*TransactionIntentV2")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionintentv2_to_payload_bytes(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionintentv2_to_payload_bytes(
+		_pointer, _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue []byte
@@ -15813,8 +15834,8 @@ func (_self *TransactionIntentV2)TransactionHeader() TransactionHeaderV2 {
 	_pointer := _self.ffiObject.incrementPointer("*TransactionIntentV2")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterTypeTransactionHeaderV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionintentv2_transaction_header(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionintentv2_transaction_header(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -15886,14 +15907,14 @@ type TransactionManifestV1 struct {
 }
 func NewTransactionManifestV1(instructions *InstructionsV1, blobs [][]byte) *TransactionManifestV1 {
 	return FfiConverterTransactionManifestV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_transactionmanifestv1_new(FfiConverterInstructionsV1INSTANCE.Lower(instructions), FfiConverterSequenceBytesINSTANCE.Lower(blobs), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_transactionmanifestv1_new(FfiConverterInstructionsV1INSTANCE.Lower(instructions), FfiConverterSequenceBytesINSTANCE.Lower(blobs).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
 
 func TransactionManifestV1FromPayloadBytes(compiled []byte, networkId uint8) (*TransactionManifestV1, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_transactionmanifestv1_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiled), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_transactionmanifestv1_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiled).toCRustBuffer(), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *TransactionManifestV1
@@ -15909,8 +15930,8 @@ func (_self *TransactionManifestV1)Blobs() [][]byte {
 	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV1")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSequenceBytesINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_blobs(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_blobs(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -15919,8 +15940,8 @@ func (_self *TransactionManifestV1)DynamicallyAnalyze(networkId uint8, toolkitRe
 	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV1")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_dynamically_analyze(
-		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), FfiConverterStringINSTANCE.Lower(toolkitReceipt), _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_dynamically_analyze(
+		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), FfiConverterStringINSTANCE.Lower(toolkitReceipt).toCRustBuffer(), _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue DynamicAnalysis
@@ -15935,8 +15956,8 @@ func (_self *TransactionManifestV1)ExtractAddresses() map[EntityType][]*Address 
 	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV1")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterMapTypeEntityTypeSequenceAddressINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_extract_addresses(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_extract_addresses(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -15955,8 +15976,8 @@ func (_self *TransactionManifestV1)StaticallyAnalyze(networkId uint8) StaticAnal
 	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV1")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterTypeStaticAnalysisINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_statically_analyze(
-		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_statically_analyze(
+		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus))
 	}))
 }
 
@@ -15965,8 +15986,8 @@ func (_self *TransactionManifestV1)StaticallyAnalyzeAndValidate(networkId uint8)
 	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV1")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_statically_analyze_and_validate(
-		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_statically_analyze_and_validate(
+		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue StaticAnalysisWithResourceMovements
@@ -15993,8 +16014,8 @@ func (_self *TransactionManifestV1)ToPayloadBytes() ([]byte, error) {
 	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV1")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_to_payload_bytes(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_to_payload_bytes(
+		_pointer, _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue []byte
@@ -16056,14 +16077,14 @@ type TransactionManifestV2 struct {
 }
 func NewTransactionManifestV2(instructions *InstructionsV2, blobs [][]byte, children []*Hash) *TransactionManifestV2 {
 	return FfiConverterTransactionManifestV2INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_transactionmanifestv2_new(FfiConverterInstructionsV2INSTANCE.Lower(instructions), FfiConverterSequenceBytesINSTANCE.Lower(blobs), FfiConverterSequenceHashINSTANCE.Lower(children), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_transactionmanifestv2_new(FfiConverterInstructionsV2INSTANCE.Lower(instructions), FfiConverterSequenceBytesINSTANCE.Lower(blobs).toCRustBuffer(), FfiConverterSequenceHashINSTANCE.Lower(children).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
 
 func TransactionManifestV2FromPayloadBytes(compiled []byte, networkId uint8) (*TransactionManifestV2, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_transactionmanifestv2_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiled), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_constructor_transactionmanifestv2_from_payload_bytes(FfiConverterBytesINSTANCE.Lower(compiled).toCRustBuffer(), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *TransactionManifestV2
@@ -16079,8 +16100,8 @@ func (_self *TransactionManifestV2)Blobs() [][]byte {
 	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV2")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSequenceBytesINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_blobs(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_blobs(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -16089,8 +16110,8 @@ func (_self *TransactionManifestV2)DynamicallyAnalyze(networkId uint8, toolkitRe
 	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV2")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_dynamically_analyze(
-		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), FfiConverterStringINSTANCE.Lower(toolkitReceipt), _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_dynamically_analyze(
+		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), FfiConverterStringINSTANCE.Lower(toolkitReceipt).toCRustBuffer(), _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue DynamicAnalysis
@@ -16105,8 +16126,8 @@ func (_self *TransactionManifestV2)ExtractAddresses() map[EntityType][]*Address 
 	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV2")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterMapTypeEntityTypeSequenceAddressINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_extract_addresses(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_extract_addresses(
+		_pointer, _uniffiStatus))
 	}))
 }
 
@@ -16125,8 +16146,8 @@ func (_self *TransactionManifestV2)StaticallyAnalyze(networkId uint8) StaticAnal
 	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV2")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterTypeStaticAnalysisINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_statically_analyze(
-		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_statically_analyze(
+		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus))
 	}))
 }
 
@@ -16135,8 +16156,8 @@ func (_self *TransactionManifestV2)StaticallyAnalyzeAndValidate(networkId uint8)
 	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV2")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_statically_analyze_and_validate(
-		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_statically_analyze_and_validate(
+		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue StaticAnalysisWithResourceMovements
@@ -16163,8 +16184,8 @@ func (_self *TransactionManifestV2)ToPayloadBytes() ([]byte, error) {
 	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV2")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_to_payload_bytes(
-		_pointer, _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_to_payload_bytes(
+		_pointer, _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue []byte
@@ -16238,7 +16259,7 @@ func (_self *TransactionV1Builder)Header(header TransactionHeaderV1) *Transactio
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterTransactionV1BuilderHeaderStepINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionv1builder_header(
-		_pointer,FfiConverterTypeTransactionHeaderV1INSTANCE.Lower(header), _uniffiStatus)
+		_pointer,FfiConverterTypeTransactionHeaderV1INSTANCE.Lower(header).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
@@ -16474,7 +16495,7 @@ func (_self *TransactionV1BuilderMessageStep)Message(message MessageV1) *Transac
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterTransactionV1BuilderIntentSignaturesStepINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionv1buildermessagestep_message(
-		_pointer,FfiConverterTypeMessageV1INSTANCE.Lower(message), _uniffiStatus)
+		_pointer,FfiConverterTypeMessageV1INSTANCE.Lower(message).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
@@ -16572,7 +16593,7 @@ func (_self *TransactionV2Builder)IntentHeader(intentHeader IntentHeaderV2) *Tra
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionv2builder_intent_header(
-		_pointer,FfiConverterTypeIntentHeaderV2INSTANCE.Lower(intentHeader), _uniffiStatus)
+		_pointer,FfiConverterTypeIntentHeaderV2INSTANCE.Lower(intentHeader).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
@@ -16592,7 +16613,7 @@ func (_self *TransactionV2Builder)Message(message MessageV2) *TransactionV2Build
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionv2builder_message(
-		_pointer,FfiConverterTypeMessageV2INSTANCE.Lower(message), _uniffiStatus)
+		_pointer,FfiConverterTypeMessageV2INSTANCE.Lower(message).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
@@ -16618,7 +16639,7 @@ func (_self *TransactionV2Builder)TransactionHeader(transactionHeader Transactio
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterTransactionV2BuilderINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionv2builder_transaction_header(
-		_pointer,FfiConverterTypeTransactionHeaderV2INSTANCE.Lower(transactionHeader), _uniffiStatus)
+		_pointer,FfiConverterTypeTransactionHeaderV2INSTANCE.Lower(transactionHeader).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
@@ -31349,7 +31370,7 @@ func radix_engine_toolkit_uniffi_cgo_Signer(handle C.uint64_t, method C.int32_t,
 	case 0:
 		// 0 means Rust is done with the callback, and the callback
 		// can be dropped by the foreign language.
-		*outBuf = FfiConverterCallbackInterfaceSignerINSTANCE.drop(uint64(handle))
+		*outBuf = FfiConverterCallbackInterfaceSignerINSTANCE.drop(uint64(handle)).toCRustBuffer()
 		// See docs of ForeignCallback in `uniffi/src/ffi/foreigncallbacks.rs`
 		return C.int32_t(uniffiIdxCallbackFree)
 
@@ -31387,7 +31408,7 @@ func (foreignCallbackCallbackInterfaceSigner) InvokeSign (callback Signer, args 
 	result :=callback.Sign(FfiConverterHashINSTANCE.Read(reader));
 
         
-	*outBuf = LowerIntoRustBuffer[[]byte](FfiConverterBytesINSTANCE, result)
+	*outBuf = LowerIntoRustBuffer[[]byte](FfiConverterBytesINSTANCE, result).toCRustBuffer()
 	return uniffiCallbackResultSuccess
 }
 func (foreignCallbackCallbackInterfaceSigner) InvokeSignToSignature (callback Signer, args []byte, outBuf *C.RustBuffer) uniffiCallbackResult {
@@ -31395,7 +31416,7 @@ func (foreignCallbackCallbackInterfaceSigner) InvokeSignToSignature (callback Si
 	result :=callback.SignToSignature(FfiConverterHashINSTANCE.Read(reader));
 
         
-	*outBuf = LowerIntoRustBuffer[SignatureV1](FfiConverterTypeSignatureV1INSTANCE, result)
+	*outBuf = LowerIntoRustBuffer[SignatureV1](FfiConverterTypeSignatureV1INSTANCE, result).toCRustBuffer()
 	return uniffiCallbackResultSuccess
 }
 func (foreignCallbackCallbackInterfaceSigner) InvokeSignToSignatureWithPublicKey (callback Signer, args []byte, outBuf *C.RustBuffer) uniffiCallbackResult {
@@ -31403,14 +31424,14 @@ func (foreignCallbackCallbackInterfaceSigner) InvokeSignToSignatureWithPublicKey
 	result :=callback.SignToSignatureWithPublicKey(FfiConverterHashINSTANCE.Read(reader));
 
         
-	*outBuf = LowerIntoRustBuffer[SignatureWithPublicKeyV1](FfiConverterTypeSignatureWithPublicKeyV1INSTANCE, result)
+	*outBuf = LowerIntoRustBuffer[SignatureWithPublicKeyV1](FfiConverterTypeSignatureWithPublicKeyV1INSTANCE, result).toCRustBuffer()
 	return uniffiCallbackResultSuccess
 }
 func (foreignCallbackCallbackInterfaceSigner) InvokePublicKey (callback Signer, args []byte, outBuf *C.RustBuffer) uniffiCallbackResult {
 	result :=callback.PublicKey();
 
         
-	*outBuf = LowerIntoRustBuffer[PublicKey](FfiConverterTypePublicKeyINSTANCE, result)
+	*outBuf = LowerIntoRustBuffer[PublicKey](FfiConverterTypePublicKeyINSTANCE, result).toCRustBuffer()
 	return uniffiCallbackResultSuccess
 }
 
@@ -34676,7 +34697,7 @@ func (FfiDestroyerTypeHashableBytes) Destroy(value HashableBytes) {
 
 func DeriveGlobalCallerNonFungibleGlobalIdFromBlueprintId(packageAddress *Address, blueprintName string, networkId uint8) (*NonFungibleGlobalId, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_derive_global_caller_non_fungible_global_id_from_blueprint_id(FfiConverterAddressINSTANCE.Lower(packageAddress), FfiConverterStringINSTANCE.Lower(blueprintName), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_derive_global_caller_non_fungible_global_id_from_blueprint_id(FfiConverterAddressINSTANCE.Lower(packageAddress), FfiConverterStringINSTANCE.Lower(blueprintName).toCRustBuffer(), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *NonFungibleGlobalId
@@ -34700,7 +34721,7 @@ func DeriveGlobalCallerNonFungibleGlobalIdFromGlobalAddress(globalAddress *Addre
 
 func DeriveOlympiaAccountAddressFromPublicKey(publicKey PublicKey, olympiaNetwork OlympiaNetwork) (*OlympiaAddress, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_derive_olympia_account_address_from_public_key(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey), FfiConverterTypeOlympiaNetworkINSTANCE.Lower(olympiaNetwork), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_derive_olympia_account_address_from_public_key(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey).toCRustBuffer(), FfiConverterTypeOlympiaNetworkINSTANCE.Lower(olympiaNetwork).toCRustBuffer(), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *OlympiaAddress
@@ -34736,7 +34757,7 @@ func DerivePreallocatedAccountAddressFromOlympiaAccountAddress(olympiaAccountAdd
 
 func DerivePreallocatedAccountAddressFromPublicKey(publicKey PublicKey, networkId uint8) (*Address, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_derive_preallocated_account_address_from_public_key(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_derive_preallocated_account_address_from_public_key(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey).toCRustBuffer(), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *Address
@@ -34748,7 +34769,7 @@ func DerivePreallocatedAccountAddressFromPublicKey(publicKey PublicKey, networkI
 
 func DerivePreallocatedIdentityAddressFromPublicKey(publicKey PublicKey, networkId uint8) (*Address, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_derive_preallocated_identity_address_from_public_key(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_derive_preallocated_identity_address_from_public_key(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey).toCRustBuffer(), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *Address
@@ -34760,7 +34781,7 @@ func DerivePreallocatedIdentityAddressFromPublicKey(publicKey PublicKey, network
 
 func DerivePublicKeyFromOlympiaAccountAddress(olympiaResourceAddress *OlympiaAddress) (PublicKey, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_derive_public_key_from_olympia_account_address(FfiConverterOlympiaAddressINSTANCE.Lower(olympiaResourceAddress), _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_func_derive_public_key_from_olympia_account_address(FfiConverterOlympiaAddressINSTANCE.Lower(olympiaResourceAddress), _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue PublicKey
@@ -34784,7 +34805,7 @@ func DeriveResourceAddressFromOlympiaResourceAddress(olympiaResourceAddress *Oly
 
 func DeriveSignatureBadgeNonFungibleGlobalIdFromPublicKey(publicKey PublicKey, networkId uint8) (*NonFungibleGlobalId, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_derive_signature_badge_non_fungible_global_id_from_public_key(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_derive_signature_badge_non_fungible_global_id_from_public_key(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey).toCRustBuffer(), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue *NonFungibleGlobalId
@@ -34796,25 +34817,25 @@ func DeriveSignatureBadgeNonFungibleGlobalIdFromPublicKey(publicKey PublicKey, n
 
 func GetBuildInformation() BuildInformation {
 	return FfiConverterTypeBuildInformationINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_get_build_information( _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_func_get_build_information( _uniffiStatus))
 	}))
 }
 
 func GetHash(data []byte) *Hash {
 	return FfiConverterHashINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_get_hash(FfiConverterBytesINSTANCE.Lower(data), _uniffiStatus)
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_get_hash(FfiConverterBytesINSTANCE.Lower(data).toCRustBuffer(), _uniffiStatus)
 	}))
 }
 
 func GetKnownAddresses(networkId uint8) KnownAddresses {
 	return FfiConverterTypeKnownAddressesINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_get_known_addresses(FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_func_get_known_addresses(FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus))
 	}))
 }
 
 func ManifestSborDecodeToStringRepresentation(bytes []byte, representation ManifestSborStringRepresentation, networkId uint8, schema *Schema) (string, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_manifest_sbor_decode_to_string_representation(FfiConverterBytesINSTANCE.Lower(bytes), FfiConverterTypeManifestSborStringRepresentationINSTANCE.Lower(representation), FfiConverterUint8INSTANCE.Lower(networkId), FfiConverterOptionalTypeSchemaINSTANCE.Lower(schema), _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_func_manifest_sbor_decode_to_string_representation(FfiConverterBytesINSTANCE.Lower(bytes).toCRustBuffer(), FfiConverterTypeManifestSborStringRepresentationINSTANCE.Lower(representation).toCRustBuffer(), FfiConverterUint8INSTANCE.Lower(networkId), FfiConverterOptionalTypeSchemaINSTANCE.Lower(schema).toCRustBuffer(), _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue string
@@ -34826,7 +34847,7 @@ func ManifestSborDecodeToStringRepresentation(bytes []byte, representation Manif
 
 func MetadataSborDecode(bytes []byte, networkId uint8) (MetadataValue, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_metadata_sbor_decode(FfiConverterBytesINSTANCE.Lower(bytes), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_func_metadata_sbor_decode(FfiConverterBytesINSTANCE.Lower(bytes).toCRustBuffer(), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue MetadataValue
@@ -34838,7 +34859,7 @@ func MetadataSborDecode(bytes []byte, networkId uint8) (MetadataValue, error) {
 
 func MetadataSborEncode(value MetadataValue) ([]byte, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_metadata_sbor_encode(FfiConverterTypeMetadataValueINSTANCE.Lower(value), _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_func_metadata_sbor_encode(FfiConverterTypeMetadataValueINSTANCE.Lower(value).toCRustBuffer(), _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue []byte
@@ -34850,7 +34871,7 @@ func MetadataSborEncode(value MetadataValue) ([]byte, error) {
 
 func NonFungibleLocalIdAsStr(value NonFungibleLocalId) (string, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_non_fungible_local_id_as_str(FfiConverterTypeNonFungibleLocalIdINSTANCE.Lower(value), _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_func_non_fungible_local_id_as_str(FfiConverterTypeNonFungibleLocalIdINSTANCE.Lower(value).toCRustBuffer(), _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue string
@@ -34862,7 +34883,7 @@ func NonFungibleLocalIdAsStr(value NonFungibleLocalId) (string, error) {
 
 func NonFungibleLocalIdFromStr(string string) (NonFungibleLocalId, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_non_fungible_local_id_from_str(FfiConverterStringINSTANCE.Lower(string), _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_func_non_fungible_local_id_from_str(FfiConverterStringINSTANCE.Lower(string).toCRustBuffer(), _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue NonFungibleLocalId
@@ -34874,7 +34895,7 @@ func NonFungibleLocalIdFromStr(string string) (NonFungibleLocalId, error) {
 
 func NonFungibleLocalIdSborDecode(bytes []byte) (NonFungibleLocalId, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_non_fungible_local_id_sbor_decode(FfiConverterBytesINSTANCE.Lower(bytes), _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_func_non_fungible_local_id_sbor_decode(FfiConverterBytesINSTANCE.Lower(bytes).toCRustBuffer(), _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue NonFungibleLocalId
@@ -34886,7 +34907,7 @@ func NonFungibleLocalIdSborDecode(bytes []byte) (NonFungibleLocalId, error) {
 
 func NonFungibleLocalIdSborEncode(value NonFungibleLocalId) ([]byte, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_non_fungible_local_id_sbor_encode(FfiConverterTypeNonFungibleLocalIdINSTANCE.Lower(value), _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_func_non_fungible_local_id_sbor_encode(FfiConverterTypeNonFungibleLocalIdINSTANCE.Lower(value).toCRustBuffer(), _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue []byte
@@ -34898,31 +34919,31 @@ func NonFungibleLocalIdSborEncode(value NonFungibleLocalId) ([]byte, error) {
 
 func PublicKeyFingerprintV1FromVec(bytes []byte) PublicKeyFingerprintV1 {
 	return FfiConverterTypePublicKeyFingerprintV1INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_public_key_fingerprint_v1_from_vec(FfiConverterBytesINSTANCE.Lower(bytes), _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_func_public_key_fingerprint_v1_from_vec(FfiConverterBytesINSTANCE.Lower(bytes).toCRustBuffer(), _uniffiStatus))
 	}))
 }
 
 func PublicKeyFingerprintV1ToVec(value PublicKeyFingerprintV1) []byte {
 	return FfiConverterBytesINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_public_key_fingerprint_v1_to_vec(FfiConverterTypePublicKeyFingerprintV1INSTANCE.Lower(value), _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_func_public_key_fingerprint_v1_to_vec(FfiConverterTypePublicKeyFingerprintV1INSTANCE.Lower(value).toCRustBuffer(), _uniffiStatus))
 	}))
 }
 
 func PublicKeyFingerprintV2FromVec(bytes []byte) PublicKeyFingerprint {
 	return FfiConverterTypePublicKeyFingerprintINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_public_key_fingerprint_v2_from_vec(FfiConverterBytesINSTANCE.Lower(bytes), _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_func_public_key_fingerprint_v2_from_vec(FfiConverterBytesINSTANCE.Lower(bytes).toCRustBuffer(), _uniffiStatus))
 	}))
 }
 
 func PublicKeyFingerprintV2ToVec(value PublicKeyFingerprint) []byte {
 	return FfiConverterBytesINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_public_key_fingerprint_v2_to_vec(FfiConverterTypePublicKeyFingerprintINSTANCE.Lower(value), _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_func_public_key_fingerprint_v2_to_vec(FfiConverterTypePublicKeyFingerprintINSTANCE.Lower(value).toCRustBuffer(), _uniffiStatus))
 	}))
 }
 
 func PublicKeyHashFromPublicKey(publicKey PublicKey) (PublicKeyHash, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_public_key_hash_from_public_key(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey), _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_func_public_key_hash_from_public_key(FfiConverterTypePublicKeyINSTANCE.Lower(publicKey).toCRustBuffer(), _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue PublicKeyHash
@@ -34934,7 +34955,7 @@ func PublicKeyHashFromPublicKey(publicKey PublicKey) (PublicKeyHash, error) {
 
 func SborDecodeToStringRepresentation(bytes []byte, representation SerializationMode, networkId uint8, schema *Schema) (string, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_sbor_decode_to_string_representation(FfiConverterBytesINSTANCE.Lower(bytes), FfiConverterTypeSerializationModeINSTANCE.Lower(representation), FfiConverterUint8INSTANCE.Lower(networkId), FfiConverterOptionalTypeSchemaINSTANCE.Lower(schema), _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_func_sbor_decode_to_string_representation(FfiConverterBytesINSTANCE.Lower(bytes).toCRustBuffer(), FfiConverterTypeSerializationModeINSTANCE.Lower(representation).toCRustBuffer(), FfiConverterUint8INSTANCE.Lower(networkId), FfiConverterOptionalTypeSchemaINSTANCE.Lower(schema).toCRustBuffer(), _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue string
@@ -34946,7 +34967,7 @@ func SborDecodeToStringRepresentation(bytes []byte, representation Serialization
 
 func ScryptoSborDecodeToNativeEvent(eventTypeIdentifier EventTypeIdentifier, eventData []byte, networkId uint8) (TypedNativeEvent, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_scrypto_sbor_decode_to_native_event(FfiConverterTypeEventTypeIdentifierINSTANCE.Lower(eventTypeIdentifier), FfiConverterBytesINSTANCE.Lower(eventData), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_func_scrypto_sbor_decode_to_native_event(FfiConverterTypeEventTypeIdentifierINSTANCE.Lower(eventTypeIdentifier).toCRustBuffer(), FfiConverterBytesINSTANCE.Lower(eventData).toCRustBuffer(), FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue TypedNativeEvent
@@ -34958,7 +34979,7 @@ func ScryptoSborDecodeToNativeEvent(eventTypeIdentifier EventTypeIdentifier, eve
 
 func ScryptoSborDecodeToStringRepresentation(bytes []byte, representation SerializationMode, networkId uint8, schema *Schema) (string, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_scrypto_sbor_decode_to_string_representation(FfiConverterBytesINSTANCE.Lower(bytes), FfiConverterTypeSerializationModeINSTANCE.Lower(representation), FfiConverterUint8INSTANCE.Lower(networkId), FfiConverterOptionalTypeSchemaINSTANCE.Lower(schema), _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_func_scrypto_sbor_decode_to_string_representation(FfiConverterBytesINSTANCE.Lower(bytes).toCRustBuffer(), FfiConverterTypeSerializationModeINSTANCE.Lower(representation).toCRustBuffer(), FfiConverterUint8INSTANCE.Lower(networkId), FfiConverterOptionalTypeSchemaINSTANCE.Lower(schema).toCRustBuffer(), _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue string
@@ -34970,7 +34991,7 @@ func ScryptoSborDecodeToStringRepresentation(bytes []byte, representation Serial
 
 func ScryptoSborEncodeStringRepresentation(representation ScryptoSborString) ([]byte, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_func_scrypto_sbor_encode_string_representation(FfiConverterTypeScryptoSborStringINSTANCE.Lower(representation), _uniffiStatus)
+		return cRustBufferToRustBuffer(C.uniffi_radix_engine_toolkit_uniffi_fn_func_scrypto_sbor_encode_string_representation(FfiConverterTypeScryptoSborStringINSTANCE.Lower(representation).toCRustBuffer(), _uniffiStatus))
 	})
 		if _uniffiErr != nil {
 			var _uniffiDefaultValue []byte
@@ -34982,7 +35003,7 @@ func ScryptoSborEncodeStringRepresentation(representation ScryptoSborString) ([]
 
 func TestPanic(message string) error {
 	_, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_radix_engine_toolkit_uniffi_fn_func_test_panic(FfiConverterStringINSTANCE.Lower(message), _uniffiStatus)
+		C.uniffi_radix_engine_toolkit_uniffi_fn_func_test_panic(FfiConverterStringINSTANCE.Lower(message).toCRustBuffer(), _uniffiStatus)
 		return false
 	})
 		return _uniffiErr
