@@ -683,7 +683,7 @@ func uniffiCheckChecksums() {
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_address_entity_type(uniffiStatus)
 	})
-	if checksum != 40172 {
+	if checksum != 12499 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_address_entity_type: UniFFI API checksum mismatch")
 	}
@@ -4938,15 +4938,6 @@ func uniffiCheckChecksums() {
 	}
 	{
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_subintentmanifestv2_static_analysis(uniffiStatus)
-	})
-	if checksum != 59806 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_subintentmanifestv2_static_analysis: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_subintentmanifestv2_statically_validate(uniffiStatus)
 	})
 	if checksum != 63790 {
@@ -5102,18 +5093,9 @@ func uniffiCheckChecksums() {
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_statically_analyze(uniffiStatus)
 	})
-	if checksum != 52728 {
+	if checksum != 39154 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_statically_analyze: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_statically_analyze_and_validate(uniffiStatus)
-	})
-	if checksum != 5080 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv1_statically_analyze_and_validate: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -5174,18 +5156,9 @@ func uniffiCheckChecksums() {
 	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_statically_analyze(uniffiStatus)
 	})
-	if checksum != 52561 {
+	if checksum != 15680 {
 		// If this happens try cleaning and rebuilding your project
 		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_statically_analyze: UniFFI API checksum mismatch")
-	}
-	}
-	{
-	checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-		return C.uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_statically_analyze_and_validate(uniffiStatus)
-	})
-	if checksum != 51639 {
-		// If this happens try cleaning and rebuilding your project
-		panic("radix_engine_toolkit_uniffi: uniffi_radix_engine_toolkit_uniffi_checksum_method_transactionmanifestv2_statically_analyze_and_validate: UniFFI API checksum mismatch")
 	}
 	}
 	{
@@ -6817,10 +6790,10 @@ func (_self *Address)Bytes() []byte {
 }
 
 
-func (_self *Address)EntityType() EntityType {
+func (_self *Address)EntityType() *EntityType {
 	_pointer := _self.ffiObject.incrementPointer("*Address")
 	defer _self.ffiObject.decrementPointer()
-	return FfiConverterTypeEntityTypeINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+	return FfiConverterOptionalTypeEntityTypeINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_address_entity_type(
 		_pointer, _uniffiStatus)
 	}))
@@ -15452,22 +15425,6 @@ func (_self *SubintentManifestV2)Instructions() *InstructionsV2 {
 }
 
 
-func (_self *SubintentManifestV2)StaticAnalysis(networkId uint8) (StaticAnalysisWithResourceMovements, error) {
-	_pointer := _self.ffiObject.incrementPointer("*SubintentManifestV2")
-	defer _self.ffiObject.decrementPointer()
-	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_subintentmanifestv2_static_analysis(
-		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
-	})
-		if _uniffiErr != nil {
-			var _uniffiDefaultValue StaticAnalysisWithResourceMovements
-			return _uniffiDefaultValue, _uniffiErr
-		} else {
-			return FfiConverterTypeStaticAnalysisWithResourceMovementsINSTANCE.Lift(_uniffiRV), _uniffiErr
-		}
-}
-
-
 func (_self *SubintentManifestV2)StaticallyValidate() error {
 	_pointer := _self.ffiObject.incrementPointer("*SubintentManifestV2")
 	defer _self.ffiObject.decrementPointer()
@@ -15951,28 +15908,18 @@ func (_self *TransactionManifestV1)Instructions() *InstructionsV1 {
 }
 
 
-func (_self *TransactionManifestV1)StaticallyAnalyze(networkId uint8) StaticAnalysis {
-	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV1")
-	defer _self.ffiObject.decrementPointer()
-	return FfiConverterTypeStaticAnalysisINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_statically_analyze(
-		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
-	}))
-}
-
-
-func (_self *TransactionManifestV1)StaticallyAnalyzeAndValidate(networkId uint8) (StaticAnalysisWithResourceMovements, error) {
+func (_self *TransactionManifestV1)StaticallyAnalyze(networkId uint8) (StaticAnalysis, error) {
 	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV1")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_statically_analyze_and_validate(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv1_statically_analyze(
 		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue StaticAnalysisWithResourceMovements
+			var _uniffiDefaultValue StaticAnalysis
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterTypeStaticAnalysisWithResourceMovementsINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterTypeStaticAnalysisINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
@@ -16121,28 +16068,18 @@ func (_self *TransactionManifestV2)Instructions() *InstructionsV2 {
 }
 
 
-func (_self *TransactionManifestV2)StaticallyAnalyze(networkId uint8) StaticAnalysis {
-	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV2")
-	defer _self.ffiObject.decrementPointer()
-	return FfiConverterTypeStaticAnalysisINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_statically_analyze(
-		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
-	}))
-}
-
-
-func (_self *TransactionManifestV2)StaticallyAnalyzeAndValidate(networkId uint8) (StaticAnalysisWithResourceMovements, error) {
+func (_self *TransactionManifestV2)StaticallyAnalyze(networkId uint8) (StaticAnalysis, error) {
 	_pointer := _self.ffiObject.incrementPointer("*TransactionManifestV2")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeRadixEngineToolkitError{},func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_statically_analyze_and_validate(
+		return C.uniffi_radix_engine_toolkit_uniffi_fn_method_transactionmanifestv2_statically_analyze(
 		_pointer,FfiConverterUint8INSTANCE.Lower(networkId), _uniffiStatus)
 	})
 		if _uniffiErr != nil {
-			var _uniffiDefaultValue StaticAnalysisWithResourceMovements
+			var _uniffiDefaultValue StaticAnalysis
 			return _uniffiDefaultValue, _uniffiErr
 		} else {
-			return FfiConverterTypeStaticAnalysisWithResourceMovementsINSTANCE.Lift(_uniffiRV), _uniffiErr
+			return FfiConverterTypeStaticAnalysisINSTANCE.Lift(_uniffiRV), _uniffiErr
 		}
 }
 
@@ -16774,6 +16711,47 @@ func (_ FfiDestroyerTransactionV2BuilderSignatureStep) Destroy(value *Transactio
 }
 
 
+type AccessRulesAddresses struct {
+	ResourceAddresses []*Address
+	NonFungibleGlobalIds []*NonFungibleGlobalId
+}
+
+func (r *AccessRulesAddresses) Destroy() {
+		FfiDestroyerSequenceAddress{}.Destroy(r.ResourceAddresses);
+		FfiDestroyerSequenceNonFungibleGlobalId{}.Destroy(r.NonFungibleGlobalIds);
+}
+
+type FfiConverterTypeAccessRulesAddresses struct {}
+
+var FfiConverterTypeAccessRulesAddressesINSTANCE = FfiConverterTypeAccessRulesAddresses{}
+
+func (c FfiConverterTypeAccessRulesAddresses) Lift(rb RustBufferI) AccessRulesAddresses {
+	return LiftFromRustBuffer[AccessRulesAddresses](c, rb)
+}
+
+func (c FfiConverterTypeAccessRulesAddresses) Read(reader io.Reader) AccessRulesAddresses {
+	return AccessRulesAddresses {
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceNonFungibleGlobalIdINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeAccessRulesAddresses) Lower(value AccessRulesAddresses) RustBuffer {
+	return LowerIntoRustBuffer[AccessRulesAddresses](c, value)
+}
+
+func (c FfiConverterTypeAccessRulesAddresses) Write(writer io.Writer, value AccessRulesAddresses) {
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.ResourceAddresses);
+		FfiConverterSequenceNonFungibleGlobalIdINSTANCE.Write(writer, value.NonFungibleGlobalIds);
+}
+
+type FfiDestroyerTypeAccessRulesAddresses struct {}
+
+func (_ FfiDestroyerTypeAccessRulesAddresses) Destroy(value AccessRulesAddresses) {
+	value.Destroy()
+}
+
+
 type AccountAddAuthorizedDepositorEvent struct {
 	AuthorizedDepositorBadge ResourceOrNonFungible
 }
@@ -16807,6 +16785,124 @@ func (c FfiConverterTypeAccountAddAuthorizedDepositorEvent) Write(writer io.Writ
 type FfiDestroyerTypeAccountAddAuthorizedDepositorEvent struct {}
 
 func (_ FfiDestroyerTypeAccountAddAuthorizedDepositorEvent) Destroy(value AccountAddAuthorizedDepositorEvent) {
+	value.Destroy()
+}
+
+
+type AccountDynamicResourceMovementsOutput struct {
+	AccountWithdraws map[string][]InvocationIoItem
+	AccountDeposits map[string][]InvocationIoItem
+}
+
+func (r *AccountDynamicResourceMovementsOutput) Destroy() {
+		FfiDestroyerMapStringSequenceTypeInvocationIoItem{}.Destroy(r.AccountWithdraws);
+		FfiDestroyerMapStringSequenceTypeInvocationIoItem{}.Destroy(r.AccountDeposits);
+}
+
+type FfiConverterTypeAccountDynamicResourceMovementsOutput struct {}
+
+var FfiConverterTypeAccountDynamicResourceMovementsOutputINSTANCE = FfiConverterTypeAccountDynamicResourceMovementsOutput{}
+
+func (c FfiConverterTypeAccountDynamicResourceMovementsOutput) Lift(rb RustBufferI) AccountDynamicResourceMovementsOutput {
+	return LiftFromRustBuffer[AccountDynamicResourceMovementsOutput](c, rb)
+}
+
+func (c FfiConverterTypeAccountDynamicResourceMovementsOutput) Read(reader io.Reader) AccountDynamicResourceMovementsOutput {
+	return AccountDynamicResourceMovementsOutput {
+			FfiConverterMapStringSequenceTypeInvocationIoItemINSTANCE.Read(reader),
+			FfiConverterMapStringSequenceTypeInvocationIoItemINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeAccountDynamicResourceMovementsOutput) Lower(value AccountDynamicResourceMovementsOutput) RustBuffer {
+	return LowerIntoRustBuffer[AccountDynamicResourceMovementsOutput](c, value)
+}
+
+func (c FfiConverterTypeAccountDynamicResourceMovementsOutput) Write(writer io.Writer, value AccountDynamicResourceMovementsOutput) {
+		FfiConverterMapStringSequenceTypeInvocationIoItemINSTANCE.Write(writer, value.AccountWithdraws);
+		FfiConverterMapStringSequenceTypeInvocationIoItemINSTANCE.Write(writer, value.AccountDeposits);
+}
+
+type FfiDestroyerTypeAccountDynamicResourceMovementsOutput struct {}
+
+func (_ FfiDestroyerTypeAccountDynamicResourceMovementsOutput) Destroy(value AccountDynamicResourceMovementsOutput) {
+	value.Destroy()
+}
+
+
+type AccountInteractionsOutput struct {
+	AccountsSecurified []*Address
+	AccountsDepositedInto []*Address
+	AccountsWithdrawnFrom []*Address
+	AccountsLockedFeesFrom []*Address
+	AccountsCreatedProofsFrom []*Address
+	AccountsBurnedFrom []*Address
+	AccountsSetDefaultDepositRuleOf []*Address
+	AccountsSetResourcePreferenceInto []*Address
+	AccountsRemoveResourcePreferenceFrom []*Address
+	AccountsAddAuthorizedDepositorInto []*Address
+	AccountsRemoveAuthorizedDepositorFrom []*Address
+}
+
+func (r *AccountInteractionsOutput) Destroy() {
+		FfiDestroyerSequenceAddress{}.Destroy(r.AccountsSecurified);
+		FfiDestroyerSequenceAddress{}.Destroy(r.AccountsDepositedInto);
+		FfiDestroyerSequenceAddress{}.Destroy(r.AccountsWithdrawnFrom);
+		FfiDestroyerSequenceAddress{}.Destroy(r.AccountsLockedFeesFrom);
+		FfiDestroyerSequenceAddress{}.Destroy(r.AccountsCreatedProofsFrom);
+		FfiDestroyerSequenceAddress{}.Destroy(r.AccountsBurnedFrom);
+		FfiDestroyerSequenceAddress{}.Destroy(r.AccountsSetDefaultDepositRuleOf);
+		FfiDestroyerSequenceAddress{}.Destroy(r.AccountsSetResourcePreferenceInto);
+		FfiDestroyerSequenceAddress{}.Destroy(r.AccountsRemoveResourcePreferenceFrom);
+		FfiDestroyerSequenceAddress{}.Destroy(r.AccountsAddAuthorizedDepositorInto);
+		FfiDestroyerSequenceAddress{}.Destroy(r.AccountsRemoveAuthorizedDepositorFrom);
+}
+
+type FfiConverterTypeAccountInteractionsOutput struct {}
+
+var FfiConverterTypeAccountInteractionsOutputINSTANCE = FfiConverterTypeAccountInteractionsOutput{}
+
+func (c FfiConverterTypeAccountInteractionsOutput) Lift(rb RustBufferI) AccountInteractionsOutput {
+	return LiftFromRustBuffer[AccountInteractionsOutput](c, rb)
+}
+
+func (c FfiConverterTypeAccountInteractionsOutput) Read(reader io.Reader) AccountInteractionsOutput {
+	return AccountInteractionsOutput {
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeAccountInteractionsOutput) Lower(value AccountInteractionsOutput) RustBuffer {
+	return LowerIntoRustBuffer[AccountInteractionsOutput](c, value)
+}
+
+func (c FfiConverterTypeAccountInteractionsOutput) Write(writer io.Writer, value AccountInteractionsOutput) {
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountsSecurified);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountsDepositedInto);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountsWithdrawnFrom);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountsLockedFeesFrom);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountsCreatedProofsFrom);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountsBurnedFrom);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountsSetDefaultDepositRuleOf);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountsSetResourcePreferenceInto);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountsRemoveResourcePreferenceFrom);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountsAddAuthorizedDepositorInto);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountsRemoveAuthorizedDepositorFrom);
+}
+
+type FfiDestroyerTypeAccountInteractionsOutput struct {}
+
+func (_ FfiDestroyerTypeAccountInteractionsOutput) Destroy(value AccountInteractionsOutput) {
 	value.Destroy()
 }
 
@@ -16959,6 +17055,92 @@ func (c FfiConverterTypeAccountSetResourcePreferenceEvent) Write(writer io.Write
 type FfiDestroyerTypeAccountSetResourcePreferenceEvent struct {}
 
 func (_ FfiDestroyerTypeAccountSetResourcePreferenceEvent) Destroy(value AccountSetResourcePreferenceEvent) {
+	value.Destroy()
+}
+
+
+type AccountSettingsUpdateOutput struct {
+	ResourcePreferencesUpdates map[string]map[string]ResourcePreferenceUpdate
+	DefaultDepositRuleUpdates map[string]AccountDefaultDepositRule
+	AuthorizedDepositorsUpdates map[string]map[Operation][]ResourceOrNonFungible
+}
+
+func (r *AccountSettingsUpdateOutput) Destroy() {
+		FfiDestroyerMapStringMapStringTypeResourcePreferenceUpdate{}.Destroy(r.ResourcePreferencesUpdates);
+		FfiDestroyerMapStringTypeAccountDefaultDepositRule{}.Destroy(r.DefaultDepositRuleUpdates);
+		FfiDestroyerMapStringMapTypeOperationSequenceTypeResourceOrNonFungible{}.Destroy(r.AuthorizedDepositorsUpdates);
+}
+
+type FfiConverterTypeAccountSettingsUpdateOutput struct {}
+
+var FfiConverterTypeAccountSettingsUpdateOutputINSTANCE = FfiConverterTypeAccountSettingsUpdateOutput{}
+
+func (c FfiConverterTypeAccountSettingsUpdateOutput) Lift(rb RustBufferI) AccountSettingsUpdateOutput {
+	return LiftFromRustBuffer[AccountSettingsUpdateOutput](c, rb)
+}
+
+func (c FfiConverterTypeAccountSettingsUpdateOutput) Read(reader io.Reader) AccountSettingsUpdateOutput {
+	return AccountSettingsUpdateOutput {
+			FfiConverterMapStringMapStringTypeResourcePreferenceUpdateINSTANCE.Read(reader),
+			FfiConverterMapStringTypeAccountDefaultDepositRuleINSTANCE.Read(reader),
+			FfiConverterMapStringMapTypeOperationSequenceTypeResourceOrNonFungibleINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeAccountSettingsUpdateOutput) Lower(value AccountSettingsUpdateOutput) RustBuffer {
+	return LowerIntoRustBuffer[AccountSettingsUpdateOutput](c, value)
+}
+
+func (c FfiConverterTypeAccountSettingsUpdateOutput) Write(writer io.Writer, value AccountSettingsUpdateOutput) {
+		FfiConverterMapStringMapStringTypeResourcePreferenceUpdateINSTANCE.Write(writer, value.ResourcePreferencesUpdates);
+		FfiConverterMapStringTypeAccountDefaultDepositRuleINSTANCE.Write(writer, value.DefaultDepositRuleUpdates);
+		FfiConverterMapStringMapTypeOperationSequenceTypeResourceOrNonFungibleINSTANCE.Write(writer, value.AuthorizedDepositorsUpdates);
+}
+
+type FfiDestroyerTypeAccountSettingsUpdateOutput struct {}
+
+func (_ FfiDestroyerTypeAccountSettingsUpdateOutput) Destroy(value AccountSettingsUpdateOutput) {
+	value.Destroy()
+}
+
+
+type AccountStaticResourceMovementsOutput struct {
+	AccountWithdraws map[string][]AccountWithdraw
+	AccountDeposits map[string][]AccountDeposit
+}
+
+func (r *AccountStaticResourceMovementsOutput) Destroy() {
+		FfiDestroyerMapStringSequenceTypeAccountWithdraw{}.Destroy(r.AccountWithdraws);
+		FfiDestroyerMapStringSequenceTypeAccountDeposit{}.Destroy(r.AccountDeposits);
+}
+
+type FfiConverterTypeAccountStaticResourceMovementsOutput struct {}
+
+var FfiConverterTypeAccountStaticResourceMovementsOutputINSTANCE = FfiConverterTypeAccountStaticResourceMovementsOutput{}
+
+func (c FfiConverterTypeAccountStaticResourceMovementsOutput) Lift(rb RustBufferI) AccountStaticResourceMovementsOutput {
+	return LiftFromRustBuffer[AccountStaticResourceMovementsOutput](c, rb)
+}
+
+func (c FfiConverterTypeAccountStaticResourceMovementsOutput) Read(reader io.Reader) AccountStaticResourceMovementsOutput {
+	return AccountStaticResourceMovementsOutput {
+			FfiConverterMapStringSequenceTypeAccountWithdrawINSTANCE.Read(reader),
+			FfiConverterMapStringSequenceTypeAccountDepositINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeAccountStaticResourceMovementsOutput) Lower(value AccountStaticResourceMovementsOutput) RustBuffer {
+	return LowerIntoRustBuffer[AccountStaticResourceMovementsOutput](c, value)
+}
+
+func (c FfiConverterTypeAccountStaticResourceMovementsOutput) Write(writer io.Writer, value AccountStaticResourceMovementsOutput) {
+		FfiConverterMapStringSequenceTypeAccountWithdrawINSTANCE.Write(writer, value.AccountWithdraws);
+		FfiConverterMapStringSequenceTypeAccountDepositINSTANCE.Write(writer, value.AccountDeposits);
+}
+
+type FfiDestroyerTypeAccountStaticResourceMovementsOutput struct {}
+
+func (_ FfiDestroyerTypeAccountStaticResourceMovementsOutput) Destroy(value AccountStaticResourceMovementsOutput) {
 	value.Destroy()
 }
 
@@ -17354,33 +17536,31 @@ func (_ FfiDestroyerTypeDepositRecoveryXrdEvent) Destroy(value DepositRecoveryXr
 
 
 type DynamicAnalysis struct {
-	AccountWithdraws map[string][]ResourceIndicator
-	AccountDeposits map[string][]ResourceIndicator
-	PresentedProofs map[string][]ResourceSpecifier
-	NewEntities NewEntities
-	EncounteredEntities []*Address
-	AccountsRequiringAuth []*Address
-	IdentitiesRequiringAuth []*Address
-	ReservedInstructions []ReservedInstruction
-	FeeLocks FeeLocks
-	FeeSummary FeeSummary
-	DetailedClassification []DetailedManifestClass
-	NewlyCreatedNonFungibles []*NonFungibleGlobalId
+	AccountInteractionsSummary AccountInteractionsOutput
+	AccountStaticResourceMovementsSummary AccountStaticResourceMovementsOutput
+	AccountDynamicResourceMovementsSummary AccountDynamicResourceMovementsOutput
+	ProofsCreatedSummary PresentedProofsOutput
+	EntitiesNewlyCreatedSummary NewEntitiesOutput
+	EntitiesEncounteredSummary EncounteredEntitiesOutput
+	EntitiesRequiringAuthSummary EntitiesRequiringAuthOutput
+	ReservedInstructionsSummary ReservedInstructionsOutput
+	FeeLocksSummary FeeLocks
+	FeeConsumptionSummary FeeSummary
+	DetailedManifestClassification []DetailedManifestClassification
 }
 
 func (r *DynamicAnalysis) Destroy() {
-		FfiDestroyerMapStringSequenceTypeResourceIndicator{}.Destroy(r.AccountWithdraws);
-		FfiDestroyerMapStringSequenceTypeResourceIndicator{}.Destroy(r.AccountDeposits);
-		FfiDestroyerMapStringSequenceTypeResourceSpecifier{}.Destroy(r.PresentedProofs);
-		FfiDestroyerTypeNewEntities{}.Destroy(r.NewEntities);
-		FfiDestroyerSequenceAddress{}.Destroy(r.EncounteredEntities);
-		FfiDestroyerSequenceAddress{}.Destroy(r.AccountsRequiringAuth);
-		FfiDestroyerSequenceAddress{}.Destroy(r.IdentitiesRequiringAuth);
-		FfiDestroyerSequenceTypeReservedInstruction{}.Destroy(r.ReservedInstructions);
-		FfiDestroyerTypeFeeLocks{}.Destroy(r.FeeLocks);
-		FfiDestroyerTypeFeeSummary{}.Destroy(r.FeeSummary);
-		FfiDestroyerSequenceTypeDetailedManifestClass{}.Destroy(r.DetailedClassification);
-		FfiDestroyerSequenceNonFungibleGlobalId{}.Destroy(r.NewlyCreatedNonFungibles);
+		FfiDestroyerTypeAccountInteractionsOutput{}.Destroy(r.AccountInteractionsSummary);
+		FfiDestroyerTypeAccountStaticResourceMovementsOutput{}.Destroy(r.AccountStaticResourceMovementsSummary);
+		FfiDestroyerTypeAccountDynamicResourceMovementsOutput{}.Destroy(r.AccountDynamicResourceMovementsSummary);
+		FfiDestroyerTypePresentedProofsOutput{}.Destroy(r.ProofsCreatedSummary);
+		FfiDestroyerTypeNewEntitiesOutput{}.Destroy(r.EntitiesNewlyCreatedSummary);
+		FfiDestroyerTypeEncounteredEntitiesOutput{}.Destroy(r.EntitiesEncounteredSummary);
+		FfiDestroyerTypeEntitiesRequiringAuthOutput{}.Destroy(r.EntitiesRequiringAuthSummary);
+		FfiDestroyerTypeReservedInstructionsOutput{}.Destroy(r.ReservedInstructionsSummary);
+		FfiDestroyerTypeFeeLocks{}.Destroy(r.FeeLocksSummary);
+		FfiDestroyerTypeFeeSummary{}.Destroy(r.FeeConsumptionSummary);
+		FfiDestroyerSequenceTypeDetailedManifestClassification{}.Destroy(r.DetailedManifestClassification);
 }
 
 type FfiConverterTypeDynamicAnalysis struct {}
@@ -17393,18 +17573,17 @@ func (c FfiConverterTypeDynamicAnalysis) Lift(rb RustBufferI) DynamicAnalysis {
 
 func (c FfiConverterTypeDynamicAnalysis) Read(reader io.Reader) DynamicAnalysis {
 	return DynamicAnalysis {
-			FfiConverterMapStringSequenceTypeResourceIndicatorINSTANCE.Read(reader),
-			FfiConverterMapStringSequenceTypeResourceIndicatorINSTANCE.Read(reader),
-			FfiConverterMapStringSequenceTypeResourceSpecifierINSTANCE.Read(reader),
-			FfiConverterTypeNewEntitiesINSTANCE.Read(reader),
-			FfiConverterSequenceAddressINSTANCE.Read(reader),
-			FfiConverterSequenceAddressINSTANCE.Read(reader),
-			FfiConverterSequenceAddressINSTANCE.Read(reader),
-			FfiConverterSequenceTypeReservedInstructionINSTANCE.Read(reader),
+			FfiConverterTypeAccountInteractionsOutputINSTANCE.Read(reader),
+			FfiConverterTypeAccountStaticResourceMovementsOutputINSTANCE.Read(reader),
+			FfiConverterTypeAccountDynamicResourceMovementsOutputINSTANCE.Read(reader),
+			FfiConverterTypePresentedProofsOutputINSTANCE.Read(reader),
+			FfiConverterTypeNewEntitiesOutputINSTANCE.Read(reader),
+			FfiConverterTypeEncounteredEntitiesOutputINSTANCE.Read(reader),
+			FfiConverterTypeEntitiesRequiringAuthOutputINSTANCE.Read(reader),
+			FfiConverterTypeReservedInstructionsOutputINSTANCE.Read(reader),
 			FfiConverterTypeFeeLocksINSTANCE.Read(reader),
 			FfiConverterTypeFeeSummaryINSTANCE.Read(reader),
-			FfiConverterSequenceTypeDetailedManifestClassINSTANCE.Read(reader),
-			FfiConverterSequenceNonFungibleGlobalIdINSTANCE.Read(reader),
+			FfiConverterSequenceTypeDetailedManifestClassificationINSTANCE.Read(reader),
 	}
 }
 
@@ -17413,18 +17592,17 @@ func (c FfiConverterTypeDynamicAnalysis) Lower(value DynamicAnalysis) RustBuffer
 }
 
 func (c FfiConverterTypeDynamicAnalysis) Write(writer io.Writer, value DynamicAnalysis) {
-		FfiConverterMapStringSequenceTypeResourceIndicatorINSTANCE.Write(writer, value.AccountWithdraws);
-		FfiConverterMapStringSequenceTypeResourceIndicatorINSTANCE.Write(writer, value.AccountDeposits);
-		FfiConverterMapStringSequenceTypeResourceSpecifierINSTANCE.Write(writer, value.PresentedProofs);
-		FfiConverterTypeNewEntitiesINSTANCE.Write(writer, value.NewEntities);
-		FfiConverterSequenceAddressINSTANCE.Write(writer, value.EncounteredEntities);
-		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountsRequiringAuth);
-		FfiConverterSequenceAddressINSTANCE.Write(writer, value.IdentitiesRequiringAuth);
-		FfiConverterSequenceTypeReservedInstructionINSTANCE.Write(writer, value.ReservedInstructions);
-		FfiConverterTypeFeeLocksINSTANCE.Write(writer, value.FeeLocks);
-		FfiConverterTypeFeeSummaryINSTANCE.Write(writer, value.FeeSummary);
-		FfiConverterSequenceTypeDetailedManifestClassINSTANCE.Write(writer, value.DetailedClassification);
-		FfiConverterSequenceNonFungibleGlobalIdINSTANCE.Write(writer, value.NewlyCreatedNonFungibles);
+		FfiConverterTypeAccountInteractionsOutputINSTANCE.Write(writer, value.AccountInteractionsSummary);
+		FfiConverterTypeAccountStaticResourceMovementsOutputINSTANCE.Write(writer, value.AccountStaticResourceMovementsSummary);
+		FfiConverterTypeAccountDynamicResourceMovementsOutputINSTANCE.Write(writer, value.AccountDynamicResourceMovementsSummary);
+		FfiConverterTypePresentedProofsOutputINSTANCE.Write(writer, value.ProofsCreatedSummary);
+		FfiConverterTypeNewEntitiesOutputINSTANCE.Write(writer, value.EntitiesNewlyCreatedSummary);
+		FfiConverterTypeEncounteredEntitiesOutputINSTANCE.Write(writer, value.EntitiesEncounteredSummary);
+		FfiConverterTypeEntitiesRequiringAuthOutputINSTANCE.Write(writer, value.EntitiesRequiringAuthSummary);
+		FfiConverterTypeReservedInstructionsOutputINSTANCE.Write(writer, value.ReservedInstructionsSummary);
+		FfiConverterTypeFeeLocksINSTANCE.Write(writer, value.FeeLocksSummary);
+		FfiConverterTypeFeeSummaryINSTANCE.Write(writer, value.FeeConsumptionSummary);
+		FfiConverterSequenceTypeDetailedManifestClassificationINSTANCE.Write(writer, value.DetailedManifestClassification);
 }
 
 type FfiDestroyerTypeDynamicAnalysis struct {}
@@ -17467,6 +17645,43 @@ func (c FfiConverterTypeEd25519PublicKey) Write(writer io.Writer, value Ed25519P
 type FfiDestroyerTypeEd25519PublicKey struct {}
 
 func (_ FfiDestroyerTypeEd25519PublicKey) Destroy(value Ed25519PublicKey) {
+	value.Destroy()
+}
+
+
+type EncounteredEntitiesOutput struct {
+	Entities []*Address
+}
+
+func (r *EncounteredEntitiesOutput) Destroy() {
+		FfiDestroyerSequenceAddress{}.Destroy(r.Entities);
+}
+
+type FfiConverterTypeEncounteredEntitiesOutput struct {}
+
+var FfiConverterTypeEncounteredEntitiesOutputINSTANCE = FfiConverterTypeEncounteredEntitiesOutput{}
+
+func (c FfiConverterTypeEncounteredEntitiesOutput) Lift(rb RustBufferI) EncounteredEntitiesOutput {
+	return LiftFromRustBuffer[EncounteredEntitiesOutput](c, rb)
+}
+
+func (c FfiConverterTypeEncounteredEntitiesOutput) Read(reader io.Reader) EncounteredEntitiesOutput {
+	return EncounteredEntitiesOutput {
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeEncounteredEntitiesOutput) Lower(value EncounteredEntitiesOutput) RustBuffer {
+	return LowerIntoRustBuffer[EncounteredEntitiesOutput](c, value)
+}
+
+func (c FfiConverterTypeEncounteredEntitiesOutput) Write(writer io.Writer, value EncounteredEntitiesOutput) {
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.Entities);
+}
+
+type FfiDestroyerTypeEncounteredEntitiesOutput struct {}
+
+func (_ FfiDestroyerTypeEncounteredEntitiesOutput) Destroy(value EncounteredEntitiesOutput) {
 	value.Destroy()
 }
 
@@ -17549,6 +17764,47 @@ func (c FfiConverterTypeEncryptedMessageV2) Write(writer io.Writer, value Encryp
 type FfiDestroyerTypeEncryptedMessageV2 struct {}
 
 func (_ FfiDestroyerTypeEncryptedMessageV2) Destroy(value EncryptedMessageV2) {
+	value.Destroy()
+}
+
+
+type EntitiesRequiringAuthOutput struct {
+	Accounts []*Address
+	Identities []*Address
+}
+
+func (r *EntitiesRequiringAuthOutput) Destroy() {
+		FfiDestroyerSequenceAddress{}.Destroy(r.Accounts);
+		FfiDestroyerSequenceAddress{}.Destroy(r.Identities);
+}
+
+type FfiConverterTypeEntitiesRequiringAuthOutput struct {}
+
+var FfiConverterTypeEntitiesRequiringAuthOutputINSTANCE = FfiConverterTypeEntitiesRequiringAuthOutput{}
+
+func (c FfiConverterTypeEntitiesRequiringAuthOutput) Lift(rb RustBufferI) EntitiesRequiringAuthOutput {
+	return LiftFromRustBuffer[EntitiesRequiringAuthOutput](c, rb)
+}
+
+func (c FfiConverterTypeEntitiesRequiringAuthOutput) Read(reader io.Reader) EntitiesRequiringAuthOutput {
+	return EntitiesRequiringAuthOutput {
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeEntitiesRequiringAuthOutput) Lower(value EntitiesRequiringAuthOutput) RustBuffer {
+	return LowerIntoRustBuffer[EntitiesRequiringAuthOutput](c, value)
+}
+
+func (c FfiConverterTypeEntitiesRequiringAuthOutput) Write(writer io.Writer, value EntitiesRequiringAuthOutput) {
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.Accounts);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.Identities);
+}
+
+type FfiDestroyerTypeEntitiesRequiringAuthOutput struct {}
+
+func (_ FfiDestroyerTypeEntitiesRequiringAuthOutput) Destroy(value EntitiesRequiringAuthOutput) {
 	value.Destroy()
 }
 
@@ -18090,6 +18346,43 @@ func (c FfiConverterTypeInitiateRecoveryEvent) Write(writer io.Writer, value Ini
 type FfiDestroyerTypeInitiateRecoveryEvent struct {}
 
 func (_ FfiDestroyerTypeInitiateRecoveryEvent) Destroy(value InitiateRecoveryEvent) {
+	value.Destroy()
+}
+
+
+type InstructionIndex struct {
+	Index uint64
+}
+
+func (r *InstructionIndex) Destroy() {
+		FfiDestroyerUint64{}.Destroy(r.Index);
+}
+
+type FfiConverterTypeInstructionIndex struct {}
+
+var FfiConverterTypeInstructionIndexINSTANCE = FfiConverterTypeInstructionIndex{}
+
+func (c FfiConverterTypeInstructionIndex) Lift(rb RustBufferI) InstructionIndex {
+	return LiftFromRustBuffer[InstructionIndex](c, rb)
+}
+
+func (c FfiConverterTypeInstructionIndex) Read(reader io.Reader) InstructionIndex {
+	return InstructionIndex {
+			FfiConverterUint64INSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeInstructionIndex) Lower(value InstructionIndex) RustBuffer {
+	return LowerIntoRustBuffer[InstructionIndex](c, value)
+}
+
+func (c FfiConverterTypeInstructionIndex) Write(writer io.Writer, value InstructionIndex) {
+		FfiConverterUint64INSTANCE.Write(writer, value.Index);
+}
+
+type FfiDestroyerTypeInstructionIndex struct {}
+
+func (_ FfiDestroyerTypeInstructionIndex) Destroy(value InstructionIndex) {
 	value.Destroy()
 }
 
@@ -19042,51 +19335,63 @@ func (_ FfiDestroyerTypeMultiResourcePoolWithdrawEvent) Destroy(value MultiResou
 }
 
 
-type NewEntities struct {
-	ComponentAddresses []*Address
-	ResourceAddresses []*Address
-	PackageAddresses []*Address
-	Metadata map[string]map[string]*MetadataValue
+type NewEntitiesOutput struct {
+	NewGlobalEntities []*Address
+	NewInternalEntities []*Address
+	NewComponentEntities []*Address
+	NewResourceEntities []*Address
+	NewPackageEntities []*Address
+	NewNonFungibles []*NonFungibleGlobalId
+	GlobalEntitiesMetadata map[string]map[string]*MetadataValue
 }
 
-func (r *NewEntities) Destroy() {
-		FfiDestroyerSequenceAddress{}.Destroy(r.ComponentAddresses);
-		FfiDestroyerSequenceAddress{}.Destroy(r.ResourceAddresses);
-		FfiDestroyerSequenceAddress{}.Destroy(r.PackageAddresses);
-		FfiDestroyerMapStringMapStringOptionalTypeMetadataValue{}.Destroy(r.Metadata);
+func (r *NewEntitiesOutput) Destroy() {
+		FfiDestroyerSequenceAddress{}.Destroy(r.NewGlobalEntities);
+		FfiDestroyerSequenceAddress{}.Destroy(r.NewInternalEntities);
+		FfiDestroyerSequenceAddress{}.Destroy(r.NewComponentEntities);
+		FfiDestroyerSequenceAddress{}.Destroy(r.NewResourceEntities);
+		FfiDestroyerSequenceAddress{}.Destroy(r.NewPackageEntities);
+		FfiDestroyerSequenceNonFungibleGlobalId{}.Destroy(r.NewNonFungibles);
+		FfiDestroyerMapStringMapStringOptionalTypeMetadataValue{}.Destroy(r.GlobalEntitiesMetadata);
 }
 
-type FfiConverterTypeNewEntities struct {}
+type FfiConverterTypeNewEntitiesOutput struct {}
 
-var FfiConverterTypeNewEntitiesINSTANCE = FfiConverterTypeNewEntities{}
+var FfiConverterTypeNewEntitiesOutputINSTANCE = FfiConverterTypeNewEntitiesOutput{}
 
-func (c FfiConverterTypeNewEntities) Lift(rb RustBufferI) NewEntities {
-	return LiftFromRustBuffer[NewEntities](c, rb)
+func (c FfiConverterTypeNewEntitiesOutput) Lift(rb RustBufferI) NewEntitiesOutput {
+	return LiftFromRustBuffer[NewEntitiesOutput](c, rb)
 }
 
-func (c FfiConverterTypeNewEntities) Read(reader io.Reader) NewEntities {
-	return NewEntities {
+func (c FfiConverterTypeNewEntitiesOutput) Read(reader io.Reader) NewEntitiesOutput {
+	return NewEntitiesOutput {
 			FfiConverterSequenceAddressINSTANCE.Read(reader),
 			FfiConverterSequenceAddressINSTANCE.Read(reader),
 			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceNonFungibleGlobalIdINSTANCE.Read(reader),
 			FfiConverterMapStringMapStringOptionalTypeMetadataValueINSTANCE.Read(reader),
 	}
 }
 
-func (c FfiConverterTypeNewEntities) Lower(value NewEntities) RustBuffer {
-	return LowerIntoRustBuffer[NewEntities](c, value)
+func (c FfiConverterTypeNewEntitiesOutput) Lower(value NewEntitiesOutput) RustBuffer {
+	return LowerIntoRustBuffer[NewEntitiesOutput](c, value)
 }
 
-func (c FfiConverterTypeNewEntities) Write(writer io.Writer, value NewEntities) {
-		FfiConverterSequenceAddressINSTANCE.Write(writer, value.ComponentAddresses);
-		FfiConverterSequenceAddressINSTANCE.Write(writer, value.ResourceAddresses);
-		FfiConverterSequenceAddressINSTANCE.Write(writer, value.PackageAddresses);
-		FfiConverterMapStringMapStringOptionalTypeMetadataValueINSTANCE.Write(writer, value.Metadata);
+func (c FfiConverterTypeNewEntitiesOutput) Write(writer io.Writer, value NewEntitiesOutput) {
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.NewGlobalEntities);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.NewInternalEntities);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.NewComponentEntities);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.NewResourceEntities);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.NewPackageEntities);
+		FfiConverterSequenceNonFungibleGlobalIdINSTANCE.Write(writer, value.NewNonFungibles);
+		FfiConverterMapStringMapStringOptionalTypeMetadataValueINSTANCE.Write(writer, value.GlobalEntitiesMetadata);
 }
 
-type FfiDestroyerTypeNewEntities struct {}
+type FfiDestroyerTypeNewEntitiesOutput struct {}
 
-func (_ FfiDestroyerTypeNewEntities) Destroy(value NewEntities) {
+func (_ FfiDestroyerTypeNewEntitiesOutput) Destroy(value NewEntitiesOutput) {
 	value.Destroy()
 }
 
@@ -19525,84 +19830,211 @@ func (_ FfiDestroyerTypePlainTextMessageV2) Destroy(value PlainTextMessageV2) {
 }
 
 
-type PredictedDecimal struct {
-	Value *Decimal
-	InstructionIndex uint64
+type PoolContributionOperation struct {
+	PoolAddress *Address
+	ContributedResources map[string]*Decimal
+	PoolUnitsResourceAddress *Address
+	PoolUnitsAmount *Decimal
 }
 
-func (r *PredictedDecimal) Destroy() {
-		FfiDestroyerDecimal{}.Destroy(r.Value);
-		FfiDestroyerUint64{}.Destroy(r.InstructionIndex);
+func (r *PoolContributionOperation) Destroy() {
+		FfiDestroyerAddress{}.Destroy(r.PoolAddress);
+		FfiDestroyerMapStringDecimal{}.Destroy(r.ContributedResources);
+		FfiDestroyerAddress{}.Destroy(r.PoolUnitsResourceAddress);
+		FfiDestroyerDecimal{}.Destroy(r.PoolUnitsAmount);
 }
 
-type FfiConverterTypePredictedDecimal struct {}
+type FfiConverterTypePoolContributionOperation struct {}
 
-var FfiConverterTypePredictedDecimalINSTANCE = FfiConverterTypePredictedDecimal{}
+var FfiConverterTypePoolContributionOperationINSTANCE = FfiConverterTypePoolContributionOperation{}
 
-func (c FfiConverterTypePredictedDecimal) Lift(rb RustBufferI) PredictedDecimal {
-	return LiftFromRustBuffer[PredictedDecimal](c, rb)
+func (c FfiConverterTypePoolContributionOperation) Lift(rb RustBufferI) PoolContributionOperation {
+	return LiftFromRustBuffer[PoolContributionOperation](c, rb)
 }
 
-func (c FfiConverterTypePredictedDecimal) Read(reader io.Reader) PredictedDecimal {
-	return PredictedDecimal {
+func (c FfiConverterTypePoolContributionOperation) Read(reader io.Reader) PoolContributionOperation {
+	return PoolContributionOperation {
+			FfiConverterAddressINSTANCE.Read(reader),
+			FfiConverterMapStringDecimalINSTANCE.Read(reader),
+			FfiConverterAddressINSTANCE.Read(reader),
 			FfiConverterDecimalINSTANCE.Read(reader),
-			FfiConverterUint64INSTANCE.Read(reader),
 	}
 }
 
-func (c FfiConverterTypePredictedDecimal) Lower(value PredictedDecimal) RustBuffer {
-	return LowerIntoRustBuffer[PredictedDecimal](c, value)
+func (c FfiConverterTypePoolContributionOperation) Lower(value PoolContributionOperation) RustBuffer {
+	return LowerIntoRustBuffer[PoolContributionOperation](c, value)
 }
 
-func (c FfiConverterTypePredictedDecimal) Write(writer io.Writer, value PredictedDecimal) {
-		FfiConverterDecimalINSTANCE.Write(writer, value.Value);
-		FfiConverterUint64INSTANCE.Write(writer, value.InstructionIndex);
+func (c FfiConverterTypePoolContributionOperation) Write(writer io.Writer, value PoolContributionOperation) {
+		FfiConverterAddressINSTANCE.Write(writer, value.PoolAddress);
+		FfiConverterMapStringDecimalINSTANCE.Write(writer, value.ContributedResources);
+		FfiConverterAddressINSTANCE.Write(writer, value.PoolUnitsResourceAddress);
+		FfiConverterDecimalINSTANCE.Write(writer, value.PoolUnitsAmount);
 }
 
-type FfiDestroyerTypePredictedDecimal struct {}
+type FfiDestroyerTypePoolContributionOperation struct {}
 
-func (_ FfiDestroyerTypePredictedDecimal) Destroy(value PredictedDecimal) {
+func (_ FfiDestroyerTypePoolContributionOperation) Destroy(value PoolContributionOperation) {
 	value.Destroy()
 }
 
 
-type PredictedNonFungibleIds struct {
-	Value []NonFungibleLocalId
-	InstructionIndex uint64
+type PoolContributionOutput struct {
+	ContributionOperations []PoolContributionOperation
 }
 
-func (r *PredictedNonFungibleIds) Destroy() {
-		FfiDestroyerSequenceTypeNonFungibleLocalId{}.Destroy(r.Value);
-		FfiDestroyerUint64{}.Destroy(r.InstructionIndex);
+func (r *PoolContributionOutput) Destroy() {
+		FfiDestroyerSequenceTypePoolContributionOperation{}.Destroy(r.ContributionOperations);
 }
 
-type FfiConverterTypePredictedNonFungibleIds struct {}
+type FfiConverterTypePoolContributionOutput struct {}
 
-var FfiConverterTypePredictedNonFungibleIdsINSTANCE = FfiConverterTypePredictedNonFungibleIds{}
+var FfiConverterTypePoolContributionOutputINSTANCE = FfiConverterTypePoolContributionOutput{}
 
-func (c FfiConverterTypePredictedNonFungibleIds) Lift(rb RustBufferI) PredictedNonFungibleIds {
-	return LiftFromRustBuffer[PredictedNonFungibleIds](c, rb)
+func (c FfiConverterTypePoolContributionOutput) Lift(rb RustBufferI) PoolContributionOutput {
+	return LiftFromRustBuffer[PoolContributionOutput](c, rb)
 }
 
-func (c FfiConverterTypePredictedNonFungibleIds) Read(reader io.Reader) PredictedNonFungibleIds {
-	return PredictedNonFungibleIds {
-			FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Read(reader),
-			FfiConverterUint64INSTANCE.Read(reader),
+func (c FfiConverterTypePoolContributionOutput) Read(reader io.Reader) PoolContributionOutput {
+	return PoolContributionOutput {
+			FfiConverterSequenceTypePoolContributionOperationINSTANCE.Read(reader),
 	}
 }
 
-func (c FfiConverterTypePredictedNonFungibleIds) Lower(value PredictedNonFungibleIds) RustBuffer {
-	return LowerIntoRustBuffer[PredictedNonFungibleIds](c, value)
+func (c FfiConverterTypePoolContributionOutput) Lower(value PoolContributionOutput) RustBuffer {
+	return LowerIntoRustBuffer[PoolContributionOutput](c, value)
 }
 
-func (c FfiConverterTypePredictedNonFungibleIds) Write(writer io.Writer, value PredictedNonFungibleIds) {
-		FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Write(writer, value.Value);
-		FfiConverterUint64INSTANCE.Write(writer, value.InstructionIndex);
+func (c FfiConverterTypePoolContributionOutput) Write(writer io.Writer, value PoolContributionOutput) {
+		FfiConverterSequenceTypePoolContributionOperationINSTANCE.Write(writer, value.ContributionOperations);
 }
 
-type FfiDestroyerTypePredictedNonFungibleIds struct {}
+type FfiDestroyerTypePoolContributionOutput struct {}
 
-func (_ FfiDestroyerTypePredictedNonFungibleIds) Destroy(value PredictedNonFungibleIds) {
+func (_ FfiDestroyerTypePoolContributionOutput) Destroy(value PoolContributionOutput) {
+	value.Destroy()
+}
+
+
+type PoolRedemptionOperation struct {
+	PoolAddress *Address
+	PoolUnitsResourceAddress *Address
+	PoolUnitsAmount *Decimal
+	RedeemedResources map[string]*Decimal
+}
+
+func (r *PoolRedemptionOperation) Destroy() {
+		FfiDestroyerAddress{}.Destroy(r.PoolAddress);
+		FfiDestroyerAddress{}.Destroy(r.PoolUnitsResourceAddress);
+		FfiDestroyerDecimal{}.Destroy(r.PoolUnitsAmount);
+		FfiDestroyerMapStringDecimal{}.Destroy(r.RedeemedResources);
+}
+
+type FfiConverterTypePoolRedemptionOperation struct {}
+
+var FfiConverterTypePoolRedemptionOperationINSTANCE = FfiConverterTypePoolRedemptionOperation{}
+
+func (c FfiConverterTypePoolRedemptionOperation) Lift(rb RustBufferI) PoolRedemptionOperation {
+	return LiftFromRustBuffer[PoolRedemptionOperation](c, rb)
+}
+
+func (c FfiConverterTypePoolRedemptionOperation) Read(reader io.Reader) PoolRedemptionOperation {
+	return PoolRedemptionOperation {
+			FfiConverterAddressINSTANCE.Read(reader),
+			FfiConverterAddressINSTANCE.Read(reader),
+			FfiConverterDecimalINSTANCE.Read(reader),
+			FfiConverterMapStringDecimalINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypePoolRedemptionOperation) Lower(value PoolRedemptionOperation) RustBuffer {
+	return LowerIntoRustBuffer[PoolRedemptionOperation](c, value)
+}
+
+func (c FfiConverterTypePoolRedemptionOperation) Write(writer io.Writer, value PoolRedemptionOperation) {
+		FfiConverterAddressINSTANCE.Write(writer, value.PoolAddress);
+		FfiConverterAddressINSTANCE.Write(writer, value.PoolUnitsResourceAddress);
+		FfiConverterDecimalINSTANCE.Write(writer, value.PoolUnitsAmount);
+		FfiConverterMapStringDecimalINSTANCE.Write(writer, value.RedeemedResources);
+}
+
+type FfiDestroyerTypePoolRedemptionOperation struct {}
+
+func (_ FfiDestroyerTypePoolRedemptionOperation) Destroy(value PoolRedemptionOperation) {
+	value.Destroy()
+}
+
+
+type PoolRedemptionOutput struct {
+	RedemptionOperations []PoolRedemptionOperation
+}
+
+func (r *PoolRedemptionOutput) Destroy() {
+		FfiDestroyerSequenceTypePoolRedemptionOperation{}.Destroy(r.RedemptionOperations);
+}
+
+type FfiConverterTypePoolRedemptionOutput struct {}
+
+var FfiConverterTypePoolRedemptionOutputINSTANCE = FfiConverterTypePoolRedemptionOutput{}
+
+func (c FfiConverterTypePoolRedemptionOutput) Lift(rb RustBufferI) PoolRedemptionOutput {
+	return LiftFromRustBuffer[PoolRedemptionOutput](c, rb)
+}
+
+func (c FfiConverterTypePoolRedemptionOutput) Read(reader io.Reader) PoolRedemptionOutput {
+	return PoolRedemptionOutput {
+			FfiConverterSequenceTypePoolRedemptionOperationINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypePoolRedemptionOutput) Lower(value PoolRedemptionOutput) RustBuffer {
+	return LowerIntoRustBuffer[PoolRedemptionOutput](c, value)
+}
+
+func (c FfiConverterTypePoolRedemptionOutput) Write(writer io.Writer, value PoolRedemptionOutput) {
+		FfiConverterSequenceTypePoolRedemptionOperationINSTANCE.Write(writer, value.RedemptionOperations);
+}
+
+type FfiDestroyerTypePoolRedemptionOutput struct {}
+
+func (_ FfiDestroyerTypePoolRedemptionOutput) Destroy(value PoolRedemptionOutput) {
+	value.Destroy()
+}
+
+
+type PresentedProofsOutput struct {
+	CreatedProofs map[string][]ResourceSpecifier
+}
+
+func (r *PresentedProofsOutput) Destroy() {
+		FfiDestroyerMapStringSequenceTypeResourceSpecifier{}.Destroy(r.CreatedProofs);
+}
+
+type FfiConverterTypePresentedProofsOutput struct {}
+
+var FfiConverterTypePresentedProofsOutputINSTANCE = FfiConverterTypePresentedProofsOutput{}
+
+func (c FfiConverterTypePresentedProofsOutput) Lift(rb RustBufferI) PresentedProofsOutput {
+	return LiftFromRustBuffer[PresentedProofsOutput](c, rb)
+}
+
+func (c FfiConverterTypePresentedProofsOutput) Read(reader io.Reader) PresentedProofsOutput {
+	return PresentedProofsOutput {
+			FfiConverterMapStringSequenceTypeResourceSpecifierINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypePresentedProofsOutput) Lower(value PresentedProofsOutput) RustBuffer {
+	return LowerIntoRustBuffer[PresentedProofsOutput](c, value)
+}
+
+func (c FfiConverterTypePresentedProofsOutput) Write(writer io.Writer, value PresentedProofsOutput) {
+		FfiConverterMapStringSequenceTypeResourceSpecifierINSTANCE.Write(writer, value.CreatedProofs);
+}
+
+type FfiDestroyerTypePresentedProofsOutput struct {}
+
+func (_ FfiDestroyerTypePresentedProofsOutput) Destroy(value PresentedProofsOutput) {
 	value.Destroy()
 }
 
@@ -19874,6 +20306,71 @@ func (c FfiConverterTypeRemoveMetadataEvent) Write(writer io.Writer, value Remov
 type FfiDestroyerTypeRemoveMetadataEvent struct {}
 
 func (_ FfiDestroyerTypeRemoveMetadataEvent) Destroy(value RemoveMetadataEvent) {
+	value.Destroy()
+}
+
+
+type ReservedInstructionsOutput struct {
+	AccountLockFeeInvocations []*Address
+	AccountSecurifyInvocations []*Address
+	AccountLockOwnerKeysMetadataFieldInvocations []*Address
+	AccountUpdateOwnerKeysMetadataFieldInvocations []*Address
+	IdentitySecurifyInvocations []*Address
+	IdentityLockOwnerKeysMetadataFieldInvocations []*Address
+	IdentityUpdateOwnerKeysMetadataFieldInvocations []*Address
+	AccessControllerInvocations []*Address
+}
+
+func (r *ReservedInstructionsOutput) Destroy() {
+		FfiDestroyerSequenceAddress{}.Destroy(r.AccountLockFeeInvocations);
+		FfiDestroyerSequenceAddress{}.Destroy(r.AccountSecurifyInvocations);
+		FfiDestroyerSequenceAddress{}.Destroy(r.AccountLockOwnerKeysMetadataFieldInvocations);
+		FfiDestroyerSequenceAddress{}.Destroy(r.AccountUpdateOwnerKeysMetadataFieldInvocations);
+		FfiDestroyerSequenceAddress{}.Destroy(r.IdentitySecurifyInvocations);
+		FfiDestroyerSequenceAddress{}.Destroy(r.IdentityLockOwnerKeysMetadataFieldInvocations);
+		FfiDestroyerSequenceAddress{}.Destroy(r.IdentityUpdateOwnerKeysMetadataFieldInvocations);
+		FfiDestroyerSequenceAddress{}.Destroy(r.AccessControllerInvocations);
+}
+
+type FfiConverterTypeReservedInstructionsOutput struct {}
+
+var FfiConverterTypeReservedInstructionsOutputINSTANCE = FfiConverterTypeReservedInstructionsOutput{}
+
+func (c FfiConverterTypeReservedInstructionsOutput) Lift(rb RustBufferI) ReservedInstructionsOutput {
+	return LiftFromRustBuffer[ReservedInstructionsOutput](c, rb)
+}
+
+func (c FfiConverterTypeReservedInstructionsOutput) Read(reader io.Reader) ReservedInstructionsOutput {
+	return ReservedInstructionsOutput {
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+			FfiConverterSequenceAddressINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeReservedInstructionsOutput) Lower(value ReservedInstructionsOutput) RustBuffer {
+	return LowerIntoRustBuffer[ReservedInstructionsOutput](c, value)
+}
+
+func (c FfiConverterTypeReservedInstructionsOutput) Write(writer io.Writer, value ReservedInstructionsOutput) {
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountLockFeeInvocations);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountSecurifyInvocations);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountLockOwnerKeysMetadataFieldInvocations);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountUpdateOwnerKeysMetadataFieldInvocations);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.IdentitySecurifyInvocations);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.IdentityLockOwnerKeysMetadataFieldInvocations);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.IdentityUpdateOwnerKeysMetadataFieldInvocations);
+		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccessControllerInvocations);
+}
+
+type FfiDestroyerTypeReservedInstructionsOutput struct {}
+
+func (_ FfiDestroyerTypeReservedInstructionsOutput) Destroy(value ReservedInstructionsOutput) {
 	value.Destroy()
 }
 
@@ -20436,25 +20933,23 @@ func (_ FfiDestroyerTypeStakeEvent) Destroy(value StakeEvent) {
 
 
 type StaticAnalysis struct {
-	PresentedProofs map[string][]ResourceSpecifier
-	AccountsWithdrawnFrom []*Address
-	AccountsDepositedInto []*Address
-	EncounteredEntities []*Address
-	AccountsRequiringAuth []*Address
-	IdentitiesRequiringAuth []*Address
-	ReservedInstructions []ReservedInstruction
-	Classification []ManifestClass
+	AccountInteractionsSummary AccountInteractionsOutput
+	AccountStaticResourceMovementsSummary AccountStaticResourceMovementsOutput
+	ProofsCreatedSummary PresentedProofsOutput
+	EntitiesEncounteredSummary EncounteredEntitiesOutput
+	EntitiesRequiringAuthSummary EntitiesRequiringAuthOutput
+	ReservedInstructionsSummary ReservedInstructionsOutput
+	ManifestClassification []ManifestClassification
 }
 
 func (r *StaticAnalysis) Destroy() {
-		FfiDestroyerMapStringSequenceTypeResourceSpecifier{}.Destroy(r.PresentedProofs);
-		FfiDestroyerSequenceAddress{}.Destroy(r.AccountsWithdrawnFrom);
-		FfiDestroyerSequenceAddress{}.Destroy(r.AccountsDepositedInto);
-		FfiDestroyerSequenceAddress{}.Destroy(r.EncounteredEntities);
-		FfiDestroyerSequenceAddress{}.Destroy(r.AccountsRequiringAuth);
-		FfiDestroyerSequenceAddress{}.Destroy(r.IdentitiesRequiringAuth);
-		FfiDestroyerSequenceTypeReservedInstruction{}.Destroy(r.ReservedInstructions);
-		FfiDestroyerSequenceTypeManifestClass{}.Destroy(r.Classification);
+		FfiDestroyerTypeAccountInteractionsOutput{}.Destroy(r.AccountInteractionsSummary);
+		FfiDestroyerTypeAccountStaticResourceMovementsOutput{}.Destroy(r.AccountStaticResourceMovementsSummary);
+		FfiDestroyerTypePresentedProofsOutput{}.Destroy(r.ProofsCreatedSummary);
+		FfiDestroyerTypeEncounteredEntitiesOutput{}.Destroy(r.EntitiesEncounteredSummary);
+		FfiDestroyerTypeEntitiesRequiringAuthOutput{}.Destroy(r.EntitiesRequiringAuthSummary);
+		FfiDestroyerTypeReservedInstructionsOutput{}.Destroy(r.ReservedInstructionsSummary);
+		FfiDestroyerSequenceTypeManifestClassification{}.Destroy(r.ManifestClassification);
 }
 
 type FfiConverterTypeStaticAnalysis struct {}
@@ -20467,14 +20962,13 @@ func (c FfiConverterTypeStaticAnalysis) Lift(rb RustBufferI) StaticAnalysis {
 
 func (c FfiConverterTypeStaticAnalysis) Read(reader io.Reader) StaticAnalysis {
 	return StaticAnalysis {
-			FfiConverterMapStringSequenceTypeResourceSpecifierINSTANCE.Read(reader),
-			FfiConverterSequenceAddressINSTANCE.Read(reader),
-			FfiConverterSequenceAddressINSTANCE.Read(reader),
-			FfiConverterSequenceAddressINSTANCE.Read(reader),
-			FfiConverterSequenceAddressINSTANCE.Read(reader),
-			FfiConverterSequenceAddressINSTANCE.Read(reader),
-			FfiConverterSequenceTypeReservedInstructionINSTANCE.Read(reader),
-			FfiConverterSequenceTypeManifestClassINSTANCE.Read(reader),
+			FfiConverterTypeAccountInteractionsOutputINSTANCE.Read(reader),
+			FfiConverterTypeAccountStaticResourceMovementsOutputINSTANCE.Read(reader),
+			FfiConverterTypePresentedProofsOutputINSTANCE.Read(reader),
+			FfiConverterTypeEncounteredEntitiesOutputINSTANCE.Read(reader),
+			FfiConverterTypeEntitiesRequiringAuthOutputINSTANCE.Read(reader),
+			FfiConverterTypeReservedInstructionsOutputINSTANCE.Read(reader),
+			FfiConverterSequenceTypeManifestClassificationINSTANCE.Read(reader),
 	}
 }
 
@@ -20483,92 +20977,18 @@ func (c FfiConverterTypeStaticAnalysis) Lower(value StaticAnalysis) RustBuffer {
 }
 
 func (c FfiConverterTypeStaticAnalysis) Write(writer io.Writer, value StaticAnalysis) {
-		FfiConverterMapStringSequenceTypeResourceSpecifierINSTANCE.Write(writer, value.PresentedProofs);
-		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountsWithdrawnFrom);
-		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountsDepositedInto);
-		FfiConverterSequenceAddressINSTANCE.Write(writer, value.EncounteredEntities);
-		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountsRequiringAuth);
-		FfiConverterSequenceAddressINSTANCE.Write(writer, value.IdentitiesRequiringAuth);
-		FfiConverterSequenceTypeReservedInstructionINSTANCE.Write(writer, value.ReservedInstructions);
-		FfiConverterSequenceTypeManifestClassINSTANCE.Write(writer, value.Classification);
+		FfiConverterTypeAccountInteractionsOutputINSTANCE.Write(writer, value.AccountInteractionsSummary);
+		FfiConverterTypeAccountStaticResourceMovementsOutputINSTANCE.Write(writer, value.AccountStaticResourceMovementsSummary);
+		FfiConverterTypePresentedProofsOutputINSTANCE.Write(writer, value.ProofsCreatedSummary);
+		FfiConverterTypeEncounteredEntitiesOutputINSTANCE.Write(writer, value.EntitiesEncounteredSummary);
+		FfiConverterTypeEntitiesRequiringAuthOutputINSTANCE.Write(writer, value.EntitiesRequiringAuthSummary);
+		FfiConverterTypeReservedInstructionsOutputINSTANCE.Write(writer, value.ReservedInstructionsSummary);
+		FfiConverterSequenceTypeManifestClassificationINSTANCE.Write(writer, value.ManifestClassification);
 }
 
 type FfiDestroyerTypeStaticAnalysis struct {}
 
 func (_ FfiDestroyerTypeStaticAnalysis) Destroy(value StaticAnalysis) {
-	value.Destroy()
-}
-
-
-type StaticAnalysisWithResourceMovements struct {
-	AccountWithdraws map[string][]AccountWithdraw
-	AccountDeposits map[string][]AccountDeposit
-	PresentedProofs map[string][]ResourceSpecifier
-	AccountsWithdrawnFrom []*Address
-	AccountsDepositedInto []*Address
-	EncounteredEntities []*Address
-	AccountsRequiringAuth []*Address
-	IdentitiesRequiringAuth []*Address
-	ReservedInstructions []ReservedInstruction
-	Classification []ManifestClass
-}
-
-func (r *StaticAnalysisWithResourceMovements) Destroy() {
-		FfiDestroyerMapStringSequenceTypeAccountWithdraw{}.Destroy(r.AccountWithdraws);
-		FfiDestroyerMapStringSequenceTypeAccountDeposit{}.Destroy(r.AccountDeposits);
-		FfiDestroyerMapStringSequenceTypeResourceSpecifier{}.Destroy(r.PresentedProofs);
-		FfiDestroyerSequenceAddress{}.Destroy(r.AccountsWithdrawnFrom);
-		FfiDestroyerSequenceAddress{}.Destroy(r.AccountsDepositedInto);
-		FfiDestroyerSequenceAddress{}.Destroy(r.EncounteredEntities);
-		FfiDestroyerSequenceAddress{}.Destroy(r.AccountsRequiringAuth);
-		FfiDestroyerSequenceAddress{}.Destroy(r.IdentitiesRequiringAuth);
-		FfiDestroyerSequenceTypeReservedInstruction{}.Destroy(r.ReservedInstructions);
-		FfiDestroyerSequenceTypeManifestClass{}.Destroy(r.Classification);
-}
-
-type FfiConverterTypeStaticAnalysisWithResourceMovements struct {}
-
-var FfiConverterTypeStaticAnalysisWithResourceMovementsINSTANCE = FfiConverterTypeStaticAnalysisWithResourceMovements{}
-
-func (c FfiConverterTypeStaticAnalysisWithResourceMovements) Lift(rb RustBufferI) StaticAnalysisWithResourceMovements {
-	return LiftFromRustBuffer[StaticAnalysisWithResourceMovements](c, rb)
-}
-
-func (c FfiConverterTypeStaticAnalysisWithResourceMovements) Read(reader io.Reader) StaticAnalysisWithResourceMovements {
-	return StaticAnalysisWithResourceMovements {
-			FfiConverterMapStringSequenceTypeAccountWithdrawINSTANCE.Read(reader),
-			FfiConverterMapStringSequenceTypeAccountDepositINSTANCE.Read(reader),
-			FfiConverterMapStringSequenceTypeResourceSpecifierINSTANCE.Read(reader),
-			FfiConverterSequenceAddressINSTANCE.Read(reader),
-			FfiConverterSequenceAddressINSTANCE.Read(reader),
-			FfiConverterSequenceAddressINSTANCE.Read(reader),
-			FfiConverterSequenceAddressINSTANCE.Read(reader),
-			FfiConverterSequenceAddressINSTANCE.Read(reader),
-			FfiConverterSequenceTypeReservedInstructionINSTANCE.Read(reader),
-			FfiConverterSequenceTypeManifestClassINSTANCE.Read(reader),
-	}
-}
-
-func (c FfiConverterTypeStaticAnalysisWithResourceMovements) Lower(value StaticAnalysisWithResourceMovements) RustBuffer {
-	return LowerIntoRustBuffer[StaticAnalysisWithResourceMovements](c, value)
-}
-
-func (c FfiConverterTypeStaticAnalysisWithResourceMovements) Write(writer io.Writer, value StaticAnalysisWithResourceMovements) {
-		FfiConverterMapStringSequenceTypeAccountWithdrawINSTANCE.Write(writer, value.AccountWithdraws);
-		FfiConverterMapStringSequenceTypeAccountDepositINSTANCE.Write(writer, value.AccountDeposits);
-		FfiConverterMapStringSequenceTypeResourceSpecifierINSTANCE.Write(writer, value.PresentedProofs);
-		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountsWithdrawnFrom);
-		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountsDepositedInto);
-		FfiConverterSequenceAddressINSTANCE.Write(writer, value.EncounteredEntities);
-		FfiConverterSequenceAddressINSTANCE.Write(writer, value.AccountsRequiringAuth);
-		FfiConverterSequenceAddressINSTANCE.Write(writer, value.IdentitiesRequiringAuth);
-		FfiConverterSequenceTypeReservedInstructionINSTANCE.Write(writer, value.ReservedInstructions);
-		FfiConverterSequenceTypeManifestClassINSTANCE.Write(writer, value.Classification);
-}
-
-type FfiDestroyerTypeStaticAnalysisWithResourceMovements struct {}
-
-func (_ FfiDestroyerTypeStaticAnalysisWithResourceMovements) Destroy(value StaticAnalysisWithResourceMovements) {
 	value.Destroy()
 }
 
@@ -20651,255 +21071,6 @@ func (c FfiConverterTypeStoreEvent) Write(writer io.Writer, value StoreEvent) {
 type FfiDestroyerTypeStoreEvent struct {}
 
 func (_ FfiDestroyerTypeStoreEvent) Destroy(value StoreEvent) {
-	value.Destroy()
-}
-
-
-type TrackedPoolContribution struct {
-	PoolAddress *Address
-	ContributedResources map[string]*Decimal
-	PoolUnitsResourceAddress *Address
-	PoolUnitsAmount *Decimal
-}
-
-func (r *TrackedPoolContribution) Destroy() {
-		FfiDestroyerAddress{}.Destroy(r.PoolAddress);
-		FfiDestroyerMapStringDecimal{}.Destroy(r.ContributedResources);
-		FfiDestroyerAddress{}.Destroy(r.PoolUnitsResourceAddress);
-		FfiDestroyerDecimal{}.Destroy(r.PoolUnitsAmount);
-}
-
-type FfiConverterTypeTrackedPoolContribution struct {}
-
-var FfiConverterTypeTrackedPoolContributionINSTANCE = FfiConverterTypeTrackedPoolContribution{}
-
-func (c FfiConverterTypeTrackedPoolContribution) Lift(rb RustBufferI) TrackedPoolContribution {
-	return LiftFromRustBuffer[TrackedPoolContribution](c, rb)
-}
-
-func (c FfiConverterTypeTrackedPoolContribution) Read(reader io.Reader) TrackedPoolContribution {
-	return TrackedPoolContribution {
-			FfiConverterAddressINSTANCE.Read(reader),
-			FfiConverterMapStringDecimalINSTANCE.Read(reader),
-			FfiConverterAddressINSTANCE.Read(reader),
-			FfiConverterDecimalINSTANCE.Read(reader),
-	}
-}
-
-func (c FfiConverterTypeTrackedPoolContribution) Lower(value TrackedPoolContribution) RustBuffer {
-	return LowerIntoRustBuffer[TrackedPoolContribution](c, value)
-}
-
-func (c FfiConverterTypeTrackedPoolContribution) Write(writer io.Writer, value TrackedPoolContribution) {
-		FfiConverterAddressINSTANCE.Write(writer, value.PoolAddress);
-		FfiConverterMapStringDecimalINSTANCE.Write(writer, value.ContributedResources);
-		FfiConverterAddressINSTANCE.Write(writer, value.PoolUnitsResourceAddress);
-		FfiConverterDecimalINSTANCE.Write(writer, value.PoolUnitsAmount);
-}
-
-type FfiDestroyerTypeTrackedPoolContribution struct {}
-
-func (_ FfiDestroyerTypeTrackedPoolContribution) Destroy(value TrackedPoolContribution) {
-	value.Destroy()
-}
-
-
-type TrackedPoolRedemption struct {
-	PoolAddress *Address
-	PoolUnitsResourceAddress *Address
-	PoolUnitsAmount *Decimal
-	RedeemedResources map[string]*Decimal
-}
-
-func (r *TrackedPoolRedemption) Destroy() {
-		FfiDestroyerAddress{}.Destroy(r.PoolAddress);
-		FfiDestroyerAddress{}.Destroy(r.PoolUnitsResourceAddress);
-		FfiDestroyerDecimal{}.Destroy(r.PoolUnitsAmount);
-		FfiDestroyerMapStringDecimal{}.Destroy(r.RedeemedResources);
-}
-
-type FfiConverterTypeTrackedPoolRedemption struct {}
-
-var FfiConverterTypeTrackedPoolRedemptionINSTANCE = FfiConverterTypeTrackedPoolRedemption{}
-
-func (c FfiConverterTypeTrackedPoolRedemption) Lift(rb RustBufferI) TrackedPoolRedemption {
-	return LiftFromRustBuffer[TrackedPoolRedemption](c, rb)
-}
-
-func (c FfiConverterTypeTrackedPoolRedemption) Read(reader io.Reader) TrackedPoolRedemption {
-	return TrackedPoolRedemption {
-			FfiConverterAddressINSTANCE.Read(reader),
-			FfiConverterAddressINSTANCE.Read(reader),
-			FfiConverterDecimalINSTANCE.Read(reader),
-			FfiConverterMapStringDecimalINSTANCE.Read(reader),
-	}
-}
-
-func (c FfiConverterTypeTrackedPoolRedemption) Lower(value TrackedPoolRedemption) RustBuffer {
-	return LowerIntoRustBuffer[TrackedPoolRedemption](c, value)
-}
-
-func (c FfiConverterTypeTrackedPoolRedemption) Write(writer io.Writer, value TrackedPoolRedemption) {
-		FfiConverterAddressINSTANCE.Write(writer, value.PoolAddress);
-		FfiConverterAddressINSTANCE.Write(writer, value.PoolUnitsResourceAddress);
-		FfiConverterDecimalINSTANCE.Write(writer, value.PoolUnitsAmount);
-		FfiConverterMapStringDecimalINSTANCE.Write(writer, value.RedeemedResources);
-}
-
-type FfiDestroyerTypeTrackedPoolRedemption struct {}
-
-func (_ FfiDestroyerTypeTrackedPoolRedemption) Destroy(value TrackedPoolRedemption) {
-	value.Destroy()
-}
-
-
-type TrackedValidatorClaim struct {
-	ValidatorAddress *Address
-	ClaimNftAddress *Address
-	ClaimNftIds []NonFungibleLocalId
-	XrdAmount *Decimal
-}
-
-func (r *TrackedValidatorClaim) Destroy() {
-		FfiDestroyerAddress{}.Destroy(r.ValidatorAddress);
-		FfiDestroyerAddress{}.Destroy(r.ClaimNftAddress);
-		FfiDestroyerSequenceTypeNonFungibleLocalId{}.Destroy(r.ClaimNftIds);
-		FfiDestroyerDecimal{}.Destroy(r.XrdAmount);
-}
-
-type FfiConverterTypeTrackedValidatorClaim struct {}
-
-var FfiConverterTypeTrackedValidatorClaimINSTANCE = FfiConverterTypeTrackedValidatorClaim{}
-
-func (c FfiConverterTypeTrackedValidatorClaim) Lift(rb RustBufferI) TrackedValidatorClaim {
-	return LiftFromRustBuffer[TrackedValidatorClaim](c, rb)
-}
-
-func (c FfiConverterTypeTrackedValidatorClaim) Read(reader io.Reader) TrackedValidatorClaim {
-	return TrackedValidatorClaim {
-			FfiConverterAddressINSTANCE.Read(reader),
-			FfiConverterAddressINSTANCE.Read(reader),
-			FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Read(reader),
-			FfiConverterDecimalINSTANCE.Read(reader),
-	}
-}
-
-func (c FfiConverterTypeTrackedValidatorClaim) Lower(value TrackedValidatorClaim) RustBuffer {
-	return LowerIntoRustBuffer[TrackedValidatorClaim](c, value)
-}
-
-func (c FfiConverterTypeTrackedValidatorClaim) Write(writer io.Writer, value TrackedValidatorClaim) {
-		FfiConverterAddressINSTANCE.Write(writer, value.ValidatorAddress);
-		FfiConverterAddressINSTANCE.Write(writer, value.ClaimNftAddress);
-		FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Write(writer, value.ClaimNftIds);
-		FfiConverterDecimalINSTANCE.Write(writer, value.XrdAmount);
-}
-
-type FfiDestroyerTypeTrackedValidatorClaim struct {}
-
-func (_ FfiDestroyerTypeTrackedValidatorClaim) Destroy(value TrackedValidatorClaim) {
-	value.Destroy()
-}
-
-
-type TrackedValidatorStake struct {
-	ValidatorAddress *Address
-	XrdAmount *Decimal
-	LiquidStakeUnitAddress *Address
-	LiquidStakeUnitAmount *Decimal
-}
-
-func (r *TrackedValidatorStake) Destroy() {
-		FfiDestroyerAddress{}.Destroy(r.ValidatorAddress);
-		FfiDestroyerDecimal{}.Destroy(r.XrdAmount);
-		FfiDestroyerAddress{}.Destroy(r.LiquidStakeUnitAddress);
-		FfiDestroyerDecimal{}.Destroy(r.LiquidStakeUnitAmount);
-}
-
-type FfiConverterTypeTrackedValidatorStake struct {}
-
-var FfiConverterTypeTrackedValidatorStakeINSTANCE = FfiConverterTypeTrackedValidatorStake{}
-
-func (c FfiConverterTypeTrackedValidatorStake) Lift(rb RustBufferI) TrackedValidatorStake {
-	return LiftFromRustBuffer[TrackedValidatorStake](c, rb)
-}
-
-func (c FfiConverterTypeTrackedValidatorStake) Read(reader io.Reader) TrackedValidatorStake {
-	return TrackedValidatorStake {
-			FfiConverterAddressINSTANCE.Read(reader),
-			FfiConverterDecimalINSTANCE.Read(reader),
-			FfiConverterAddressINSTANCE.Read(reader),
-			FfiConverterDecimalINSTANCE.Read(reader),
-	}
-}
-
-func (c FfiConverterTypeTrackedValidatorStake) Lower(value TrackedValidatorStake) RustBuffer {
-	return LowerIntoRustBuffer[TrackedValidatorStake](c, value)
-}
-
-func (c FfiConverterTypeTrackedValidatorStake) Write(writer io.Writer, value TrackedValidatorStake) {
-		FfiConverterAddressINSTANCE.Write(writer, value.ValidatorAddress);
-		FfiConverterDecimalINSTANCE.Write(writer, value.XrdAmount);
-		FfiConverterAddressINSTANCE.Write(writer, value.LiquidStakeUnitAddress);
-		FfiConverterDecimalINSTANCE.Write(writer, value.LiquidStakeUnitAmount);
-}
-
-type FfiDestroyerTypeTrackedValidatorStake struct {}
-
-func (_ FfiDestroyerTypeTrackedValidatorStake) Destroy(value TrackedValidatorStake) {
-	value.Destroy()
-}
-
-
-type TrackedValidatorUnstake struct {
-	ValidatorAddress *Address
-	LiquidStakeUnitAddress *Address
-	LiquidStakeUnitAmount *Decimal
-	ClaimNftAddress *Address
-	ClaimNftIds []NonFungibleLocalId
-}
-
-func (r *TrackedValidatorUnstake) Destroy() {
-		FfiDestroyerAddress{}.Destroy(r.ValidatorAddress);
-		FfiDestroyerAddress{}.Destroy(r.LiquidStakeUnitAddress);
-		FfiDestroyerDecimal{}.Destroy(r.LiquidStakeUnitAmount);
-		FfiDestroyerAddress{}.Destroy(r.ClaimNftAddress);
-		FfiDestroyerSequenceTypeNonFungibleLocalId{}.Destroy(r.ClaimNftIds);
-}
-
-type FfiConverterTypeTrackedValidatorUnstake struct {}
-
-var FfiConverterTypeTrackedValidatorUnstakeINSTANCE = FfiConverterTypeTrackedValidatorUnstake{}
-
-func (c FfiConverterTypeTrackedValidatorUnstake) Lift(rb RustBufferI) TrackedValidatorUnstake {
-	return LiftFromRustBuffer[TrackedValidatorUnstake](c, rb)
-}
-
-func (c FfiConverterTypeTrackedValidatorUnstake) Read(reader io.Reader) TrackedValidatorUnstake {
-	return TrackedValidatorUnstake {
-			FfiConverterAddressINSTANCE.Read(reader),
-			FfiConverterAddressINSTANCE.Read(reader),
-			FfiConverterDecimalINSTANCE.Read(reader),
-			FfiConverterAddressINSTANCE.Read(reader),
-			FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Read(reader),
-	}
-}
-
-func (c FfiConverterTypeTrackedValidatorUnstake) Lower(value TrackedValidatorUnstake) RustBuffer {
-	return LowerIntoRustBuffer[TrackedValidatorUnstake](c, value)
-}
-
-func (c FfiConverterTypeTrackedValidatorUnstake) Write(writer io.Writer, value TrackedValidatorUnstake) {
-		FfiConverterAddressINSTANCE.Write(writer, value.ValidatorAddress);
-		FfiConverterAddressINSTANCE.Write(writer, value.LiquidStakeUnitAddress);
-		FfiConverterDecimalINSTANCE.Write(writer, value.LiquidStakeUnitAmount);
-		FfiConverterAddressINSTANCE.Write(writer, value.ClaimNftAddress);
-		FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Write(writer, value.ClaimNftIds);
-}
-
-type FfiDestroyerTypeTrackedValidatorUnstake struct {}
-
-func (_ FfiDestroyerTypeTrackedValidatorUnstake) Destroy(value TrackedValidatorUnstake) {
 	value.Destroy()
 }
 
@@ -21248,92 +21419,6 @@ func (_ FfiDestroyerTypeUnregisterValidatorEvent) Destroy(value UnregisterValida
 }
 
 
-type UnstakeData struct {
-	Name string
-	ClaimEpoch uint64
-	ClaimAmount *Decimal
-}
-
-func (r *UnstakeData) Destroy() {
-		FfiDestroyerString{}.Destroy(r.Name);
-		FfiDestroyerUint64{}.Destroy(r.ClaimEpoch);
-		FfiDestroyerDecimal{}.Destroy(r.ClaimAmount);
-}
-
-type FfiConverterTypeUnstakeData struct {}
-
-var FfiConverterTypeUnstakeDataINSTANCE = FfiConverterTypeUnstakeData{}
-
-func (c FfiConverterTypeUnstakeData) Lift(rb RustBufferI) UnstakeData {
-	return LiftFromRustBuffer[UnstakeData](c, rb)
-}
-
-func (c FfiConverterTypeUnstakeData) Read(reader io.Reader) UnstakeData {
-	return UnstakeData {
-			FfiConverterStringINSTANCE.Read(reader),
-			FfiConverterUint64INSTANCE.Read(reader),
-			FfiConverterDecimalINSTANCE.Read(reader),
-	}
-}
-
-func (c FfiConverterTypeUnstakeData) Lower(value UnstakeData) RustBuffer {
-	return LowerIntoRustBuffer[UnstakeData](c, value)
-}
-
-func (c FfiConverterTypeUnstakeData) Write(writer io.Writer, value UnstakeData) {
-		FfiConverterStringINSTANCE.Write(writer, value.Name);
-		FfiConverterUint64INSTANCE.Write(writer, value.ClaimEpoch);
-		FfiConverterDecimalINSTANCE.Write(writer, value.ClaimAmount);
-}
-
-type FfiDestroyerTypeUnstakeData struct {}
-
-func (_ FfiDestroyerTypeUnstakeData) Destroy(value UnstakeData) {
-	value.Destroy()
-}
-
-
-type UnstakeDataEntry struct {
-	NonFungibleGlobalId *NonFungibleGlobalId
-	Data UnstakeData
-}
-
-func (r *UnstakeDataEntry) Destroy() {
-		FfiDestroyerNonFungibleGlobalId{}.Destroy(r.NonFungibleGlobalId);
-		FfiDestroyerTypeUnstakeData{}.Destroy(r.Data);
-}
-
-type FfiConverterTypeUnstakeDataEntry struct {}
-
-var FfiConverterTypeUnstakeDataEntryINSTANCE = FfiConverterTypeUnstakeDataEntry{}
-
-func (c FfiConverterTypeUnstakeDataEntry) Lift(rb RustBufferI) UnstakeDataEntry {
-	return LiftFromRustBuffer[UnstakeDataEntry](c, rb)
-}
-
-func (c FfiConverterTypeUnstakeDataEntry) Read(reader io.Reader) UnstakeDataEntry {
-	return UnstakeDataEntry {
-			FfiConverterNonFungibleGlobalIdINSTANCE.Read(reader),
-			FfiConverterTypeUnstakeDataINSTANCE.Read(reader),
-	}
-}
-
-func (c FfiConverterTypeUnstakeDataEntry) Lower(value UnstakeDataEntry) RustBuffer {
-	return LowerIntoRustBuffer[UnstakeDataEntry](c, value)
-}
-
-func (c FfiConverterTypeUnstakeDataEntry) Write(writer io.Writer, value UnstakeDataEntry) {
-		FfiConverterNonFungibleGlobalIdINSTANCE.Write(writer, value.NonFungibleGlobalId);
-		FfiConverterTypeUnstakeDataINSTANCE.Write(writer, value.Data);
-}
-
-type FfiDestroyerTypeUnstakeDataEntry struct {}
-
-func (_ FfiDestroyerTypeUnstakeDataEntry) Destroy(value UnstakeDataEntry) {
-	value.Destroy()
-}
-
-
 type UnstakeEvent struct {
 	StakeUnits *Decimal
 }
@@ -21404,6 +21489,92 @@ func (c FfiConverterTypeUpdateAcceptingStakeDelegationStateEvent) Write(writer i
 type FfiDestroyerTypeUpdateAcceptingStakeDelegationStateEvent struct {}
 
 func (_ FfiDestroyerTypeUpdateAcceptingStakeDelegationStateEvent) Destroy(value UpdateAcceptingStakeDelegationStateEvent) {
+	value.Destroy()
+}
+
+
+type ValidatorClaimOperation struct {
+	ValidatorAddress *Address
+	ClaimNftAddress *Address
+	ClaimNftIds []NonFungibleLocalId
+	XrdAmount *Decimal
+}
+
+func (r *ValidatorClaimOperation) Destroy() {
+		FfiDestroyerAddress{}.Destroy(r.ValidatorAddress);
+		FfiDestroyerAddress{}.Destroy(r.ClaimNftAddress);
+		FfiDestroyerSequenceTypeNonFungibleLocalId{}.Destroy(r.ClaimNftIds);
+		FfiDestroyerDecimal{}.Destroy(r.XrdAmount);
+}
+
+type FfiConverterTypeValidatorClaimOperation struct {}
+
+var FfiConverterTypeValidatorClaimOperationINSTANCE = FfiConverterTypeValidatorClaimOperation{}
+
+func (c FfiConverterTypeValidatorClaimOperation) Lift(rb RustBufferI) ValidatorClaimOperation {
+	return LiftFromRustBuffer[ValidatorClaimOperation](c, rb)
+}
+
+func (c FfiConverterTypeValidatorClaimOperation) Read(reader io.Reader) ValidatorClaimOperation {
+	return ValidatorClaimOperation {
+			FfiConverterAddressINSTANCE.Read(reader),
+			FfiConverterAddressINSTANCE.Read(reader),
+			FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Read(reader),
+			FfiConverterDecimalINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeValidatorClaimOperation) Lower(value ValidatorClaimOperation) RustBuffer {
+	return LowerIntoRustBuffer[ValidatorClaimOperation](c, value)
+}
+
+func (c FfiConverterTypeValidatorClaimOperation) Write(writer io.Writer, value ValidatorClaimOperation) {
+		FfiConverterAddressINSTANCE.Write(writer, value.ValidatorAddress);
+		FfiConverterAddressINSTANCE.Write(writer, value.ClaimNftAddress);
+		FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Write(writer, value.ClaimNftIds);
+		FfiConverterDecimalINSTANCE.Write(writer, value.XrdAmount);
+}
+
+type FfiDestroyerTypeValidatorClaimOperation struct {}
+
+func (_ FfiDestroyerTypeValidatorClaimOperation) Destroy(value ValidatorClaimOperation) {
+	value.Destroy()
+}
+
+
+type ValidatorClaimingXrdOutput struct {
+	ClaimOperations []ValidatorClaimOperation
+}
+
+func (r *ValidatorClaimingXrdOutput) Destroy() {
+		FfiDestroyerSequenceTypeValidatorClaimOperation{}.Destroy(r.ClaimOperations);
+}
+
+type FfiConverterTypeValidatorClaimingXrdOutput struct {}
+
+var FfiConverterTypeValidatorClaimingXrdOutputINSTANCE = FfiConverterTypeValidatorClaimingXrdOutput{}
+
+func (c FfiConverterTypeValidatorClaimingXrdOutput) Lift(rb RustBufferI) ValidatorClaimingXrdOutput {
+	return LiftFromRustBuffer[ValidatorClaimingXrdOutput](c, rb)
+}
+
+func (c FfiConverterTypeValidatorClaimingXrdOutput) Read(reader io.Reader) ValidatorClaimingXrdOutput {
+	return ValidatorClaimingXrdOutput {
+			FfiConverterSequenceTypeValidatorClaimOperationINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeValidatorClaimingXrdOutput) Lower(value ValidatorClaimingXrdOutput) RustBuffer {
+	return LowerIntoRustBuffer[ValidatorClaimingXrdOutput](c, value)
+}
+
+func (c FfiConverterTypeValidatorClaimingXrdOutput) Write(writer io.Writer, value ValidatorClaimingXrdOutput) {
+		FfiConverterSequenceTypeValidatorClaimOperationINSTANCE.Write(writer, value.ClaimOperations);
+}
+
+type FfiDestroyerTypeValidatorClaimingXrdOutput struct {}
+
+func (_ FfiDestroyerTypeValidatorClaimingXrdOutput) Destroy(value ValidatorClaimingXrdOutput) {
 	value.Destroy()
 }
 
@@ -21547,6 +21718,182 @@ func (c FfiConverterTypeValidatorRewardAppliedEvent) Write(writer io.Writer, val
 type FfiDestroyerTypeValidatorRewardAppliedEvent struct {}
 
 func (_ FfiDestroyerTypeValidatorRewardAppliedEvent) Destroy(value ValidatorRewardAppliedEvent) {
+	value.Destroy()
+}
+
+
+type ValidatorStakeOperation struct {
+	ValidatorAddress *Address
+	StakedXrdAmount *Decimal
+	LiquidStakeUnitResourceAddress *Address
+	LiquidStakeUnitAmount *Decimal
+}
+
+func (r *ValidatorStakeOperation) Destroy() {
+		FfiDestroyerAddress{}.Destroy(r.ValidatorAddress);
+		FfiDestroyerDecimal{}.Destroy(r.StakedXrdAmount);
+		FfiDestroyerAddress{}.Destroy(r.LiquidStakeUnitResourceAddress);
+		FfiDestroyerDecimal{}.Destroy(r.LiquidStakeUnitAmount);
+}
+
+type FfiConverterTypeValidatorStakeOperation struct {}
+
+var FfiConverterTypeValidatorStakeOperationINSTANCE = FfiConverterTypeValidatorStakeOperation{}
+
+func (c FfiConverterTypeValidatorStakeOperation) Lift(rb RustBufferI) ValidatorStakeOperation {
+	return LiftFromRustBuffer[ValidatorStakeOperation](c, rb)
+}
+
+func (c FfiConverterTypeValidatorStakeOperation) Read(reader io.Reader) ValidatorStakeOperation {
+	return ValidatorStakeOperation {
+			FfiConverterAddressINSTANCE.Read(reader),
+			FfiConverterDecimalINSTANCE.Read(reader),
+			FfiConverterAddressINSTANCE.Read(reader),
+			FfiConverterDecimalINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeValidatorStakeOperation) Lower(value ValidatorStakeOperation) RustBuffer {
+	return LowerIntoRustBuffer[ValidatorStakeOperation](c, value)
+}
+
+func (c FfiConverterTypeValidatorStakeOperation) Write(writer io.Writer, value ValidatorStakeOperation) {
+		FfiConverterAddressINSTANCE.Write(writer, value.ValidatorAddress);
+		FfiConverterDecimalINSTANCE.Write(writer, value.StakedXrdAmount);
+		FfiConverterAddressINSTANCE.Write(writer, value.LiquidStakeUnitResourceAddress);
+		FfiConverterDecimalINSTANCE.Write(writer, value.LiquidStakeUnitAmount);
+}
+
+type FfiDestroyerTypeValidatorStakeOperation struct {}
+
+func (_ FfiDestroyerTypeValidatorStakeOperation) Destroy(value ValidatorStakeOperation) {
+	value.Destroy()
+}
+
+
+type ValidatorStakingOutput struct {
+	StakeOperations []ValidatorStakeOperation
+}
+
+func (r *ValidatorStakingOutput) Destroy() {
+		FfiDestroyerSequenceTypeValidatorStakeOperation{}.Destroy(r.StakeOperations);
+}
+
+type FfiConverterTypeValidatorStakingOutput struct {}
+
+var FfiConverterTypeValidatorStakingOutputINSTANCE = FfiConverterTypeValidatorStakingOutput{}
+
+func (c FfiConverterTypeValidatorStakingOutput) Lift(rb RustBufferI) ValidatorStakingOutput {
+	return LiftFromRustBuffer[ValidatorStakingOutput](c, rb)
+}
+
+func (c FfiConverterTypeValidatorStakingOutput) Read(reader io.Reader) ValidatorStakingOutput {
+	return ValidatorStakingOutput {
+			FfiConverterSequenceTypeValidatorStakeOperationINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeValidatorStakingOutput) Lower(value ValidatorStakingOutput) RustBuffer {
+	return LowerIntoRustBuffer[ValidatorStakingOutput](c, value)
+}
+
+func (c FfiConverterTypeValidatorStakingOutput) Write(writer io.Writer, value ValidatorStakingOutput) {
+		FfiConverterSequenceTypeValidatorStakeOperationINSTANCE.Write(writer, value.StakeOperations);
+}
+
+type FfiDestroyerTypeValidatorStakingOutput struct {}
+
+func (_ FfiDestroyerTypeValidatorStakingOutput) Destroy(value ValidatorStakingOutput) {
+	value.Destroy()
+}
+
+
+type ValidatorUnstakeOperation struct {
+	ValidatorAddress *Address
+	LiquidStakeUnitAddress *Address
+	LiquidStakeUnitAmount *Decimal
+	ClaimNftAddress *Address
+	ClaimNftIds []NonFungibleLocalId
+}
+
+func (r *ValidatorUnstakeOperation) Destroy() {
+		FfiDestroyerAddress{}.Destroy(r.ValidatorAddress);
+		FfiDestroyerAddress{}.Destroy(r.LiquidStakeUnitAddress);
+		FfiDestroyerDecimal{}.Destroy(r.LiquidStakeUnitAmount);
+		FfiDestroyerAddress{}.Destroy(r.ClaimNftAddress);
+		FfiDestroyerSequenceTypeNonFungibleLocalId{}.Destroy(r.ClaimNftIds);
+}
+
+type FfiConverterTypeValidatorUnstakeOperation struct {}
+
+var FfiConverterTypeValidatorUnstakeOperationINSTANCE = FfiConverterTypeValidatorUnstakeOperation{}
+
+func (c FfiConverterTypeValidatorUnstakeOperation) Lift(rb RustBufferI) ValidatorUnstakeOperation {
+	return LiftFromRustBuffer[ValidatorUnstakeOperation](c, rb)
+}
+
+func (c FfiConverterTypeValidatorUnstakeOperation) Read(reader io.Reader) ValidatorUnstakeOperation {
+	return ValidatorUnstakeOperation {
+			FfiConverterAddressINSTANCE.Read(reader),
+			FfiConverterAddressINSTANCE.Read(reader),
+			FfiConverterDecimalINSTANCE.Read(reader),
+			FfiConverterAddressINSTANCE.Read(reader),
+			FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeValidatorUnstakeOperation) Lower(value ValidatorUnstakeOperation) RustBuffer {
+	return LowerIntoRustBuffer[ValidatorUnstakeOperation](c, value)
+}
+
+func (c FfiConverterTypeValidatorUnstakeOperation) Write(writer io.Writer, value ValidatorUnstakeOperation) {
+		FfiConverterAddressINSTANCE.Write(writer, value.ValidatorAddress);
+		FfiConverterAddressINSTANCE.Write(writer, value.LiquidStakeUnitAddress);
+		FfiConverterDecimalINSTANCE.Write(writer, value.LiquidStakeUnitAmount);
+		FfiConverterAddressINSTANCE.Write(writer, value.ClaimNftAddress);
+		FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Write(writer, value.ClaimNftIds);
+}
+
+type FfiDestroyerTypeValidatorUnstakeOperation struct {}
+
+func (_ FfiDestroyerTypeValidatorUnstakeOperation) Destroy(value ValidatorUnstakeOperation) {
+	value.Destroy()
+}
+
+
+type ValidatorUnstakingOutput struct {
+	UnstakeOperations []ValidatorUnstakeOperation
+}
+
+func (r *ValidatorUnstakingOutput) Destroy() {
+		FfiDestroyerSequenceTypeValidatorUnstakeOperation{}.Destroy(r.UnstakeOperations);
+}
+
+type FfiConverterTypeValidatorUnstakingOutput struct {}
+
+var FfiConverterTypeValidatorUnstakingOutputINSTANCE = FfiConverterTypeValidatorUnstakingOutput{}
+
+func (c FfiConverterTypeValidatorUnstakingOutput) Lift(rb RustBufferI) ValidatorUnstakingOutput {
+	return LiftFromRustBuffer[ValidatorUnstakingOutput](c, rb)
+}
+
+func (c FfiConverterTypeValidatorUnstakingOutput) Read(reader io.Reader) ValidatorUnstakingOutput {
+	return ValidatorUnstakingOutput {
+			FfiConverterSequenceTypeValidatorUnstakeOperationINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeValidatorUnstakingOutput) Lower(value ValidatorUnstakingOutput) RustBuffer {
+	return LowerIntoRustBuffer[ValidatorUnstakingOutput](c, value)
+}
+
+func (c FfiConverterTypeValidatorUnstakingOutput) Write(writer io.Writer, value ValidatorUnstakingOutput) {
+		FfiConverterSequenceTypeValidatorUnstakeOperationINSTANCE.Write(writer, value.UnstakeOperations);
+}
+
+type FfiDestroyerTypeValidatorUnstakingOutput struct {}
+
+func (_ FfiDestroyerTypeValidatorUnstakingOutput) Destroy(value ValidatorUnstakingOutput) {
 	value.Destroy()
 }
 
@@ -22537,184 +22884,302 @@ func (_ FfiDestroyerTypeDepositResourceEvent) Destroy(value DepositResourceEvent
 
 
 
-type DetailedManifestClass interface {
+type DetailedManifestClassification interface {
 	Destroy()
 }
-type DetailedManifestClassGeneral struct {
+type DetailedManifestClassificationGeneral struct {
 }
 
-func (e DetailedManifestClassGeneral) Destroy() {
+func (e DetailedManifestClassificationGeneral) Destroy() {
 }
-type DetailedManifestClassTransfer struct {
-	IsOneToOne bool
-}
-
-func (e DetailedManifestClassTransfer) Destroy() {
-		FfiDestroyerBool{}.Destroy(e.IsOneToOne);
-}
-type DetailedManifestClassPoolContribution struct {
-	PoolAddresses []*Address
-	PoolContributions []TrackedPoolContribution
+type DetailedManifestClassificationGeneralSubintent struct {
 }
 
-func (e DetailedManifestClassPoolContribution) Destroy() {
-		FfiDestroyerSequenceAddress{}.Destroy(e.PoolAddresses);
-		FfiDestroyerSequenceTypeTrackedPoolContribution{}.Destroy(e.PoolContributions);
+func (e DetailedManifestClassificationGeneralSubintent) Destroy() {
 }
-type DetailedManifestClassPoolRedemption struct {
-	PoolAddresses []*Address
-	PoolRedemptions []TrackedPoolRedemption
+type DetailedManifestClassificationTransfer struct {
+	IsOneToOneTransfer bool
 }
 
-func (e DetailedManifestClassPoolRedemption) Destroy() {
-		FfiDestroyerSequenceAddress{}.Destroy(e.PoolAddresses);
-		FfiDestroyerSequenceTypeTrackedPoolRedemption{}.Destroy(e.PoolRedemptions);
+func (e DetailedManifestClassificationTransfer) Destroy() {
+		FfiDestroyerBool{}.Destroy(e.IsOneToOneTransfer);
 }
-type DetailedManifestClassValidatorStake struct {
-	ValidatorAddresses []*Address
-	ValidatorStakes []TrackedValidatorStake
+type DetailedManifestClassificationValidatorStake struct {
+	Value ValidatorStakingOutput
 }
 
-func (e DetailedManifestClassValidatorStake) Destroy() {
-		FfiDestroyerSequenceAddress{}.Destroy(e.ValidatorAddresses);
-		FfiDestroyerSequenceTypeTrackedValidatorStake{}.Destroy(e.ValidatorStakes);
+func (e DetailedManifestClassificationValidatorStake) Destroy() {
+		FfiDestroyerTypeValidatorStakingOutput{}.Destroy(e.Value);
 }
-type DetailedManifestClassValidatorUnstake struct {
-	ValidatorAddresses []*Address
-	ValidatorUnstakes []TrackedValidatorUnstake
-	ClaimsNonFungibleData []UnstakeDataEntry
+type DetailedManifestClassificationValidatorUnstake struct {
+	Value ValidatorUnstakingOutput
 }
 
-func (e DetailedManifestClassValidatorUnstake) Destroy() {
-		FfiDestroyerSequenceAddress{}.Destroy(e.ValidatorAddresses);
-		FfiDestroyerSequenceTypeTrackedValidatorUnstake{}.Destroy(e.ValidatorUnstakes);
-		FfiDestroyerSequenceTypeUnstakeDataEntry{}.Destroy(e.ClaimsNonFungibleData);
+func (e DetailedManifestClassificationValidatorUnstake) Destroy() {
+		FfiDestroyerTypeValidatorUnstakingOutput{}.Destroy(e.Value);
 }
-type DetailedManifestClassValidatorClaim struct {
-	ValidatorAddresses []*Address
-	ValidatorClaims []TrackedValidatorClaim
+type DetailedManifestClassificationValidatorClaimXrd struct {
+	Value ValidatorClaimingXrdOutput
 }
 
-func (e DetailedManifestClassValidatorClaim) Destroy() {
-		FfiDestroyerSequenceAddress{}.Destroy(e.ValidatorAddresses);
-		FfiDestroyerSequenceTypeTrackedValidatorClaim{}.Destroy(e.ValidatorClaims);
+func (e DetailedManifestClassificationValidatorClaimXrd) Destroy() {
+		FfiDestroyerTypeValidatorClaimingXrdOutput{}.Destroy(e.Value);
 }
-type DetailedManifestClassAccountDepositSettingsUpdate struct {
-	ResourcePreferencesUpdates map[string]map[string]ResourcePreferenceUpdate
-	DepositModeUpdates map[string]AccountDefaultDepositRule
-	AuthorizedDepositorsAdded map[string][]ResourceOrNonFungible
-	AuthorizedDepositorsRemoved map[string][]ResourceOrNonFungible
+type DetailedManifestClassificationPoolContribution struct {
+	Value PoolContributionOutput
 }
 
-func (e DetailedManifestClassAccountDepositSettingsUpdate) Destroy() {
-		FfiDestroyerMapStringMapStringTypeResourcePreferenceUpdate{}.Destroy(e.ResourcePreferencesUpdates);
-		FfiDestroyerMapStringTypeAccountDefaultDepositRule{}.Destroy(e.DepositModeUpdates);
-		FfiDestroyerMapStringSequenceTypeResourceOrNonFungible{}.Destroy(e.AuthorizedDepositorsAdded);
-		FfiDestroyerMapStringSequenceTypeResourceOrNonFungible{}.Destroy(e.AuthorizedDepositorsRemoved);
+func (e DetailedManifestClassificationPoolContribution) Destroy() {
+		FfiDestroyerTypePoolContributionOutput{}.Destroy(e.Value);
+}
+type DetailedManifestClassificationPoolRedemption struct {
+	Value PoolRedemptionOutput
 }
 
-type FfiConverterTypeDetailedManifestClass struct {}
-
-var FfiConverterTypeDetailedManifestClassINSTANCE = FfiConverterTypeDetailedManifestClass{}
-
-func (c FfiConverterTypeDetailedManifestClass) Lift(rb RustBufferI) DetailedManifestClass {
-	return LiftFromRustBuffer[DetailedManifestClass](c, rb)
+func (e DetailedManifestClassificationPoolRedemption) Destroy() {
+		FfiDestroyerTypePoolRedemptionOutput{}.Destroy(e.Value);
+}
+type DetailedManifestClassificationAccountDepositSettingsUpdate struct {
+	Value AccountSettingsUpdateOutput
 }
 
-func (c FfiConverterTypeDetailedManifestClass) Lower(value DetailedManifestClass) RustBuffer {
-	return LowerIntoRustBuffer[DetailedManifestClass](c, value)
+func (e DetailedManifestClassificationAccountDepositSettingsUpdate) Destroy() {
+		FfiDestroyerTypeAccountSettingsUpdateOutput{}.Destroy(e.Value);
 }
-func (FfiConverterTypeDetailedManifestClass) Read(reader io.Reader) DetailedManifestClass {
+
+type FfiConverterTypeDetailedManifestClassification struct {}
+
+var FfiConverterTypeDetailedManifestClassificationINSTANCE = FfiConverterTypeDetailedManifestClassification{}
+
+func (c FfiConverterTypeDetailedManifestClassification) Lift(rb RustBufferI) DetailedManifestClassification {
+	return LiftFromRustBuffer[DetailedManifestClassification](c, rb)
+}
+
+func (c FfiConverterTypeDetailedManifestClassification) Lower(value DetailedManifestClassification) RustBuffer {
+	return LowerIntoRustBuffer[DetailedManifestClassification](c, value)
+}
+func (FfiConverterTypeDetailedManifestClassification) Read(reader io.Reader) DetailedManifestClassification {
 	id := readInt32(reader)
 	switch (id) {
 		case 1:
-			return DetailedManifestClassGeneral{
+			return DetailedManifestClassificationGeneral{
 			};
 		case 2:
-			return DetailedManifestClassTransfer{
-				FfiConverterBoolINSTANCE.Read(reader),
+			return DetailedManifestClassificationGeneralSubintent{
 			};
 		case 3:
-			return DetailedManifestClassPoolContribution{
-				FfiConverterSequenceAddressINSTANCE.Read(reader),
-				FfiConverterSequenceTypeTrackedPoolContributionINSTANCE.Read(reader),
+			return DetailedManifestClassificationTransfer{
+				FfiConverterBoolINSTANCE.Read(reader),
 			};
 		case 4:
-			return DetailedManifestClassPoolRedemption{
-				FfiConverterSequenceAddressINSTANCE.Read(reader),
-				FfiConverterSequenceTypeTrackedPoolRedemptionINSTANCE.Read(reader),
+			return DetailedManifestClassificationValidatorStake{
+				FfiConverterTypeValidatorStakingOutputINSTANCE.Read(reader),
 			};
 		case 5:
-			return DetailedManifestClassValidatorStake{
-				FfiConverterSequenceAddressINSTANCE.Read(reader),
-				FfiConverterSequenceTypeTrackedValidatorStakeINSTANCE.Read(reader),
+			return DetailedManifestClassificationValidatorUnstake{
+				FfiConverterTypeValidatorUnstakingOutputINSTANCE.Read(reader),
 			};
 		case 6:
-			return DetailedManifestClassValidatorUnstake{
-				FfiConverterSequenceAddressINSTANCE.Read(reader),
-				FfiConverterSequenceTypeTrackedValidatorUnstakeINSTANCE.Read(reader),
-				FfiConverterSequenceTypeUnstakeDataEntryINSTANCE.Read(reader),
+			return DetailedManifestClassificationValidatorClaimXrd{
+				FfiConverterTypeValidatorClaimingXrdOutputINSTANCE.Read(reader),
 			};
 		case 7:
-			return DetailedManifestClassValidatorClaim{
-				FfiConverterSequenceAddressINSTANCE.Read(reader),
-				FfiConverterSequenceTypeTrackedValidatorClaimINSTANCE.Read(reader),
+			return DetailedManifestClassificationPoolContribution{
+				FfiConverterTypePoolContributionOutputINSTANCE.Read(reader),
 			};
 		case 8:
-			return DetailedManifestClassAccountDepositSettingsUpdate{
-				FfiConverterMapStringMapStringTypeResourcePreferenceUpdateINSTANCE.Read(reader),
-				FfiConverterMapStringTypeAccountDefaultDepositRuleINSTANCE.Read(reader),
-				FfiConverterMapStringSequenceTypeResourceOrNonFungibleINSTANCE.Read(reader),
-				FfiConverterMapStringSequenceTypeResourceOrNonFungibleINSTANCE.Read(reader),
+			return DetailedManifestClassificationPoolRedemption{
+				FfiConverterTypePoolRedemptionOutputINSTANCE.Read(reader),
+			};
+		case 9:
+			return DetailedManifestClassificationAccountDepositSettingsUpdate{
+				FfiConverterTypeAccountSettingsUpdateOutputINSTANCE.Read(reader),
 			};
 		default:
-			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeDetailedManifestClass.Read()", id));
+			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeDetailedManifestClassification.Read()", id));
 	}
 }
 
-func (FfiConverterTypeDetailedManifestClass) Write(writer io.Writer, value DetailedManifestClass) {
+func (FfiConverterTypeDetailedManifestClassification) Write(writer io.Writer, value DetailedManifestClassification) {
 	switch variant_value := value.(type) {
-		case DetailedManifestClassGeneral:
+		case DetailedManifestClassificationGeneral:
 			writeInt32(writer, 1)
-		case DetailedManifestClassTransfer:
+		case DetailedManifestClassificationGeneralSubintent:
 			writeInt32(writer, 2)
-			FfiConverterBoolINSTANCE.Write(writer, variant_value.IsOneToOne)
-		case DetailedManifestClassPoolContribution:
+		case DetailedManifestClassificationTransfer:
 			writeInt32(writer, 3)
-			FfiConverterSequenceAddressINSTANCE.Write(writer, variant_value.PoolAddresses)
-			FfiConverterSequenceTypeTrackedPoolContributionINSTANCE.Write(writer, variant_value.PoolContributions)
-		case DetailedManifestClassPoolRedemption:
+			FfiConverterBoolINSTANCE.Write(writer, variant_value.IsOneToOneTransfer)
+		case DetailedManifestClassificationValidatorStake:
 			writeInt32(writer, 4)
-			FfiConverterSequenceAddressINSTANCE.Write(writer, variant_value.PoolAddresses)
-			FfiConverterSequenceTypeTrackedPoolRedemptionINSTANCE.Write(writer, variant_value.PoolRedemptions)
-		case DetailedManifestClassValidatorStake:
+			FfiConverterTypeValidatorStakingOutputINSTANCE.Write(writer, variant_value.Value)
+		case DetailedManifestClassificationValidatorUnstake:
 			writeInt32(writer, 5)
-			FfiConverterSequenceAddressINSTANCE.Write(writer, variant_value.ValidatorAddresses)
-			FfiConverterSequenceTypeTrackedValidatorStakeINSTANCE.Write(writer, variant_value.ValidatorStakes)
-		case DetailedManifestClassValidatorUnstake:
+			FfiConverterTypeValidatorUnstakingOutputINSTANCE.Write(writer, variant_value.Value)
+		case DetailedManifestClassificationValidatorClaimXrd:
 			writeInt32(writer, 6)
-			FfiConverterSequenceAddressINSTANCE.Write(writer, variant_value.ValidatorAddresses)
-			FfiConverterSequenceTypeTrackedValidatorUnstakeINSTANCE.Write(writer, variant_value.ValidatorUnstakes)
-			FfiConverterSequenceTypeUnstakeDataEntryINSTANCE.Write(writer, variant_value.ClaimsNonFungibleData)
-		case DetailedManifestClassValidatorClaim:
+			FfiConverterTypeValidatorClaimingXrdOutputINSTANCE.Write(writer, variant_value.Value)
+		case DetailedManifestClassificationPoolContribution:
 			writeInt32(writer, 7)
-			FfiConverterSequenceAddressINSTANCE.Write(writer, variant_value.ValidatorAddresses)
-			FfiConverterSequenceTypeTrackedValidatorClaimINSTANCE.Write(writer, variant_value.ValidatorClaims)
-		case DetailedManifestClassAccountDepositSettingsUpdate:
+			FfiConverterTypePoolContributionOutputINSTANCE.Write(writer, variant_value.Value)
+		case DetailedManifestClassificationPoolRedemption:
 			writeInt32(writer, 8)
-			FfiConverterMapStringMapStringTypeResourcePreferenceUpdateINSTANCE.Write(writer, variant_value.ResourcePreferencesUpdates)
-			FfiConverterMapStringTypeAccountDefaultDepositRuleINSTANCE.Write(writer, variant_value.DepositModeUpdates)
-			FfiConverterMapStringSequenceTypeResourceOrNonFungibleINSTANCE.Write(writer, variant_value.AuthorizedDepositorsAdded)
-			FfiConverterMapStringSequenceTypeResourceOrNonFungibleINSTANCE.Write(writer, variant_value.AuthorizedDepositorsRemoved)
+			FfiConverterTypePoolRedemptionOutputINSTANCE.Write(writer, variant_value.Value)
+		case DetailedManifestClassificationAccountDepositSettingsUpdate:
+			writeInt32(writer, 9)
+			FfiConverterTypeAccountSettingsUpdateOutputINSTANCE.Write(writer, variant_value.Value)
 		default:
 			_ = variant_value
-			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeDetailedManifestClass.Write", value))
+			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeDetailedManifestClassification.Write", value))
 	}
 }
 
-type FfiDestroyerTypeDetailedManifestClass struct {}
+type FfiDestroyerTypeDetailedManifestClassification struct {}
 
-func (_ FfiDestroyerTypeDetailedManifestClass) Destroy(value DetailedManifestClass) {
+func (_ FfiDestroyerTypeDetailedManifestClassification) Destroy(value DetailedManifestClassification) {
+	value.Destroy()
+}
+
+
+
+
+type EitherGuaranteedOrPredictedDecimal interface {
+	Destroy()
+}
+type EitherGuaranteedOrPredictedDecimalGuaranteed struct {
+	Value *Decimal
+}
+
+func (e EitherGuaranteedOrPredictedDecimalGuaranteed) Destroy() {
+		FfiDestroyerDecimal{}.Destroy(e.Value);
+}
+type EitherGuaranteedOrPredictedDecimalPredicted struct {
+	Value *Decimal
+	CreatedAt InstructionIndex
+}
+
+func (e EitherGuaranteedOrPredictedDecimalPredicted) Destroy() {
+		FfiDestroyerDecimal{}.Destroy(e.Value);
+		FfiDestroyerTypeInstructionIndex{}.Destroy(e.CreatedAt);
+}
+
+type FfiConverterTypeEitherGuaranteedOrPredictedDecimal struct {}
+
+var FfiConverterTypeEitherGuaranteedOrPredictedDecimalINSTANCE = FfiConverterTypeEitherGuaranteedOrPredictedDecimal{}
+
+func (c FfiConverterTypeEitherGuaranteedOrPredictedDecimal) Lift(rb RustBufferI) EitherGuaranteedOrPredictedDecimal {
+	return LiftFromRustBuffer[EitherGuaranteedOrPredictedDecimal](c, rb)
+}
+
+func (c FfiConverterTypeEitherGuaranteedOrPredictedDecimal) Lower(value EitherGuaranteedOrPredictedDecimal) RustBuffer {
+	return LowerIntoRustBuffer[EitherGuaranteedOrPredictedDecimal](c, value)
+}
+func (FfiConverterTypeEitherGuaranteedOrPredictedDecimal) Read(reader io.Reader) EitherGuaranteedOrPredictedDecimal {
+	id := readInt32(reader)
+	switch (id) {
+		case 1:
+			return EitherGuaranteedOrPredictedDecimalGuaranteed{
+				FfiConverterDecimalINSTANCE.Read(reader),
+			};
+		case 2:
+			return EitherGuaranteedOrPredictedDecimalPredicted{
+				FfiConverterDecimalINSTANCE.Read(reader),
+				FfiConverterTypeInstructionIndexINSTANCE.Read(reader),
+			};
+		default:
+			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeEitherGuaranteedOrPredictedDecimal.Read()", id));
+	}
+}
+
+func (FfiConverterTypeEitherGuaranteedOrPredictedDecimal) Write(writer io.Writer, value EitherGuaranteedOrPredictedDecimal) {
+	switch variant_value := value.(type) {
+		case EitherGuaranteedOrPredictedDecimalGuaranteed:
+			writeInt32(writer, 1)
+			FfiConverterDecimalINSTANCE.Write(writer, variant_value.Value)
+		case EitherGuaranteedOrPredictedDecimalPredicted:
+			writeInt32(writer, 2)
+			FfiConverterDecimalINSTANCE.Write(writer, variant_value.Value)
+			FfiConverterTypeInstructionIndexINSTANCE.Write(writer, variant_value.CreatedAt)
+		default:
+			_ = variant_value
+			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeEitherGuaranteedOrPredictedDecimal.Write", value))
+	}
+}
+
+type FfiDestroyerTypeEitherGuaranteedOrPredictedDecimal struct {}
+
+func (_ FfiDestroyerTypeEitherGuaranteedOrPredictedDecimal) Destroy(value EitherGuaranteedOrPredictedDecimal) {
+	value.Destroy()
+}
+
+
+
+
+type EitherGuaranteedOrPredictedNonFungibleIds interface {
+	Destroy()
+}
+type EitherGuaranteedOrPredictedNonFungibleIdsGuaranteed struct {
+	Value []NonFungibleLocalId
+}
+
+func (e EitherGuaranteedOrPredictedNonFungibleIdsGuaranteed) Destroy() {
+		FfiDestroyerSequenceTypeNonFungibleLocalId{}.Destroy(e.Value);
+}
+type EitherGuaranteedOrPredictedNonFungibleIdsPredicted struct {
+	Value []NonFungibleLocalId
+	CreatedAt InstructionIndex
+}
+
+func (e EitherGuaranteedOrPredictedNonFungibleIdsPredicted) Destroy() {
+		FfiDestroyerSequenceTypeNonFungibleLocalId{}.Destroy(e.Value);
+		FfiDestroyerTypeInstructionIndex{}.Destroy(e.CreatedAt);
+}
+
+type FfiConverterTypeEitherGuaranteedOrPredictedNonFungibleIds struct {}
+
+var FfiConverterTypeEitherGuaranteedOrPredictedNonFungibleIdsINSTANCE = FfiConverterTypeEitherGuaranteedOrPredictedNonFungibleIds{}
+
+func (c FfiConverterTypeEitherGuaranteedOrPredictedNonFungibleIds) Lift(rb RustBufferI) EitherGuaranteedOrPredictedNonFungibleIds {
+	return LiftFromRustBuffer[EitherGuaranteedOrPredictedNonFungibleIds](c, rb)
+}
+
+func (c FfiConverterTypeEitherGuaranteedOrPredictedNonFungibleIds) Lower(value EitherGuaranteedOrPredictedNonFungibleIds) RustBuffer {
+	return LowerIntoRustBuffer[EitherGuaranteedOrPredictedNonFungibleIds](c, value)
+}
+func (FfiConverterTypeEitherGuaranteedOrPredictedNonFungibleIds) Read(reader io.Reader) EitherGuaranteedOrPredictedNonFungibleIds {
+	id := readInt32(reader)
+	switch (id) {
+		case 1:
+			return EitherGuaranteedOrPredictedNonFungibleIdsGuaranteed{
+				FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Read(reader),
+			};
+		case 2:
+			return EitherGuaranteedOrPredictedNonFungibleIdsPredicted{
+				FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Read(reader),
+				FfiConverterTypeInstructionIndexINSTANCE.Read(reader),
+			};
+		default:
+			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeEitherGuaranteedOrPredictedNonFungibleIds.Read()", id));
+	}
+}
+
+func (FfiConverterTypeEitherGuaranteedOrPredictedNonFungibleIds) Write(writer io.Writer, value EitherGuaranteedOrPredictedNonFungibleIds) {
+	switch variant_value := value.(type) {
+		case EitherGuaranteedOrPredictedNonFungibleIdsGuaranteed:
+			writeInt32(writer, 1)
+			FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Write(writer, variant_value.Value)
+		case EitherGuaranteedOrPredictedNonFungibleIdsPredicted:
+			writeInt32(writer, 2)
+			FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Write(writer, variant_value.Value)
+			FfiConverterTypeInstructionIndexINSTANCE.Write(writer, variant_value.CreatedAt)
+		default:
+			_ = variant_value
+			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeEitherGuaranteedOrPredictedNonFungibleIds.Write", value))
+	}
+}
+
+type FfiDestroyerTypeEitherGuaranteedOrPredictedNonFungibleIds struct {}
+
+func (_ FfiDestroyerTypeEitherGuaranteedOrPredictedNonFungibleIds) Destroy(value EitherGuaranteedOrPredictedNonFungibleIds) {
 	value.Destroy()
 }
 
@@ -22847,74 +23312,6 @@ func (FfiConverterTypeEntityType) Write(writer io.Writer, value EntityType) {
 type FfiDestroyerTypeEntityType struct {}
 
 func (_ FfiDestroyerTypeEntityType) Destroy(value EntityType) {
-}
-
-
-
-
-type FungibleResourceIndicator interface {
-	Destroy()
-}
-type FungibleResourceIndicatorGuaranteed struct {
-	Amount *Decimal
-}
-
-func (e FungibleResourceIndicatorGuaranteed) Destroy() {
-		FfiDestroyerDecimal{}.Destroy(e.Amount);
-}
-type FungibleResourceIndicatorPredicted struct {
-	PredictedAmount PredictedDecimal
-}
-
-func (e FungibleResourceIndicatorPredicted) Destroy() {
-		FfiDestroyerTypePredictedDecimal{}.Destroy(e.PredictedAmount);
-}
-
-type FfiConverterTypeFungibleResourceIndicator struct {}
-
-var FfiConverterTypeFungibleResourceIndicatorINSTANCE = FfiConverterTypeFungibleResourceIndicator{}
-
-func (c FfiConverterTypeFungibleResourceIndicator) Lift(rb RustBufferI) FungibleResourceIndicator {
-	return LiftFromRustBuffer[FungibleResourceIndicator](c, rb)
-}
-
-func (c FfiConverterTypeFungibleResourceIndicator) Lower(value FungibleResourceIndicator) RustBuffer {
-	return LowerIntoRustBuffer[FungibleResourceIndicator](c, value)
-}
-func (FfiConverterTypeFungibleResourceIndicator) Read(reader io.Reader) FungibleResourceIndicator {
-	id := readInt32(reader)
-	switch (id) {
-		case 1:
-			return FungibleResourceIndicatorGuaranteed{
-				FfiConverterDecimalINSTANCE.Read(reader),
-			};
-		case 2:
-			return FungibleResourceIndicatorPredicted{
-				FfiConverterTypePredictedDecimalINSTANCE.Read(reader),
-			};
-		default:
-			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeFungibleResourceIndicator.Read()", id));
-	}
-}
-
-func (FfiConverterTypeFungibleResourceIndicator) Write(writer io.Writer, value FungibleResourceIndicator) {
-	switch variant_value := value.(type) {
-		case FungibleResourceIndicatorGuaranteed:
-			writeInt32(writer, 1)
-			FfiConverterDecimalINSTANCE.Write(writer, variant_value.Amount)
-		case FungibleResourceIndicatorPredicted:
-			writeInt32(writer, 2)
-			FfiConverterTypePredictedDecimalINSTANCE.Write(writer, variant_value.PredictedAmount)
-		default:
-			_ = variant_value
-			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeFungibleResourceIndicator.Write", value))
-	}
-}
-
-type FfiDestroyerTypeFungibleResourceIndicator struct {}
-
-func (_ FfiDestroyerTypeFungibleResourceIndicator) Destroy(value FungibleResourceIndicator) {
-	value.Destroy()
 }
 
 
@@ -24088,6 +24485,82 @@ func (_ FfiDestroyerTypeInstructionV2) Destroy(value InstructionV2) {
 
 
 
+type InvocationIoItem interface {
+	Destroy()
+}
+type InvocationIoItemFungible struct {
+	Address *Address
+	Amount EitherGuaranteedOrPredictedDecimal
+}
+
+func (e InvocationIoItemFungible) Destroy() {
+		FfiDestroyerAddress{}.Destroy(e.Address);
+		FfiDestroyerTypeEitherGuaranteedOrPredictedDecimal{}.Destroy(e.Amount);
+}
+type InvocationIoItemNonFungible struct {
+	Address *Address
+	Ids EitherGuaranteedOrPredictedNonFungibleIds
+}
+
+func (e InvocationIoItemNonFungible) Destroy() {
+		FfiDestroyerAddress{}.Destroy(e.Address);
+		FfiDestroyerTypeEitherGuaranteedOrPredictedNonFungibleIds{}.Destroy(e.Ids);
+}
+
+type FfiConverterTypeInvocationIoItem struct {}
+
+var FfiConverterTypeInvocationIoItemINSTANCE = FfiConverterTypeInvocationIoItem{}
+
+func (c FfiConverterTypeInvocationIoItem) Lift(rb RustBufferI) InvocationIoItem {
+	return LiftFromRustBuffer[InvocationIoItem](c, rb)
+}
+
+func (c FfiConverterTypeInvocationIoItem) Lower(value InvocationIoItem) RustBuffer {
+	return LowerIntoRustBuffer[InvocationIoItem](c, value)
+}
+func (FfiConverterTypeInvocationIoItem) Read(reader io.Reader) InvocationIoItem {
+	id := readInt32(reader)
+	switch (id) {
+		case 1:
+			return InvocationIoItemFungible{
+				FfiConverterAddressINSTANCE.Read(reader),
+				FfiConverterTypeEitherGuaranteedOrPredictedDecimalINSTANCE.Read(reader),
+			};
+		case 2:
+			return InvocationIoItemNonFungible{
+				FfiConverterAddressINSTANCE.Read(reader),
+				FfiConverterTypeEitherGuaranteedOrPredictedNonFungibleIdsINSTANCE.Read(reader),
+			};
+		default:
+			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeInvocationIoItem.Read()", id));
+	}
+}
+
+func (FfiConverterTypeInvocationIoItem) Write(writer io.Writer, value InvocationIoItem) {
+	switch variant_value := value.(type) {
+		case InvocationIoItemFungible:
+			writeInt32(writer, 1)
+			FfiConverterAddressINSTANCE.Write(writer, variant_value.Address)
+			FfiConverterTypeEitherGuaranteedOrPredictedDecimalINSTANCE.Write(writer, variant_value.Amount)
+		case InvocationIoItemNonFungible:
+			writeInt32(writer, 2)
+			FfiConverterAddressINSTANCE.Write(writer, variant_value.Address)
+			FfiConverterTypeEitherGuaranteedOrPredictedNonFungibleIdsINSTANCE.Write(writer, variant_value.Ids)
+		default:
+			_ = variant_value
+			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeInvocationIoItem.Write", value))
+	}
+}
+
+type FfiDestroyerTypeInvocationIoItem struct {}
+
+func (_ FfiDestroyerTypeInvocationIoItem) Destroy(value InvocationIoItem) {
+	value.Destroy()
+}
+
+
+
+
 type LocalTypeId interface {
 	Destroy()
 }
@@ -24224,18 +24697,18 @@ type ManifestAddress interface {
 	Destroy()
 }
 type ManifestAddressNamed struct {
-	Value uint32
+	NamedAddressId uint32
 }
 
 func (e ManifestAddressNamed) Destroy() {
-		FfiDestroyerUint32{}.Destroy(e.Value);
+		FfiDestroyerUint32{}.Destroy(e.NamedAddressId);
 }
 type ManifestAddressStatic struct {
-	Value *Address
+	StaticAddress *Address
 }
 
 func (e ManifestAddressStatic) Destroy() {
-		FfiDestroyerAddress{}.Destroy(e.Value);
+		FfiDestroyerAddress{}.Destroy(e.StaticAddress);
 }
 
 type FfiConverterTypeManifestAddress struct {}
@@ -24269,10 +24742,10 @@ func (FfiConverterTypeManifestAddress) Write(writer io.Writer, value ManifestAdd
 	switch variant_value := value.(type) {
 		case ManifestAddressNamed:
 			writeInt32(writer, 1)
-			FfiConverterUint32INSTANCE.Write(writer, variant_value.Value)
+			FfiConverterUint32INSTANCE.Write(writer, variant_value.NamedAddressId)
 		case ManifestAddressStatic:
 			writeInt32(writer, 2)
-			FfiConverterAddressINSTANCE.Write(writer, variant_value.Value)
+			FfiConverterAddressINSTANCE.Write(writer, variant_value.StaticAddress)
 		default:
 			_ = variant_value
 			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeManifestAddress.Write", value))
@@ -24820,43 +25293,43 @@ func (_ FfiDestroyerTypeManifestBuilderValueKind) Destroy(value ManifestBuilderV
 
 
 
-type ManifestClass uint
+type ManifestClassification uint
 
 const (
-	ManifestClassGeneralSubintent ManifestClass = 1
-	ManifestClassGeneral ManifestClass = 2
-	ManifestClassTransfer ManifestClass = 3
-	ManifestClassPoolContribution ManifestClass = 4
-	ManifestClassPoolRedemption ManifestClass = 5
-	ManifestClassValidatorStake ManifestClass = 6
-	ManifestClassValidatorUnstake ManifestClass = 7
-	ManifestClassValidatorClaim ManifestClass = 8
-	ManifestClassAccountDepositSettingsUpdate ManifestClass = 9
+	ManifestClassificationGeneral ManifestClassification = 1
+	ManifestClassificationGeneralSubintent ManifestClassification = 2
+	ManifestClassificationTransfer ManifestClassification = 3
+	ManifestClassificationValidatorStake ManifestClassification = 4
+	ManifestClassificationValidatorUnstake ManifestClassification = 5
+	ManifestClassificationValidatorClaimXrd ManifestClassification = 6
+	ManifestClassificationPoolContribution ManifestClassification = 7
+	ManifestClassificationPoolRedemption ManifestClassification = 8
+	ManifestClassificationAccountDepositSettingsUpdate ManifestClassification = 9
 )
 
-type FfiConverterTypeManifestClass struct {}
+type FfiConverterTypeManifestClassification struct {}
 
-var FfiConverterTypeManifestClassINSTANCE = FfiConverterTypeManifestClass{}
+var FfiConverterTypeManifestClassificationINSTANCE = FfiConverterTypeManifestClassification{}
 
-func (c FfiConverterTypeManifestClass) Lift(rb RustBufferI) ManifestClass {
-	return LiftFromRustBuffer[ManifestClass](c, rb)
+func (c FfiConverterTypeManifestClassification) Lift(rb RustBufferI) ManifestClassification {
+	return LiftFromRustBuffer[ManifestClassification](c, rb)
 }
 
-func (c FfiConverterTypeManifestClass) Lower(value ManifestClass) RustBuffer {
-	return LowerIntoRustBuffer[ManifestClass](c, value)
+func (c FfiConverterTypeManifestClassification) Lower(value ManifestClassification) RustBuffer {
+	return LowerIntoRustBuffer[ManifestClassification](c, value)
 }
-func (FfiConverterTypeManifestClass) Read(reader io.Reader) ManifestClass {
+func (FfiConverterTypeManifestClassification) Read(reader io.Reader) ManifestClassification {
 	id := readInt32(reader)
-	return ManifestClass(id)
+	return ManifestClassification(id)
 }
 
-func (FfiConverterTypeManifestClass) Write(writer io.Writer, value ManifestClass) {
+func (FfiConverterTypeManifestClassification) Write(writer io.Writer, value ManifestClassification) {
 	writeInt32(writer, int32(value))
 }
 
-type FfiDestroyerTypeManifestClass struct {}
+type FfiDestroyerTypeManifestClassification struct {}
 
-func (_ FfiDestroyerTypeManifestClass) Destroy(value ManifestClass) {
+func (_ FfiDestroyerTypeManifestClassification) Destroy(value ManifestClassification) {
 }
 
 
@@ -26534,96 +27007,6 @@ func (_ FfiDestroyerTypeNonFungibleLocalId) Destroy(value NonFungibleLocalId) {
 
 
 
-type NonFungibleResourceIndicator interface {
-	Destroy()
-}
-type NonFungibleResourceIndicatorByAll struct {
-	PredictedAmount PredictedDecimal
-	PredictedIds PredictedNonFungibleIds
-}
-
-func (e NonFungibleResourceIndicatorByAll) Destroy() {
-		FfiDestroyerTypePredictedDecimal{}.Destroy(e.PredictedAmount);
-		FfiDestroyerTypePredictedNonFungibleIds{}.Destroy(e.PredictedIds);
-}
-type NonFungibleResourceIndicatorByAmount struct {
-	Amount *Decimal
-	PredictedIds PredictedNonFungibleIds
-}
-
-func (e NonFungibleResourceIndicatorByAmount) Destroy() {
-		FfiDestroyerDecimal{}.Destroy(e.Amount);
-		FfiDestroyerTypePredictedNonFungibleIds{}.Destroy(e.PredictedIds);
-}
-type NonFungibleResourceIndicatorByIds struct {
-	Ids []NonFungibleLocalId
-}
-
-func (e NonFungibleResourceIndicatorByIds) Destroy() {
-		FfiDestroyerSequenceTypeNonFungibleLocalId{}.Destroy(e.Ids);
-}
-
-type FfiConverterTypeNonFungibleResourceIndicator struct {}
-
-var FfiConverterTypeNonFungibleResourceIndicatorINSTANCE = FfiConverterTypeNonFungibleResourceIndicator{}
-
-func (c FfiConverterTypeNonFungibleResourceIndicator) Lift(rb RustBufferI) NonFungibleResourceIndicator {
-	return LiftFromRustBuffer[NonFungibleResourceIndicator](c, rb)
-}
-
-func (c FfiConverterTypeNonFungibleResourceIndicator) Lower(value NonFungibleResourceIndicator) RustBuffer {
-	return LowerIntoRustBuffer[NonFungibleResourceIndicator](c, value)
-}
-func (FfiConverterTypeNonFungibleResourceIndicator) Read(reader io.Reader) NonFungibleResourceIndicator {
-	id := readInt32(reader)
-	switch (id) {
-		case 1:
-			return NonFungibleResourceIndicatorByAll{
-				FfiConverterTypePredictedDecimalINSTANCE.Read(reader),
-				FfiConverterTypePredictedNonFungibleIdsINSTANCE.Read(reader),
-			};
-		case 2:
-			return NonFungibleResourceIndicatorByAmount{
-				FfiConverterDecimalINSTANCE.Read(reader),
-				FfiConverterTypePredictedNonFungibleIdsINSTANCE.Read(reader),
-			};
-		case 3:
-			return NonFungibleResourceIndicatorByIds{
-				FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Read(reader),
-			};
-		default:
-			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeNonFungibleResourceIndicator.Read()", id));
-	}
-}
-
-func (FfiConverterTypeNonFungibleResourceIndicator) Write(writer io.Writer, value NonFungibleResourceIndicator) {
-	switch variant_value := value.(type) {
-		case NonFungibleResourceIndicatorByAll:
-			writeInt32(writer, 1)
-			FfiConverterTypePredictedDecimalINSTANCE.Write(writer, variant_value.PredictedAmount)
-			FfiConverterTypePredictedNonFungibleIdsINSTANCE.Write(writer, variant_value.PredictedIds)
-		case NonFungibleResourceIndicatorByAmount:
-			writeInt32(writer, 2)
-			FfiConverterDecimalINSTANCE.Write(writer, variant_value.Amount)
-			FfiConverterTypePredictedNonFungibleIdsINSTANCE.Write(writer, variant_value.PredictedIds)
-		case NonFungibleResourceIndicatorByIds:
-			writeInt32(writer, 3)
-			FfiConverterSequenceTypeNonFungibleLocalIdINSTANCE.Write(writer, variant_value.Ids)
-		default:
-			_ = variant_value
-			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeNonFungibleResourceIndicator.Write", value))
-	}
-}
-
-type FfiDestroyerTypeNonFungibleResourceIndicator struct {}
-
-func (_ FfiDestroyerTypeNonFungibleResourceIndicator) Destroy(value NonFungibleResourceIndicator) {
-	value.Destroy()
-}
-
-
-
-
 type OlympiaNetwork uint
 
 const (
@@ -26668,8 +27051,8 @@ func (_ FfiDestroyerTypeOlympiaNetwork) Destroy(value OlympiaNetwork) {
 type Operation uint
 
 const (
-	OperationAdd Operation = 1
-	OperationRemove Operation = 2
+	OperationAdded Operation = 1
+	OperationRemoved Operation = 2
 )
 
 type FfiConverterTypeOperation struct {}
@@ -26988,6 +27371,7 @@ var ErrRadixEngineToolkitErrorInvalidReceipt = fmt.Errorf("RadixEngineToolkitErr
 var ErrRadixEngineToolkitErrorStaticAnalysisFailed = fmt.Errorf("RadixEngineToolkitErrorStaticAnalysisFailed")
 var ErrRadixEngineToolkitErrorNotAllBuilderItemsWereSpecified = fmt.Errorf("RadixEngineToolkitErrorNotAllBuilderItemsWereSpecified")
 var ErrRadixEngineToolkitErrorManifestValidationError = fmt.Errorf("RadixEngineToolkitErrorManifestValidationError")
+var ErrRadixEngineToolkitErrorManifestAnalysisError = fmt.Errorf("RadixEngineToolkitErrorManifestAnalysisError")
 
 // Variant structs
 type RadixEngineToolkitErrorInvalidLength struct {
@@ -27135,11 +27519,11 @@ func (self RadixEngineToolkitErrorNonFungibleContentValidationError) Is(target e
 }
 type RadixEngineToolkitErrorEntityTypeMismatchError struct {
 	Expected []EntityType
-	Actual EntityType
+	Actual *EntityType
 }
 func NewRadixEngineToolkitErrorEntityTypeMismatchError(
 	expected []EntityType,
-	actual EntityType,
+	actual *EntityType,
 ) *RadixEngineToolkitError {
 	return &RadixEngineToolkitError{
 		err: &RadixEngineToolkitErrorEntityTypeMismatchError{
@@ -27690,6 +28074,31 @@ func (err RadixEngineToolkitErrorManifestValidationError) Error() string {
 func (self RadixEngineToolkitErrorManifestValidationError) Is(target error) bool {
 	return target == ErrRadixEngineToolkitErrorManifestValidationError
 }
+type RadixEngineToolkitErrorManifestAnalysisError struct {
+	Error_ string
+}
+func NewRadixEngineToolkitErrorManifestAnalysisError(
+	error string,
+) *RadixEngineToolkitError {
+	return &RadixEngineToolkitError{
+		err: &RadixEngineToolkitErrorManifestAnalysisError{
+			Error_: error,
+		},
+	}
+}
+
+func (err RadixEngineToolkitErrorManifestAnalysisError) Error() string {
+	return fmt.Sprint("ManifestAnalysisError",
+		": ",
+		
+		"Error_=",
+		err.Error_,
+	)
+}
+
+func (self RadixEngineToolkitErrorManifestAnalysisError) Is(target error) bool {
+	return target == ErrRadixEngineToolkitErrorManifestAnalysisError
+}
 
 type FfiConverterTypeRadixEngineToolkitError struct{}
 
@@ -27733,7 +28142,7 @@ func (c FfiConverterTypeRadixEngineToolkitError) Read(reader io.Reader) error {
 	case 6:
 		return &RadixEngineToolkitError{&RadixEngineToolkitErrorEntityTypeMismatchError{
 			Expected: FfiConverterSequenceTypeEntityTypeINSTANCE.Read(reader),
-			Actual: FfiConverterTypeEntityTypeINSTANCE.Read(reader),
+			Actual: FfiConverterOptionalTypeEntityTypeINSTANCE.Read(reader),
 		}}
 	case 7:
 		return &RadixEngineToolkitError{&RadixEngineToolkitErrorDerivationError{
@@ -27819,6 +28228,10 @@ func (c FfiConverterTypeRadixEngineToolkitError) Read(reader io.Reader) error {
 		return &RadixEngineToolkitError{&RadixEngineToolkitErrorManifestValidationError{
 			Error_: FfiConverterStringINSTANCE.Read(reader),
 		}}
+	case 29:
+		return &RadixEngineToolkitError{&RadixEngineToolkitErrorManifestAnalysisError{
+			Error_: FfiConverterStringINSTANCE.Read(reader),
+		}}
 	default:
 		panic(fmt.Sprintf("Unknown error code %d in FfiConverterTypeRadixEngineToolkitError.Read()", errorID))
 	}
@@ -27847,7 +28260,7 @@ func (c FfiConverterTypeRadixEngineToolkitError) Write(writer io.Writer, value *
 		case *RadixEngineToolkitErrorEntityTypeMismatchError:
 			writeInt32(writer, 6)
 			FfiConverterSequenceTypeEntityTypeINSTANCE.Write(writer, variantValue.Expected)
-			FfiConverterTypeEntityTypeINSTANCE.Write(writer, variantValue.Actual)
+			FfiConverterOptionalTypeEntityTypeINSTANCE.Write(writer, variantValue.Actual)
 		case *RadixEngineToolkitErrorDerivationError:
 			writeInt32(writer, 7)
 			FfiConverterStringINSTANCE.Write(writer, variantValue.Error_)
@@ -27909,6 +28322,9 @@ func (c FfiConverterTypeRadixEngineToolkitError) Write(writer io.Writer, value *
 			writeInt32(writer, 27)
 		case *RadixEngineToolkitErrorManifestValidationError:
 			writeInt32(writer, 28)
+			FfiConverterStringINSTANCE.Write(writer, variantValue.Error_)
+		case *RadixEngineToolkitErrorManifestAnalysisError:
+			writeInt32(writer, 29)
 			FfiConverterStringINSTANCE.Write(writer, variantValue.Error_)
 		default:
 			_ = variantValue
@@ -27980,123 +28396,6 @@ func (FfiConverterTypeRecallResourceEvent) Write(writer io.Writer, value RecallR
 type FfiDestroyerTypeRecallResourceEvent struct {}
 
 func (_ FfiDestroyerTypeRecallResourceEvent) Destroy(value RecallResourceEvent) {
-	value.Destroy()
-}
-
-
-
-
-type ReservedInstruction uint
-
-const (
-	ReservedInstructionAccountLockFee ReservedInstruction = 1
-	ReservedInstructionAccountSecurify ReservedInstruction = 2
-	ReservedInstructionAccountLockOwnerKeysMetadataField ReservedInstruction = 3
-	ReservedInstructionAccountUpdateOwnerKeysMetadataField ReservedInstruction = 4
-	ReservedInstructionIdentitySecurify ReservedInstruction = 5
-	ReservedInstructionIdentityLockOwnerKeysMetadataField ReservedInstruction = 6
-	ReservedInstructionIdentityUpdateOwnerKeysMetadataField ReservedInstruction = 7
-	ReservedInstructionAccessControllerMethod ReservedInstruction = 8
-)
-
-type FfiConverterTypeReservedInstruction struct {}
-
-var FfiConverterTypeReservedInstructionINSTANCE = FfiConverterTypeReservedInstruction{}
-
-func (c FfiConverterTypeReservedInstruction) Lift(rb RustBufferI) ReservedInstruction {
-	return LiftFromRustBuffer[ReservedInstruction](c, rb)
-}
-
-func (c FfiConverterTypeReservedInstruction) Lower(value ReservedInstruction) RustBuffer {
-	return LowerIntoRustBuffer[ReservedInstruction](c, value)
-}
-func (FfiConverterTypeReservedInstruction) Read(reader io.Reader) ReservedInstruction {
-	id := readInt32(reader)
-	return ReservedInstruction(id)
-}
-
-func (FfiConverterTypeReservedInstruction) Write(writer io.Writer, value ReservedInstruction) {
-	writeInt32(writer, int32(value))
-}
-
-type FfiDestroyerTypeReservedInstruction struct {}
-
-func (_ FfiDestroyerTypeReservedInstruction) Destroy(value ReservedInstruction) {
-}
-
-
-
-
-type ResourceIndicator interface {
-	Destroy()
-}
-type ResourceIndicatorFungible struct {
-	ResourceAddress *Address
-	Indicator FungibleResourceIndicator
-}
-
-func (e ResourceIndicatorFungible) Destroy() {
-		FfiDestroyerAddress{}.Destroy(e.ResourceAddress);
-		FfiDestroyerTypeFungibleResourceIndicator{}.Destroy(e.Indicator);
-}
-type ResourceIndicatorNonFungible struct {
-	ResourceAddress *Address
-	Indicator NonFungibleResourceIndicator
-}
-
-func (e ResourceIndicatorNonFungible) Destroy() {
-		FfiDestroyerAddress{}.Destroy(e.ResourceAddress);
-		FfiDestroyerTypeNonFungibleResourceIndicator{}.Destroy(e.Indicator);
-}
-
-type FfiConverterTypeResourceIndicator struct {}
-
-var FfiConverterTypeResourceIndicatorINSTANCE = FfiConverterTypeResourceIndicator{}
-
-func (c FfiConverterTypeResourceIndicator) Lift(rb RustBufferI) ResourceIndicator {
-	return LiftFromRustBuffer[ResourceIndicator](c, rb)
-}
-
-func (c FfiConverterTypeResourceIndicator) Lower(value ResourceIndicator) RustBuffer {
-	return LowerIntoRustBuffer[ResourceIndicator](c, value)
-}
-func (FfiConverterTypeResourceIndicator) Read(reader io.Reader) ResourceIndicator {
-	id := readInt32(reader)
-	switch (id) {
-		case 1:
-			return ResourceIndicatorFungible{
-				FfiConverterAddressINSTANCE.Read(reader),
-				FfiConverterTypeFungibleResourceIndicatorINSTANCE.Read(reader),
-			};
-		case 2:
-			return ResourceIndicatorNonFungible{
-				FfiConverterAddressINSTANCE.Read(reader),
-				FfiConverterTypeNonFungibleResourceIndicatorINSTANCE.Read(reader),
-			};
-		default:
-			panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeResourceIndicator.Read()", id));
-	}
-}
-
-func (FfiConverterTypeResourceIndicator) Write(writer io.Writer, value ResourceIndicator) {
-	switch variant_value := value.(type) {
-		case ResourceIndicatorFungible:
-			writeInt32(writer, 1)
-			FfiConverterAddressINSTANCE.Write(writer, variant_value.ResourceAddress)
-			FfiConverterTypeFungibleResourceIndicatorINSTANCE.Write(writer, variant_value.Indicator)
-		case ResourceIndicatorNonFungible:
-			writeInt32(writer, 2)
-			FfiConverterAddressINSTANCE.Write(writer, variant_value.ResourceAddress)
-			FfiConverterTypeNonFungibleResourceIndicatorINSTANCE.Write(writer, variant_value.Indicator)
-		default:
-			_ = variant_value
-			panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeResourceIndicator.Write", value))
-	}
-}
-
-type FfiDestroyerTypeResourceIndicator struct {}
-
-func (_ FfiDestroyerTypeResourceIndicator) Destroy(value ResourceIndicator) {
 	value.Destroy()
 }
 
@@ -31791,6 +32090,45 @@ func (_ FfiDestroyerOptionalTypeSchema) Destroy(value *Schema) {
 
 
 
+type FfiConverterOptionalTypeEntityType struct{}
+
+var FfiConverterOptionalTypeEntityTypeINSTANCE = FfiConverterOptionalTypeEntityType{}
+
+func (c FfiConverterOptionalTypeEntityType) Lift(rb RustBufferI) *EntityType {
+	return LiftFromRustBuffer[*EntityType](c, rb)
+}
+
+func (_ FfiConverterOptionalTypeEntityType) Read(reader io.Reader) *EntityType {
+	if readInt8(reader) == 0 {
+		return nil
+	}
+	temp := FfiConverterTypeEntityTypeINSTANCE.Read(reader)
+	return &temp
+}
+
+func (c FfiConverterOptionalTypeEntityType) Lower(value *EntityType) RustBuffer {
+	return LowerIntoRustBuffer[*EntityType](c, value)
+}
+
+func (_ FfiConverterOptionalTypeEntityType) Write(writer io.Writer, value *EntityType) {
+	if value == nil {
+		writeInt8(writer, 0)
+	} else {
+		writeInt8(writer, 1)
+		FfiConverterTypeEntityTypeINSTANCE.Write(writer, *value)
+	}
+}
+
+type FfiDestroyerOptionalTypeEntityType struct {}
+
+func (_ FfiDestroyerOptionalTypeEntityType) Destroy(value *EntityType) {
+	if value != nil {
+		FfiDestroyerTypeEntityType{}.Destroy(*value)
+	}
+}
+
+
+
 type FfiConverterOptionalTypeMetadataValue struct{}
 
 var FfiConverterOptionalTypeMetadataValueINSTANCE = FfiConverterOptionalTypeMetadataValue{}
@@ -32544,271 +32882,226 @@ func (FfiDestroyerSequenceTypeMapEntry) Destroy(sequence []MapEntry) {
 
 
 
-type FfiConverterSequenceTypeTrackedPoolContribution struct{}
+type FfiConverterSequenceTypePoolContributionOperation struct{}
 
-var FfiConverterSequenceTypeTrackedPoolContributionINSTANCE = FfiConverterSequenceTypeTrackedPoolContribution{}
+var FfiConverterSequenceTypePoolContributionOperationINSTANCE = FfiConverterSequenceTypePoolContributionOperation{}
 
-func (c FfiConverterSequenceTypeTrackedPoolContribution) Lift(rb RustBufferI) []TrackedPoolContribution {
-	return LiftFromRustBuffer[[]TrackedPoolContribution](c, rb)
+func (c FfiConverterSequenceTypePoolContributionOperation) Lift(rb RustBufferI) []PoolContributionOperation {
+	return LiftFromRustBuffer[[]PoolContributionOperation](c, rb)
 }
 
-func (c FfiConverterSequenceTypeTrackedPoolContribution) Read(reader io.Reader) []TrackedPoolContribution {
+func (c FfiConverterSequenceTypePoolContributionOperation) Read(reader io.Reader) []PoolContributionOperation {
 	length := readInt32(reader)
 	if length == 0 {
 		return nil
 	}
-	result := make([]TrackedPoolContribution, 0, length)
+	result := make([]PoolContributionOperation, 0, length)
 	for i := int32(0); i < length; i++ {
-		result = append(result, FfiConverterTypeTrackedPoolContributionINSTANCE.Read(reader))
+		result = append(result, FfiConverterTypePoolContributionOperationINSTANCE.Read(reader))
 	}
 	return result
 }
 
-func (c FfiConverterSequenceTypeTrackedPoolContribution) Lower(value []TrackedPoolContribution) RustBuffer {
-	return LowerIntoRustBuffer[[]TrackedPoolContribution](c, value)
+func (c FfiConverterSequenceTypePoolContributionOperation) Lower(value []PoolContributionOperation) RustBuffer {
+	return LowerIntoRustBuffer[[]PoolContributionOperation](c, value)
 }
 
-func (c FfiConverterSequenceTypeTrackedPoolContribution) Write(writer io.Writer, value []TrackedPoolContribution) {
+func (c FfiConverterSequenceTypePoolContributionOperation) Write(writer io.Writer, value []PoolContributionOperation) {
 	if len(value) > math.MaxInt32 {
-		panic("[]TrackedPoolContribution is too large to fit into Int32")
+		panic("[]PoolContributionOperation is too large to fit into Int32")
 	}
 
 	writeInt32(writer, int32(len(value)))
 	for _, item := range value {
-		FfiConverterTypeTrackedPoolContributionINSTANCE.Write(writer, item)
+		FfiConverterTypePoolContributionOperationINSTANCE.Write(writer, item)
 	}
 }
 
-type FfiDestroyerSequenceTypeTrackedPoolContribution struct {}
+type FfiDestroyerSequenceTypePoolContributionOperation struct {}
 
-func (FfiDestroyerSequenceTypeTrackedPoolContribution) Destroy(sequence []TrackedPoolContribution) {
+func (FfiDestroyerSequenceTypePoolContributionOperation) Destroy(sequence []PoolContributionOperation) {
 	for _, value := range sequence {
-		FfiDestroyerTypeTrackedPoolContribution{}.Destroy(value)	
+		FfiDestroyerTypePoolContributionOperation{}.Destroy(value)	
 	}
 }
 
 
 
-type FfiConverterSequenceTypeTrackedPoolRedemption struct{}
+type FfiConverterSequenceTypePoolRedemptionOperation struct{}
 
-var FfiConverterSequenceTypeTrackedPoolRedemptionINSTANCE = FfiConverterSequenceTypeTrackedPoolRedemption{}
+var FfiConverterSequenceTypePoolRedemptionOperationINSTANCE = FfiConverterSequenceTypePoolRedemptionOperation{}
 
-func (c FfiConverterSequenceTypeTrackedPoolRedemption) Lift(rb RustBufferI) []TrackedPoolRedemption {
-	return LiftFromRustBuffer[[]TrackedPoolRedemption](c, rb)
+func (c FfiConverterSequenceTypePoolRedemptionOperation) Lift(rb RustBufferI) []PoolRedemptionOperation {
+	return LiftFromRustBuffer[[]PoolRedemptionOperation](c, rb)
 }
 
-func (c FfiConverterSequenceTypeTrackedPoolRedemption) Read(reader io.Reader) []TrackedPoolRedemption {
+func (c FfiConverterSequenceTypePoolRedemptionOperation) Read(reader io.Reader) []PoolRedemptionOperation {
 	length := readInt32(reader)
 	if length == 0 {
 		return nil
 	}
-	result := make([]TrackedPoolRedemption, 0, length)
+	result := make([]PoolRedemptionOperation, 0, length)
 	for i := int32(0); i < length; i++ {
-		result = append(result, FfiConverterTypeTrackedPoolRedemptionINSTANCE.Read(reader))
+		result = append(result, FfiConverterTypePoolRedemptionOperationINSTANCE.Read(reader))
 	}
 	return result
 }
 
-func (c FfiConverterSequenceTypeTrackedPoolRedemption) Lower(value []TrackedPoolRedemption) RustBuffer {
-	return LowerIntoRustBuffer[[]TrackedPoolRedemption](c, value)
+func (c FfiConverterSequenceTypePoolRedemptionOperation) Lower(value []PoolRedemptionOperation) RustBuffer {
+	return LowerIntoRustBuffer[[]PoolRedemptionOperation](c, value)
 }
 
-func (c FfiConverterSequenceTypeTrackedPoolRedemption) Write(writer io.Writer, value []TrackedPoolRedemption) {
+func (c FfiConverterSequenceTypePoolRedemptionOperation) Write(writer io.Writer, value []PoolRedemptionOperation) {
 	if len(value) > math.MaxInt32 {
-		panic("[]TrackedPoolRedemption is too large to fit into Int32")
+		panic("[]PoolRedemptionOperation is too large to fit into Int32")
 	}
 
 	writeInt32(writer, int32(len(value)))
 	for _, item := range value {
-		FfiConverterTypeTrackedPoolRedemptionINSTANCE.Write(writer, item)
+		FfiConverterTypePoolRedemptionOperationINSTANCE.Write(writer, item)
 	}
 }
 
-type FfiDestroyerSequenceTypeTrackedPoolRedemption struct {}
+type FfiDestroyerSequenceTypePoolRedemptionOperation struct {}
 
-func (FfiDestroyerSequenceTypeTrackedPoolRedemption) Destroy(sequence []TrackedPoolRedemption) {
+func (FfiDestroyerSequenceTypePoolRedemptionOperation) Destroy(sequence []PoolRedemptionOperation) {
 	for _, value := range sequence {
-		FfiDestroyerTypeTrackedPoolRedemption{}.Destroy(value)	
+		FfiDestroyerTypePoolRedemptionOperation{}.Destroy(value)	
 	}
 }
 
 
 
-type FfiConverterSequenceTypeTrackedValidatorClaim struct{}
+type FfiConverterSequenceTypeValidatorClaimOperation struct{}
 
-var FfiConverterSequenceTypeTrackedValidatorClaimINSTANCE = FfiConverterSequenceTypeTrackedValidatorClaim{}
+var FfiConverterSequenceTypeValidatorClaimOperationINSTANCE = FfiConverterSequenceTypeValidatorClaimOperation{}
 
-func (c FfiConverterSequenceTypeTrackedValidatorClaim) Lift(rb RustBufferI) []TrackedValidatorClaim {
-	return LiftFromRustBuffer[[]TrackedValidatorClaim](c, rb)
+func (c FfiConverterSequenceTypeValidatorClaimOperation) Lift(rb RustBufferI) []ValidatorClaimOperation {
+	return LiftFromRustBuffer[[]ValidatorClaimOperation](c, rb)
 }
 
-func (c FfiConverterSequenceTypeTrackedValidatorClaim) Read(reader io.Reader) []TrackedValidatorClaim {
+func (c FfiConverterSequenceTypeValidatorClaimOperation) Read(reader io.Reader) []ValidatorClaimOperation {
 	length := readInt32(reader)
 	if length == 0 {
 		return nil
 	}
-	result := make([]TrackedValidatorClaim, 0, length)
+	result := make([]ValidatorClaimOperation, 0, length)
 	for i := int32(0); i < length; i++ {
-		result = append(result, FfiConverterTypeTrackedValidatorClaimINSTANCE.Read(reader))
+		result = append(result, FfiConverterTypeValidatorClaimOperationINSTANCE.Read(reader))
 	}
 	return result
 }
 
-func (c FfiConverterSequenceTypeTrackedValidatorClaim) Lower(value []TrackedValidatorClaim) RustBuffer {
-	return LowerIntoRustBuffer[[]TrackedValidatorClaim](c, value)
+func (c FfiConverterSequenceTypeValidatorClaimOperation) Lower(value []ValidatorClaimOperation) RustBuffer {
+	return LowerIntoRustBuffer[[]ValidatorClaimOperation](c, value)
 }
 
-func (c FfiConverterSequenceTypeTrackedValidatorClaim) Write(writer io.Writer, value []TrackedValidatorClaim) {
+func (c FfiConverterSequenceTypeValidatorClaimOperation) Write(writer io.Writer, value []ValidatorClaimOperation) {
 	if len(value) > math.MaxInt32 {
-		panic("[]TrackedValidatorClaim is too large to fit into Int32")
+		panic("[]ValidatorClaimOperation is too large to fit into Int32")
 	}
 
 	writeInt32(writer, int32(len(value)))
 	for _, item := range value {
-		FfiConverterTypeTrackedValidatorClaimINSTANCE.Write(writer, item)
+		FfiConverterTypeValidatorClaimOperationINSTANCE.Write(writer, item)
 	}
 }
 
-type FfiDestroyerSequenceTypeTrackedValidatorClaim struct {}
+type FfiDestroyerSequenceTypeValidatorClaimOperation struct {}
 
-func (FfiDestroyerSequenceTypeTrackedValidatorClaim) Destroy(sequence []TrackedValidatorClaim) {
+func (FfiDestroyerSequenceTypeValidatorClaimOperation) Destroy(sequence []ValidatorClaimOperation) {
 	for _, value := range sequence {
-		FfiDestroyerTypeTrackedValidatorClaim{}.Destroy(value)	
+		FfiDestroyerTypeValidatorClaimOperation{}.Destroy(value)	
 	}
 }
 
 
 
-type FfiConverterSequenceTypeTrackedValidatorStake struct{}
+type FfiConverterSequenceTypeValidatorStakeOperation struct{}
 
-var FfiConverterSequenceTypeTrackedValidatorStakeINSTANCE = FfiConverterSequenceTypeTrackedValidatorStake{}
+var FfiConverterSequenceTypeValidatorStakeOperationINSTANCE = FfiConverterSequenceTypeValidatorStakeOperation{}
 
-func (c FfiConverterSequenceTypeTrackedValidatorStake) Lift(rb RustBufferI) []TrackedValidatorStake {
-	return LiftFromRustBuffer[[]TrackedValidatorStake](c, rb)
+func (c FfiConverterSequenceTypeValidatorStakeOperation) Lift(rb RustBufferI) []ValidatorStakeOperation {
+	return LiftFromRustBuffer[[]ValidatorStakeOperation](c, rb)
 }
 
-func (c FfiConverterSequenceTypeTrackedValidatorStake) Read(reader io.Reader) []TrackedValidatorStake {
+func (c FfiConverterSequenceTypeValidatorStakeOperation) Read(reader io.Reader) []ValidatorStakeOperation {
 	length := readInt32(reader)
 	if length == 0 {
 		return nil
 	}
-	result := make([]TrackedValidatorStake, 0, length)
+	result := make([]ValidatorStakeOperation, 0, length)
 	for i := int32(0); i < length; i++ {
-		result = append(result, FfiConverterTypeTrackedValidatorStakeINSTANCE.Read(reader))
+		result = append(result, FfiConverterTypeValidatorStakeOperationINSTANCE.Read(reader))
 	}
 	return result
 }
 
-func (c FfiConverterSequenceTypeTrackedValidatorStake) Lower(value []TrackedValidatorStake) RustBuffer {
-	return LowerIntoRustBuffer[[]TrackedValidatorStake](c, value)
+func (c FfiConverterSequenceTypeValidatorStakeOperation) Lower(value []ValidatorStakeOperation) RustBuffer {
+	return LowerIntoRustBuffer[[]ValidatorStakeOperation](c, value)
 }
 
-func (c FfiConverterSequenceTypeTrackedValidatorStake) Write(writer io.Writer, value []TrackedValidatorStake) {
+func (c FfiConverterSequenceTypeValidatorStakeOperation) Write(writer io.Writer, value []ValidatorStakeOperation) {
 	if len(value) > math.MaxInt32 {
-		panic("[]TrackedValidatorStake is too large to fit into Int32")
+		panic("[]ValidatorStakeOperation is too large to fit into Int32")
 	}
 
 	writeInt32(writer, int32(len(value)))
 	for _, item := range value {
-		FfiConverterTypeTrackedValidatorStakeINSTANCE.Write(writer, item)
+		FfiConverterTypeValidatorStakeOperationINSTANCE.Write(writer, item)
 	}
 }
 
-type FfiDestroyerSequenceTypeTrackedValidatorStake struct {}
+type FfiDestroyerSequenceTypeValidatorStakeOperation struct {}
 
-func (FfiDestroyerSequenceTypeTrackedValidatorStake) Destroy(sequence []TrackedValidatorStake) {
+func (FfiDestroyerSequenceTypeValidatorStakeOperation) Destroy(sequence []ValidatorStakeOperation) {
 	for _, value := range sequence {
-		FfiDestroyerTypeTrackedValidatorStake{}.Destroy(value)	
+		FfiDestroyerTypeValidatorStakeOperation{}.Destroy(value)	
 	}
 }
 
 
 
-type FfiConverterSequenceTypeTrackedValidatorUnstake struct{}
+type FfiConverterSequenceTypeValidatorUnstakeOperation struct{}
 
-var FfiConverterSequenceTypeTrackedValidatorUnstakeINSTANCE = FfiConverterSequenceTypeTrackedValidatorUnstake{}
+var FfiConverterSequenceTypeValidatorUnstakeOperationINSTANCE = FfiConverterSequenceTypeValidatorUnstakeOperation{}
 
-func (c FfiConverterSequenceTypeTrackedValidatorUnstake) Lift(rb RustBufferI) []TrackedValidatorUnstake {
-	return LiftFromRustBuffer[[]TrackedValidatorUnstake](c, rb)
+func (c FfiConverterSequenceTypeValidatorUnstakeOperation) Lift(rb RustBufferI) []ValidatorUnstakeOperation {
+	return LiftFromRustBuffer[[]ValidatorUnstakeOperation](c, rb)
 }
 
-func (c FfiConverterSequenceTypeTrackedValidatorUnstake) Read(reader io.Reader) []TrackedValidatorUnstake {
+func (c FfiConverterSequenceTypeValidatorUnstakeOperation) Read(reader io.Reader) []ValidatorUnstakeOperation {
 	length := readInt32(reader)
 	if length == 0 {
 		return nil
 	}
-	result := make([]TrackedValidatorUnstake, 0, length)
+	result := make([]ValidatorUnstakeOperation, 0, length)
 	for i := int32(0); i < length; i++ {
-		result = append(result, FfiConverterTypeTrackedValidatorUnstakeINSTANCE.Read(reader))
+		result = append(result, FfiConverterTypeValidatorUnstakeOperationINSTANCE.Read(reader))
 	}
 	return result
 }
 
-func (c FfiConverterSequenceTypeTrackedValidatorUnstake) Lower(value []TrackedValidatorUnstake) RustBuffer {
-	return LowerIntoRustBuffer[[]TrackedValidatorUnstake](c, value)
+func (c FfiConverterSequenceTypeValidatorUnstakeOperation) Lower(value []ValidatorUnstakeOperation) RustBuffer {
+	return LowerIntoRustBuffer[[]ValidatorUnstakeOperation](c, value)
 }
 
-func (c FfiConverterSequenceTypeTrackedValidatorUnstake) Write(writer io.Writer, value []TrackedValidatorUnstake) {
+func (c FfiConverterSequenceTypeValidatorUnstakeOperation) Write(writer io.Writer, value []ValidatorUnstakeOperation) {
 	if len(value) > math.MaxInt32 {
-		panic("[]TrackedValidatorUnstake is too large to fit into Int32")
+		panic("[]ValidatorUnstakeOperation is too large to fit into Int32")
 	}
 
 	writeInt32(writer, int32(len(value)))
 	for _, item := range value {
-		FfiConverterTypeTrackedValidatorUnstakeINSTANCE.Write(writer, item)
+		FfiConverterTypeValidatorUnstakeOperationINSTANCE.Write(writer, item)
 	}
 }
 
-type FfiDestroyerSequenceTypeTrackedValidatorUnstake struct {}
+type FfiDestroyerSequenceTypeValidatorUnstakeOperation struct {}
 
-func (FfiDestroyerSequenceTypeTrackedValidatorUnstake) Destroy(sequence []TrackedValidatorUnstake) {
+func (FfiDestroyerSequenceTypeValidatorUnstakeOperation) Destroy(sequence []ValidatorUnstakeOperation) {
 	for _, value := range sequence {
-		FfiDestroyerTypeTrackedValidatorUnstake{}.Destroy(value)	
-	}
-}
-
-
-
-type FfiConverterSequenceTypeUnstakeDataEntry struct{}
-
-var FfiConverterSequenceTypeUnstakeDataEntryINSTANCE = FfiConverterSequenceTypeUnstakeDataEntry{}
-
-func (c FfiConverterSequenceTypeUnstakeDataEntry) Lift(rb RustBufferI) []UnstakeDataEntry {
-	return LiftFromRustBuffer[[]UnstakeDataEntry](c, rb)
-}
-
-func (c FfiConverterSequenceTypeUnstakeDataEntry) Read(reader io.Reader) []UnstakeDataEntry {
-	length := readInt32(reader)
-	if length == 0 {
-		return nil
-	}
-	result := make([]UnstakeDataEntry, 0, length)
-	for i := int32(0); i < length; i++ {
-		result = append(result, FfiConverterTypeUnstakeDataEntryINSTANCE.Read(reader))
-	}
-	return result
-}
-
-func (c FfiConverterSequenceTypeUnstakeDataEntry) Lower(value []UnstakeDataEntry) RustBuffer {
-	return LowerIntoRustBuffer[[]UnstakeDataEntry](c, value)
-}
-
-func (c FfiConverterSequenceTypeUnstakeDataEntry) Write(writer io.Writer, value []UnstakeDataEntry) {
-	if len(value) > math.MaxInt32 {
-		panic("[]UnstakeDataEntry is too large to fit into Int32")
-	}
-
-	writeInt32(writer, int32(len(value)))
-	for _, item := range value {
-		FfiConverterTypeUnstakeDataEntryINSTANCE.Write(writer, item)
-	}
-}
-
-type FfiDestroyerSequenceTypeUnstakeDataEntry struct {}
-
-func (FfiDestroyerSequenceTypeUnstakeDataEntry) Destroy(sequence []UnstakeDataEntry) {
-	for _, value := range sequence {
-		FfiDestroyerTypeUnstakeDataEntry{}.Destroy(value)	
+		FfiDestroyerTypeValidatorUnstakeOperation{}.Destroy(value)	
 	}
 }
 
@@ -32904,46 +33197,46 @@ func (FfiDestroyerSequenceTypeAccountWithdraw) Destroy(sequence []AccountWithdra
 
 
 
-type FfiConverterSequenceTypeDetailedManifestClass struct{}
+type FfiConverterSequenceTypeDetailedManifestClassification struct{}
 
-var FfiConverterSequenceTypeDetailedManifestClassINSTANCE = FfiConverterSequenceTypeDetailedManifestClass{}
+var FfiConverterSequenceTypeDetailedManifestClassificationINSTANCE = FfiConverterSequenceTypeDetailedManifestClassification{}
 
-func (c FfiConverterSequenceTypeDetailedManifestClass) Lift(rb RustBufferI) []DetailedManifestClass {
-	return LiftFromRustBuffer[[]DetailedManifestClass](c, rb)
+func (c FfiConverterSequenceTypeDetailedManifestClassification) Lift(rb RustBufferI) []DetailedManifestClassification {
+	return LiftFromRustBuffer[[]DetailedManifestClassification](c, rb)
 }
 
-func (c FfiConverterSequenceTypeDetailedManifestClass) Read(reader io.Reader) []DetailedManifestClass {
+func (c FfiConverterSequenceTypeDetailedManifestClassification) Read(reader io.Reader) []DetailedManifestClassification {
 	length := readInt32(reader)
 	if length == 0 {
 		return nil
 	}
-	result := make([]DetailedManifestClass, 0, length)
+	result := make([]DetailedManifestClassification, 0, length)
 	for i := int32(0); i < length; i++ {
-		result = append(result, FfiConverterTypeDetailedManifestClassINSTANCE.Read(reader))
+		result = append(result, FfiConverterTypeDetailedManifestClassificationINSTANCE.Read(reader))
 	}
 	return result
 }
 
-func (c FfiConverterSequenceTypeDetailedManifestClass) Lower(value []DetailedManifestClass) RustBuffer {
-	return LowerIntoRustBuffer[[]DetailedManifestClass](c, value)
+func (c FfiConverterSequenceTypeDetailedManifestClassification) Lower(value []DetailedManifestClassification) RustBuffer {
+	return LowerIntoRustBuffer[[]DetailedManifestClassification](c, value)
 }
 
-func (c FfiConverterSequenceTypeDetailedManifestClass) Write(writer io.Writer, value []DetailedManifestClass) {
+func (c FfiConverterSequenceTypeDetailedManifestClassification) Write(writer io.Writer, value []DetailedManifestClassification) {
 	if len(value) > math.MaxInt32 {
-		panic("[]DetailedManifestClass is too large to fit into Int32")
+		panic("[]DetailedManifestClassification is too large to fit into Int32")
 	}
 
 	writeInt32(writer, int32(len(value)))
 	for _, item := range value {
-		FfiConverterTypeDetailedManifestClassINSTANCE.Write(writer, item)
+		FfiConverterTypeDetailedManifestClassificationINSTANCE.Write(writer, item)
 	}
 }
 
-type FfiDestroyerSequenceTypeDetailedManifestClass struct {}
+type FfiDestroyerSequenceTypeDetailedManifestClassification struct {}
 
-func (FfiDestroyerSequenceTypeDetailedManifestClass) Destroy(sequence []DetailedManifestClass) {
+func (FfiDestroyerSequenceTypeDetailedManifestClassification) Destroy(sequence []DetailedManifestClassification) {
 	for _, value := range sequence {
-		FfiDestroyerTypeDetailedManifestClass{}.Destroy(value)	
+		FfiDestroyerTypeDetailedManifestClassification{}.Destroy(value)	
 	}
 }
 
@@ -33084,6 +33377,51 @@ func (FfiDestroyerSequenceTypeInstructionV2) Destroy(sequence []InstructionV2) {
 
 
 
+type FfiConverterSequenceTypeInvocationIoItem struct{}
+
+var FfiConverterSequenceTypeInvocationIoItemINSTANCE = FfiConverterSequenceTypeInvocationIoItem{}
+
+func (c FfiConverterSequenceTypeInvocationIoItem) Lift(rb RustBufferI) []InvocationIoItem {
+	return LiftFromRustBuffer[[]InvocationIoItem](c, rb)
+}
+
+func (c FfiConverterSequenceTypeInvocationIoItem) Read(reader io.Reader) []InvocationIoItem {
+	length := readInt32(reader)
+	if length == 0 {
+		return nil
+	}
+	result := make([]InvocationIoItem, 0, length)
+	for i := int32(0); i < length; i++ {
+		result = append(result, FfiConverterTypeInvocationIoItemINSTANCE.Read(reader))
+	}
+	return result
+}
+
+func (c FfiConverterSequenceTypeInvocationIoItem) Lower(value []InvocationIoItem) RustBuffer {
+	return LowerIntoRustBuffer[[]InvocationIoItem](c, value)
+}
+
+func (c FfiConverterSequenceTypeInvocationIoItem) Write(writer io.Writer, value []InvocationIoItem) {
+	if len(value) > math.MaxInt32 {
+		panic("[]InvocationIoItem is too large to fit into Int32")
+	}
+
+	writeInt32(writer, int32(len(value)))
+	for _, item := range value {
+		FfiConverterTypeInvocationIoItemINSTANCE.Write(writer, item)
+	}
+}
+
+type FfiDestroyerSequenceTypeInvocationIoItem struct {}
+
+func (FfiDestroyerSequenceTypeInvocationIoItem) Destroy(sequence []InvocationIoItem) {
+	for _, value := range sequence {
+		FfiDestroyerTypeInvocationIoItem{}.Destroy(value)	
+	}
+}
+
+
+
 type FfiConverterSequenceTypeManifestBuilderValue struct{}
 
 var FfiConverterSequenceTypeManifestBuilderValueINSTANCE = FfiConverterSequenceTypeManifestBuilderValue{}
@@ -33129,46 +33467,46 @@ func (FfiDestroyerSequenceTypeManifestBuilderValue) Destroy(sequence []ManifestB
 
 
 
-type FfiConverterSequenceTypeManifestClass struct{}
+type FfiConverterSequenceTypeManifestClassification struct{}
 
-var FfiConverterSequenceTypeManifestClassINSTANCE = FfiConverterSequenceTypeManifestClass{}
+var FfiConverterSequenceTypeManifestClassificationINSTANCE = FfiConverterSequenceTypeManifestClassification{}
 
-func (c FfiConverterSequenceTypeManifestClass) Lift(rb RustBufferI) []ManifestClass {
-	return LiftFromRustBuffer[[]ManifestClass](c, rb)
+func (c FfiConverterSequenceTypeManifestClassification) Lift(rb RustBufferI) []ManifestClassification {
+	return LiftFromRustBuffer[[]ManifestClassification](c, rb)
 }
 
-func (c FfiConverterSequenceTypeManifestClass) Read(reader io.Reader) []ManifestClass {
+func (c FfiConverterSequenceTypeManifestClassification) Read(reader io.Reader) []ManifestClassification {
 	length := readInt32(reader)
 	if length == 0 {
 		return nil
 	}
-	result := make([]ManifestClass, 0, length)
+	result := make([]ManifestClassification, 0, length)
 	for i := int32(0); i < length; i++ {
-		result = append(result, FfiConverterTypeManifestClassINSTANCE.Read(reader))
+		result = append(result, FfiConverterTypeManifestClassificationINSTANCE.Read(reader))
 	}
 	return result
 }
 
-func (c FfiConverterSequenceTypeManifestClass) Lower(value []ManifestClass) RustBuffer {
-	return LowerIntoRustBuffer[[]ManifestClass](c, value)
+func (c FfiConverterSequenceTypeManifestClassification) Lower(value []ManifestClassification) RustBuffer {
+	return LowerIntoRustBuffer[[]ManifestClassification](c, value)
 }
 
-func (c FfiConverterSequenceTypeManifestClass) Write(writer io.Writer, value []ManifestClass) {
+func (c FfiConverterSequenceTypeManifestClassification) Write(writer io.Writer, value []ManifestClassification) {
 	if len(value) > math.MaxInt32 {
-		panic("[]ManifestClass is too large to fit into Int32")
+		panic("[]ManifestClassification is too large to fit into Int32")
 	}
 
 	writeInt32(writer, int32(len(value)))
 	for _, item := range value {
-		FfiConverterTypeManifestClassINSTANCE.Write(writer, item)
+		FfiConverterTypeManifestClassificationINSTANCE.Write(writer, item)
 	}
 }
 
-type FfiDestroyerSequenceTypeManifestClass struct {}
+type FfiDestroyerSequenceTypeManifestClassification struct {}
 
-func (FfiDestroyerSequenceTypeManifestClass) Destroy(sequence []ManifestClass) {
+func (FfiDestroyerSequenceTypeManifestClassification) Destroy(sequence []ManifestClassification) {
 	for _, value := range sequence {
-		FfiDestroyerTypeManifestClass{}.Destroy(value)	
+		FfiDestroyerTypeManifestClassification{}.Destroy(value)	
 	}
 }
 
@@ -33349,96 +33687,6 @@ type FfiDestroyerSequenceTypePublicKeyHash struct {}
 func (FfiDestroyerSequenceTypePublicKeyHash) Destroy(sequence []PublicKeyHash) {
 	for _, value := range sequence {
 		FfiDestroyerTypePublicKeyHash{}.Destroy(value)	
-	}
-}
-
-
-
-type FfiConverterSequenceTypeReservedInstruction struct{}
-
-var FfiConverterSequenceTypeReservedInstructionINSTANCE = FfiConverterSequenceTypeReservedInstruction{}
-
-func (c FfiConverterSequenceTypeReservedInstruction) Lift(rb RustBufferI) []ReservedInstruction {
-	return LiftFromRustBuffer[[]ReservedInstruction](c, rb)
-}
-
-func (c FfiConverterSequenceTypeReservedInstruction) Read(reader io.Reader) []ReservedInstruction {
-	length := readInt32(reader)
-	if length == 0 {
-		return nil
-	}
-	result := make([]ReservedInstruction, 0, length)
-	for i := int32(0); i < length; i++ {
-		result = append(result, FfiConverterTypeReservedInstructionINSTANCE.Read(reader))
-	}
-	return result
-}
-
-func (c FfiConverterSequenceTypeReservedInstruction) Lower(value []ReservedInstruction) RustBuffer {
-	return LowerIntoRustBuffer[[]ReservedInstruction](c, value)
-}
-
-func (c FfiConverterSequenceTypeReservedInstruction) Write(writer io.Writer, value []ReservedInstruction) {
-	if len(value) > math.MaxInt32 {
-		panic("[]ReservedInstruction is too large to fit into Int32")
-	}
-
-	writeInt32(writer, int32(len(value)))
-	for _, item := range value {
-		FfiConverterTypeReservedInstructionINSTANCE.Write(writer, item)
-	}
-}
-
-type FfiDestroyerSequenceTypeReservedInstruction struct {}
-
-func (FfiDestroyerSequenceTypeReservedInstruction) Destroy(sequence []ReservedInstruction) {
-	for _, value := range sequence {
-		FfiDestroyerTypeReservedInstruction{}.Destroy(value)	
-	}
-}
-
-
-
-type FfiConverterSequenceTypeResourceIndicator struct{}
-
-var FfiConverterSequenceTypeResourceIndicatorINSTANCE = FfiConverterSequenceTypeResourceIndicator{}
-
-func (c FfiConverterSequenceTypeResourceIndicator) Lift(rb RustBufferI) []ResourceIndicator {
-	return LiftFromRustBuffer[[]ResourceIndicator](c, rb)
-}
-
-func (c FfiConverterSequenceTypeResourceIndicator) Read(reader io.Reader) []ResourceIndicator {
-	length := readInt32(reader)
-	if length == 0 {
-		return nil
-	}
-	result := make([]ResourceIndicator, 0, length)
-	for i := int32(0); i < length; i++ {
-		result = append(result, FfiConverterTypeResourceIndicatorINSTANCE.Read(reader))
-	}
-	return result
-}
-
-func (c FfiConverterSequenceTypeResourceIndicator) Lower(value []ResourceIndicator) RustBuffer {
-	return LowerIntoRustBuffer[[]ResourceIndicator](c, value)
-}
-
-func (c FfiConverterSequenceTypeResourceIndicator) Write(writer io.Writer, value []ResourceIndicator) {
-	if len(value) > math.MaxInt32 {
-		panic("[]ResourceIndicator is too large to fit into Int32")
-	}
-
-	writeInt32(writer, int32(len(value)))
-	for _, item := range value {
-		FfiConverterTypeResourceIndicatorINSTANCE.Write(writer, item)
-	}
-}
-
-type FfiDestroyerSequenceTypeResourceIndicator struct {}
-
-func (FfiDestroyerSequenceTypeResourceIndicator) Destroy(sequence []ResourceIndicator) {
-	for _, value := range sequence {
-		FfiDestroyerTypeResourceIndicator{}.Destroy(value)	
 	}
 }
 
@@ -34175,93 +34423,47 @@ func (_ FfiDestroyerMapStringSequenceTypeAccountWithdraw) Destroy(mapValue map[s
 
 
 
-type FfiConverterMapStringSequenceTypeResourceIndicator struct {}
+type FfiConverterMapStringSequenceTypeInvocationIoItem struct {}
 
-var FfiConverterMapStringSequenceTypeResourceIndicatorINSTANCE = FfiConverterMapStringSequenceTypeResourceIndicator{}
+var FfiConverterMapStringSequenceTypeInvocationIoItemINSTANCE = FfiConverterMapStringSequenceTypeInvocationIoItem{}
 
-func (c FfiConverterMapStringSequenceTypeResourceIndicator) Lift(rb RustBufferI) map[string][]ResourceIndicator {
-	return LiftFromRustBuffer[map[string][]ResourceIndicator](c, rb)
+func (c FfiConverterMapStringSequenceTypeInvocationIoItem) Lift(rb RustBufferI) map[string][]InvocationIoItem {
+	return LiftFromRustBuffer[map[string][]InvocationIoItem](c, rb)
 }
 
-func (_ FfiConverterMapStringSequenceTypeResourceIndicator) Read(reader io.Reader) map[string][]ResourceIndicator {
-	result := make(map[string][]ResourceIndicator)
+func (_ FfiConverterMapStringSequenceTypeInvocationIoItem) Read(reader io.Reader) map[string][]InvocationIoItem {
+	result := make(map[string][]InvocationIoItem)
 	length := readInt32(reader)
 	for i := int32(0); i < length; i++ {
 		key := FfiConverterStringINSTANCE.Read(reader)
-		value := FfiConverterSequenceTypeResourceIndicatorINSTANCE.Read(reader)
+		value := FfiConverterSequenceTypeInvocationIoItemINSTANCE.Read(reader)
 		result[key] = value
 	}
 	return result
 }
 
-func (c FfiConverterMapStringSequenceTypeResourceIndicator) Lower(value map[string][]ResourceIndicator) RustBuffer {
-	return LowerIntoRustBuffer[map[string][]ResourceIndicator](c, value)
+func (c FfiConverterMapStringSequenceTypeInvocationIoItem) Lower(value map[string][]InvocationIoItem) RustBuffer {
+	return LowerIntoRustBuffer[map[string][]InvocationIoItem](c, value)
 }
 
-func (_ FfiConverterMapStringSequenceTypeResourceIndicator) Write(writer io.Writer, mapValue map[string][]ResourceIndicator) {
+func (_ FfiConverterMapStringSequenceTypeInvocationIoItem) Write(writer io.Writer, mapValue map[string][]InvocationIoItem) {
 	if len(mapValue) > math.MaxInt32 {
-		panic("map[string][]ResourceIndicator is too large to fit into Int32")
+		panic("map[string][]InvocationIoItem is too large to fit into Int32")
 	}
 
 	writeInt32(writer, int32(len(mapValue)))
 	for key, value := range mapValue {
 		FfiConverterStringINSTANCE.Write(writer, key)
-		FfiConverterSequenceTypeResourceIndicatorINSTANCE.Write(writer, value)
+		FfiConverterSequenceTypeInvocationIoItemINSTANCE.Write(writer, value)
 	}
 }
 
-type FfiDestroyerMapStringSequenceTypeResourceIndicator struct {}
+type FfiDestroyerMapStringSequenceTypeInvocationIoItem struct {}
 
-func (_ FfiDestroyerMapStringSequenceTypeResourceIndicator) Destroy(mapValue map[string][]ResourceIndicator) {
+func (_ FfiDestroyerMapStringSequenceTypeInvocationIoItem) Destroy(mapValue map[string][]InvocationIoItem) {
 	for key, value := range mapValue {
 		FfiDestroyerString{}.Destroy(key)
-		FfiDestroyerSequenceTypeResourceIndicator{}.Destroy(value)	
-	}
-}
-
-
-
-type FfiConverterMapStringSequenceTypeResourceOrNonFungible struct {}
-
-var FfiConverterMapStringSequenceTypeResourceOrNonFungibleINSTANCE = FfiConverterMapStringSequenceTypeResourceOrNonFungible{}
-
-func (c FfiConverterMapStringSequenceTypeResourceOrNonFungible) Lift(rb RustBufferI) map[string][]ResourceOrNonFungible {
-	return LiftFromRustBuffer[map[string][]ResourceOrNonFungible](c, rb)
-}
-
-func (_ FfiConverterMapStringSequenceTypeResourceOrNonFungible) Read(reader io.Reader) map[string][]ResourceOrNonFungible {
-	result := make(map[string][]ResourceOrNonFungible)
-	length := readInt32(reader)
-	for i := int32(0); i < length; i++ {
-		key := FfiConverterStringINSTANCE.Read(reader)
-		value := FfiConverterSequenceTypeResourceOrNonFungibleINSTANCE.Read(reader)
-		result[key] = value
-	}
-	return result
-}
-
-func (c FfiConverterMapStringSequenceTypeResourceOrNonFungible) Lower(value map[string][]ResourceOrNonFungible) RustBuffer {
-	return LowerIntoRustBuffer[map[string][]ResourceOrNonFungible](c, value)
-}
-
-func (_ FfiConverterMapStringSequenceTypeResourceOrNonFungible) Write(writer io.Writer, mapValue map[string][]ResourceOrNonFungible) {
-	if len(mapValue) > math.MaxInt32 {
-		panic("map[string][]ResourceOrNonFungible is too large to fit into Int32")
-	}
-
-	writeInt32(writer, int32(len(mapValue)))
-	for key, value := range mapValue {
-		FfiConverterStringINSTANCE.Write(writer, key)
-		FfiConverterSequenceTypeResourceOrNonFungibleINSTANCE.Write(writer, value)
-	}
-}
-
-type FfiDestroyerMapStringSequenceTypeResourceOrNonFungible struct {}
-
-func (_ FfiDestroyerMapStringSequenceTypeResourceOrNonFungible) Destroy(mapValue map[string][]ResourceOrNonFungible) {
-	for key, value := range mapValue {
-		FfiDestroyerString{}.Destroy(key)
-		FfiDestroyerSequenceTypeResourceOrNonFungible{}.Destroy(value)	
+		FfiDestroyerSequenceTypeInvocationIoItem{}.Destroy(value)	
 	}
 }
 
@@ -34400,6 +34602,52 @@ func (_ FfiDestroyerMapStringMapStringOptionalTypeMetadataValue) Destroy(mapValu
 	for key, value := range mapValue {
 		FfiDestroyerString{}.Destroy(key)
 		FfiDestroyerMapStringOptionalTypeMetadataValue{}.Destroy(value)	
+	}
+}
+
+
+
+type FfiConverterMapStringMapTypeOperationSequenceTypeResourceOrNonFungible struct {}
+
+var FfiConverterMapStringMapTypeOperationSequenceTypeResourceOrNonFungibleINSTANCE = FfiConverterMapStringMapTypeOperationSequenceTypeResourceOrNonFungible{}
+
+func (c FfiConverterMapStringMapTypeOperationSequenceTypeResourceOrNonFungible) Lift(rb RustBufferI) map[string]map[Operation][]ResourceOrNonFungible {
+	return LiftFromRustBuffer[map[string]map[Operation][]ResourceOrNonFungible](c, rb)
+}
+
+func (_ FfiConverterMapStringMapTypeOperationSequenceTypeResourceOrNonFungible) Read(reader io.Reader) map[string]map[Operation][]ResourceOrNonFungible {
+	result := make(map[string]map[Operation][]ResourceOrNonFungible)
+	length := readInt32(reader)
+	for i := int32(0); i < length; i++ {
+		key := FfiConverterStringINSTANCE.Read(reader)
+		value := FfiConverterMapTypeOperationSequenceTypeResourceOrNonFungibleINSTANCE.Read(reader)
+		result[key] = value
+	}
+	return result
+}
+
+func (c FfiConverterMapStringMapTypeOperationSequenceTypeResourceOrNonFungible) Lower(value map[string]map[Operation][]ResourceOrNonFungible) RustBuffer {
+	return LowerIntoRustBuffer[map[string]map[Operation][]ResourceOrNonFungible](c, value)
+}
+
+func (_ FfiConverterMapStringMapTypeOperationSequenceTypeResourceOrNonFungible) Write(writer io.Writer, mapValue map[string]map[Operation][]ResourceOrNonFungible) {
+	if len(mapValue) > math.MaxInt32 {
+		panic("map[string]map[Operation][]ResourceOrNonFungible is too large to fit into Int32")
+	}
+
+	writeInt32(writer, int32(len(mapValue)))
+	for key, value := range mapValue {
+		FfiConverterStringINSTANCE.Write(writer, key)
+		FfiConverterMapTypeOperationSequenceTypeResourceOrNonFungibleINSTANCE.Write(writer, value)
+	}
+}
+
+type FfiDestroyerMapStringMapTypeOperationSequenceTypeResourceOrNonFungible struct {}
+
+func (_ FfiDestroyerMapStringMapTypeOperationSequenceTypeResourceOrNonFungible) Destroy(mapValue map[string]map[Operation][]ResourceOrNonFungible) {
+	for key, value := range mapValue {
+		FfiDestroyerString{}.Destroy(key)
+		FfiDestroyerMapTypeOperationSequenceTypeResourceOrNonFungible{}.Destroy(value)	
 	}
 }
 
@@ -34630,6 +34878,52 @@ func (_ FfiDestroyerMapTypeEntityTypeSequenceAddress) Destroy(mapValue map[Entit
 	for key, value := range mapValue {
 		FfiDestroyerTypeEntityType{}.Destroy(key)
 		FfiDestroyerSequenceAddress{}.Destroy(value)	
+	}
+}
+
+
+
+type FfiConverterMapTypeOperationSequenceTypeResourceOrNonFungible struct {}
+
+var FfiConverterMapTypeOperationSequenceTypeResourceOrNonFungibleINSTANCE = FfiConverterMapTypeOperationSequenceTypeResourceOrNonFungible{}
+
+func (c FfiConverterMapTypeOperationSequenceTypeResourceOrNonFungible) Lift(rb RustBufferI) map[Operation][]ResourceOrNonFungible {
+	return LiftFromRustBuffer[map[Operation][]ResourceOrNonFungible](c, rb)
+}
+
+func (_ FfiConverterMapTypeOperationSequenceTypeResourceOrNonFungible) Read(reader io.Reader) map[Operation][]ResourceOrNonFungible {
+	result := make(map[Operation][]ResourceOrNonFungible)
+	length := readInt32(reader)
+	for i := int32(0); i < length; i++ {
+		key := FfiConverterTypeOperationINSTANCE.Read(reader)
+		value := FfiConverterSequenceTypeResourceOrNonFungibleINSTANCE.Read(reader)
+		result[key] = value
+	}
+	return result
+}
+
+func (c FfiConverterMapTypeOperationSequenceTypeResourceOrNonFungible) Lower(value map[Operation][]ResourceOrNonFungible) RustBuffer {
+	return LowerIntoRustBuffer[map[Operation][]ResourceOrNonFungible](c, value)
+}
+
+func (_ FfiConverterMapTypeOperationSequenceTypeResourceOrNonFungible) Write(writer io.Writer, mapValue map[Operation][]ResourceOrNonFungible) {
+	if len(mapValue) > math.MaxInt32 {
+		panic("map[Operation][]ResourceOrNonFungible is too large to fit into Int32")
+	}
+
+	writeInt32(writer, int32(len(mapValue)))
+	for key, value := range mapValue {
+		FfiConverterTypeOperationINSTANCE.Write(writer, key)
+		FfiConverterSequenceTypeResourceOrNonFungibleINSTANCE.Write(writer, value)
+	}
+}
+
+type FfiDestroyerMapTypeOperationSequenceTypeResourceOrNonFungible struct {}
+
+func (_ FfiDestroyerMapTypeOperationSequenceTypeResourceOrNonFungible) Destroy(mapValue map[Operation][]ResourceOrNonFungible) {
+	for key, value := range mapValue {
+		FfiDestroyerTypeOperation{}.Destroy(key)
+		FfiDestroyerSequenceTypeResourceOrNonFungible{}.Destroy(value)	
 	}
 }
 
